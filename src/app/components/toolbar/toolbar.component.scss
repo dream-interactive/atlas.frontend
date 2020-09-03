@@ -1,0 +1,28 @@
+@import "src/styles";
+
+.toolbar {
+  color: $primary-dark;
+  a {
+    color: $primary-dark;
+    font-size: 16px;
+  }
+  height: $toolbar-height;
+  padding: 0;
+  box-shadow:
+    0 3px 5px -1px rgba(0,0,0,.2),
+    0 6px 10px 0 rgba(0,0,0,.14),
+    0 1px 18px 0 rgba(0,0,0,.12);
+
+  &__logo {
+    &-image {
+      height: $toolbar-height - 26px;
+    }
+  }
+  &__nav {
+    margin-right: 16px;
+  }
+}
+
+.spacer{
+  flex: 1 1 auto;
+}

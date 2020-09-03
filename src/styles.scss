@@ -1,1 +1,80 @@
+@import '~@angular/material/theming';
+
+
+
+/***** variables *****/
+$primary-dark: #263238;
+$primary-light: #eceff1;
+$accent: #80cbc4;
+
+$toolbar-height: 56px;
+
+/***** variables end *****/
+
+/***** theme *****/
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$atlas-frontend-primary: mat-palette($mat-blue-gray, 50);
+$atlas-frontend-accent: mat-palette($mat-teal, 200);
+$atlas-frontend-warn: mat-palette($mat-red);
+
+$light-theme: mat-light-theme((
+  color: (
+    primary: $atlas-frontend-primary,
+    accent: $atlas-frontend-accent,
+    warn: $atlas-frontend-warn,
+  )
+));
+
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey, 900);
+$dark-theme: mat-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $atlas-frontend-accent,
+    warn: $atlas-frontend-warn,
+  )
+));
+
+.light-theme {
+  @include angular-material-color($light-theme);
+
+  &-color {
+    color: $primary-dark;
+    background-color: $primary-light;
+  }
+
+  a {
+    color: $primary-dark;
+  }
+}
+
+.dark-theme {
+  @include angular-material-color($dark-theme);
+
+  &-color {
+    color: $primary-light;
+    background-color: $primary-dark;
+  }
+
+  a {
+    color: $primary-light;
+  }
+}
+
+/***** theme end *****/
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
