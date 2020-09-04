@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 4200;
 const path = require("path");
 
-const fileDirectory = path.resolve(__dirname, "./dist")
+const fileDirectory = path.resolve(__dirname, "dist")
 
 app.use(express.static(fileDirectory));
 
@@ -16,5 +16,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () =>
-  console.log(`App listening at http://localhost:${port}`)
+  console.log(`App listening at port ${port}`)
 );
