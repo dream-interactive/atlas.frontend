@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build  --prod",
+    "node": "ng build  --prod && node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,6 +25,8 @@
     "@angular/platform-browser-dynamic": "~10.0.14",
     "@angular/router": "~10.0.14",
     "express": "^4.17.1",
+    "keycloak-angular": "^8.0.1",
+    "keycloak-js": "^11.0.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
