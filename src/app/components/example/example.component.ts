@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {KeycloakService} from 'keycloak-angular';
 
 @Component({
   selector: 'app-example',
@@ -10,6 +11,7 @@ export class ExampleComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

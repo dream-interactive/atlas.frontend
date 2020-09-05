@@ -8,6 +8,7 @@ import {MaterialModule} from './material.module';
 import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {ExampleModule} from './components/example/example.module';
+import {HttpClientModule} from '@angular/common/http';
 
 /*export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
 
@@ -43,14 +44,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
     keycloak.init({
       config: {
         url: 'http://localhost:8080/auth',
-        realm: 'Atlas',
+        realm: 'Atlas.local',
         clientId: 'atlas-client',
       },
-      /*  initOptions: {
-          onLoad: 'check-sso',
-          silentCheckSsoRedirectUri:
-            window.location.origin + '/assets/silent-check-sso.html',
-        },*/
+      initOptions: {
+        onLoad: 'login-required',
+        checkLoginIframe: false
+      },
+      enableBearerInterceptor: true,
+      loadUserProfileAtStartUp: true,
+      bearerExcludedUrls: ['/assets']
     });
 }
 
@@ -65,7 +68,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MaterialModule,
     ToolbarModule,
     KeycloakAngularModule,
-    ExampleModule
+    ExampleModule,
+    HttpClientModule,
   ],
   providers: [
     {

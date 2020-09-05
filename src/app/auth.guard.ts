@@ -15,13 +15,16 @@ export class AuthGuard extends KeycloakAuthGuard {
 
   isAccessAllowed(route: ActivatedRouteSnapshot): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
+
       if (!this.authenticated) {
         this.keycloakAngular.login();
+        console.log(this.keycloakAngular.getUsername());
         return resolve(true);
       }
 
       const requiredRoles = route.data.roles;
       if (!requiredRoles || requiredRoles.length === 0) {
+
         return resolve(true);
       } else {
         if (!this.roles || this.roles.length === 0) {

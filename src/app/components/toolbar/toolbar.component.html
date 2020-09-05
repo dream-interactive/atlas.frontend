@@ -5,7 +5,9 @@
   <span class="spacer"></span>
   <nav class="toolbar__nav">
     <a href="#" mat-flat-button color="accent">Try now</a>
+    {{username}}
     <a href="#" mat-button>Log in</a>
+    <a routerLink="/" mat-button (click)="logout()">Log out</a>
 
   </nav>
 </mat-toolbar>
