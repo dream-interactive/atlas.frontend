@@ -9,34 +9,7 @@ import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {ExampleModule} from './components/example/example.module';
 import {HttpClientModule} from '@angular/common/http';
-
-/*export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
-
-  return (): Promise<any> => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        await keycloak.init({
-          config: {
-            url: 'http://localhost:8080/auth',
-            realm: 'Atlas',
-            clientId: 'atlas-client',
-          },
-          initOptions: {
-            onLoad: 'login-required',
-            checkLoginIframe: false
-          },
-          enableBearerInterceptor: true
-        });
-        resolve();
-      } catch (error) {
-        console.log('Error thrown in init ' + error);
-        reject(error);
-      }
-    });
-  };
-}*/
-
-
+import {AtlasModule} from './components/atlas/atlas.module';
 
 // tslint:disable-next-line:typedef
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -48,7 +21,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
         clientId: 'atlas-client',
       },
       initOptions: {
-        onLoad: 'login-required',
+       // onLoad: 'login-required',
         checkLoginIframe: false
       },
       enableBearerInterceptor: true,
@@ -70,6 +43,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule,
     ExampleModule,
     HttpClientModule,
+    AtlasModule
   ],
   providers: [
     {

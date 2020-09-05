@@ -17,7 +17,7 @@ export class AuthGuard extends KeycloakAuthGuard {
     return new Promise(async (resolve, reject) => {
 
       if (!this.authenticated) {
-        this.keycloakAngular.login();
+        await this.keycloakAngular.login();
         console.log(this.keycloakAngular.getUsername());
         return resolve(true);
       }

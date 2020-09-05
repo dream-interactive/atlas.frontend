@@ -5,7 +5,10 @@
 /***** variables *****/
 $primary-dark: #263238;
 $primary-light: #eceff1;
-$accent: #80cbc4;
+
+$accent-light: #80cbc4;
+$accent-lighter: #e0f2f1;
+$accent: #26a69a;
 
 $toolbar-height: 56px;
 
@@ -19,7 +22,7 @@ $toolbar-height: 56px;
 @include mat-core();
 
 $atlas-frontend-primary: mat-palette($mat-blue-gray, 50);
-$atlas-frontend-accent: mat-palette($mat-teal, 200);
+$atlas-frontend-accent: mat-palette($mat-teal, 700);
 $atlas-frontend-warn: mat-palette($mat-red);
 
 $light-theme: mat-light-theme((
