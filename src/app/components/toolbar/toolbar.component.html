@@ -25,7 +25,10 @@
         <button mat-menu-item class="toolbar__menu-item" >Settings</button>
         <mat-divider></mat-divider>
         <div class="toolbar__menu-item">
-          <mat-icon>nights_stay</mat-icon><mat-slide-toggle class="toolbar__menu-item">Dark mode</mat-slide-toggle>
+          <mat-icon>nights_stay</mat-icon>
+          <mat-slide-toggle (change)="changeTheme($event.checked)"
+                            appDark [toggle]="'none'"
+                            class="toolbar__theme">Dark mode</mat-slide-toggle>
         </div>
         <button class="toolbar__menu-item" mat-menu-item (click)="auth.logout()"><mat-icon>login</mat-icon>Log out</button>
       </mat-menu>

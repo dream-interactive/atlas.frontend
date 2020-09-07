@@ -25,7 +25,7 @@
     margin-right: 16px;
   }
   &__button {
-    margin-left: 10px;
+    margin-left: 16px;
     &--colorless {
       &:hover {
         background-color: $accent-lighter !important;
@@ -54,6 +54,9 @@
       padding-left: 16px;
       font-weight: bold;
     }
+  }
+  &__theme {
+    padding-left: 16px;
   }
 }
 

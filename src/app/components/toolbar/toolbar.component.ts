@@ -23,5 +23,9 @@ export class ToolbarComponent implements OnInit {
       this.auth.userProfile$.subscribe(prof => this.profile = prof);
     }
   }
+
+  changeTheme(checked: boolean): void {
+    this.themeService.theme$.next(checked);
+  }
 }
 
