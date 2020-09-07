@@ -6,9 +6,9 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {ToolbarModule} from './components/toolbar/toolbar.module';
-import {ExampleModule} from './components/example/example.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AtlasModule} from './components/atlas/atlas.module';
+import {ProfileModule} from './components/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -20,9 +20,9 @@ import {AtlasModule} from './components/atlas/atlas.module';
     BrowserAnimationsModule,
     MaterialModule,
     ToolbarModule,
-    ExampleModule,
     HttpClientModule,
-    AtlasModule
+    AtlasModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

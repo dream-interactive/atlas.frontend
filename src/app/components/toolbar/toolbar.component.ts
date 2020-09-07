@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,21 +8,15 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  isLoggedIn = false;
 
+  public profile;
 
-  constructor(private http: HttpClient) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
-  }
-
-  logout(): void {
-  }
-
-  logIn(): void {
-  }
-
-  getUser(): void {
+    if (this.auth.userProfile$) {
+      this.auth.userProfile$.subscribe(prof => this.profile = prof);
+    }
   }
 }
 
