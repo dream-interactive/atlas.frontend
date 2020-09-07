@@ -1,9 +1,8 @@
 @import "src/styles";
 
 .toolbar {
-  color: $primary-dark;
+
   a {
-    color: $primary-dark;
     font-size: 16px;
   }
   height: $toolbar-height;
@@ -20,6 +19,15 @@
   }
   &__nav {
     margin-right: 16px;
+  }
+  &__button {
+    margin-left: 10px;
+    &--colorless {
+      &:hover {
+        background-color: $accent-lighter !important;
+        color: $accent !important;
+      }
+    }
   }
 }
 

@@ -1,13 +1,26 @@
-<mat-toolbar color="primary" class="toolbar dark-theme">
+<mat-toolbar class="toolbar dark-theme">
   <a href="#" class="toolbar__logo" mat-button>
     <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_light.svg" alt="atlas-logo" class="toolbar__logo-image">
   </a>
   <span class="spacer"></span>
   <nav class="toolbar__nav">
-    <a href="#" mat-flat-button color="accent">Try now</a>
-    {{username}}
-    <a href="#" mat-button>Log in</a>
-    <a routerLink="/" mat-button (click)="logout()">Log out</a>
+    <a href="#" mat-flat-button color="accent" class="toolbar__button" (click)="getUser()">User</a>
+    <a href="#" mat-flat-button color="accent" class="toolbar__button">Try now</a>
+
+
+    <a href="#" mat-button *ngIf="!isLoggedIn; else userMenu" class="toolbar__button toolbar__button--colorless" (click)="logIn()">Log in</a>
+
+    <ng-template #userMenu>
+      <button mat-mini-fab [matMenuTriggerFor]="beforeMenu" class="toolbar__button">
+        <img src="" alt="">
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item (click)="logout()">Log out</button>
+      </mat-menu>
+    </ng-template>
+
+ <!--   <a routerLink="/" mat-button (click)="logout()" class="toolbar__button toolbar__button&#45;&#45;colorless">Log out</a>-->
 
   </nav>
 </mat-toolbar>

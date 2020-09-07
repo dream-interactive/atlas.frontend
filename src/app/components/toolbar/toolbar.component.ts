@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {KeycloakService} from 'keycloak-angular';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,18 +7,21 @@ import {KeycloakService} from 'keycloak-angular';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  isLoggedIn = false;
 
-  // TODO tmp
-  username = '';
 
-  constructor(private ks: KeycloakService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.username = this.ks.getUsername();
-    this.ks.getToken().then(r => console.log('token', r));
   }
 
   logout(): void {
-    this.ks.logout('http://localhost:4200/').then();
+  }
+
+  logIn(): void {
+  }
+
+  getUser(): void {
   }
 }
+
