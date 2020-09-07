@@ -1,27 +1,33 @@
-<mat-toolbar class="toolbar dark-theme">
+<mat-toolbar class="toolbar" color="primary">
   <a routerLink="/" class="toolbar__logo" mat-button>
-    <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_light.svg" alt="atlas-logo" class="toolbar__logo-image">
+    <img *ngIf="!theme, else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light.svg" alt="atlas-logo" class="toolbar__logo-image">
+    <ng-template #darkMode>
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark.svg" alt="atlas-logo" class="toolbar__logo-image">
+    </ng-template>
   </a>
-
-  <a routerLink="/profile" *ngIf="auth.loggedIn">Profile</a>
 
   <span class="spacer"></span>
   <nav class="toolbar__nav">
     <a href="#" mat-flat-button color="accent" class="toolbar__button">Try now</a>
 
-
     <a href="#" mat-button *ngIf="!auth.loggedIn; else userMenu" class="toolbar__button toolbar__button--colorless" (click)="auth.login()">Log in</a>
 
     <ng-template #userMenu>
-      <button mat-mini-fab [matMenuTriggerFor]="beforeMenu" class="toolbar__button toolbar__user-picture" [style.backgroundImage]="'url('+ profile.picture+ ')'">
+      <button mat-mini-fab
+              [matMenuTriggerFor]="beforeMenu"
+              class="toolbar__button toolbar__user-picture"
+              [style.backgroundImage]="'url('+ profile.picture+ ')'">
       </button>
-      <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <div>Atlas</div>
-        <button mat-menu-item >Settings</button>
-        <div>{{profile.name}}</div>
-        <button mat-menu-item>Profile</button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before" class="toolbar__menu">
+        <div class="toolbar__menu-item toolbar__menu-title">{{profile.name}}</div>
+        <button mat-menu-item class="toolbar__menu-item">Profile</button>
+        <div  class="toolbar__menu-item toolbar__menu-title" >Atlas</div>
+        <button mat-menu-item class="toolbar__menu-item" >Settings</button>
         <mat-divider></mat-divider>
-        <button mat-menu-item (click)="auth.logout()">Log out</button>
+        <div class="toolbar__menu-item">
+          <mat-icon>nights_stay</mat-icon><mat-slide-toggle class="toolbar__menu-item">Dark mode</mat-slide-toggle>
+        </div>
+        <button class="toolbar__menu-item" mat-menu-item (click)="auth.logout()"><mat-icon>login</mat-icon>Log out</button>
       </mat-menu>
     </ng-template>
 

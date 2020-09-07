@@ -9,10 +9,12 @@ import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AtlasModule} from './components/atlas/atlas.module';
 import {ProfileModule} from './components/profile/profile.module';
+import { DarkDirective } from './dark.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DarkDirective
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,9 @@ import {ProfileModule} from './components/profile/profile.module';
     ProfileModule
   ],
   providers: [],
+  exports: [
+    DarkDirective
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

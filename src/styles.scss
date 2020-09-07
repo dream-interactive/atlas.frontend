@@ -43,6 +43,18 @@ $dark-theme: mat-dark-theme((
   )
 ));
 
+.dark-theme {
+  @include angular-material-color($dark-theme);
+
+  &-color {
+    color: $primary-light;
+    background-color: $primary-dark;
+  }
+
+  a {
+    color: $primary-light;
+  }
+}
 .light-theme {
   @include angular-material-color($light-theme);
 
@@ -56,18 +68,6 @@ $dark-theme: mat-dark-theme((
   }
 }
 
-.dark-theme {
-  @include angular-material-color($dark-theme);
-
-  &-color {
-    color: $primary-light;
-    background-color: $primary-dark;
-  }
-
-  a {
-    color: $primary-light;
-  }
-}
 
 /***** theme end *****/
 

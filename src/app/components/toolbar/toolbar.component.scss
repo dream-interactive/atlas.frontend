@@ -1,10 +1,11 @@
 @import "src/styles";
+::ng-deep .mat-menu-panel {
+  width: 250px;
+  background-color: $primary-light!important;
+}
 
 .toolbar {
 
-  a {
-    font-size: 16px;
-  }
   height: $toolbar-height;
   padding: 0;
   box-shadow:
@@ -12,6 +13,9 @@
     0 6px 10px 0 rgba(0,0,0,.14),
     0 1px 18px 0 rgba(0,0,0,.12);
 
+  a {
+    font-size: 16px;
+  }
   &__logo {
     &-image {
       height: $toolbar-height - 26px;
@@ -35,6 +39,21 @@
     background-size: cover;
     background-position: center center;
     border: 2px solid $accent;
+  }
+
+  &__menu {
+
+    &-item {
+      padding-left: 24px;
+      display: flex;
+      align-items: center;
+      background-color: $primary-light;
+      height: 50px;
+    }
+    &-title {
+      padding-left: 16px;
+      font-weight: bold;
+    }
   }
 }
 
