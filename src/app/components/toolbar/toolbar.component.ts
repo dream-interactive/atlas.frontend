@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../../services/auth.service';
+import {ThemeService} from '../../services/theme.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,21 +9,23 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  isLoggedIn = false;
 
+  public profile;
+  public theme: boolean;
 
-  constructor(private http: HttpClient) { }
+  constructor(public auth: AuthService,
+              private themeService: ThemeService) { }
 
   ngOnInit(): void {
+    this.themeService.theme$.subscribe(theme => this.theme = theme);
+
+    if (this.auth.userProfile$) {
+      this.auth.userProfile$.subscribe(prof => this.profile = prof);
+    }
   }
 
-  logout(): void {
-  }
-
-  logIn(): void {
-  }
-
-  getUser(): void {
+  changeTheme(checked: boolean): void {
+    this.themeService.theme$.next(checked);
   }
 }
 
