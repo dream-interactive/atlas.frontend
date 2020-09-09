@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AtlasComponent} from './components/atlas/atlas.component';
-import {ProfileComponent} from './components/profile/profile.component';
+import {AtlasComponent} from './view/atlas/atlas.component';
+import {ProfileComponent} from './view/profile/profile.component';
 import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [

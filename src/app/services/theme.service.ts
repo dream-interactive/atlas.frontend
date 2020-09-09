@@ -1,32 +1,52 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {OverlayContainer} from '@angular/cdk/overlay';
+
+
+export interface SiteTheme {
+  name: string;
+  displayName?: string;
+  accent?: string;
+  primary?: string;
+  isDark?: boolean;
+  isDefault?: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  public theme$ = new BehaviorSubject(false); // false light, true dark
-  constructor( private overlay: OverlayContainer) { }
 
+  static defaultTheme: SiteTheme =   {
+    primary: '#eceff1',
+    accent: '#26a69a',
+    displayName: 'Light theme',
+    name: 'light-theme',
+    isDark: false,
+    isDefault: true,
+  };
 
-  public lightMode(): void {
-    document.body.classList.remove('dark-theme-color');
-    document.body.classList.remove('dark-theme');
-    this.overlay.getContainerElement().classList.remove('dark-theme');
+  themes: SiteTheme[] = [
+    {
+      primary: '#263238',
+      accent: '#26a69a',
+      displayName: 'Dark theme',
+      name: 'dark-theme',
+      isDark: true,
+    },
+    ThemeService.defaultTheme
+  ];
 
-    document.body.classList.add('light-theme-color');
-    document.body.classList.add('light-theme');
-    this.overlay.getContainerElement().classList.add('light-theme');
+  private themeSubject$ = new BehaviorSubject(ThemeService.defaultTheme);
+  theme$ = this.themeSubject$.asObservable();
+
+  constructor() {
   }
 
-  public darkMode(): void {
-    document.body.classList.remove('light-theme-color');
-    document.body.classList.remove('light-theme');
-    this.overlay.getContainerElement().classList.remove('light-theme');
+  updateTheme(theme: SiteTheme): void {
+    this.themeSubject$.next(theme);
+  }
 
-    document.body.classList.add('dark-theme-color');
-    document.body.classList.add('dark-theme');
-    this.overlay.getContainerElement().classList.add('dark-theme');
+  findTheme(themeName: string): SiteTheme | undefined {
+    return this.themes.find(currentTheme => currentTheme.name === themeName);
   }
 }
