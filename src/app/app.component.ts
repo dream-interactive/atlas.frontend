@@ -11,13 +11,13 @@ export class AppComponent implements OnInit {
   constructor(private themeService: ThemeService) {
   }
   ngOnInit(): void {
-    this.themeService.theme$.subscribe(theme => {
-      if (theme) {
-        this.themeService.darkMode();
-      } else {
-        this.themeService.lightMode();
-      }
-    });
+   // this.themeService.theme$.subscribe(theme => {
+   //   if (theme) {
+   //     this.themeService.darkMode();
+   //   } else {
+   //     this.themeService.lightMode();
+   //   }
+   // });
   }
 
 }

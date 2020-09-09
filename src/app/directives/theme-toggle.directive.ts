@@ -1,14 +1,16 @@
 import {Directive, ElementRef, Input, OnChanges} from '@angular/core';
 
 @Directive({
-  selector: '[appDark]'
+  selector: '[appThemeToggle]'
 })
-export class DarkDirective implements OnChanges{
+export class ThemeToggleDirective implements OnChanges{
 
   @Input() toggle: string;
+
+
   styleElement: HTMLStyleElement = document.createElement('style');
 
-  attributeName = 'theme-toggle';
+  attributeName = 'theme-dir';
 
   constructor(private el: ElementRef) {
     const nativeEl: HTMLElement = this.el.nativeElement;
@@ -17,15 +19,14 @@ export class DarkDirective implements OnChanges{
   }
 
   ngOnChanges(): void {
-    this.setColors();
+    this.removeToggle();
   }
 
-  setColors(): void {
+  private removeToggle(): void {
     this.styleElement.innerText = `
       [${this.attributeName}] .mat-slide-toggle-bar {
        display: ${this.toggle};
       }
     `;
   }
-
 }
