@@ -1,0 +1,18 @@
+{
+  "navbar": {
+    "button": {
+      "trynow": "Use free",
+      "signin": "Sign In"
+    }
+  },
+  "footer": {
+    "link": {
+      "cargo": "Cargoes",
+      "carrier": "Carriers",
+      "api": "API",
+      "about": "About",
+      "privacy": "Privacy",
+      "price": "Pricing"
+    }
+  }
+}

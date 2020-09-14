@@ -25,7 +25,6 @@ export class ThemePickerComponent {
       setTimeout(() => {
         this.selectTheme(themeName);
       }, 100);
-
       this.checked = themeName === 'dark-theme';
     }
   }
