@@ -1,8 +1,9 @@
 @import '~@angular/material/theming';
 
+@import 'src/app/components/footer/footer-theme';
 @import 'src/app/components/toolbar/toolbar-theme';
 @import 'src/app/components/toolbar/user-menu/user-menu-theme';
-@import 'src/app/view/atlas/atlas-theme';
+@import '../app/pages/atlas/atlas-theme';
 
 // Styles for the components that are based on the current theme.
 @mixin components-theme($theme) {
@@ -16,6 +17,7 @@
   @include toolbar-theme($theme);
   @include user-menu-theme($theme);
   @include atlas-theme($theme);
+  @include footer-theme($theme)
 
 }
 

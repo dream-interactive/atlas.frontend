@@ -5,10 +5,17 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {ToolbarModule} from './components/toolbar/toolbar.module';
-import {HttpClientModule} from '@angular/common/http';
-import {AtlasModule} from './view/atlas/atlas.module';
-import {ProfileModule} from './view/profile/profile.module';
-import {LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AtlasModule} from './pages/atlas/atlas.module';
+import {ProfileModule} from './pages/profile/profile.module';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {FooterModule} from './components/footer/footer.module';
+import {AboutModule} from './pages/about/about.module';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -16,13 +23,24 @@ import {LocationStrategy, PathLocationStrategy} from '@angular/common';
   ],
   imports: [
     BrowserModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'ua'
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     ToolbarModule,
     HttpClientModule,
     AtlasModule,
-    ProfileModule
+    AboutModule,
+    ProfileModule,
+
+    FooterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

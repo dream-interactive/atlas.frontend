@@ -1,0 +1,13 @@
+@mixin user-menu-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .menu {
+    &__title {
+      color: mat-color($primary, default-contrast);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "src/styles/const";
+
+.i18n {
+  margin-left: 10px;
+  width: 50px;
+  &__flag {
+    height: 24px;
+  }
+}

@@ -1,0 +1,31 @@
+@import "src/styles/mixins";
+@import "src/styles/const";
+
+.footer {
+  width: 100%;
+  height: $footer-height;
+
+  &__group {
+    width: 100%;
+    .drm-logo {
+      width: 350px;
+      &__img {
+        height: 46px;
+        margin: 0 16px;
+      }
+      &__text {
+        @include gradient-text
+      }
+    }
+
+    &-left {
+      width: 100%;
+      margin-left: 16px;
+    }
+    &-right {
+      width: 100%;
+      margin-right: 16px;
+
+    }
+  }
+}

@@ -21,24 +21,24 @@ export class StyleService {
     }
   }
 
-// tslint:disable-next-line:typedef
-  getLinkElementForKey(key: string) {
+
+  getLinkElementForKey(key: string): Element {
     return this.getExistingLinkElementByKey(key) || this.createLinkElementWithKey(key);
   }
-// tslint:disable-next-line:typedef
-  getExistingLinkElementByKey(key: string) {
+
+  getExistingLinkElementByKey(key: string): Element {
     return document.head.querySelector(`link[rel="stylesheet"].${this.getClassNameForKey(key)}`);
   }
-// tslint:disable-next-line:typedef
-  createLinkElementWithKey(key: string) {
+
+  createLinkElementWithKey(key: string): Element {
     const linkEl = document.createElement('link');
     linkEl.setAttribute('rel', 'stylesheet');
     linkEl.classList.add(this.getClassNameForKey(key));
     document.head.appendChild(linkEl);
     return linkEl;
   }
-// tslint:disable-next-line:typedef
-  getClassNameForKey(key: string) {
+
+  getClassNameForKey(key: string): string {
     return `style-manager-${key}`;
   }
 }

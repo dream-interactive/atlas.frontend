@@ -1,0 +1,16 @@
+{
+  "navbar": {
+    "button": {
+      "trynow": "Use it free",
+      "signin": "Sign In"
+    }
+  },
+  "footer": {
+    "link": {
+      "api": "API",
+      "about": "About",
+      "privacy": "Privacy",
+      "price": "Pricing"
+    }
+  }
+}
