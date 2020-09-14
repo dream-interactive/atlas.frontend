@@ -6,11 +6,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {AtlasModule} from './view/atlas/atlas.module';
-import {ProfileModule} from './view/profile/profile.module';
+import {AtlasModule} from './pages/atlas/atlas.module';
+import {ProfileModule} from './pages/profile/profile.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FooterModule} from './components/footer/footer.module';
+import {AboutModule} from './pages/about/about.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -22,13 +23,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    ToolbarModule,
-    HttpClientModule,
-    AtlasModule,
-    ProfileModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -37,6 +31,15 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
       defaultLanguage: 'ua'
     }),
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    ToolbarModule,
+    HttpClientModule,
+    AtlasModule,
+    AboutModule,
+    ProfileModule,
+
     FooterModule
   ],
   providers: [],

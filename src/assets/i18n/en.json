@@ -1,14 +1,12 @@
 {
   "navbar": {
     "button": {
-      "trynow": "Use free",
+      "trynow": "Use it free",
       "signin": "Sign In"
     }
   },
   "footer": {
     "link": {
-      "cargo": "Cargoes",
-      "carrier": "Carriers",
       "api": "API",
       "about": "About",
       "privacy": "Privacy",
