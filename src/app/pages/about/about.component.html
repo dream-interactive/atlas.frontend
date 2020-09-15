@@ -1,0 +1,22 @@
+<div class="about" fxLayout="column" fxLayoutGap="100px">
+  <div class="about__header" fxLayout="column" fxFlexAlign="center" fxLayoutGap="20px">
+    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="about__logo-image">
+    <ng-template #darkMode>
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="about__logo-image">
+    </ng-template>
+    <h1 class="about__title" >{{'about.header.text.title' | translate}}</h1>
+    <div fxFlexAlign="center">
+      <a href="#" mat-flat-button color="accent" class="about__button">{{'about.header.button.trynow' | translate }}</a>
+    </div>
+
+  </div>
+  <div class="about__row section" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="50px" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
+    <div class="section__left" fxLayout="column" fxLayoutGap="10px">
+      <h2 class="section__title">{{'about.scrum.title' | translate}}</h2>
+      <p class="section__text">{{'about.scrum.body' | translate}}</p>
+    </div>
+    <img src="assets/images/scrum.png" alt="scrum" class="section__image">
+  </div>
+  <div class="about__row"></div>
+  <div class="about__row"></div>
+</div>

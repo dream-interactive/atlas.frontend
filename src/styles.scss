@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import "styles/reset";
 @import "styles/app-theme";
 @import 'styles/const';
 @import "app/app.component";
@@ -7,17 +8,3 @@
 @include angular-material-theme($theme);
 @include components-theme($theme);
 
-
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: inherit; /* no underline */
-}
