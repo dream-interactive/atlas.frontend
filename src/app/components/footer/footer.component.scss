@@ -5,27 +5,24 @@
   width: 100%;
   height: $footer-height;
 
-  &__group {
-    width: 100%;
-    .drm-logo {
-      width: 350px;
-      &__img {
-        height: 46px;
-        margin: 0 16px;
-      }
-      &__text {
-        @include gradient-text
-      }
+  .drm-logo {
+    width: 350px;
+    &__img {
+      height: 46px;
+      margin: 0 16px;
     }
-
-    &-left {
-      width: 100%;
-      margin-left: 16px;
-    }
-    &-right {
-      width: 100%;
-      margin-right: 16px;
-
+    &__text {
+      //  @include gradient-text
     }
   }
+
+  &__container {
+    margin: 0 auto;
+    max-width: 95%;
+  }
+  .group {
+    width: 100%;
+    height: $footer-height / 2;
+  }
+
 }

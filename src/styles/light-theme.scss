@@ -47,8 +47,8 @@ $mat-light-theme-foreground: (
     accent: $accent,
     warn: $warn,
     is-dark: false,
-    foreground: $mat-light-theme-background,
-    background: $mat-light-theme-foreground,
+    foreground: $mat-light-theme-foreground,
+    background: $mat-light-theme-background,
   );
 }
 
