@@ -1,3 +1,7 @@
 <pre *ngIf="auth.userProfile$ | async as profile">
 <code>{{ profile | json }}</code>
 </pre>
+
+<pre *ngIf="auth.auth0Client$ | async as auth0Client">
+ <code>{{ auth0Client.getIdTokenClaims() | json }}</code>
+</pre>

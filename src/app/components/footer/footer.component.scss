@@ -1,9 +1,17 @@
-@import "src/styles/mixins";
-@import "src/styles/const";
+@import "../../../styles/mixins";
+@import "../../../styles/const";
 
 .footer {
   width: 100%;
   height: $footer-height;
+  font-size: .9rem;
+  font-weight: lighter;
+
+  a {
+    &:hover {
+      color: $accent;
+    }
+  }
 
   .drm-logo {
     width: 350px;
@@ -12,7 +20,7 @@
       margin: 0 16px;
     }
     &__text {
-      //  @include gradient-text
+      @include gradient-text
     }
   }
 
