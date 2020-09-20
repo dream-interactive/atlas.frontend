@@ -1,9 +1,10 @@
-@import '~@angular/material/theming';
+@import '../../node_modules/@angular/material/theming';
 
-@import 'src/app/components/footer/footer-theme';
-@import 'src/app/components/toolbar/toolbar-theme';
-@import 'src/app/components/toolbar/user-menu/user-menu-theme';
+@import '../app/components/footer/footer-theme';
+@import '../app/components/toolbar/toolbar-theme';
+@import '../app/components/toolbar/user-menu/user-menu-theme';
 @import '../app/pages/atlas/atlas-theme';
+@import '../app/pages/organizations/organizations-theme';
 @import '../app/pages/about/about-theme';
 
 // Styles for the components that are based on the current theme.
@@ -19,7 +20,8 @@
   @include user-menu-theme($theme);
   @include atlas-theme($theme);
   @include footer-theme($theme);
-  @include about-theme($theme)
+  @include about-theme($theme);
+  @include organizations-theme($theme);
 
 }
 

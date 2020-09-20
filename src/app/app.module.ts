@@ -12,6 +12,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FooterModule} from './components/footer/footer.module';
 import {AboutModule} from './pages/about/about.module';
+import {OrganizationsModule} from './pages/organizations/organizations.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -34,13 +35,14 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ToolbarModule,
     HttpClientModule,
+
+    ToolbarModule,
     AtlasModule,
     AboutModule,
     ProfileModule,
-
-    FooterModule
+    FooterModule,
+    OrganizationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
