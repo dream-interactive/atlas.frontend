@@ -1,7 +1,7 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {from, Observable, throwError} from 'rxjs';
-import {catchError, flatMap} from 'rxjs/operators';
-import {AuthService} from './auth.service';
+import {catchError, mergeMap} from 'rxjs/operators';
+import {AuthService} from '../services/auth.service';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -12,14 +12,14 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return this.authService.isAuthenticated$.pipe(
-      flatMap(
+      mergeMap(
         authenticated => {
           if (authenticated) {
             return this.authService.auth0Client$.pipe(
-              flatMap(client => {
+              mergeMap(client => {
                 const claims$ = from(client.getIdTokenClaims());
                 return claims$.pipe(
-                  flatMap(c => {
+                  mergeMap(c => {
                     const authReq = req.clone({
                       headers: req.headers.set('Authorization', `Bearer ${c.__raw}`)
                     });
@@ -39,8 +39,8 @@ export class AuthInterceptor implements HttpInterceptor {
   private newHttpEvent(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError(err => {
-          console.log('Error:', err.error.message);
-          return throwError(err);
+        console.log('Error:', err.error.message);
+        return throwError(err);
       })
     );
   }

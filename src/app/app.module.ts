@@ -13,7 +13,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FooterModule} from './components/footer/footer.module';
 import {AboutModule} from './pages/about/about.module';
 import {OrganizationsModule} from './pages/organizations/organizations.module';
-import {AuthInterceptor} from './services/auth-interceptor';
+import {AuthInterceptor} from './interceptors/auth-interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
