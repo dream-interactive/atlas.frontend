@@ -1,0 +1,23 @@
+
+.orgs {
+  &__selector {
+    width: 120px;
+  }
+  &__selector--header {
+    width: 100%;
+  }
+  &__image {
+    width: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+::ng-deep.selector-panel {
+  margin-top: 30px;
+}
+.org {
+  &__img {
+    height: 32px;
+  }
+}

@@ -1,6 +1,10 @@
 @import 'app-theme';
 
-
+mat-select {
+  &:hover {
+    background: map-get($mat-dark-theme-background, hover);
+  }
+}
 
 
 // Define the dark theme.

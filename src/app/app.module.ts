@@ -5,14 +5,16 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {ToolbarModule} from './components/toolbar/toolbar.module';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AtlasModule} from './pages/atlas/atlas.module';
 import {ProfileModule} from './pages/profile/profile.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FooterModule} from './components/footer/footer.module';
 import {AboutModule} from './pages/about/about.module';
-import {OrganizationsModule} from './pages/organizations/organizations.module';
+import {StartModule} from './pages/start/start.module';
+import {AuthInterceptor} from './interceptors/auth-interceptor';
+import {OrganizationModule} from './pages/organization/organization.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -42,9 +44,16 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AboutModule,
     ProfileModule,
     FooterModule,
-    OrganizationsModule
+    StartModule,
+    OrganizationModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

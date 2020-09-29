@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrganizationsComponent } from './organizations.component';
+import { StartComponent } from './start.component';
 import {FlexModule} from '@angular/flex-layout';
 import {MaterialModule} from '../../material.module';
 
 
 
 @NgModule({
-  declarations: [OrganizationsComponent],
+  declarations: [StartComponent],
   imports: [
     CommonModule,
     FlexModule,
     MaterialModule
   ],
   exports: [
-    OrganizationsComponent
+    StartComponent
   ]
 })
-export class OrganizationsModule { }
+export class StartModule { }

@@ -42,7 +42,9 @@ export class ThemePickerComponent {
 
     if (theme.isDefault) {
       this.styleService.removeStyle('theme');
+      this.styleService.setStyle('theme', `assets/${theme.name}.css`);
     } else {
+      this.styleService.removeStyle('theme');
       this.styleService.setStyle('theme', `assets/${theme.name}.css`);
     }
 

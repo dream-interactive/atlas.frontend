@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
-import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
-import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import {BehaviorSubject, combineLatest, from, Observable, of, throwError} from 'rxjs';
+import {catchError, concatMap, shareReplay, tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService {
     createAuth0Client({
       domain: 'atlas-s.eu.auth0.com',
       client_id: 'YJXeZnMs105UnSRF7BmYupS2yCuLp07a',
-      redirect_uri: `${window.location.origin}`
+      redirect_uri: `${window.location.origin}/start`
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -79,7 +79,7 @@ export class AuthService {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log in
       client.loginWithRedirect({
-        redirect_uri: `${window.location.origin}`,
+        redirect_uri: `${window.location.origin}/start`,
         appState: { target: redirectPath }
       });
     });
@@ -89,7 +89,7 @@ export class AuthService {
     // Call when app reloads after user logs in with Auth0
     const params = window.location.search;
     if (params.includes('code=') && params.includes('state=')) {
-      let targetRoute: string; // Path to redirect to after login processsed
+      let targetRoute: string; // Path to redirect to after login processed
       const authComplete$ = this.handleRedirectCallback$.pipe(
         // Have client, now call method to handle auth callback redirect
         tap(cbRes => {
@@ -108,8 +108,13 @@ export class AuthService {
       // Response will be an array of user and login status
       authComplete$.subscribe(([user, loggedIn]) => {
         // Redirect to target route after callback processing
-        this.router.navigate([targetRoute]);
+
+       // this.router.navigate([targetRoute]); //
+        this.router.navigate([targetRoute.slice(0, targetRoute.indexOf('?'))]);
       });
+
+
+
     }
   }
 

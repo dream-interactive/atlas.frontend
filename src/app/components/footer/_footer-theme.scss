@@ -10,5 +10,10 @@
     .footer {
       background: mat-color($primary);
     }
+    a {
+      &:hover {
+        color: mat-color($primary);
+      }
+    }
   }
 }

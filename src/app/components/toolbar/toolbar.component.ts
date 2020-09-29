@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {SiteTheme, ThemeService} from '../../services/theme.service';
 import {TranslateService} from '@ngx-translate/core';

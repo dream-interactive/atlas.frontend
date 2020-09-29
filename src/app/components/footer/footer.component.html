@@ -15,14 +15,21 @@
            class="footer footer__link footer__link-api">{{"footer.link.api" | translate}}</a>
       </div>
     </div>
-    <div fxLayout="column" fxLayoutAlign="center center" class="drm-logo" [fxShow.lt-md]="false">
-      <img src="../../../assets/images/partly-cloudy-night.png" alt="logo" class="drm-logo__img">
+
+    <img src="../../../assets/images/logo/Atlas-logo_339_5grad_Deep.svg" alt="logo" class="footer__logo" [fxShow.lt-md]="false">
+ <!--   <div fxLayout="column" fxLayoutAlign="center center" class="drm-logo" [fxShow.lt-md]="false">
+
+      <img src="../../../assets/images/partly-cloudy-night.png" alt="logo" class="drm-logo__img" >
       <a class="drm-logo__text" href="">by Dream Interactive</a>
-    </div>
+    </div>-->
     <div class="group" fxLayoutGap="16px" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.lt-md="center center">
       <div class="link-wrapper">
         <a routerLink="/price"
            class="footer footer__link footer__link-price">{{"footer.link.price" | translate}}</a>
+      </div>
+      <div class="link-wrapper">
+        <a routerLink="/special"
+           class="footer footer__link footer__link-special">Special</a>
       </div>
       <app-i18n-menu></app-i18n-menu>
     </div>
