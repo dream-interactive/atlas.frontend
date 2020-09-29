@@ -1,5 +1,12 @@
 <mat-toolbar class="toolbar">
-  <a routerLink="/" class="toolbar__logo" mat-button>
+
+  <a routerLink="/start" class="toolbar__logo" mat-button *ngIf="auth.loggedIn">
+    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+    <ng-template #darkMode>
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+    </ng-template>
+  </a>
+  <a routerLink="/" class="toolbar__logo" mat-button *ngIf="!auth.loggedIn">
     <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     <ng-template #darkMode>
       <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
@@ -9,7 +16,8 @@
   <span class="spacer"></span>
   <nav class="toolbar__nav">
 
-
+    <app-organizations-menu  *ngIf="auth.loggedIn"></app-organizations-menu>
+    <app-projects-menu  *ngIf="auth.loggedIn"></app-projects-menu>
 
     <a href="#" mat-flat-button color="accent" class="toolbar__button">{{'navbar.button.trynow' | translate }}</a>
 

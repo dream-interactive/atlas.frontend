@@ -7,6 +7,8 @@ import {DirectivesModule} from '../../directives/directives.module';
 import {ThemePickerModule} from './theme-picker/theme-picker.module';
 import {UserMenuModule} from './user-menu/user-menu.module';
 import {TranslateModule} from '@ngx-translate/core';
+import {ProjectsMenuModule} from './projects-menu/projects-menu.module';
+import {OrganizationsMenuModule} from './organizations-menu/organizations-menu.module';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {TranslateModule} from '@ngx-translate/core';
     DirectivesModule,
     ThemePickerModule,
     UserMenuModule,
-    TranslateModule
+    TranslateModule,
+    ProjectsMenuModule,
+    OrganizationsMenuModule
   ],
   exports: [
     ToolbarComponent

@@ -1,13 +1,13 @@
-@mixin organizations-theme($theme) {
+@mixin start-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  app-organizations {
+  app-start{
     color: mat-color($primary, default-contrast);
-    .organizations {
+    .start {
       background-color: mat-color($primary);
     }
   }

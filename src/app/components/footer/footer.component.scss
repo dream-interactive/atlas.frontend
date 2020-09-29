@@ -13,20 +13,24 @@
     }
   }
 
-  .drm-logo {
-    width: 350px;
-    &__img {
-      height: 46px;
-      margin: 0 16px;
-    }
-    &__text {
-     // @include gradient-text
-    }
+  // .drm-logo {
+  //   width: 350px;
+  //   &__img {
+  //     height: 46px;
+  //     margin: 0 16px;
+  //   }
+  //   &__text {
+  //    // @include gradient-text
+  //   }
+  // }
+  &__logo {
+    height: 40px;
   }
 
   &__container {
     margin: 0 auto;
     max-width: 95%;
+    height: inherit;
   }
   .group {
     width: 100%;

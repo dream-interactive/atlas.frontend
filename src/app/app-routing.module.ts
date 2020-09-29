@@ -3,7 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {AuthGuard} from './guards/auth.guard';
 import {AboutComponent} from './pages/about/about.component';
-import {OrganizationsComponent} from './pages/organizations/organizations.component';
+import {StartComponent} from './pages/start/start.component';
+import {OrganizationComponent} from './pages/organization/organization.component';
+import {ProjectComponent} from './pages/project/project.component';
 
 const routes: Routes = [
   {
@@ -20,8 +22,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'organizations',
-    component: OrganizationsComponent,
+    path: 'start',
+    component: StartComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':organization',
+    component: OrganizationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':organization/p/:project',
+    component: ProjectComponent,
     canActivate: [AuthGuard]
   }
 ];

@@ -44,8 +44,20 @@ p {
   font-weight: lighter;
 }
 
-
-
+mat-select {
+  padding: 0 16px;
+  font-size: .9rem;
+  border-radius: 4px;
+}
+.mat-button-wrapper {
+  font-size: .9rem;
+}
+.mat-option-text {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 @media (min-width: 720px) {
 

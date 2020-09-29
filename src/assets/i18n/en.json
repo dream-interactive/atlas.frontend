@@ -3,6 +3,12 @@
     "button": {
       "trynow": "Use it free",
       "signin": "Sign In"
+    },
+    "dropdown": {
+      "projects": "Projects",
+      "orgs": "Your organizations",
+      "new": "Create organization"
+
     }
   },
   "footer": {

@@ -15,7 +15,7 @@ export class AuthService {
     createAuth0Client({
       domain: 'atlas-s.eu.auth0.com',
       client_id: 'YJXeZnMs105UnSRF7BmYupS2yCuLp07a',
-      redirect_uri: `${window.location.origin}`
+      redirect_uri: `${window.location.origin}/start`
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -79,7 +79,7 @@ export class AuthService {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log in
       client.loginWithRedirect({
-        redirect_uri: `${window.location.origin}`,
+        redirect_uri: `${window.location.origin}/start`,
         appState: { target: redirectPath }
       });
     });
@@ -89,7 +89,7 @@ export class AuthService {
     // Call when app reloads after user logs in with Auth0
     const params = window.location.search;
     if (params.includes('code=') && params.includes('state=')) {
-      let targetRoute: string; // Path to redirect to after login processsed
+      let targetRoute: string; // Path to redirect to after login processed
       const authComplete$ = this.handleRedirectCallback$.pipe(
         // Have client, now call method to handle auth callback redirect
         tap(cbRes => {
@@ -107,13 +107,10 @@ export class AuthService {
       // Subscribe to authentication completion observable
       // Response will be an array of user and login status
       authComplete$.subscribe(([user, loggedIn]) => {
-        // save user in backend db if it doesn't exist
-
-
-
         // Redirect to target route after callback processing
 
-        this.router.navigate([targetRoute]);
+       // this.router.navigate([targetRoute]); //
+        this.router.navigate([targetRoute.slice(0, targetRoute.indexOf('?'))]);
       });
 
 
@@ -130,10 +127,6 @@ export class AuthService {
         returnTo: `${window.location.origin}`
       });
     });
-  }
-
-  private saveUserInBackendDB(): void{
-
   }
 
 }
