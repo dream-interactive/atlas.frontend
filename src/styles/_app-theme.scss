@@ -6,6 +6,7 @@
 @import '../app/pages/atlas/atlas-theme';
 @import '../app/pages/start/start-theme';
 @import '../app/pages/about/about-theme';
+@import '../app/pages/special/special-theme';
 
 // Styles for the components that are based on the current theme.
 @mixin components-theme($theme) {
@@ -14,7 +15,7 @@
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
-  $next-theme: mat-palette($mat-red);
+  // $next-theme: mat-palette($mat-red);
 
   @include toolbar-theme($theme);
   @include user-menu-theme($theme);
@@ -22,7 +23,7 @@
   @include footer-theme($theme);
   @include about-theme($theme);
   @include start-theme($theme);
-
+  @include special-theme($theme)
 }
 
 // Define the light theme.

@@ -1,19 +1,17 @@
-@mixin footer-theme($theme) {
+@mixin special-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  app-footer {
+  app-special {
     color: mat-color($primary, default-contrast);
-    .footer {
+    .special {
       background: mat-color($primary);
     }
     a {
-      &:hover {
-        color: mat-color($primary);
-      }
+      color: mat-color($accent);
     }
   }
 }
