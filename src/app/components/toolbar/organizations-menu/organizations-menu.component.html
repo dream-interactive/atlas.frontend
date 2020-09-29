@@ -1,4 +1,4 @@
-<mat-select [(value)]="yourOrgs.id"
+<mat-select [(value)]="selected"
             (selectionChange)="selectOrganization($event)"
             class="orgs__selector"
             panelClass="selector-panel"
@@ -12,7 +12,7 @@
     <span class="org__name">{{org.name}}</span>
   </mat-option>
 
-  <mat-option class="org" value="{{yourOrgs.id}}">
+  <mat-option class="org" value="{{yourOrgs.id }}">
     <img class="org__img" src="{{yourOrgs.image}}" alt="org">
     <span class="org__name">{{yourOrgs.name}}</span>
   </mat-option>

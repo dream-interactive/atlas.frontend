@@ -6,6 +6,7 @@ import {AboutComponent} from './pages/about/about.component';
 import {StartComponent} from './pages/start/start.component';
 import {OrganizationComponent} from './pages/organization/organization.component';
 import {ProjectComponent} from './pages/project/project.component';
+import {SpecialComponent} from './pages/special/special.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: ':organization',
+    path: 'special',
+    component: SpecialComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'o/:organization',
     component: OrganizationComponent,
     canActivate: [AuthGuard]
   },
@@ -35,7 +41,8 @@ const routes: Routes = [
     path: ':organization/p/:project',
     component: ProjectComponent,
     canActivate: [AuthGuard]
-  }
+  },
+
 ];
 
 @NgModule({

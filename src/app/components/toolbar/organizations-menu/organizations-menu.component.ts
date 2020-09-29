@@ -11,7 +11,7 @@ import {MatSelectChange} from '@angular/material/select';
 })
 export class OrganizationsMenuComponent implements OnInit {
 
-
+  selected = '';
   yourOrgs: Organization = {
     id: 'yourOrgsId', name: '', image: '../../assets/images/organization.svg'
   };
@@ -25,7 +25,9 @@ export class OrganizationsMenuComponent implements OnInit {
     translator.get(['navbar.dropdown.orgs', 'navbar.dropdown.new']).subscribe(res => {
       this.yourOrgs.name = res['navbar.dropdown.orgs']; // Get default value on first load
       this.createOrg.name = res['navbar.dropdown.new'];
+      this.selected = this.yourOrgs.id;
     });
+
     translator.onLangChange.pipe(
       mergeMap(() => translator.get(['navbar.dropdown.orgs', 'navbar.dropdown.new']))
     ).subscribe(res => {
