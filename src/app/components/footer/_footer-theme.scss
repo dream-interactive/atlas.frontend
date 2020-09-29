@@ -15,5 +15,10 @@
         color: mat-color($primary);
       }
     }
+    a {
+      &:hover {
+        color: mat-color($accent);
+      }
+    }
   }
 }

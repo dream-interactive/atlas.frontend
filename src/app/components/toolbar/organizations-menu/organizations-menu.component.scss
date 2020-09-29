@@ -1,23 +1,24 @@
 
 .orgs {
-  &__selector {
-    width: 120px;
-  }
   &__selector--header {
     width: 100%;
   }
   &__image {
-    width: 120px;
+    width: 150px;
     margin-top: 10px;
     margin-bottom: 10px;
   }
 }
 
-::ng-deep.selector-panel {
-  margin-top: 30px;
-}
 .org {
+  width: 100%;
+  display: flex;
+  font-weight: normal;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
   &__img {
     height: 32px;
   }
 }
+
