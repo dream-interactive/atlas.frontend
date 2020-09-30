@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ProjectsMenuComponent} from './projects-menu.component';
 import {MaterialModule} from '../../../material.module';
 import {TranslateModule} from '@ngx-translate/core';
+import {FlexModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {TranslateModule} from '@ngx-translate/core';
     imports: [
         CommonModule,
         MaterialModule,
-        TranslateModule
+        TranslateModule,
+        FlexModule
     ],
   exports: [
     ProjectsMenuComponent

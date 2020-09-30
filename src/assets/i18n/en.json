@@ -5,9 +5,10 @@
       "signin": "Sign In"
     },
     "dropdown": {
-      "projects": "Projects",
+      "projects": "Your projects",
       "orgs": "Your organizations",
-      "new": "Create organization"
+      "neworg": "Create organization",
+      "newproject": "Create project"
 
     }
   },

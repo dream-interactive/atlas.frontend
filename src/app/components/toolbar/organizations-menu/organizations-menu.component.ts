@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Organization} from '../../../services/organization.service';
-import {NavigationStart, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, mergeMap} from 'rxjs/operators';
 
@@ -12,46 +12,41 @@ import {filter, mergeMap} from 'rxjs/operators';
 export class OrganizationsMenuComponent implements OnInit {
 
   removeOrg: Organization = {
-    image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
+    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
   };
   orgs: Organization[] = [this.removeOrg];
 
   currentOrg: string;
 
-  constructor(private router: Router, private translator: TranslateService) {
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private translator: TranslateService) {
 
     const currentUrl = this.router.url;
-    if (currentUrl.match(new RegExp('/o/'))) {
-      const s = currentUrl.substring(3, currentUrl.length);
-      const index = s.indexOf('/');
-      if (index === -1) {
-        this.setNameOfCurrentOrganization(s);
-      } else {
-        this.setNameOfCurrentOrganization(s.substring(0, index));
-      }
-    } else {
-      this.getDefaultOrganizationNameFromTranslator(); // Get default value on first loa
 
-      this.translator.onLangChange.pipe(
-        mergeMap(() => this.translator.get(['navbar.dropdown.orgs']))
-      ).subscribe(res => {
-        this.currentOrg = res['navbar.dropdown.orgs'];
-      }); // Get default value on lang change
+    if (currentUrl.match(new RegExp('/o/'))) {
+      const orgName = route.children[0].snapshot.url[1].path; // organization is a second part in url
+      this.setNameOfCurrentOrganization(orgName);
+    } else {
+      this.getDefaultOrganizationNameFromTranslator(); // Get default value on first load
     }
+
+
+    this.translator.onLangChange.pipe(
+      mergeMap(() => this.translator.get(['navbar.dropdown.orgs']))
+    ).subscribe(res => {
+      this.currentOrg = res['navbar.dropdown.orgs'];
+    }); // Get default value on lang change
+
 
     router.events
       .pipe(
-        filter((e) => e instanceof NavigationStart))
-      .subscribe((event: NavigationStart) => {
+        filter((e) => e instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
         const eventUrl = event.url;
         if (eventUrl.match(new RegExp('/o/'))) {
-          const s = eventUrl.substring(3, eventUrl.length); // remove /o/
-          const index = s.indexOf('/'); // find firs '/'
-          if (index === -1) {
-            this.setNameOfCurrentOrganization(s);
-          } else {
-            this.setNameOfCurrentOrganization(s.substring(0, index));
-          }
+          const orgName = route.children[0].snapshot.url[1].path; // organization is a second part in url
+          this.setNameOfCurrentOrganization(orgName);
         } else {
           this.getDefaultOrganizationNameFromTranslator();
         }
@@ -66,7 +61,7 @@ export class OrganizationsMenuComponent implements OnInit {
     this.router.navigate([`/o/${name.toLowerCase()}`]);
   }
 
-  goToStart(): void {
+  goToOrgs(): void {
     this.router.navigate([`/start`]);
   }
 
@@ -80,8 +75,7 @@ export class OrganizationsMenuComponent implements OnInit {
 
     if (organizations) {
       this.currentOrg = organizations[0].name;
-    }
-    else {
+    } else {
       this.getDefaultOrganizationNameFromTranslator();
     }
   }
