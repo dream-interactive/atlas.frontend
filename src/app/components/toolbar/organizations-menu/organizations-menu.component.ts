@@ -12,7 +12,7 @@ import {filter, mergeMap} from 'rxjs/operators';
 export class OrganizationsMenuComponent implements OnInit {
 
   removeOrg: Organization = {
-    image: '../../../assets/images/101-laptop.svg', name: 'Remove'
+    image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
   };
   orgs: Organization[] = [this.removeOrg];
 
