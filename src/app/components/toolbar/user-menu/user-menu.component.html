@@ -1,0 +1,18 @@
+<button mat-mini-fab
+        [matMenuTriggerFor]="beforeMenu"
+        class="user-picture"
+        [style.backgroundImage]="'url('+ profile.picture+ ')'">
+</button>
+<mat-menu  #beforeMenu="matMenu" xPosition="before" class="menu">
+  <div class="menu__item menu__title">{{profile.name}}</div>
+  <button mat-menu-item class="menu__item"><mat-icon>person</mat-icon>Profile</button>
+  <div  class="menu__item menu__title">Atlas</div>
+  <button mat-menu-item class="menu__item" ><mat-icon>settings</mat-icon>Settings</button>
+  <mat-divider></mat-divider>
+  <button  mat-menu-item class="menu__item">
+    <mat-icon>nights_stay</mat-icon>
+    <span>Dark mode</span>
+    <app-theme-picker></app-theme-picker>
+  </button>
+  <button class="menu__item" mat-menu-item (click)="auth.logout()"><mat-icon>login</mat-icon>Log out</button>
+</mat-menu>

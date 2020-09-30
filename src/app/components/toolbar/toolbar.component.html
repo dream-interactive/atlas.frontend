@@ -1,13 +1,35 @@
-<mat-toolbar color="primary" class="toolbar dark-theme">
-  <a href="#" class="toolbar__logo" mat-button>
-    <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_light.svg" alt="atlas-logo" class="toolbar__logo-image">
+<mat-toolbar class="toolbar">
+
+  <a routerLink="/start" class="toolbar__logo" mat-button *ngIf="auth.loggedIn">
+    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+    <ng-template #darkMode>
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+    </ng-template>
   </a>
+  <a routerLink="/" class="toolbar__logo" mat-button *ngIf="!auth.loggedIn">
+    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+    <ng-template #darkMode>
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+    </ng-template>
+  </a>
+
   <span class="spacer"></span>
   <nav class="toolbar__nav">
-    <a href="#" mat-flat-button color="accent">Try now</a>
-    {{username}}
-    <a href="#" mat-button>Log in</a>
-    <a routerLink="/" mat-button (click)="logout()">Log out</a>
+
+    <app-organizations-menu  *ngIf="auth.loggedIn"></app-organizations-menu>
+    <app-projects-menu  *ngIf="auth.loggedIn"></app-projects-menu>
+
+    <a href="#" mat-flat-button color="accent" class="toolbar__button">{{'navbar.button.trynow' | translate }}</a>
+
+    <a href="#" mat-button
+       *ngIf="!auth.loggedIn; else userMenu"
+       class="toolbar__button toolbar__button--colorless"
+       (click)="auth.login()">{{'navbar.button.signin' | translate }}</a>
+    <ng-template #userMenu >
+      <app-user-menu  class="toolbar__button"></app-user-menu>
+    </ng-template>
 
   </nav>
 </mat-toolbar>
+
+

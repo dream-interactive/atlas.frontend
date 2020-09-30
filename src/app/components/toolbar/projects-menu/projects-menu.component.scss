@@ -1,0 +1,22 @@
+.projects {
+  &__selector--header {
+    width: 100%;
+  }
+  &__image {
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.project {
+  width: 100%;
+  display: flex;
+  font-weight: normal;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  &__img {
+    height: 32px;
+  }
+}

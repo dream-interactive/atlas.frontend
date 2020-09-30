@@ -1,0 +1,27 @@
+
+<button mat-button [matMenuTriggerFor]="projectsMenu" >
+  {{currentProject}}<mat-icon>arrow_drop_down</mat-icon>
+</button>
+<mat-menu #projectsMenu yPosition="below"  class="projects__selector">
+
+  <div class="projects__selector--header" fxLayout="column" fxLayoutAlign="center center">
+    <img  *ngIf="theme.name === 'light-theme', else darkMode"  src="assets/images/projects.png" alt="projects" class="projects__image">
+    <ng-template #darkMode>
+      <img src="assets/images/projects_light.png" alt="projects" class="projects__image">
+    </ng-template>
+  </div>
+
+  <button mat-menu-item class="project" *ngFor="let project of projects" (click)="goTo(project.id)">
+    <img class="project__img" src="{{project.img}}" alt="org">
+    <span class="project__name">{{project.name}}</span>
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item class="project" (click)="goToProjects()">
+    <img class="project__img" src="assets/images/icon-business-pack/svg/101-organization-1.svg" alt="org">
+    <span class="project__name">{{'navbar.dropdown.projects' | translate}}</span>
+  </button>
+  <button mat-menu-item class="project" (click)="goToCreate()">
+    <img class="project__img" src="assets/images/icon-business-pack/svg/101-target-1.svg" alt="org">
+    <span class="project__name">{{'navbar.dropdown.newproject' | translate}}</span>
+  </button>
+</mat-menu>

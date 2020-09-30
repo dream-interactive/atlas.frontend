@@ -1,0 +1,19 @@
+<pre *ngIf="auth.userProfile$ | async as profile">
+<code>{{ profile | json }}</code>
+</pre>
+
+<pre>
+  <code>{{ user | json }}</code>
+</pre>
+
+
+<pre *ngIf="auth.auth0Client$ | async as auth0Client">
+  <code>{{ auth0Client.getIdTokenClaims() | json }}</code>
+</pre>
+
+
+<button mat-button (click)="getUsers()">GetUser</button>
+
+<pre *ngIf="auth.auth0Client$ | async as auth0Client">
+ <code>{{ users | json }}</code>
+</pre>

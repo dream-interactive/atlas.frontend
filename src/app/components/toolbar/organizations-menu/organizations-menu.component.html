@@ -1,0 +1,23 @@
+
+<button mat-button [matMenuTriggerFor]="orgsMenu" >
+  {{currentOrg}}<mat-icon>arrow_drop_down</mat-icon>
+</button>
+<mat-menu #orgsMenu yPosition="below"  class="orgs__selector">
+  <div class="orgs__selector--header" fxLayout="column" fxLayoutAlign="center center">
+    <img src="assets/images/organization.png" alt="orgs" class="orgs__image">
+  </div>
+
+  <button mat-menu-item class="org" *ngFor="let org of orgs" (click)="goTo(org.name)">
+    <img class="org__img" src="{{org.image}}" alt="org">
+    <span class="org__name">{{org.name}}</span>
+  </button>
+<mat-divider></mat-divider>
+  <button mat-menu-item class="org" (click)="goToOrgs()">
+    <img class="org__img" src="assets/images/icon-business-pack/svg/101-organization-4.svg" alt="org">
+    <span class="org__name">{{'navbar.dropdown.orgs' | translate}}</span>
+  </button>
+  <button mat-menu-item class="org" (click)="goToCreate()">
+    <img class="org__img" src="assets/images/icon-business-pack/svg/101-check.svg" alt="org">
+    <span class="org__name">{{'navbar.dropdown.neworg' | translate}}</span>
+  </button>
+</mat-menu>

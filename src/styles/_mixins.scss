@@ -1,0 +1,6 @@
+@mixin gradient-text($angle: 90deg, $fcolor: #C424FF, $scolor: #2369FF) {
+  background: -webkit-linear-gradient($angle, $fcolor,  $scolor);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  display: inline-block;
+}

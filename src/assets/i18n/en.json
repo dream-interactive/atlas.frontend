@@ -1,0 +1,38 @@
+{
+  "navbar": {
+    "button": {
+      "trynow": "Use it free",
+      "signin": "Sign In"
+    },
+    "dropdown": {
+      "projects": "Your projects",
+      "orgs": "Your organizations",
+      "neworg": "Create organization",
+      "newproject": "Create project"
+
+    }
+  },
+  "footer": {
+    "link": {
+      "api": "API",
+      "about": "About",
+      "privacy": "Privacy",
+      "price": "Pricing"
+    }
+  },
+  "about": {
+    "header": {
+      "button": {
+        "trynow": "Use it free"
+      },
+      "text": {
+        "title": "Project management tool for agile teams",
+        "body": ""
+      }
+    },
+    "scrum": {
+      "title": "Scrum boards",
+      "body": "Agile teams can stay focused on delivering iterative and incremental value, as fast as possible, with customizable scrum boards."
+    }
+  }
+}

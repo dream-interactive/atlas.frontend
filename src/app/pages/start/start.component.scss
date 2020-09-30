@@ -1,0 +1,12 @@
+.start {
+  height: 100%;
+  p {
+    font-size: .9rem;
+  }
+  &__image {
+    height: 200px;
+  }
+  &__container {
+    height: inherit;
+  }
+}
