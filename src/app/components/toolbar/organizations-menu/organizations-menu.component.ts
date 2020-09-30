@@ -1,15 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Organization} from '../../../services/organization.service';
-import {MatSelectChange} from '@angular/material/select';
-import {NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {mergeMap} from 'rxjs/operators';
+import {filter, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organizations-menu',
   templateUrl: './organizations-menu.component.html',
-  styleUrls: ['./organizations-menu.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./organizations-menu.component.scss']
 })
 export class OrganizationsMenuComponent implements OnInit {
 
@@ -21,22 +19,18 @@ export class OrganizationsMenuComponent implements OnInit {
   currentOrg: string;
 
   constructor(private router: Router, private translator: TranslateService) {
+
     const currentUrl = this.router.url;
-    console.log('navigationCu', this.currentOrg);
-
-    if (currentUrl.match('/o/')) {
-      const s = currentUrl.substring(4, currentUrl.length);
+    if (currentUrl.match(new RegExp('/o/'))) {
+      const s = currentUrl.substring(3, currentUrl.length);
       const index = s.indexOf('/');
-
-      this.currentOrg = s.substring(0, index);
-
-      console.log('navigation', this.currentOrg);
-
+      if (index === -1) {
+        this.setNameOfCurrentOrganization(s);
+      } else {
+        this.setNameOfCurrentOrganization(s.substring(0, index));
+      }
     } else {
-
-      this.translator.get(['navbar.dropdown.orgs']).subscribe(res => {
-        this.currentOrg = res['navbar.dropdown.orgs']; // Get default value on first load
-      });
+      this.getDefaultOrganizationNameFromTranslator(); // Get default value on first loa
 
       this.translator.onLangChange.pipe(
         mergeMap(() => this.translator.get(['navbar.dropdown.orgs']))
@@ -45,30 +39,23 @@ export class OrganizationsMenuComponent implements OnInit {
       }); // Get default value on lang change
     }
 
-
-
-
-    router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        const currentUrl2 = this.router.url;
-        console.log('navigationCu', this.currentOrg);
-
-        if (currentUrl2.match('/o/')) {
-          const s = currentUrl2.substring(4, currentUrl2.length);
-          const index = s.indexOf('/');
-
-          this.currentOrg = s.substring(0, index);
-
-          console.log('navigation', this.currentOrg);
-
+    router.events
+      .pipe(
+        filter((e) => e instanceof NavigationStart))
+      .subscribe((event: NavigationStart) => {
+        const eventUrl = event.url;
+        if (eventUrl.match(new RegExp('/o/'))) {
+          const s = eventUrl.substring(3, eventUrl.length); // remove /o/
+          const index = s.indexOf('/'); // find firs '/'
+          if (index === -1) {
+            this.setNameOfCurrentOrganization(s);
+          } else {
+            this.setNameOfCurrentOrganization(s.substring(0, index));
+          }
         } else {
-
-          this.translator.get(['navbar.dropdown.orgs']).subscribe(res => {
-            this.currentOrg = res['navbar.dropdown.orgs']; // Get default value on first load
-          });
+          this.getDefaultOrganizationNameFromTranslator();
         }
-      }
-    });
+      });
   }
 
   ngOnInit(): void {
@@ -85,5 +72,23 @@ export class OrganizationsMenuComponent implements OnInit {
 
   goToCreate(): void {
     this.router.navigate([`/new/organization`]);
+  }
+
+  setNameOfCurrentOrganization(route: string): void {
+    const organizations = this.orgs
+      .filter((org) => org.name.toLowerCase() === route);
+
+    if (organizations) {
+      this.currentOrg = organizations[0].name;
+    }
+    else {
+      this.getDefaultOrganizationNameFromTranslator();
+    }
+  }
+
+  getDefaultOrganizationNameFromTranslator(): void {
+    this.translator.get(['navbar.dropdown.orgs']).subscribe((res) => {
+      this.currentOrg = res['navbar.dropdown.orgs'];
+    });
   }
 }
