@@ -80,10 +80,6 @@ export class ProjectsMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    if (this.router.url.match('projects/+/^[a-z0-9]+$/i')) {
-      console.log('rout', this.router.url);
-    }
   }
 
 
@@ -109,10 +105,11 @@ export class ProjectsMenuComponent implements OnInit {
     const projects = this.projects
       .filter((project) => project.name.toLowerCase() === route);
 
-    if (projects) {
+    if (projects.length > 0) {
       this.currentProject = projects[0].name;
     }
     else {
+      // todo 404
       this.getDefaultProjectNameFromTranslator();
     }
   }

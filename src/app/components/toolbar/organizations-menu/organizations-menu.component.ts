@@ -73,9 +73,10 @@ export class OrganizationsMenuComponent implements OnInit {
     const organizations = this.orgs
       .filter((org) => org.name.toLowerCase() === route);
 
-    if (organizations) {
+    if (organizations.length > 0) {
       this.currentOrg = organizations[0].name;
     } else {
+      // todo 404
       this.getDefaultOrganizationNameFromTranslator();
     }
   }
