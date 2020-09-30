@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 export class ProfileComponent implements OnInit {
 
   users: any[] = [];
+  user = {};
 
   token: string;
 
@@ -18,6 +19,11 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.auth.getUser$().subscribe( (u) => {
+      this.user = u;
+      }
+    );
   }
 
   getUsers(): void {

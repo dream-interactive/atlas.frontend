@@ -7,10 +7,12 @@ import {catchError} from 'rxjs/operators';
 
 export interface Project {
   id: string;
+  organizationId: string;
   name: string;
   key: string;
   type: ProjectType;
   issuesTypes: any[]; // TODO
+  img: string;
 }
 
 export enum ProjectType {
