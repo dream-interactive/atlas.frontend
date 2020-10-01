@@ -34,5 +34,14 @@
       "title": "Scrum boards",
       "body": "Agile teams can stay focused on delivering iterative and incremental value, as fast as possible, with customizable scrum boards."
     }
+  },
+  "project": {
+    "dialog": {
+      "title": "Create project",
+      "buttons": {
+        "create": "Create",
+        "close": "Cancel"
+      }
+    }
   }
 }

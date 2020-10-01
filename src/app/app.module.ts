@@ -38,7 +38,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-
     ToolbarModule,
     AtlasModule,
     AboutModule,
