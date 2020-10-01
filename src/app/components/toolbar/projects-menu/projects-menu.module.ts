@@ -4,16 +4,18 @@ import {ProjectsMenuComponent} from './projects-menu.component';
 import {MaterialModule} from '../../../material.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {FlexModule} from '@angular/flex-layout';
+import {ProjectModalModule} from '../../project-modal/project-modal.module';
 
 
 @NgModule({
   declarations: [ProjectsMenuComponent],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        TranslateModule,
-        FlexModule
-    ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    TranslateModule,
+    FlexModule,
+    ProjectModalModule
+  ],
   exports: [
     ProjectsMenuComponent
   ]
