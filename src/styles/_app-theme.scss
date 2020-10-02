@@ -7,6 +7,7 @@
 @import '../app/pages/start/start-theme';
 @import '../app/pages/about/about-theme';
 @import '../app/pages/special/special-theme';
+@import '../app/components/project-modal/project-modal-theme';
 
 // Styles for the components that are based on the current theme.
 @mixin components-theme($theme) {
@@ -23,7 +24,8 @@
   @include footer-theme($theme);
   @include about-theme($theme);
   @include start-theme($theme);
-  @include special-theme($theme)
+  @include special-theme($theme);
+  @include project-modal-theme($theme);
 }
 
 // Define the light theme.

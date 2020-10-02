@@ -20,7 +20,7 @@
     <img class="project__img" src="assets/images/icon-business-pack/svg/101-organization-1.svg" alt="org">
     <span class="project__name">{{'navbar.dropdown.projects' | translate}}</span>
   </button>
-  <button mat-menu-item class="project" (click)="goToCreate()">
+  <button mat-menu-item class="project" (click)="goToCreate()" [disabled]="orgs.length < 1">
     <img class="project__img" src="assets/images/icon-business-pack/svg/101-target-1.svg" alt="org">
     <span class="project__name">{{'navbar.dropdown.newproject' | translate}}</span>
   </button>

@@ -32,13 +32,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
-      defaultLanguage: 'ua'
+      defaultLanguage: 'en'
     }),
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-
     ToolbarModule,
     AtlasModule,
     AboutModule,
