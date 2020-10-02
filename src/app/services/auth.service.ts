@@ -4,17 +4,18 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import {BehaviorSubject, combineLatest, from, Observable, of, throwError} from 'rxjs';
 import {catchError, concatMap, shareReplay, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  env = environment;
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
     createAuth0Client({
-      domain: 'atlas-s.eu.auth0.com',
-      client_id: 'YJXeZnMs105UnSRF7BmYupS2yCuLp07a',
+      domain: this.env.auth0_domain,
+      client_id: this.env.auth0_client_id,
       redirect_uri: `${window.location.origin}/start`
     })
   ) as Observable<Auth0Client>).pipe(

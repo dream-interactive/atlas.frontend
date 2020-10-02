@@ -37,7 +37,11 @@
   },
   "project": {
     "dialog": {
-      "title": "Create project",
+      "title": "Your new project",
+      "organization": "Organization",
+      "name": "Project name",
+      "key": "Project key",
+
       "buttons": {
         "create": "Create",
         "close": "Cancel"
