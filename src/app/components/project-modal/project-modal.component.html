@@ -4,7 +4,7 @@
 <div mat-dialog-content class="dialog__content">
 
   <form [formGroup]="projectForm" (ngSubmit)="create()" fxLayout="column" fxFlexAlign="center center"
-        fxLayoutGap="1rem">
+        fxLayoutGap=".8rem">
 
 <!--
     <button class="dialog__project-img" mat-fab
@@ -13,8 +13,14 @@
 -->
 
     <mat-button-toggle-group name="projectType" aria-label="Project Type" [(value)]="projectType" class="dialog__toggle-group">
-      <mat-button-toggle value="SCRUM" class="toggle__button"><img src="../../../assets/images/tipa-scrum.png" alt="SCRUM" class="toggle__img"> SCRUM</mat-button-toggle>
-      <mat-button-toggle value="KANBAN" class="toggle__button"><img src="../../../assets/images/kanban-board-page.png" alt="KANBAN" class="toggle__img"> KANBAN</mat-button-toggle>
+      <mat-button-toggle value="SCRUM" class="toggle__button">
+        <img src="../../../assets/images/tipa-scrum.png" alt="SCRUM" class="toggle__img">
+        <div>SCRUM</div>
+      </mat-button-toggle>
+      <mat-button-toggle value="KANBAN" class="toggle__button">
+        <img src="../../../assets/images/kanban-board-page.png" alt="KANBAN" class="toggle__img">
+        <div>KANBAN</div>
+      </mat-button-toggle>
     </mat-button-toggle-group>
 
     <mat-form-field appearance="outline">
