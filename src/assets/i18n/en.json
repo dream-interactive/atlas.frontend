@@ -47,5 +47,17 @@
         "close": "Cancel"
       }
     }
+  },
+  "organization": {
+    "dialog": {
+      "title": "Your new Organization",
+      "name": "Organization name",
+
+      "buttons": {
+        "create": "Create",
+        "close": "Cancel",
+        "logo": "Load your's logo"
+      }
+    }
   }
 }

@@ -31,7 +31,7 @@ export class ProjectsMenuComponent implements OnInit {
   currentProject: string;
 
   removeOrg: Organization = {
-    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
+    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', owner: ''
   };
 
   orgs: Organization[] = [this.removeOrg];
