@@ -1,0 +1,14 @@
+.dialog {
+  &__content {
+    width: 400px;
+    margin: 0 auto;
+  }
+  &__img {
+    max-height: 180px;
+    text-align: center;
+  }
+  &__button-group{
+    width: 100%;
+  }
+
+}
