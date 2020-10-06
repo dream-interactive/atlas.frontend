@@ -11,13 +11,6 @@
 
 // Styles for the components that are based on the current theme.
 @mixin components-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-  // $next-theme: mat-palette($mat-red);
-
   @include toolbar-theme($theme);
   @include user-menu-theme($theme);
   @include atlas-theme($theme);

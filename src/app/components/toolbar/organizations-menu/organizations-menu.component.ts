@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Organization} from '../../../services/organization.service';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, mergeMap} from 'rxjs/operators';
 
