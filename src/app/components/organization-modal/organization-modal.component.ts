@@ -3,6 +3,7 @@ import {Organization, OrganizationService} from '../../services/organization.ser
 import {ProfileService} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-organization-modal',
@@ -12,23 +13,23 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class OrganizationModalComponent implements OnInit {
   organizationForm: FormGroup;
   organization: Organization;
+  errorMessages: string;
   orgName = new FormControl('',
-    [Validators.required, Validators.pattern('^[a-zA-Z](?:-?[a-zA-Z0-9]+)*')]
+    [Validators.required,
+      Validators.pattern('^[a-zA-Z](?:-?[a-zA-Z0-9 ]+)*'),
+      Validators.minLength(3)]
   );
 
   constructor(private organizationService: OrganizationService,
               private profileService: ProfileService,
-              private  dialog: MatDialogRef<OrganizationModalComponent>)
-{
-
+              private  dialog: MatDialogRef<OrganizationModalComponent>,
+              private translateService: TranslateService) {
     this.organizationForm = new FormGroup({
       name: this.orgName
-  })
-    ;
+    });
   }
 
   ngOnInit(): void {
-
   }
 
   create(): void {
@@ -46,13 +47,21 @@ export class OrganizationModalComponent implements OnInit {
   }
 
   getOrganizationNameErrorMessage(): string {
+    this.translateService.get(['empty', 'wrong', 'short']).subscribe(translations => {
 
-    if (this.orgName.hasError('required')) {
-      return 'You must enter a value';
-    }
-    return (this.orgName.hasError('pattern'))
-      ? 'Organization name should start with latin alphabet letters(case insensitive), can contain numbers and dash(inside)'
-      : '';
+      if (this.orgName.hasError('required')) {
+        this.errorMessages =  translations.empty;
+      }
+    else if (this.orgName.hasError('minlength')){
+      this.errorMessages = translations.short;
+      }
+    else  if (this.orgName.hasError('pattern')) {
+      this.errorMessages  = translations.wrong;
+      }
+
+    });
+    return this.errorMessages;
   }
+
 }
 

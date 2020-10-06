@@ -7,7 +7,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {FlexModule} from '@angular/flex-layout';
 
 
-
 @NgModule({
   declarations: [OrganizationModalComponent],
   imports: [

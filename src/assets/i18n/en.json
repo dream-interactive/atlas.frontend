@@ -9,7 +9,6 @@
       "orgs": "Your organizations",
       "neworg": "Create organization",
       "newproject": "Create project"
-
     }
   },
   "footer": {
@@ -41,7 +40,6 @@
       "organization": "Organization",
       "name": "Project name",
       "key": "Project key",
-
       "buttons": {
         "create": "Create",
         "close": "Cancel"
@@ -52,12 +50,25 @@
     "dialog": {
       "title": "Your new Organization",
       "name": "Organization name",
-
+      "url": "Your URL will be:",
       "buttons": {
         "create": "Create",
-        "close": "Cancel",
-        "logo": "Load your's logo"
+        "close": "Cancel"
       }
     }
-  }
+  },
+  "start": {
+    "headers": {
+      "organization": "Your's organization",
+      "project": "Yous's project",
+      "dontHaveOrganization": "You don't have any organization"
+    },
+    "text": "Organization allows you to manage projects and teams.",
+    "buttons": {
+      "create": "Create your first organization"
+    }
+  },
+    "empty": "You must enter a value",
+    "wrong": "Organization name should start with alphabet letters(case insensitive), can contain numbers and dash(inside)",
+    "short": "Organization name must have 3 or more characters"
 }
