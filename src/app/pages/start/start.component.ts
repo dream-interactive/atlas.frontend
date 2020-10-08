@@ -19,8 +19,7 @@ export class StartComponent implements OnInit {
   }
   createOrganization(): void{
     this.dialog.open(OrganizationModalComponent, {
-      panelClass: ['full-screen-modal']
-
+      // panelClass: ['full-screen-modal']
     });
   }
 

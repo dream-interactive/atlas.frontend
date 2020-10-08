@@ -70,5 +70,6 @@
   },
     "empty": "You must enter a value",
     "wrong": "Organization name should start with alphabet letters(case insensitive), can contain numbers and dash(inside)",
-    "short": "Organization name must have 3 or more characters"
+    "short": "Organization name must have 3 or more characters",
+    "exist": "An organization with this name already exists, choose another"
 }

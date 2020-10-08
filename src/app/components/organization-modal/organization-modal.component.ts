@@ -35,19 +35,31 @@ export class OrganizationModalComponent implements OnInit {
   create(): void {
     if (this.organizationForm.valid) {
       const organizationDate = {...this.organizationForm.value};
-      this.profileService.profile$.subscribe(user => {
-        this.organization = {
-          name: organizationDate.name,
-          owner: user.sub
-        };
-        this.organizationService.save(this.organization);
-      });
-      this.dialog.close();
+      const name  = organizationDate.name;
+      const validName = this.createOrgValidName(name);
+      this.organizationService.existByName(validName).subscribe(
+        exist => {
+          if (exist){
+            this.orgName.setErrors({exist: true});
+          }
+          else {
+            this.profileService.profile$.subscribe(user => {
+              this.organization = {
+                validName: this.createOrgValidName(organizationDate.name),
+                name: organizationDate.name,
+                owner: user.sub
+              };
+              this.organizationService.save(this.organization);
+              this.dialog.close();
+          });
+        }}
+      );
     }
   }
 
   getOrganizationNameErrorMessage(): string {
-    this.translateService.get(['empty', 'wrong', 'short']).subscribe(translations => {
+    this.translateService.get(['empty', 'wrong', 'short', 'exist']).subscribe(translations => {
+
 
       if (this.orgName.hasError('required')) {
         this.errorMessages =  translations.empty;
@@ -58,9 +70,23 @@ export class OrganizationModalComponent implements OnInit {
     else  if (this.orgName.hasError('pattern')) {
       this.errorMessages  = translations.wrong;
       }
+      else  if (this.orgName.hasError('exist')) {
+        this.errorMessages  = translations.exist;
+      }
 
     });
     return this.errorMessages;
+  }
+
+
+  createOrgValidName(name: string): string {
+    name =  name.toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/\-+/g, '-');
+    return name;
+
+
   }
 
 }

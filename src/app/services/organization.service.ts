@@ -8,6 +8,7 @@ import {ProfileService, UserProfile} from './profile.service';
 export interface Organization {
   id?: string;
   name: string;
+  validName: string;
   image?: string;
   owner: string; // ID user which create organization
   members?: string[]; // ID all users who is member of this organization
@@ -33,7 +34,7 @@ export class OrganizationService  implements CrudService<Organization, string>{
 
   save(organization: Organization): Observable<Organization>{
     console.log('Saving organization.....', organization);
-      //  return this.http.post<Organization>(`${URL}/api/organization/`, organization);
+    //  return this.http.post<Organization>(`${URL}/api/organization/`, organization);
     return null;
   }
 
@@ -52,10 +53,10 @@ export class OrganizationService  implements CrudService<Organization, string>{
     //  return  this.http.get<Organization>(`${URL}/api/organization/${id}`)
     return null;
   }
-  existByName(name: string): boolean{
-    console.log('exist', name)
-   //  return this.http.get<boolean>(`${URL}/api/organization/name/${name}`);
-    return false;
+  existByName(name: string): Observable<boolean>{
+    console.log('exist', name);
+    // return this.http.get<boolean>(`${URL}/api/organization/name/${name}`);
+    return new Observable<boolean>(obs => { obs.next(false); });
   }
 
 }

@@ -7,15 +7,14 @@
  <form [formGroup]="organizationForm" (ngSubmit)="create()" fxLayout="column" fxFlexAlign="center center"
         fxLayoutGap=".8rem">
 
-
   <mat-form-field appearance="outline">
     <mat-label >{{'organization.dialog.name' | translate}}</mat-label>
     <input matInput
            [formControl]="orgName"
           #name>
     <mat-error *ngIf="orgName.invalid">{{getOrganizationNameErrorMessage()}}</mat-error>
+    <mat-hint *ngIf="orgName.valid">{{'organization.dialog.url'|translate}} https://atlas.com/o/{{createOrgValidName(name.value)}}</mat-hint>
 
-    <mat-hint *ngIf="orgName.valid">{{'organization.dialog.url'|translate}} https://atlas.com/o/{{name.value}}</mat-hint>
 
   </mat-form-field>
 

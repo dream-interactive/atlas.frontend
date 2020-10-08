@@ -9,12 +9,14 @@ import {OrganizationModalModule} from '../../components/organization-modal/organ
 
 @NgModule({
   declarations: [StartComponent],
-  imports: [
-    CommonModule,
-    FlexModule,
-    MaterialModule,
-    OrganizationModalModule
-  ],
+    imports: [
+        CommonModule,
+        FlexModule,
+        MaterialModule,
+        OrganizationModalModule,
+        CardOrganizationModule,
+        TranslateModule
+    ],
   exports: [
     StartComponent
   ]
