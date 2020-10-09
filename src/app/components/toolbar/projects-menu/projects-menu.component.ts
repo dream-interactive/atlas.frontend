@@ -17,21 +17,12 @@ export class ProjectsMenuComponent implements OnInit {
 
   theme: SiteTheme;
 
-  removeProject: Project = {
-    id: '1', organizationId: '1', issuesTypes: [], key: '', name: 'Remove1', type: undefined, img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg'
-  };
-  removeProject2: Project = {
-    id: '2', organizationId: '1', issuesTypes: [], key: '', name: 'Remove-2', type: undefined, img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg'
-  };
-  removeProject3: Project = {
-    id: '3', organizationId: '1', issuesTypes: [], key: '', name: 'Remove3', type: undefined, img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg'
-  };
-  projects: Project[] = [this.removeProject, this.removeProject2, this.removeProject3];
+  projects: Project[] = [];
 
   currentProject: string;
 
   removeOrg: Organization = {
-    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
+    id: 'cb0f40bb-9d8c-4c1c-802f-6bc15cc63cda', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
   };
 
   orgs: Organization[] = [this.removeOrg];
@@ -83,6 +74,10 @@ export class ProjectsMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.projectService.projects$.subscribe( prjcts => {
+      this.projects = prjcts;
+    });
   }
 
 
