@@ -51,6 +51,12 @@
       "title": "Your new Organization",
       "name": "Organization name",
       "url": "Your URL will be:",
+      "errors": {
+        "empty": "Please, enter an organization name.",
+        "wrong": "Organization name should start with alphabet letters(case insensitive), can contain numbers, whitespaces and hyphens(inside)",
+        "short": "Organization name should contain 3 or more characters.",
+        "exist": "An organization with this name already exists"
+      },
       "buttons": {
         "create": "Create",
         "close": "Cancel"
@@ -59,17 +65,13 @@
   },
   "start": {
     "headers": {
-      "organization": "Your's organization",
-      "project": "Yous's project",
+      "organization": "Your organization",
+      "project": "Your project",
       "dontHaveOrganization": "You don't have any organization"
     },
     "text": "Organization allows you to manage projects and teams.",
     "buttons": {
       "create": "Create your first organization"
     }
-  },
-    "empty": "You must enter a value",
-    "wrong": "Organization name should start with alphabet letters(case insensitive), can contain numbers and dash(inside)",
-    "short": "Organization name must have 3 or more characters",
-    "exist": "An organization with this name already exists, choose another"
+  }
 }

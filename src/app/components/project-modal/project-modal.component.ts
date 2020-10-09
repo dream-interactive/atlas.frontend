@@ -10,7 +10,7 @@ import {ProjectType} from '../../services/project.service';
 })
 export class ProjectModalComponent implements OnInit {
   removeOrg: Organization = {
-    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', validName: ' ', ownerUserId: ''
+    id: '1', img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', validName: ' ', ownerUserId: ''
   };
   organizations: Organization[] = [this.removeOrg];
 

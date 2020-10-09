@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, mergeMap} from 'rxjs/operators';
-import {Organization} from '../../../services/organization.service';
+import {Organization, OrganizationService} from '../../../services/organization.service';
 import {OrganizationModalComponent} from '../../organization-modal/organization-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -13,17 +13,15 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class OrganizationsMenuComponent implements OnInit {
 
-  removeOrg: Organization = {
-    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', validName: ' ', ownerUserId: ''
-  };
-  orgs: Organization[] = [this.removeOrg];
+  organizations: Organization[] = [];
 
   currentOrg: string;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private translator: TranslateService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private os: OrganizationService) {
 
     const currentUrl = this.router.url;
 
@@ -57,6 +55,7 @@ export class OrganizationsMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.os.userOrganizations$.subscribe((orgs) => this.organizations = orgs);
   }
 
 
@@ -75,7 +74,7 @@ export class OrganizationsMenuComponent implements OnInit {
   }
 
   setNameOfCurrentOrganization(route: string): void {
-    const organizations = this.orgs
+    const organizations = this.organizations
       .filter((org) => org.name.toLowerCase() === route);
 
     if (organizations.length > 0) {

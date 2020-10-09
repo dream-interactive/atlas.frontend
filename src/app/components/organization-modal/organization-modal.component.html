@@ -13,7 +13,7 @@
            [formControl]="orgName"
           #name>
     <mat-error *ngIf="orgName.invalid">{{getOrganizationNameErrorMessage()}}</mat-error>
-    <mat-hint *ngIf="orgName.valid">{{'organization.dialog.url'|translate}} https://atlas.com/o/{{createOrgValidName(name.value)}}</mat-hint>
+    <mat-hint *ngIf="orgName.valid">{{'organization.dialog.url'| translate}} https://atlas.com/o/{{createOrgValidName(name.value)}}</mat-hint>
 
 
   </mat-form-field>

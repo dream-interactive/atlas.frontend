@@ -1,62 +1,77 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {CrudService} from './crud.service';
-import {Project} from './project.service';
-import {HttpClient} from '@angular/common/http';
-import {ProfileService, UserProfile} from './profile.service';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {ProfileService} from './profile.service';
+import {environment} from '../../environments/environment';
+import {catchError, mergeMap} from 'rxjs/operators';
 
 export interface Organization {
   id?: string;
   name: string;
   validName: string;
-  image?: string;
+  img?: string;
   ownerUserId: string; // ID user which create organization
-  members?: string[]; // ID all users who is member of this organization
-  projects?: Project; // TODO project
 }
 
-const URL = 'http://localhost:9000';
 @Injectable({
   providedIn: 'root'
 })
+export class OrganizationService implements CrudService<Organization, string> {
 
-export class OrganizationService  implements CrudService<Organization, string>{
+  private organizationsSubject$ = new BehaviorSubject<Organization[]>([]);
+  userOrganizations$ = this.organizationsSubject$.asObservable();
 
-  // organization: Organization;
-  public profile: UserProfile;
+  private URL = environment.uri;
 
-  constructor(private http: HttpClient,
-              private profileService: ProfileService) {
-    if (this.profileService.profile$) {
-      this.profileService.profile$.subscribe(prof => this.profile = prof);
-    }
+  constructor(private http: HttpClient, profileService: ProfileService) {
+    profileService.profile$.pipe(
+      mergeMap((profile) => {
+        return this.findAllByUserId(profile.sub);
+      })
+    ).subscribe(organizations => this.updateUserOrganizationsSubject(organizations));
   }
 
-  save(organization: Organization): Observable<Organization>{
-    console.log('Saving organization.....', organization);
-    return this.http.post<Organization>(`${URL}/api/organizations/`, organization);
-   // return null;
+  updateUserOrganizationsSubject(organizations: Organization[]): void {
+    console.log('organizations', organizations);
+    this.organizationsSubject$.next(organizations);
   }
 
-  delete( id: string): void{
+  save(organization: Organization): Observable<Organization> {
+    return this.http.post<Organization>(`${this.URL}/organizations`, organization).pipe(
+      catchError(err => {
+        console.log('Error:', err.error.message);
+        return throwError(err);
+      })
+    );
+  }
+
+  delete(id: string): void {
   }
 
   findAllByUserId(userId: string): Observable<Organization[]> {
-    console.log('Finding organization.....', userId);
-    //  return  this.http.get<Organization>(`${URL}/api/organization/${userId}`)
+
+    const params = new HttpParams().set('userId', userId);
+
+    return  this.http.get<Organization[]>(`${this.URL}/organizations`, { params }).pipe(
+      catchError(err => {
+        console.log('Error:', err.error.message);
+        return throwError(err);
+      })
+    );
+  }
+
+  findAll(): Observable<Organization[]> {
     return null;
   }
-  findAll(): Observable<Organization[]>{
-    return null;
-  }
+
   findById(id: string): Observable<Organization> {
     //  return  this.http.get<Organization>(`${URL}/api/organization/${id}`)
     return null;
   }
-  existByValidName(validName: string): Observable<boolean>{
-    console.log('exist', validName);
-    return this.http.get<boolean>(`${URL}/api/organizations/exists/${validName}`);
-   // return new Observable<boolean>(obs => { obs.next(false); });
+
+  existByValidName(validName: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.URL}/organizations?validName=${validName}`);
   }
 
 }

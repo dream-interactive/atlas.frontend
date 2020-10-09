@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Organization, OrganizationService} from '../../services/organization.service';
 import {ProfileService} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -8,16 +8,17 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-organization-modal',
   templateUrl: './organization-modal.component.html',
-  styleUrls: ['./organization-modal.component.scss']
+  styleUrls: ['./organization-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrganizationModalComponent implements OnInit {
   organizationForm: FormGroup;
   organization: Organization;
-  errorMessages: string;
   orgName = new FormControl('',
-    [Validators.required,
-      Validators.pattern('^[a-zA-Z](?:-?[a-zA-Z0-9 ]+)*'),
-      Validators.minLength(3)]
+    [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern('^[a-zA-Z](?:-?[a-zA-Z0-9 ]+)*')]
   );
 
   constructor(private organizationService: OrganizationService,
@@ -37,9 +38,9 @@ export class OrganizationModalComponent implements OnInit {
       const organizationDate = {...this.organizationForm.value};
       const name  = organizationDate.name;
       const validName = this.createOrgValidName(name);
-      this.organizationService.existByValidName(validName).subscribe(
-        exist => {
-          console.log('EXIST ', exist);
+      this.organizationService
+        .existByValidName(validName)
+        .subscribe(exist => {
           if (exist){
             this.orgName.setErrors({exist: true});
           }
@@ -50,8 +51,7 @@ export class OrganizationModalComponent implements OnInit {
                 name: organizationDate.name,
                 ownerUserId: user.sub
               };
-              this.organizationService.save(this.organization).subscribe(org =>
-              {
+              this.organizationService.save(this.organization).subscribe(org => {
                 console .log(org);
               });
               this.dialog.close();
@@ -62,32 +62,29 @@ export class OrganizationModalComponent implements OnInit {
   }
 
   getOrganizationNameErrorMessage(): string {
-    this.translateService.get(['empty', 'wrong', 'short', 'exist']).subscribe(translations => {
 
-
-      if (this.orgName.hasError('required')) {
-        this.errorMessages =  translations.empty;
-      }
+    if (this.orgName.hasError('required')) {
+      return this.translateService.instant('organization.dialog.errors.empty');
+    }
     else if (this.orgName.hasError('minlength')){
-      this.errorMessages = translations.short;
-      }
+      return this.translateService.instant('organization.dialog.errors.short');
+    }
     else  if (this.orgName.hasError('pattern')) {
-      this.errorMessages  = translations.wrong;
-      }
-      else  if (this.orgName.hasError('exist')) {
-        this.errorMessages  = translations.exist;
-      }
-
-    });
-    return this.errorMessages;
+      return this.translateService.instant('organization.dialog.errors.wrong');
+    }
+    else  if (this.orgName.hasError('exist')) {
+      return this.translateService.instant('organization.dialog.errors.exist');
+    }
+    return '';
   }
 
 
   createOrgValidName(name: string): string {
-    name =  name.toLowerCase()
-            .trim()
-            .replace(/\s+/g, '-')
-            .replace(/\-+/g, '-');
+    name =  name
+              .toLowerCase()
+              .trim()
+              .replace(/\s+/g, '-')
+              .replace(/\-+/g, '-');
     return name;
 
 
