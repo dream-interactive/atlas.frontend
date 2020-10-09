@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Organization, OrganizationService} from '../../services/organization.service';
 import {ProfileService} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -37,8 +37,9 @@ export class OrganizationModalComponent implements OnInit {
       const organizationDate = {...this.organizationForm.value};
       const name  = organizationDate.name;
       const validName = this.createOrgValidName(name);
-      this.organizationService.existByName(validName).subscribe(
+      this.organizationService.existByValidName(validName).subscribe(
         exist => {
+          console.log('EXIST ', exist);
           if (exist){
             this.orgName.setErrors({exist: true});
           }
@@ -47,9 +48,12 @@ export class OrganizationModalComponent implements OnInit {
               this.organization = {
                 validName: this.createOrgValidName(organizationDate.name),
                 name: organizationDate.name,
-                owner: user.sub
+                ownerUserId: user.sub
               };
-              this.organizationService.save(this.organization);
+              this.organizationService.save(this.organization).subscribe(org =>
+              {
+                console .log(org);
+              });
               this.dialog.close();
           });
         }}

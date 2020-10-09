@@ -10,7 +10,7 @@ export interface Organization {
   name: string;
   validName: string;
   image?: string;
-  owner: string; // ID user which create organization
+  ownerUserId: string; // ID user which create organization
   members?: string[]; // ID all users who is member of this organization
   projects?: Project; // TODO project
 }
@@ -34,8 +34,8 @@ export class OrganizationService  implements CrudService<Organization, string>{
 
   save(organization: Organization): Observable<Organization>{
     console.log('Saving organization.....', organization);
-    //  return this.http.post<Organization>(`${URL}/api/organization/`, organization);
-    return null;
+    return this.http.post<Organization>(`${URL}/api/organizations/`, organization);
+   // return null;
   }
 
   delete( id: string): void{
@@ -53,10 +53,10 @@ export class OrganizationService  implements CrudService<Organization, string>{
     //  return  this.http.get<Organization>(`${URL}/api/organization/${id}`)
     return null;
   }
-  existByName(name: string): Observable<boolean>{
-    console.log('exist', name);
-    // return this.http.get<boolean>(`${URL}/api/organization/name/${name}`);
-    return new Observable<boolean>(obs => { obs.next(false); });
+  existByValidName(validName: string): Observable<boolean>{
+    console.log('exist', validName);
+    return this.http.get<boolean>(`${URL}/api/organizations/exists/${validName}`);
+   // return new Observable<boolean>(obs => { obs.next(false); });
   }
 
 }
