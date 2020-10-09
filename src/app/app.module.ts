@@ -13,8 +13,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FooterModule} from './components/footer/footer.module';
 import {AboutModule} from './pages/about/about.module';
 import {StartModule} from './pages/start/start.module';
-import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {OrganizationModule} from './pages/organization/organization.module';
+import {AuthInterceptor} from './interceptors/auth-interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -44,7 +44,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ProfileModule,
     FooterModule,
     StartModule,
-    OrganizationModule
+    OrganizationModule,
   ],
   providers: [
     {

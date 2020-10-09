@@ -19,7 +19,11 @@
     <app-organizations-menu  *ngIf="auth.loggedIn"></app-organizations-menu>
     <app-projects-menu  *ngIf="auth.loggedIn"></app-projects-menu>
 
-    <a href="#" mat-flat-button color="accent" class="toolbar__button">{{'navbar.button.trynow' | translate }}</a>
+
+    <button *ngIf="!auth.loggedIn"  mat-flat-button color="accent"
+             class="toolbar__button"
+             (click)="goToStart()"
+    >{{'navbar.button.trynow' | translate }}</button>
 
     <a href="#" mat-button
        *ngIf="!auth.loggedIn; else userMenu"

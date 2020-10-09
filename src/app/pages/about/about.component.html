@@ -6,7 +6,10 @@
     </ng-template>
     <h1 class="about__title" >{{'about.header.text.title' | translate}}</h1>
     <div fxFlexAlign="center">
-      <a href="#" mat-flat-button color="accent" class="about__button">{{'about.header.button.trynow' | translate }}</a>
+      <button mat-flat-button color="accent"
+              class="about__button"
+              (click)="goToOrganization()"
+      >{{'about.header.button.trynow' | translate }}</button>
     </div>
 
   </div>

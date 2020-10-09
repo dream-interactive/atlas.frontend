@@ -11,7 +11,7 @@ import {AuthService} from '../../services/auth.service';
 })
 export class ProjectModalComponent implements OnInit {
   removeOrg: Organization = {
-    id: 'd43405ef-eb60-47c9-88ed-f4a732a1eab8', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'testOrganization'
+    id: '1', img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', validName: ' ', ownerUserId: ''
   };
   organizations: Organization[] = [this.removeOrg];
 

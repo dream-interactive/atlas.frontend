@@ -1,0 +1,28 @@
+<div mat-dialog-title>
+  <h2 >{{'organization.dialog.title'| translate}}</h2>
+</div>
+
+
+<div mat-dialog-content class="dialog__content">
+ <form [formGroup]="organizationForm" (ngSubmit)="create()" fxLayout="column" fxFlexAlign="center center"
+        fxLayoutGap=".8rem">
+
+  <mat-form-field appearance="outline">
+    <mat-label >{{'organization.dialog.name' | translate}}</mat-label>
+    <input matInput
+           [formControl]="orgName"
+          #name>
+    <mat-error *ngIf="orgName.invalid">{{getOrganizationNameErrorMessage()}}</mat-error>
+    <mat-hint *ngIf="orgName.valid">{{'organization.dialog.url'| translate}} https://atlas.com/o/{{createOrgValidName(name.value)}}</mat-hint>
+
+
+  </mat-form-field>
+
+    <div class="dialog__button-group" fxLayout="row" fxLayoutAlign="space-around center" >
+
+      <button mat-flat-button mat-dialog-close type="button">{{'organization.dialog.buttons.close' | translate}}</button>
+      <button mat-flat-button color="accent" type="submit"
+              [disabled]="organizationForm.invalid">{{'organization.dialog.buttons.create' | translate}}</button>
+    </div>
+    </form>
+</div>

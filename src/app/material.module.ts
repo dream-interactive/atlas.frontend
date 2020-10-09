@@ -41,7 +41,7 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonToggleModule,
     MatSelectModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
 
   ]
 })
