@@ -1,11 +1,5 @@
 @import 'app-theme';
 
-mat-select {
-  &:hover {
-    background: map-get($mat-light-theme-background, hover);
-  }
-}
-
 // Define the light theme.
 $primary: mat-palette($mat-blue-gray, 50);
 $accent:  mat-palette($mat-teal, 700);
@@ -46,6 +40,9 @@ $mat-light-theme-foreground: (
   slider-off-active: rgba(black, 0.38),
 );
 
+h1, h2 {
+  color: mat-color($accent);
+}
 
 @function create-light-theme($primary, $accent, $warn: mat-palette($mat-red)) {
   @return (

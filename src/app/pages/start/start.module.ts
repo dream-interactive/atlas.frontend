@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { StartComponent } from './start.component';
 import {FlexModule} from '@angular/flex-layout';
 import {MaterialModule} from '../../material.module';
+import {OrganizationModalModule} from '../../components/organization-modal/organization-modal.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 
@@ -11,7 +13,9 @@ import {MaterialModule} from '../../material.module';
   imports: [
     CommonModule,
     FlexModule,
-    MaterialModule
+    MaterialModule,
+    OrganizationModalModule,
+    TranslateModule,
   ],
   exports: [
     StartComponent

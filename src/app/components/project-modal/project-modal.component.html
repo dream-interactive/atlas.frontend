@@ -1,0 +1,55 @@
+<div mat-dialog-title class="dialog__title">
+  <h2 >{{'project.dialog.title' | translate}}</h2>
+</div>
+<div mat-dialog-content class="dialog__content">
+
+  <form [formGroup]="projectForm" (ngSubmit)="create()" fxLayout="column" fxFlexAlign="center center"
+        fxLayoutGap=".8rem">
+
+<!--
+    <button class="dialog__project-img" mat-fab
+            [style.backgroundImage]="'url(../../assets/images/icon-business-pack/svg/101-gear.svg)'">
+    </button>
+-->
+
+    <mat-button-toggle-group name="projectType" aria-label="Project Type" [(value)]="projectType" class="dialog__toggle-group">
+      <mat-button-toggle value="SCRUM" class="toggle__button">
+        <img src="../../../assets/images/tipa-scrum.png" alt="SCRUM" class="toggle__img">
+        <div>SCRUM</div>
+      </mat-button-toggle>
+      <mat-button-toggle value="KANBAN" class="toggle__button">
+        <img src="../../../assets/images/kanban-board-page.png" alt="KANBAN" class="toggle__img">
+        <div>KANBAN</div>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{'project.dialog.organization' | translate}}</mat-label>
+      <mat-select [formControl]="organizationControl">
+        <mat-option *ngFor="let org of organizations" [value]="org.id">
+          {{org.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{'project.dialog.name' | translate}}</mat-label>
+      <input matInput [formControl]="projectNameControl" (keyup)="onKeyUpProjectNameControl()">
+      <mat-error *ngIf="projectNameControl.invalid">{{getProjectNameErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'project.dialog.key' | translate}}</mat-label>
+      <input matInput [formControl]="projectKeyControl" (keyup)="keyToUpperCase()" maxlength="5">
+      <mat-error *ngIf="projectKeyControl.invalid">{{getProjectKeyErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <div class="dialog__button-group" fxLayout="row" fxLayoutAlign="space-around center" >
+
+      <button mat-flat-button mat-dialog-close type="button">{{'project.dialog.buttons.close' | translate}}</button>
+      <button mat-flat-button color="accent" type="submit"
+              [disabled]="projectForm.invalid || projectType === undefined">{{'project.dialog.buttons.create' | translate}}</button>
+    </div>
+  </form>
+</div>
+
+

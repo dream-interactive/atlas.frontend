@@ -5,6 +5,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {filter, mergeMap} from 'rxjs/operators';
 import {SiteTheme, ThemeService} from '../../../services/theme.service';
 import {Organization} from '../../../services/organization.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ProjectModalComponent} from '../../project-modal/project-modal.component';
 
 @Component({
   selector: 'app-projects-menu',
@@ -15,27 +17,21 @@ export class ProjectsMenuComponent implements OnInit {
 
   theme: SiteTheme;
 
-  removeProject: Project = {
-    id: '1', organizationId: '1', issuesTypes: [], key: '', name: 'Remove1', type: undefined, img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg'
-  };
-  removeProject2: Project = {
-    id: '2', organizationId: '1', issuesTypes: [], key: '', name: 'Remove-2', type: undefined, img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg'
-  };
-  removeProject3: Project = {
-    id: '3', organizationId: '1', issuesTypes: [], key: '', name: 'Remove3', type: undefined, img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg'
-  };
-  projects: Project[] = [this.removeProject, this.removeProject2, this.removeProject3];
+  projects: Project[] = [];
 
   currentProject: string;
 
   removeOrg: Organization = {
-    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
+
+    id: '1', img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', validName: 'c', ownerUserId: ''
+
   };
 
   orgs: Organization[] = [this.removeOrg];
 
 
   constructor(private projectService: ProjectService,
+              private dialog: MatDialog,
               private router: Router,
               private route: ActivatedRoute,
               private translator: TranslateService,
@@ -81,9 +77,9 @@ export class ProjectsMenuComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.router.url.match('projects/+/^[a-z0-9]+$/i')) {
-      console.log('rout', this.router.url);
-    }
+    this.projectService.projects$.subscribe( prjcts => {
+      this.projects = prjcts;
+    });
   }
 
 
@@ -102,17 +98,20 @@ export class ProjectsMenuComponent implements OnInit {
   }
 
   goToCreate(): void {
-    this.router.navigate([`/new/project`]);
+    this.dialog.open(ProjectModalComponent, {
+      panelClass: ['full-screen-modal']
+    });
   }
 
   private setNameOfCurrentProject(route: string): void {
     const projects = this.projects
       .filter((project) => project.name.toLowerCase() === route);
 
-    if (projects) {
+    if (projects.length > 0) {
       this.currentProject = projects[0].name;
     }
     else {
+      // todo 404
       this.getDefaultProjectNameFromTranslator();
     }
   }

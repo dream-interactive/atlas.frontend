@@ -9,7 +9,6 @@
       "orgs": "Your organizations",
       "neworg": "Create organization",
       "newproject": "Create project"
-
     }
   },
   "footer": {
@@ -33,6 +32,46 @@
     "scrum": {
       "title": "Scrum boards",
       "body": "Agile teams can stay focused on delivering iterative and incremental value, as fast as possible, with customizable scrum boards."
+    }
+  },
+  "project": {
+    "dialog": {
+      "title": "Your new project",
+      "organization": "Organization",
+      "name": "Project name",
+      "key": "Project key",
+      "buttons": {
+        "create": "Create",
+        "close": "Cancel"
+      }
+    }
+  },
+  "organization": {
+    "dialog": {
+      "title": "Your new Organization",
+      "name": "Organization name",
+      "url": "Your URL will be:",
+      "errors": {
+        "empty": "Please, enter an organization name.",
+        "wrong": "Organization name should start with alphabet letters(case insensitive), can contain numbers, whitespaces and hyphens(inside)",
+        "short": "Organization name should contain 3 or more characters.",
+        "exist": "An organization with this name already exists"
+      },
+      "buttons": {
+        "create": "Create",
+        "close": "Cancel"
+      }
+    }
+  },
+  "start": {
+    "headers": {
+      "organization": "Your organization",
+      "project": "Your project",
+      "dontHaveOrganization": "You don't have any organization"
+    },
+    "text": "Organization allows you to manage projects and teams.",
+    "buttons": {
+      "create": "Create your first organization"
     }
   }
 }

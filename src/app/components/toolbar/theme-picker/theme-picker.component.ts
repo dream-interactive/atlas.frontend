@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {ThemeStorageService} from '../../../services/theme-storage.service';
 import {StyleService} from '../../../services/style.service';
 import {SiteTheme, ThemeService} from '../../../services/theme.service';
+import {LocalStorageService} from '../../../services/local-storage.service';
 
 @Component({
   selector: 'app-theme-picker',
@@ -17,9 +17,9 @@ export class ThemePickerComponent {
   constructor(
     public styleService: StyleService,
     private themeService: ThemeService,
-    private themeStorage: ThemeStorageService) {
+    private localStorage: LocalStorageService) {
 
-    const themeName = this.themeStorage.getStoredThemeName();
+    const themeName = this.localStorage.getValue(LocalStorageService.themeKey);
 
     if (themeName) {
       setTimeout(() => {
@@ -49,7 +49,7 @@ export class ThemePickerComponent {
     }
 
     if (this.currentTheme) {
-      this.themeStorage.storeTheme(this.currentTheme);
+      this.localStorage.store(LocalStorageService.themeKey, this.currentTheme.name);
     }
   }
 }

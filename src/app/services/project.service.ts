@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CrudService} from './crud.service';
-import {Observable, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {catchError} from 'rxjs/operators';
+import {catchError, mergeMap} from 'rxjs/operators';
+import {AuthService} from './auth.service';
 
 export interface Project {
-  id: string;
-  organizationId: string;
+  id?: string;
   name: string;
   key: string;
-  type: ProjectType;
-  issuesTypes: any[]; // TODO
-  img: string;
+  organizationId: string;
+  typeId: number;
+  leadId: string;
+  img?: string;
+  isPrivate?: boolean;
 }
 
 export enum ProjectType {
@@ -24,12 +26,38 @@ export enum ProjectType {
 })
 export class ProjectService implements CrudService<Project, string>{
 
+  private projectsSubject$ = new BehaviorSubject<Project[]>([]);
+  projects$ = this.projectsSubject$.asObservable();
+
   uri = environment.uri;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {
+
+    // authService.userProfile$
+    //   .pipe(
+    //     mergeMap(userProfile => {
+    //       return this.findByUserId(userProfile.sub);
+    //     })
+    //   ).subscribe(projects => this.updateProjects(projects));
+  }
+
+  updateProjects(projects: Project[]): void {
+    this.projectsSubject$.next(projects);
+  }
 
 
   save(project: Project): Observable<Project> {
+
+
+    if (project.id) {
+
+      return this.http.put<Project>(`${this.uri}/projects`, project).pipe(
+        catchError(err => {
+          console.log('Error:', err.error.message);
+          return throwError(err);
+        })
+      );
+    }
     return this.http.post<Project>(`${this.uri}/projects`, project).pipe(
       catchError(err => {
         console.log('Error:', err.error.message);
@@ -56,6 +84,14 @@ export class ProjectService implements CrudService<Project, string>{
     );
   }
 
+  isExist(organizationId: string, projectName: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.uri}/projects?organizationId=${organizationId}&projectName=${projectName}`).pipe(
+      catchError(err => {
+        console.log('Error:', err.error.message);
+        return throwError(err);
+      })
+    );
+  }
 
   findById(id: string): Observable<Project> {
     return this.http.get<Project>(`${this.uri}/projects/${id}`).pipe(

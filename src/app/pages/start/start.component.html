@@ -6,9 +6,11 @@ Organizations
 <ng-template #IfOrganizationsArrayIsEmpty>
   <div fxLayout="column" fxLayoutGap="20px" class="start__container" fxLayoutAlign="center center">
     <img src="assets/images/organization.png" alt="org-img" class="start__image">
-    <h3>У Вас пока нет организаци.</h3>
-    <p>Организация позволяет управлять проектами и командами.</p>
-    <button mat-raised-button color="accent">Создайте организацию</button>
+    <h3>{{'start.headers.organization'|translate}}</h3>
+    <p>{{'start.text'|translate}} </p>
+    <button mat-flat-button color="accent"
+            (click) = "createOrganization()"
+            >{{'start.buttons.create'|translate}}</button>
   </div>
 </ng-template>
 </div>

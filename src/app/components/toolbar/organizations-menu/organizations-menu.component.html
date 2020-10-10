@@ -1,4 +1,3 @@
-
 <button mat-button [matMenuTriggerFor]="orgsMenu" >
   {{currentOrg}}<mat-icon>arrow_drop_down</mat-icon>
 </button>
@@ -7,8 +6,8 @@
     <img src="assets/images/organization.png" alt="orgs" class="orgs__image">
   </div>
 
-  <button mat-menu-item class="org" *ngFor="let org of orgs" (click)="goTo(org.name)">
-    <img class="org__img" src="{{org.image}}" alt="org">
+  <button mat-menu-item class="org" *ngFor="let org of organizations" (click)="goTo(org.name)">
+    <img class="org__img" src="{{org.img}}" alt="org">
     <span class="org__name">{{org.name}}</span>
   </button>
 <mat-divider></mat-divider>

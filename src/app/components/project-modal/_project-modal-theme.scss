@@ -1,0 +1,14 @@
+@mixin project-modal-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-form-field.mat-focused .mat-form-field-label {
+    color: mat-color($primary, default-contrast);
+  }
+  input {
+    caret-color: mat-color($primary, default-contrast)!important;
+  }
+}
