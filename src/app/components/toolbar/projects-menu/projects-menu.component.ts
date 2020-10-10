@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Project, ProjectService} from '../../../services/project.service';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, mergeMap} from 'rxjs/operators';
 import {SiteTheme, ThemeService} from '../../../services/theme.service';
-import {Organization} from '../../../services/organization.service';
+import {Organization, OrganizationService} from '../../../services/organization.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ProjectModalComponent} from '../../project-modal/project-modal.component';
 
@@ -21,16 +21,11 @@ export class ProjectsMenuComponent implements OnInit {
 
   currentProject: string;
 
-  removeOrg: Organization = {
-
-    id: '1', img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', validName: 'c', ownerUserId: ''
-
-  };
-
-  orgs: Organization[] = [this.removeOrg];
+  orgs: Organization[] = [];
 
 
   constructor(private projectService: ProjectService,
+              private organizationService: OrganizationService,
               private dialog: MatDialog,
               private router: Router,
               private route: ActivatedRoute,
@@ -77,9 +72,13 @@ export class ProjectsMenuComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.projectService.projects$.subscribe( prjcts => {
-      this.projects = prjcts;
-    });
+    this.organizationService
+      .userOrganizations$
+      .subscribe( (orgs) => this.orgs = orgs);
+
+    this.projectService
+      .projects$
+      .subscribe( prjcts => this.projects = prjcts);
   }
 
 
