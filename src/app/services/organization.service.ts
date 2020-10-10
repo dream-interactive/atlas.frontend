@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {CrudService} from './crud.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {ProfileService} from './profile.service';
 import {environment} from '../../environments/environment';
 import {catchError, mergeMap} from 'rxjs/operators';

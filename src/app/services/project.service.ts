@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CrudService} from './crud.service';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {AuthService} from './auth.service';
+import {ProfileService} from './profile.service';
 
 export interface Project {
   id?: string;
   name: string;
   key: string;
   organizationId: string;
-  typeId: number;
+  type: ProjectType;
   leadId: string;
   img?: string;
   isPrivate?: boolean;
@@ -29,16 +30,14 @@ export class ProjectService implements CrudService<Project, string>{
   private projectsSubject$ = new BehaviorSubject<Project[]>([]);
   projects$ = this.projectsSubject$.asObservable();
 
-  uri = environment.uri;
+  private uri = environment.uri;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-
-    // authService.userProfile$
-    //   .pipe(
-    //     mergeMap(userProfile => {
-    //       return this.findByUserId(userProfile.sub);
-    //     })
-    //   ).subscribe(projects => this.updateProjects(projects));
+  constructor(private http: HttpClient, profileService: ProfileService) {
+    profileService.profile$.pipe(
+      mergeMap((profile) => {
+        return this.findAllByUserId(profile.sub);
+      })
+    ).subscribe((projects) => this.updateProjects(projects));
   }
 
   updateProjects(projects: Project[]): void {
@@ -58,7 +57,10 @@ export class ProjectService implements CrudService<Project, string>{
         })
       );
     }
-    return this.http.post<Project>(`${this.uri}/projects`, project).pipe(
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.http.post<Project>(`${this.uri}/projects`, project, {headers}).pipe(
       catchError(err => {
         console.log('Error:', err.error.message);
         return throwError(err);
@@ -66,8 +68,10 @@ export class ProjectService implements CrudService<Project, string>{
     );
   }
 
-  findByUserId(id: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.uri}/projects?userId=${id}`).pipe(
+  findAllByUserId(id: string): Observable<Project[]> {
+    const params = new HttpParams().set('userId', id);
+
+    return this.http.get<Project[]>(`${this.uri}/projects`, {params}).pipe(
       catchError(err => {
         console.log('Error:', err.error.message);
         return throwError(err);

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Organization, OrganizationService} from '../../services/organization.service';
 import {Project, ProjectService, ProjectType} from '../../services/project.service';
 import {AuthService} from '../../services/auth.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-project-modal',
@@ -10,10 +11,8 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./project-modal.component.scss']
 })
 export class ProjectModalComponent implements OnInit {
-  removeOrg: Organization = {
-    id: '1', img: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove', validName: ' ', ownerUserId: ''
-  };
-  organizations: Organization[] = [this.removeOrg];
+
+  organizations: Organization[] = [];
 
   projects: Project[] = [];
   projectForm: FormGroup;
@@ -25,7 +24,7 @@ export class ProjectModalComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(5)]
   );
-  organizationControl = new FormControl(`${this.organizations[0].id}`, Validators.required);
+  organizationControl = new FormControl('', Validators.required);
   selectedOrganization: any;
 
 
@@ -33,6 +32,7 @@ export class ProjectModalComponent implements OnInit {
   userProfile: any;
 
   constructor(private orgService: OrganizationService,
+              private  dialog: MatDialogRef<ProjectModalComponent>,
               private ps: ProjectService,
               private auth: AuthService) {
     this.projectForm = new FormGroup({
@@ -45,20 +45,29 @@ export class ProjectModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.orgService
+      .userOrganizations$
+      .subscribe( (orgs) => {
+        this.organizations = orgs;
+        this.organizationControl.setValue(orgs[0].id);
+      });
+
     this.ps.projects$.subscribe(projects => this.projects = projects);
   }
 
   create(): void{
     const project: Project = {
-      key: this.projectKeyControl.value,
-      leadId: this.userProfile.sub,
       name: this.projectNameControl.value,
+      key: this.projectKeyControl.value,
       organizationId: this.organizationControl.value,
-      typeId: this.projectType
+      type: this.projectType,
+      leadId: this.userProfile.sub
     };
 
-    // console.log('project: ', project);
-    this.ps.save(project).subscribe(proj => console.log('project: ', proj));
+    this.ps.save(project).subscribe(proj => {
+      console.log('project: ', proj);
+      this.dialog.close();
+    });
   }
 
   getProjectNameErrorMessage(): string {
