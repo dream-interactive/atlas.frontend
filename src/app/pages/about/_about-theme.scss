@@ -6,10 +6,12 @@
   $foreground: map-get($theme, foreground);
 
   app-about {
-    color: mat-color($primary, default-contrast);
-
+    color: map-get($foreground, text);
     .about {
-      background: mat-color($primary);
+      background: map-get($background, background);
+    }
+    h1, h2 {
+      color: mat-color($primary);
     }
   }
 }

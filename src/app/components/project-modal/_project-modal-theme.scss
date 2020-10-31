@@ -6,9 +6,9 @@
   $foreground: map-get($theme, foreground);
 
   .mat-form-field.mat-focused .mat-form-field-label {
-    color: mat-color($primary, default-contrast);
+    color: map-get($foreground, text);
   }
   input {
-    caret-color: mat-color($primary, default-contrast)!important;
+    caret-color: map-get($foreground, text)!important;
   }
 }

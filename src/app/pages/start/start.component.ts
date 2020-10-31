@@ -23,18 +23,12 @@ export class StartComponent implements OnInit {
 
   ngOnInit(): void {
     this.organizationService.userOrganizations$.subscribe(organizations => this.organizations = organizations);
-    this.projectService.projects$.subscribe(projects => {
-      this.projects = projects;
-    });
+    this.projectService.projects$.subscribe(projects => this.projects = projects);
   }
 
-  createOrganization(): void{
+  createOrganization(): void {
     this.dialog.open(OrganizationModalComponent, {
       // panelClass: ['full-screen-modal']
     });
-  }
-
-  getProjectsLength(organization: Organization): number {
-    return this.projects.filter(project => project.organizationId === organization.id).length;
   }
 }
