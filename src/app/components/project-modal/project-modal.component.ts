@@ -56,18 +56,21 @@ export class ProjectModalComponent implements OnInit {
   }
 
   create(): void{
-    const project: Project = {
-      name: this.projectNameControl.value,
-      key: this.projectKeyControl.value,
-      organizationId: this.organizationControl.value,
-      type: this.projectType,
-      leadId: this.userProfile.sub
-    };
+    if (this.projectForm.valid) {
+      const project: Project = {
+        name: this.projectNameControl.value,
+        key: this.projectKeyControl.value,
+        organizationId: this.organizationControl.value,
+        type: this.projectType,
+        leadId: this.userProfile.sub
+      };
 
-    this.ps.save(project).subscribe(proj => {
-      console.log('project: ', proj);
-      this.dialog.close();
-    });
+      this.ps.save(project).subscribe(proj => {
+        this.projects.push(proj);
+        this.ps.updateProjects(this.projects);
+        this.dialog.close();
+      });
+    }
   }
 
   getProjectNameErrorMessage(): string {
@@ -107,8 +110,7 @@ export class ProjectModalComponent implements OnInit {
 
   existsByOrganizationIdAndName(pName: string): void {
     const orgId = this.organizationControl.value;
-    const projects1 = this.projects.filter(p => p.organizationId === orgId && p.name === pName);
-    console.log('project length: ', projects1.length);
+    this.projects.filter(p => p.organizationId === orgId && p.name === pName);
   }
   onKeyUpProjectNameControl(): void {
     const pName = this.projectNameControl.value.toString();

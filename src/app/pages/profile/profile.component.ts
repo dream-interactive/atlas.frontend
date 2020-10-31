@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {HttpClient} from '@angular/common/http';
+import {ProfileService} from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,9 @@ export class ProfileComponent implements OnInit {
 
   token: string;
 
-  constructor(public auth: AuthService, private  http: HttpClient) {
+  constructor(public auth: AuthService,
+              private  http: HttpClient,
+              public ps: ProfileService) {
 
   }
 

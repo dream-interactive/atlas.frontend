@@ -4,6 +4,7 @@ import {ProfileService} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organization-modal',
@@ -14,6 +15,8 @@ import {TranslateService} from '@ngx-translate/core';
 export class OrganizationModalComponent implements OnInit {
   organizationForm: FormGroup;
   organization: Organization;
+  organizations: Organization[];
+
   orgName = new FormControl('',
     [
       Validators.required,
@@ -31,6 +34,7 @@ export class OrganizationModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.organizationService.userOrganizations$.subscribe((organizations) => this.organizations = organizations);
   }
 
   create(): void {
@@ -52,7 +56,8 @@ export class OrganizationModalComponent implements OnInit {
                 ownerUserId: user.sub
               };
               this.organizationService.save(this.organization).subscribe(org => {
-                console .log(org);
+                this.organizations.push(org);
+                this.organizationService.updateUserOrganizationsSubject(this.organizations);
               });
               this.dialog.close();
           });

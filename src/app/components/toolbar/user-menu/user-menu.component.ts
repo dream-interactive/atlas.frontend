@@ -11,7 +11,6 @@ export class UserMenuComponent{
 
   public profile: UserProfile;
 
-
   constructor(public auth: AuthService,
               private userService: ProfileService) {
     if (this.userService.profile$) {
