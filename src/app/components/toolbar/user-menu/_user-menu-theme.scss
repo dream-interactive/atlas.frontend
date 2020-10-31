@@ -7,7 +7,7 @@
 
   .menu {
     &__title {
-      color: mat-color($primary, default-contrast);
+      color: map-get($foreground, text);
     }
   }
 }

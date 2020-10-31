@@ -21,13 +21,6 @@ export class ThemePickerComponent {
 
     const themeName = this.localStorage.getValue(LocalStorageService.themeKey);
 
- /*   if (themeName) {
-      setTimeout(() => {
-        this.selectTheme(themeName);
-      }, 100);
-      this.checked = themeName === 'dark-theme';
-    }*/
-
     if (themeName) {
       this.selectTheme(themeName);
       this.checked = themeName === 'dark-theme';

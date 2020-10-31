@@ -6,7 +6,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {AtlasModule} from './pages/atlas/atlas.module';
 import {ProfileModule} from './pages/profile/profile.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -39,7 +38,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MaterialModule,
     HttpClientModule,
     ToolbarModule,
-    AtlasModule,
     AboutModule,
     ProfileModule,
     FooterModule,

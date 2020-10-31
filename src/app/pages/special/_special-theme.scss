@@ -6,12 +6,12 @@
   $foreground: map-get($theme, foreground);
 
   app-special {
-    color: mat-color($primary, default-contrast);
+    color: map-get($foreground, text);
     .special {
-      background: mat-color($primary);
+      background: map-get($background, background);
     }
     a {
-      color: mat-color($accent);
+      color: mat-color($primary);
     }
   }
 }

@@ -6,9 +6,9 @@
   $foreground: map-get($theme, foreground);
 
   app-start{
-    color: mat-color($primary, default-contrast);
+    color: map-get($foreground, text);
     .start {
-      background-color: mat-color($primary);
+      background-color: map-get($background, background);
     }
   }
 }

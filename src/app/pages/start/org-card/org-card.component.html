@@ -1,0 +1,19 @@
+<mat-card class="card" *ngFor="let organization of organizations">
+  <mat-card-header>
+    <img mat-card-avatar  src="{{organization.img}}" alt="Company avatar">
+    <mat-card-title class="card__title">{{organization.name}}</mat-card-title>
+    <mat-card-subtitle>/o/{{organization.validName}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <button mat-button title="Statistics" class="button">
+      <mat-icon>insights</mat-icon>
+    </button>
+    <button mat-button title="Settings" class="button">
+      <mat-icon>tune</mat-icon>
+    </button>
+    <button mat-button title="Projects" class="button">
+      <mat-icon class="button__icon">library_books</mat-icon>
+      <span>{{getProjectsLength(organization)}}</span>
+    </button>
+  </mat-card-actions>
+</mat-card>

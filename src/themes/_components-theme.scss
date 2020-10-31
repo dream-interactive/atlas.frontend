@@ -1,9 +1,7 @@
 @import '../../node_modules/@angular/material/theming';
 
 @import '../app/components/footer/footer-theme';
-@import '../app/components/toolbar/toolbar-theme';
 @import '../app/components/toolbar/user-menu/user-menu-theme';
-@import '../app/pages/atlas/atlas-theme';
 @import '../app/pages/start/start-theme';
 @import '../app/pages/about/about-theme';
 @import '../app/pages/special/special-theme';
@@ -11,9 +9,7 @@
 
 // Styles for the components that are based on the current theme.
 @mixin components-theme($theme) {
-  @include toolbar-theme($theme);
   @include user-menu-theme($theme);
-  @include atlas-theme($theme);
   @include footer-theme($theme);
   @include about-theme($theme);
   @include start-theme($theme);
