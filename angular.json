@@ -36,14 +36,14 @@
               {
                 "lazy": true,
                 "inject": false,
-                "input": "src/styles/dark-theme.scss",
-                "bundleName": "assets/dark-theme"
+                "input": "src/themes/dark-theme.scss",
+                "bundleName": "themes/dark-theme"
               },
               {
                 "lazy": true,
                 "inject": false,
-                "input": "src/styles/light-theme.scss",
-                "bundleName": "assets/light-theme"
+                "input": "src/themes/light-theme.scss",
+                "bundleName": "themes/light-theme"
               }
             ],
             "scripts": []
@@ -115,13 +115,13 @@
               {
                 "lazy": true,
                 "inject": false,
-                "input": "src/styles/dark-theme.scss",
+                "input": "src/themes/dark-theme.scss",
                 "bundleName": "assets/dark-theme"
               },
               {
                 "lazy": true,
                 "inject": false,
-                "input": "src/styles/light-theme.scss",
+                "input": "src/themes/light-theme.scss",
                 "bundleName": "assets/light-theme"
               }
             ],

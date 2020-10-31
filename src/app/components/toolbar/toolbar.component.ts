@@ -10,14 +10,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
-  theme: SiteTheme;
+  theme: SiteTheme = ThemeService.defaultTheme;
 
   constructor(public auth: AuthService,
               public translate: TranslateService,
               private themeService: ThemeService,
               public route: Router) {
-    this.theme = ThemeService.defaultTheme;
-    this.themeService.theme$.subscribe(theme => this.theme = theme);
+
+    themeService.theme$.subscribe(theme => this.theme = theme);
   }
 
   goToStart(): void{
