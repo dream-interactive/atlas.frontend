@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
-@import "styles/reset";
-@import "styles/app-theme";
-@import 'styles/const';
+@import "themes/reset";
+@import "themes/components-theme";
+@import 'themes/const';
 @import "app/app.component";
 
 @include mat-core();
