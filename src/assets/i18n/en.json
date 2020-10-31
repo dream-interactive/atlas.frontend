@@ -63,15 +63,23 @@
       }
     }
   },
+
   "start": {
-    "headers": {
-      "organization": "Your organization",
-      "project": "Your project",
-      "dontHaveOrganization": "You don't have any organization"
+    "noOrg": {
+      "title": "You are not currently a member of any organization.",
+      "text": "Organization allows you to manage projects and teams.",
+      "buttons": {
+        "create": "Create your first organization"
+      }
     },
-    "text": "Organization allows you to manage projects and teams.",
-    "buttons": {
-      "create": "Create your first organization"
+    "organizations": {
+      "title": "Organizations"
+    },
+    "projects":  {
+      "title": "Projects"
+    },
+    "activity":  {
+      "title": "Activity"
     }
   }
 }

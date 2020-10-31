@@ -50,12 +50,7 @@ export class ProjectService implements CrudService<Project, string>{
 
     if (project.id) {
 
-      return this.http.put<Project>(`${this.uri}/projects`, project).pipe(
-        catchError(err => {
-          console.log('Error:', err.error.message);
-          return throwError(err);
-        })
-      );
+      return this.http.put<Project>(`${this.uri}/projects`, project);
     }
 
     const headers = new HttpHeaders({'Content-Type': 'application/json'});

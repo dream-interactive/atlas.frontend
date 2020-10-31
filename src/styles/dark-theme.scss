@@ -6,7 +6,7 @@ $accent:  mat-palette($mat-teal, 700);
 
 // Background palette for dark themes.
 $mat-dark-theme-background: (
-  status-bar: black,
+  status-bar: #000000,
   app-bar:    map_get($mat-blue-grey, 900),
   background: map_get($mat-blue-grey, 900),
   hover:      rgba(white, 0.04),

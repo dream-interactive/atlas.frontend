@@ -1,5 +1,6 @@
 .start {
   height: 100%;
+  padding: 20px;
   p {
     font-size: .9rem;
   }
@@ -8,5 +9,24 @@
   }
   &__container {
     height: inherit;
+  }
+  &__card {
+    width: 400px;
+  }
+
+  .card {
+    &__title {
+      max-width: 300px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .button {
+      height: 48px;
+      &__icon {
+        margin-right: 10px;
+      }
+    }
+
   }
 }

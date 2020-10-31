@@ -33,7 +33,6 @@ export class OrganizationService implements CrudService<Organization, string> {
   }
 
   updateUserOrganizationsSubject(organizations: Organization[]): void {
-    console.log('organizations', organizations);
     this.organizationsSubject$.next(organizations);
   }
 
