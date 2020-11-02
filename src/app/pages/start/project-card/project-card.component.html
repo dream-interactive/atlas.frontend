@@ -1,0 +1,21 @@
+<div class="card__wrapper" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="1rem">
+  <div *ngFor="let project of projects" class="project__card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <img mat-card-avatar  src="{{project.img}}" alt="Project avatar">
+    <div class="project__header" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3px">
+      <a class="project__title" routerLink="/o/{{getOrganization(project.organizationId).validName}}/{{project.name}}">{{project.name}}</a>
+      <span class="project__subtitle a-under">/o/{{getOrganization(project.organizationId).validName}}/{{project.name}}</span>
+    </div>
+    <div  fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3px">
+      <span class="project__lead">Lead</span>
+      <a class="project__subtitle">{{getProjectLead(project.leadId).name}}</a>
+    </div>
+    <button mat-button title="Statistics" class="button">
+      <mat-icon>insights</mat-icon>
+    </button>
+    <button mat-button title="Settings" class="button">
+      <mat-icon>tune</mat-icon>
+    </button>
+  </div>
+</div>
+
+

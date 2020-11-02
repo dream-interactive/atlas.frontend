@@ -4,7 +4,6 @@ import {ProfileService} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
-import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organization-modal',

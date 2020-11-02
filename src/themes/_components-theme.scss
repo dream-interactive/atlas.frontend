@@ -3,6 +3,7 @@
 @import '../app/components/footer/footer-theme';
 @import '../app/components/toolbar/user-menu/user-menu-theme';
 @import '../app/pages/start/start-theme';
+@import '../app/pages/start/project-card/project-card-theme';
 @import '../app/pages/about/about-theme';
 @import '../app/pages/special/special-theme';
 @import '../app/components/project-modal/project-modal-theme';
@@ -15,11 +16,12 @@
   @include start-theme($theme);
   @include special-theme($theme);
   @include project-modal-theme($theme);
+  @include project-card-theme($theme);
 }
 
 // Define the light theme.
-$primary: mat-palette($mat-blue-gray, 50);
-$accent:  mat-palette($mat-teal, 700);
+$primary:  mat-palette($mat-teal, 700);
+$accent: mat-palette($mat-deep-orange, 700);
 $theme: mat-light-theme($primary, $accent);
 
 

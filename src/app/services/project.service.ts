@@ -55,12 +55,7 @@ export class ProjectService implements CrudService<Project, string>{
 
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    return this.http.post<Project>(`${this.uri}/projects`, project, {headers}).pipe(
-      catchError(err => {
-        console.log('Error:', err.error.message);
-        return throwError(err);
-      })
-    );
+    return this.http.post<Project>(`${this.uri}/projects`, project, {headers});
   }
 
   findAllByUserId(id: string): Observable<Project[]> {
@@ -83,8 +78,8 @@ export class ProjectService implements CrudService<Project, string>{
     );
   }
 
-  isExist(organizationId: string, projectName: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.uri}/projects?organizationId=${organizationId}&projectName=${projectName}`).pipe(
+  isExist(organizationId: string, projectKey: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.uri}/projects?organizationId=${organizationId}&projectKey=${projectKey}`).pipe(
       catchError(err => {
         console.log('Error:', err.error.message);
         return throwError(err);
