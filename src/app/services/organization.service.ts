@@ -29,20 +29,15 @@ export class OrganizationService implements CrudService<Organization, string> {
       mergeMap((profile) => {
         return this.findAllByUserId(profile.sub);
       })
-    ).subscribe(organizations => this.updateUserOrganizationsSubject(organizations));
+    ).subscribe(organizations => this.updateOrganizationsSubject(organizations));
   }
 
-  updateUserOrganizationsSubject(organizations: Organization[]): void {
+  updateOrganizationsSubject(organizations: Organization[]): void {
     this.organizationsSubject$.next(organizations);
   }
 
   save(organization: Organization): Observable<Organization> {
-    return this.http.post<Organization>(`${this.URL}/organizations`, organization).pipe(
-      catchError(err => {
-        console.log('Error:', err.error.message);
-        return throwError(err);
-      })
-    );
+    return this.http.post<Organization>(`${this.URL}/organizations`, organization);
   }
 
   delete(id: string): void {

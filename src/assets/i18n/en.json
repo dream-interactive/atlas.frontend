@@ -65,6 +65,7 @@
       "name": "Organization name",
       "url": "Your URL will be:",
       "errors": {
+        "notUnique": "An organization with this name already exists.",
         "empty": "Please, enter an organization name.",
         "wrong": "Organization name should start with alphabet letters(case insensitive), can contain numbers, whitespaces and hyphens(inside)",
         "short": "Organization name should contain 3 or more characters.",
