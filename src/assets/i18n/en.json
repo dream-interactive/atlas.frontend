@@ -43,6 +43,19 @@
       "buttons": {
         "create": "Create",
         "close": "Cancel"
+      },
+      "errors": {
+        "nameField": {
+          "empty": "Please, enter an project name.",
+          "wrong": "Project name should start with latin alphabet letters(case insensitive), can contain numbers and hyphen(inside)"
+        },
+        "keyField": {
+          "empty": "Please, enter a key.",
+          "minLength": "Key length must be between 3 and 5 characters.",
+          "maxLength": "Key length must be between 3 and 5 characters.",
+          "notUnique": "You already have an organization with this key.",
+          "pattern": "Key should contain only latin alphabet letters in upper case."
+        }
       }
     }
   },

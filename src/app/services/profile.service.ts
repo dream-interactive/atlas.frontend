@@ -49,7 +49,7 @@ export class ProfileService {
               picture: profile.picture,
               sub: profile.sub
             };
-            return this.findById(up).pipe(
+            return this.findById(up.sub).pipe(
               mergeMap((result) => { // if user exist in database
                 if (result.emailVerified === up.emailVerified) {
                   return of(result);
@@ -82,8 +82,8 @@ export class ProfileService {
     this.userProfileSubject$.next(profile);
   }
 
-  findById(up: UserProfile): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.URL}/users/${up.sub}`);
+  findById(id: string): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.URL}/users/${id}`);
   }
   create(user: UserProfile): Observable<UserProfile> {
     return this.http.post<UserProfile>(`${this.URL}/users`, user);

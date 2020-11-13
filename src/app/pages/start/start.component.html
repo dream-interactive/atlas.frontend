@@ -1,21 +1,21 @@
 <div class="start">
   <div *ngIf="organizations.length, else IfOrganizationsArrayIsEmpty" class="start__container" fxLayout="column" fxLayoutGap="20px">
-    <span>{{"start.organizations.title" | translate}}</span>
+    <h3>{{"start.organizations.title" | translate}}</h3>
     <div class="start__orgs" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <app-org-card></app-org-card>
     </div>
 
-    <!-- <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-     <div class="start__projects">
-       <span>{{"start.projects.title" | translate}}</span>
-
-     </div>-->
+    <h3>{{"start.projects.title" | translate}}</h3>
+    <div class="start__projects"  fxLayout="column" fxLayoutAlign="center start">
+      <app-project-card></app-project-card>
+    </div>
 
     <mat-divider></mat-divider>
 
+    <h3>{{"start.activity.title" | translate}}</h3>
     <div class="start__changes">
-      <span>{{"start.activity.title" | translate}}</span>
 
     </div>
 

@@ -1,0 +1,33 @@
+<div class="card__wrapper" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+  <div *ngFor="let project of projects" class="project__card" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
+    <div class="project__desc"  fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <img mat-card-avatar  src="{{project.img}}" alt="Project avatar">
+      <div class="project__header" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3px">
+        <a class="project__title" routerLink="/o/{{getOrganization(project.organizationId).validName}}/{{project.name}}">{{project.name}}</a>
+        <span class="project__subtitle a-under">/o/{{getOrganization(project.organizationId).validName}}/{{project.name}}</span>
+      </div>
+    </div>
+
+    <div class="project__info" fxLayout="row" fxLayoutAlign="space-between center">
+      <div  fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3px">
+        <span class="project__key">Key</span>
+        <a class="project__subtitle">{{project.key}}</a>
+      </div>
+      <div  fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3px">
+        <span class="project__lead">Lead</span>
+        <a class="project__subtitle" routerLink="/user/{{getProjectLead(project.leadId).nickname}}">{{getProjectLead(project.leadId).name}}</a>
+      </div>
+    </div>
+
+    <div class="project__buttons" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button title="Statistics" class="button">
+        <mat-icon>insights</mat-icon>
+      </button>
+      <button mat-button title="Settings" class="button">
+        <mat-icon>tune</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+

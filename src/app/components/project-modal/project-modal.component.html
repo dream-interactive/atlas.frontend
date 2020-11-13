@@ -6,12 +6,6 @@
   <form [formGroup]="projectForm" (ngSubmit)="create()" fxLayout="column" fxFlexAlign="center center"
         fxLayoutGap=".8rem">
 
-<!--
-    <button class="dialog__project-img" mat-fab
-            [style.backgroundImage]="'url(../../assets/images/icon-business-pack/svg/101-gear.svg)'">
-    </button>
--->
-
     <mat-button-toggle-group name="projectType" aria-label="Project Type" [(value)]="projectType" class="dialog__toggle-group">
       <mat-button-toggle value="SCRUM" class="toggle__button">
         <img src="../../../assets/images/tipa-scrum.png" alt="SCRUM" class="toggle__img">
@@ -43,6 +37,7 @@
       <input matInput [formControl]="projectKeyControl" (keyup)="keyToUpperCase()" maxlength="5">
       <mat-error *ngIf="projectKeyControl.invalid">{{getProjectKeyErrorMessage()}}</mat-error>
     </mat-form-field>
+
     <div class="dialog__button-group" fxLayout="row" fxLayoutAlign="space-around center" >
 
       <button mat-flat-button mat-dialog-close type="button">{{'project.dialog.buttons.close' | translate}}</button>
