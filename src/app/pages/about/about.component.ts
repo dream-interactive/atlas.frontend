@@ -10,12 +10,12 @@ import {Router} from '@angular/router';
 })
 export class AboutComponent implements OnInit {
 
-  theme: SiteTheme;
+  theme = ThemeService.defaultTheme;
 
   constructor(public translate: TranslateService,
               private themeService: ThemeService,
               public route: Router) {
-    this.theme = ThemeService.defaultTheme;
+
     this.themeService.theme$.subscribe(theme => this.theme = theme);
   }
   ngOnInit(): void {

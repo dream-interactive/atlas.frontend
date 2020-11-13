@@ -29,10 +29,10 @@ export class OrganizationService implements CrudService<Organization, string> {
       mergeMap((profile) => {
         return this.findAllByUserId(profile.sub);
       })
-    ).subscribe(organizations => this.updateUserOrganizationsSubject(organizations));
+    ).subscribe(organizations => this.updateOrganizationsSubject(organizations));
   }
 
-  updateUserOrganizationsSubject(organizations: Organization[]): void {
+  updateOrganizationsSubject(organizations: Organization[]): void {
     this.organizationsSubject$.next(organizations);
   }
 

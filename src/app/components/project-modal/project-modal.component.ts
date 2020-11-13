@@ -5,6 +5,7 @@ import {Project, ProjectService, ProjectType} from '../../services/project.servi
 import {AuthService} from '../../services/auth.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
+import {ProfileService, UserProfile} from '../../services/profile.service';
 
 @Component({
   selector: 'app-project-modal',
@@ -30,12 +31,12 @@ export class ProjectModalComponent implements OnInit {
 
 
   projectType: ProjectType;
-  userProfile: any;
+  userProfile: UserProfile;
 
   constructor(private orgService: OrganizationService,
               private  dialog: MatDialogRef<ProjectModalComponent>,
               private ps: ProjectService,
-              private auth: AuthService,
+              private profileService: ProfileService,
               private translateService: TranslateService) {
     this.projectForm = new FormGroup({
       projectName: this.projectNameControl,
@@ -43,7 +44,7 @@ export class ProjectModalComponent implements OnInit {
       organizationControl: this.organizationControl
     });
 
-    auth.userProfile$.subscribe(profile => this.userProfile = {...profile});
+    profileService.profile$.subscribe(profile => this.userProfile = {...profile});
   }
 
   ngOnInit(): void {
@@ -90,6 +91,7 @@ export class ProjectModalComponent implements OnInit {
     }
     return '';
   }
+
   getProjectKeyErrorMessage(): string {
     if (this.projectKeyControl.hasError('required')) {
       return this.translateService.instant('project.dialog.errors.keyField.empty');

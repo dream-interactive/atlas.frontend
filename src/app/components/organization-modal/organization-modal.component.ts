@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Organization, OrganizationService} from '../../services/organization.service';
-import {ProfileService} from '../../services/profile.service';
+import {ProfileService, UserProfile} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
@@ -15,8 +15,9 @@ export class OrganizationModalComponent implements OnInit {
   organizationForm: FormGroup;
   organization: Organization;
   organizations: Organization[];
+  userProfile: UserProfile;
 
-  orgName = new FormControl('',
+  nameControl = new FormControl('',
     [
       Validators.required,
       Validators.minLength(3),
@@ -28,8 +29,11 @@ export class OrganizationModalComponent implements OnInit {
               private  dialog: MatDialogRef<OrganizationModalComponent>,
               private translateService: TranslateService) {
     this.organizationForm = new FormGroup({
-      name: this.orgName
+      nameControl: this.nameControl
     });
+
+    profileService.profile$.subscribe(profile => this.userProfile = {...profile});
+
   }
 
   ngOnInit(): void {
@@ -38,45 +42,43 @@ export class OrganizationModalComponent implements OnInit {
 
   create(): void {
     if (this.organizationForm.valid) {
-      const organizationData = {...this.organizationForm.value};
-      const name  = organizationData.name;
-      const validName = this.createOrgValidName(name);
-      this.organizationService
-        .existByValidName(validName)
-        .subscribe(exist => {
-          if (exist){
-            this.orgName.setErrors({exist: true});
+
+      const organization: Organization = {
+        name: this.nameControl.value,
+        ownerUserId: this.userProfile.sub,
+        validName: this.createOrgValidName(this.nameControl.value)
+      };
+
+      this.organizationService.save(organization).subscribe(
+        (org) => {
+          this.organizations.push(org);
+          this.organizationService.updateOrganizationsSubject(this.organizations);
+          this.dialog.close();
+        },
+        error => {
+          if (error.status === 409) {
+            this.nameControl.setErrors({ notUnique: true }) ;
           }
-          else {
-            this.profileService.profile$.subscribe(user => {
-              this.organization = {
-                validName: this.createOrgValidName(organizationData.name),
-                name: organizationData.name,
-                ownerUserId: user.sub
-              };
-              this.organizationService.save(this.organization).subscribe(org => {
-                this.organizations.push(org);
-                this.organizationService.updateUserOrganizationsSubject(this.organizations);
-              });
-              this.dialog.close();
-          });
-        }}
+        }
       );
     }
   }
 
   getOrganizationNameErrorMessage(): string {
 
-    if (this.orgName.hasError('required')) {
+    if (this.nameControl.hasError('required')) {
       return this.translateService.instant('organization.dialog.errors.empty');
     }
-    else if (this.orgName.hasError('minlength')){
+    else if (this.nameControl.hasError('minlength')){
       return this.translateService.instant('organization.dialog.errors.short');
     }
-    else  if (this.orgName.hasError('pattern')) {
+    else if (this.nameControl.hasError('notUnique')) {
+      return this.translateService.instant('organization.dialog.errors.notUnique');
+    }
+    else  if (this.nameControl.hasError('pattern')) {
       return this.translateService.instant('organization.dialog.errors.wrong');
     }
-    else  if (this.orgName.hasError('exist')) {
+    else  if (this.nameControl.hasError('exist')) {
       return this.translateService.instant('organization.dialog.errors.exist');
     }
     return '';
@@ -92,5 +94,8 @@ export class OrganizationModalComponent implements OnInit {
     return name;
   }
 
+  do() {
+
+  }
 }
 
