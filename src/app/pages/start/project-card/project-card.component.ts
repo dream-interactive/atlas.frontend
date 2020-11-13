@@ -13,7 +13,7 @@ export class ProjectCardComponent implements OnInit {
 
   projects: Project[] = [];
   organizations: Organization [] = [];
-  leads: UserProfile [] = []; // switch to hashset
+  leads: Set<UserProfile>  = new Set();
 
   constructor( private orgService: OrganizationService,
                private projectService: ProjectService,
@@ -28,7 +28,7 @@ export class ProjectCardComponent implements OnInit {
           return this.userService.findById(project.leadId); // find lead of project
         })
       )
-      .subscribe((lead) => this.leads.push(lead));
+      .subscribe((lead) => this.leads.add(lead));
   }
 
   getOrganization(id: string): Organization{
@@ -37,7 +37,12 @@ export class ProjectCardComponent implements OnInit {
   }
 
   getProjectLead(leadId: string): UserProfile {
-    const userProfile = this.leads.filter(user => user.sub === leadId)[0];
+    let userProfile: UserProfile;
+    this.leads.forEach(user => {
+      if (user.sub === leadId) {
+        userProfile = user;
+      }
+    });
     const userp: UserProfile = {email: '', emailVerified: false, name: '', nickname: '', picture: '', sub: '', updatedAt: ''};
     return userProfile ? userProfile : userp ;
   }

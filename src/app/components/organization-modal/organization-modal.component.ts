@@ -38,8 +38,8 @@ export class OrganizationModalComponent implements OnInit {
 
   create(): void {
     if (this.organizationForm.valid) {
-      const organizationDate = {...this.organizationForm.value};
-      const name  = organizationDate.name;
+      const organizationData = {...this.organizationForm.value};
+      const name  = organizationData.name;
       const validName = this.createOrgValidName(name);
       this.organizationService
         .existByValidName(validName)
@@ -50,8 +50,8 @@ export class OrganizationModalComponent implements OnInit {
           else {
             this.profileService.profile$.subscribe(user => {
               this.organization = {
-                validName: this.createOrgValidName(organizationDate.name),
-                name: organizationDate.name,
+                validName: this.createOrgValidName(organizationData.name),
+                name: organizationData.name,
                 ownerUserId: user.sub
               };
               this.organizationService.save(this.organization).subscribe(org => {
@@ -90,8 +90,6 @@ export class OrganizationModalComponent implements OnInit {
               .replace(/\s+/g, '-')
               .replace(/\-+/g, '-');
     return name;
-
-
   }
 
 }

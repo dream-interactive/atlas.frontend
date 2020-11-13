@@ -1,4 +1,14 @@
+.card__wrapper {
+  width: 100%;
+}
+
 .project {
+  &__info {
+    width: 400px;
+  }
+  &__card {
+    width: 100%;
+  }
   &__header {
     width: 400px;
   }
@@ -20,5 +30,8 @@
   }
   &__subtitle {
     font-size: 14px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
