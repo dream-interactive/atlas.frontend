@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Organization, OrganizationService} from '../../services/organization.service';
 import {Project, ProjectService, ProjectType} from '../../services/project.service';
-import {AuthService} from '../../services/auth.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
 import {ProfileService, UserProfile} from '../../services/profile.service';
@@ -48,17 +47,15 @@ export class ProjectModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orgService
-      .userOrganizations$
-      .subscribe( (orgs) => {
-        this.organizations = orgs;
-        this.organizationControl.setValue(orgs[0].id);
-      });
+    this.orgService.userOrganizations$.subscribe((orgs) => {
+      this.organizations = orgs;
+      this.organizationControl.setValue(orgs[0].id);
+    });
 
     this.ps.projects$.subscribe(projects => this.projects = projects);
   }
 
-  create(): void{
+  create(): void {
     if (this.projectForm.valid) {
       const project: Project = {
         name: this.projectNameControl.value,
@@ -75,7 +72,7 @@ export class ProjectModalComponent implements OnInit {
           this.dialog.close();
         }, error => {
           if (error.status === 409) {
-            this.projectForm.get('projectKey').setErrors({ notUnique: true }) ;
+            this.projectForm.get('projectKey').setErrors({notUnique: true});
           }
         }
       );
@@ -86,7 +83,7 @@ export class ProjectModalComponent implements OnInit {
 
     if (this.projectNameControl.hasError('required')) {
       return this.translateService.instant('project.dialog.errors.nameField.empty');
-    } else if (this.projectNameControl.hasError('pattern')){
+    } else if (this.projectNameControl.hasError('pattern')) {
       return this.translateService.instant('project.dialog.errors.nameField.wrong');
     }
     return '';
@@ -95,14 +92,11 @@ export class ProjectModalComponent implements OnInit {
   getProjectKeyErrorMessage(): string {
     if (this.projectKeyControl.hasError('required')) {
       return this.translateService.instant('project.dialog.errors.keyField.empty');
-    }
-    else if (this.projectKeyControl.hasError('minLength')) {
+    } else if (this.projectKeyControl.hasError('minLength')) {
       return this.translateService.instant('project.dialog.errors.keyField.minLength');
-    }
-    else if (this.projectKeyControl.hasError('maxLength')) {
+    } else if (this.projectKeyControl.hasError('maxLength')) {
       return this.translateService.instant('project.dialog.errors.keyField.maxLength');
-    }
-    else if (this.projectKeyControl.hasError('notUnique')) {
+    } else if (this.projectKeyControl.hasError('notUnique')) {
       return this.translateService.instant('project.dialog.errors.keyField.notUnique');
     }
     return (this.projectKeyControl.hasError('pattern'))

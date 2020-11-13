@@ -9,7 +9,6 @@ import {TranslateService} from '@ngx-translate/core';
   selector: 'app-organization-modal',
   templateUrl: './organization-modal.component.html',
   styleUrls: ['./organization-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrganizationModalComponent implements OnInit {
   organizationForm: FormGroup;
@@ -57,7 +56,8 @@ export class OrganizationModalComponent implements OnInit {
         },
         error => {
           if (error.status === 409) {
-            this.nameControl.setErrors({ notUnique: true }) ;
+            console.log('errotr', error);
+            this.nameControl.setErrors({ notUnique: true });
           }
         }
       );
@@ -72,16 +72,15 @@ export class OrganizationModalComponent implements OnInit {
     else if (this.nameControl.hasError('minlength')){
       return this.translateService.instant('organization.dialog.errors.short');
     }
-    else if (this.nameControl.hasError('notUnique')) {
-      return this.translateService.instant('organization.dialog.errors.notUnique');
-    }
     else  if (this.nameControl.hasError('pattern')) {
       return this.translateService.instant('organization.dialog.errors.wrong');
     }
     else  if (this.nameControl.hasError('exist')) {
       return this.translateService.instant('organization.dialog.errors.exist');
     }
-    return '';
+    return (this.nameControl.hasError('notUnique'))
+      ? this.translateService.instant('organization.dialog.errors.notUnique')
+      : '';
   }
 
 
@@ -92,10 +91,6 @@ export class OrganizationModalComponent implements OnInit {
               .replace(/\s+/g, '-')
               .replace(/\-+/g, '-');
     return name;
-  }
-
-  do() {
-
   }
 }
 

@@ -37,12 +37,7 @@ export class OrganizationService implements CrudService<Organization, string> {
   }
 
   save(organization: Organization): Observable<Organization> {
-    return this.http.post<Organization>(`${this.URL}/organizations`, organization).pipe(
-      catchError(err => {
-        console.log('Error:', err.error.message);
-        return throwError(err);
-      })
-    );
+    return this.http.post<Organization>(`${this.URL}/organizations`, organization);
   }
 
   delete(id: string): void {
