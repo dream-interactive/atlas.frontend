@@ -2,7 +2,7 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .project {
+  .project-card {
     &__title {
       background: linear-gradient(map-get($foreground, text), map-get($foreground, text)) no-repeat center bottom;
     }

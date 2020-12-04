@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from './project-card.component';
 import {MaterialModule} from '../../../material.module';
-import {FlexModule} from '@angular/flex-layout';
+import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 
 
@@ -12,11 +12,12 @@ import {RouterModule} from '@angular/router';
   exports: [
     ProjectCardComponent
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    FlexModule,
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        MaterialModule,
+        FlexModule,
+        RouterModule,
+        FlexLayoutModule
+    ]
 })
 export class ProjectCardModule { }

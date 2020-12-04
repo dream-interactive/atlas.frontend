@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Organization, OrganizationService} from '../../../services/organization.service';
 import {Project, ProjectService} from '../../../services/project.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-org-card',
@@ -9,7 +10,8 @@ import {Project, ProjectService} from '../../../services/project.service';
 })
 export class OrgCardComponent implements OnInit {
 
-  organizations: Organization [] = [];
+  @Input()
+  organization: Organization;
   projects: Project[] = [];
 
   constructor(private orgService: OrganizationService,
@@ -17,11 +19,8 @@ export class OrgCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orgService.userOrganizations$.subscribe((orgs) => this.organizations = orgs);
-    this.projectService.projects$.subscribe(projects => this.projects = projects);
-  }
-
-  getProjectsLength(organization: Organization): number {
-    return this.projects.filter(project => project.organizationId === organization.id).length;
+    this.projectService.projects$.subscribe(projects => {
+      this.projects = projects.filter(project => project.organizationId === this.organization.id);
+    });
   }
 }

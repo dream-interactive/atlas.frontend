@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CrudService} from './crud.service';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {BehaviorSubject, EMPTY, Observable, of, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {AuthService} from './auth.service';
@@ -25,23 +25,34 @@ export enum ProjectType {
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService implements CrudService<Project, string>{
+export class ProjectService implements CrudService<Project, string> {
 
   private projectsSubject$ = new BehaviorSubject<Project[]>([]);
   projects$ = this.projectsSubject$.asObservable();
+
+  private projectSubject$ = new BehaviorSubject<Project>(null);
+  project$ = this.projectsSubject$.asObservable();
 
   private uri = environment.uri;
 
   constructor(private http: HttpClient, profileService: ProfileService) {
     profileService.profile$.pipe(
       mergeMap((profile) => {
-        return this.findAllByUserId(profile.sub);
+        if (profile.sub) {
+          return this.findAllByUserId(profile.sub);
+        } else {
+          return EMPTY;
+        }
       })
     ).subscribe((projects) => this.updateProjects(projects));
   }
 
   updateProjects(projects: Project[]): void {
     this.projectsSubject$.next(projects);
+  }
+
+  updateProject(project: Project): void {
+    this.projectSubject$.next(project);
   }
 
 
@@ -59,9 +70,7 @@ export class ProjectService implements CrudService<Project, string>{
   }
 
   findAllByUserId(id: string): Observable<Project[]> {
-    const params = new HttpParams().set('userId', id);
-
-    return this.http.get<Project[]>(`${this.uri}/projects`, {params}).pipe(
+    return this.http.get<Project[]>(`${this.uri}/projects/users/${id}`).pipe(
       catchError(err => {
         console.log('Error:', err.error.message);
         return throwError(err);
@@ -70,16 +79,7 @@ export class ProjectService implements CrudService<Project, string>{
   }
 
   findByOrganizationId(id: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.uri}/projects?organizationId=${id}`).pipe(
-      catchError(err => {
-        console.log('Error:', err.error.message);
-        return throwError(err);
-      })
-    );
-  }
-
-  isExist(organizationId: string, projectKey: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.uri}/projects?organizationId=${organizationId}&projectKey=${projectKey}`).pipe(
+    return this.http.get<Project[]>(`${this.uri}/projects/organizations/${id}`).pipe(
       catchError(err => {
         console.log('Error:', err.error.message);
         return throwError(err);
@@ -96,10 +96,6 @@ export class ProjectService implements CrudService<Project, string>{
     );
   }
 
-  findAll(): Observable<Project[]> {
-    return undefined;
-  }
-
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.uri}/projects/${id}`).pipe(
       catchError(err => {
@@ -107,6 +103,24 @@ export class ProjectService implements CrudService<Project, string>{
         return throwError(err);
       })
     );
+  }
+
+  findByOrganizationIdAndProjectKey(organizationId: string, key: string): Observable<Project> {
+    const params = {organizationId, key};
+    return this.http.get<Project>(`${this.uri}/projects`, {params});
+  }
+
+  /**
+   * @param ovn - organization valid name
+   * @param pk - project key
+   */
+  findByOrganizationValidNameAndProjectKey(ovn: string, pk: string): Observable<Project> {
+    const params = {ovn, pk};
+    return this.http.get<Project>(`${this.uri}/projects`, {params});
+  }
+
+  findAll(): Observable<Project[]> {
+    return undefined;
   }
 
 }

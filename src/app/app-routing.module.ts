@@ -38,7 +38,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'o/:organization/:project',
+    path: 'o/:organization/:project/:key',
     component: ProjectComponent,
     canActivate: [AuthGuard]
   },

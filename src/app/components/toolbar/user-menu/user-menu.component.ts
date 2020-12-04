@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {ProfileService, UserProfile} from '../../../services/profile.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-user-menu',
@@ -9,12 +10,10 @@ import {ProfileService, UserProfile} from '../../../services/profile.service';
 })
 export class UserMenuComponent{
 
-  public profile: UserProfile;
+  public profile: Observable<UserProfile>;
 
   constructor(public auth: AuthService,
               private userService: ProfileService) {
-    if (this.userService.profile$) {
-      this.userService.profile$.subscribe(prof => this.profile = prof);
-    }
+    this.profile = userService.profile$;
   }
 }

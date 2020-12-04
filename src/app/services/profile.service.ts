@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import {BehaviorSubject, EMPTY, Observable, of, throwError} from 'rxjs';
 import {AuthService} from './auth.service';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -39,7 +39,7 @@ export class ProfileService {
       .getUser$()
       .pipe(
         mergeMap(profile => {
-          if (profile) { // if profile doesn't exist, for example when user doesn't login
+          if (profile) {
             const up: UserProfile = {
               email: profile.email,
               emailVerified: profile.email_verified,
@@ -68,8 +68,8 @@ export class ProfileService {
                 }
               })
             );
-          } else {
-            return of(this.userProfile);
+          } else {  // if profile doesn't exist, for example when user doesn't login
+            return EMPTY; // of(this.userProfile);
           }
         })
       )

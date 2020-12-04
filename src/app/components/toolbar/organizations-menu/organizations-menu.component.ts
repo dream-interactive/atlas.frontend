@@ -22,16 +22,33 @@ export class OrganizationsMenuComponent implements OnInit {
               private translator: TranslateService,
               private dialog: MatDialog,
               private os: OrganizationService) {
+  }
 
-    const currentUrl = this.router.url;
+  ngOnInit(): void {
+    this.os.userOrganizations$.subscribe((orgs) => {
+      this.organizations = orgs;
+      const currentUrl = this.router.url;
 
-    if (currentUrl.match(new RegExp('/o/'))) {
-      const orgName = route.children[0].snapshot.url[1].path; // organization is a second part in url
-      this.setNameOfCurrentOrganization(orgName);
-    } else {
-      this.getDefaultOrganizationNameFromTranslator(); // Get default value on first load
-    }
+      if (currentUrl.match(new RegExp('/o/'))) {
+        const orgName = this.route.children[0].snapshot.url[1].path; // organization is a second part in url
+        this.setNameOfCurrentOrganization(orgName);
+      } else {
+        this.getDefaultOrganizationNameFromTranslator(); // Get default value on first load
+      }
 
+      this.router.events
+        .pipe(
+          filter((e) => e instanceof NavigationEnd))
+        .subscribe((event: NavigationEnd) => {
+          const eventUrl = event.url;
+          if (eventUrl.match(new RegExp('/o/'))) {
+            const orgName = this.route.children[0].snapshot.url[1].path; // organization is a second part in url
+            this.setNameOfCurrentOrganization(orgName);
+          } else {
+            this.getDefaultOrganizationNameFromTranslator();
+          }
+        });
+    });
 
     this.translator.onLangChange.pipe(
       mergeMap(() => this.translator.get(['navbar.dropdown.orgs']))
@@ -39,23 +56,6 @@ export class OrganizationsMenuComponent implements OnInit {
       this.currentOrg = res['navbar.dropdown.orgs'];
     }); // Get default value on lang change
 
-
-    router.events
-      .pipe(
-        filter((e) => e instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        const eventUrl = event.url;
-        if (eventUrl.match(new RegExp('/o/'))) {
-          const orgName = route.children[0].snapshot.url[1].path; // organization is a second part in url
-          this.setNameOfCurrentOrganization(orgName);
-        } else {
-          this.getDefaultOrganizationNameFromTranslator();
-        }
-      });
-  }
-
-  ngOnInit(): void {
-    this.os.userOrganizations$.subscribe((orgs) => this.organizations = orgs);
   }
 
 
