@@ -1,8 +1,9 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {from, Observable, throwError} from 'rxjs';
-import {catchError, mergeMap} from 'rxjs/operators';
+import {from, Observable} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
 import {AuthService} from '../services/auth.service';
 import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -17,31 +18,46 @@ export class AuthInterceptor implements HttpInterceptor {
           if (authenticated) {
             return this.authService.auth0Client$.pipe(
               mergeMap(client => {
-                const claims$ = from(client.getIdTokenClaims());
-                return claims$.pipe(
-                  mergeMap(c => {
+                return from(client.getTokenSilently({ audience: environment.audience })).pipe(
+                  mergeMap(token => {
+                    console.log('token', token);
                     const authReq = req.clone({
-                      headers: req.headers.set('Authorization', `Bearer ${c.__raw}`)
+                      headers: req.headers.set('Authorization', `Bearer ${token}`)
                     });
-                    return this.newHttpEvent(authReq, next);
+                    return next.handle(authReq);
                   })
                 );
               })
             );
           } else {
-            return this.newHttpEvent(req, next);
+            return next.handle(req);
           }
         }
       )
     );
   }
-
-  private newHttpEvent(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
-      catchError(err => {
-        console.log('Error:', err.error.message);
-        return throwError(err);
-      })
-    );
-  }
 }
+
+// intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//   return from(this.handle(req, next));
+// }
+//
+// async handle(req: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
+//
+//   const isAuthenticated = await this.authService.isAuthenticated$.toPromise();
+//
+//   if (isAuthenticated) {
+//
+//     const auth0Client = await this.authService.auth0Client$.toPromise();
+//
+//     const token = await auth0Client.getTokenSilently({ audience: environment.audience });
+//     console.log('token', token);
+//     const authReq = req.clone({
+//       headers: req.headers.set('Authorization', `Bearer ${token}`)
+    //     });
+//     return next.handle(authReq).toPromise();
+//
+//   } else {
+//     return next.handle(req).toPromise();
+//   }
+// }

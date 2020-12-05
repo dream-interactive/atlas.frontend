@@ -59,6 +59,7 @@ export class ProfileService {
                 }
               }),
               catchError(err => {
+                console.log('err', err);
                 if (err.error.message.match('ATLAS-12')) { // if error 404 match ATLAS-12
                   return this.create(up); // create user in db
                 }
