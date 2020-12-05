@@ -4,7 +4,6 @@ import {CrudService} from './crud.service';
 import {BehaviorSubject, EMPTY, Observable, of, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, mergeMap} from 'rxjs/operators';
-import {AuthService} from './auth.service';
 import {ProfileService} from './profile.service';
 
 export interface Project {

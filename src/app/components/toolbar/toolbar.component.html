@@ -1,12 +1,12 @@
 <mat-toolbar class="toolbar">
 
-  <a routerLink="/start" class="toolbar__logo" mat-button *ngIf="auth.loggedIn">
+  <a routerLink="/start" class="toolbar__logo" mat-button *ngIf="isAuthenticated">
     <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     <ng-template #darkMode>
       <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     </ng-template>
   </a>
-  <a routerLink="/" class="toolbar__logo" mat-button *ngIf="!auth.loggedIn">
+  <a routerLink="/" class="toolbar__logo" mat-button *ngIf="!isAuthenticated">
     <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     <ng-template #darkMode>
       <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
@@ -16,19 +16,19 @@
   <span class="spacer"></span>
   <nav class="toolbar__nav">
 
-    <app-organizations-menu  *ngIf="auth.loggedIn"></app-organizations-menu>
-    <app-projects-menu  *ngIf="auth.loggedIn"></app-projects-menu>
+    <app-organizations-menu  *ngIf="isAuthenticated"></app-organizations-menu>
+    <app-projects-menu  *ngIf="isAuthenticated"></app-projects-menu>
 
 
-    <button *ngIf="!auth.loggedIn"  mat-flat-button color="primary"
+    <button *ngIf="!isAuthenticated"  mat-flat-button color="primary"
              class="toolbar__button"
              (click)="goToStart()"
     >{{'navbar.button.trynow' | translate }}</button>
 
     <a href="#" mat-button
-       *ngIf="!auth.loggedIn; else userMenu"
+       *ngIf="!isAuthenticated; else userMenu"
        class="toolbar__button toolbar__button--colorless"
-       (click)="auth.login()">{{'navbar.button.signin' | translate }}</a>
+       (click)="auth.signInWithRedirect()">{{'navbar.button.signin' | translate }}</a>
     <ng-template #userMenu >
       <app-user-menu  class="toolbar__button"></app-user-menu>
     </ng-template>

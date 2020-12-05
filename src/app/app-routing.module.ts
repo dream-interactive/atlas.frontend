@@ -3,10 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {AuthGuard} from './guards/auth.guard';
 import {AboutComponent} from './pages/about/about.component';
-import {StartComponent} from './pages/start/start.component';
 import {OrganizationComponent} from './pages/organization/organization.component';
 import {ProjectComponent} from './pages/project/project.component';
 import {SpecialComponent} from './pages/special/special.component';
+import {StartComponent} from './pages/start/start.component';
 
 const routes: Routes = [
   {

@@ -13,11 +13,20 @@ import {FooterModule} from './components/footer/footer.module';
 import {AboutModule} from './pages/about/about.module';
 import {StartModule} from './pages/start/start.module';
 import {OrganizationModule} from './pages/organization/organization.module';
-import {AuthInterceptor} from './interceptors/auth-interceptor';
+import {AuthRoutingModule} from './auth-routing.module';
+import {OKTA_CONFIG} from '@okta/okta-angular';
+import {AuthInterceptor} from './shared/okta/auth.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
+
+const oktaConfig = {
+  issuer: 'https://dev-786355.okta.com/oauth2/default',
+  redirectUri: '/callback',
+  clientId: '0oa1ium5l7RlObiG74x7',
+  scopes: ['openid', 'profile']
+};
 
 @NgModule({
   declarations: [
@@ -43,13 +52,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FooterModule,
     StartModule,
     OrganizationModule,
+    AuthRoutingModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    { provide: OKTA_CONFIG, useValue: oktaConfig },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

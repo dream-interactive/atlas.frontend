@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../../services/auth.service';
 import {ProfileService, UserProfile} from '../../../services/profile.service';
 import {Observable} from 'rxjs';
+import {OktaAuthService} from '@okta/okta-angular';
 
 @Component({
   selector: 'app-user-menu',
@@ -12,7 +12,7 @@ export class UserMenuComponent{
 
   public profile: Observable<UserProfile>;
 
-  constructor(public auth: AuthService,
+  constructor(public auth: OktaAuthService,
               private userService: ProfileService) {
     this.profile = userService.profile$;
   }
