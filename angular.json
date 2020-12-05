@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "extractCss": true,
             "sourceMap": true,
             "outputPath": "dist",
             "index": "src/index.html",
@@ -31,16 +30,15 @@
             ],
             "styles": [
               {
-                "input": "src/styles.scss"
+                "input": "src/styles.scss",
+                "inject": true
               },
               {
-                "lazy": true,
                 "inject": false,
                 "input": "src/themes/dark-theme.scss",
                 "bundleName": "themes/dark-theme"
               },
               {
-                "lazy": true,
                 "inject": false,
                 "input": "src/themes/light-theme.scss",
                 "bundleName": "themes/light-theme"
@@ -60,7 +58,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -110,16 +107,15 @@
             ],
             "styles": [
               {
-                "input": "src/styles.scss"
+                "input": "src/styles.scss",
+                "inject": true
               },
               {
-                "lazy": true,
                 "inject": false,
                 "input": "src/themes/dark-theme.scss",
                 "bundleName": "assets/dark-theme"
               },
               {
-                "lazy": true,
                 "inject": false,
                 "input": "src/themes/light-theme.scss",
                 "bundleName": "assets/light-theme"
