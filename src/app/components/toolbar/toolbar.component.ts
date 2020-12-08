@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SiteTheme, ThemeService} from '../../services/theme.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {OktaAuthService} from '@okta/okta-angular';
 
 @Component({
@@ -16,7 +16,8 @@ export class ToolbarComponent implements OnInit{
   constructor(public auth: OktaAuthService,
               public translate: TranslateService,
               private themeService: ThemeService,
-              public route: Router) {
+              private route: ActivatedRoute,
+              public router: Router) {
 
     themeService.theme$.subscribe(theme => this.theme = theme);
   }
@@ -26,11 +27,11 @@ export class ToolbarComponent implements OnInit{
     this.isAuthenticated = await this.auth.isAuthenticated();
     // Subscribe to authentication state changes
     this.auth.$authenticationState.subscribe(
-      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+      (isAuthenticated)  => this.isAuthenticated = isAuthenticated
     );
   }
 
-  goToStart(): void{
-    this.route.navigate(['start']);
+  login(): void {
+    this.auth.signInWithRedirect().then();
   }
 }

@@ -6,13 +6,9 @@ import {AboutComponent} from './pages/about/about.component';
 import {OrganizationComponent} from './pages/organization/organization.component';
 import {ProjectComponent} from './pages/project/project.component';
 import {SpecialComponent} from './pages/special/special.component';
-import {StartComponent} from './pages/start/start.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AboutComponent
-  },
+
   {
     path: 'about',
     component: AboutComponent
@@ -22,11 +18,7 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'start',
-    component: StartComponent,
-    canActivate: [AuthGuard]
-  },
+
   {
     path: 'special',
     component: SpecialComponent,
@@ -46,7 +38,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

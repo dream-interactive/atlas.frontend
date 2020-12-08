@@ -13,7 +13,7 @@
   },
   "footer": {
     "link": {
-      "api": "API",
+      "documentation": "Documentation",
       "about": "About",
       "privacy": "Privacy",
       "price": "Pricing"

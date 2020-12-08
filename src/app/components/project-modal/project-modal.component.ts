@@ -4,7 +4,7 @@ import {Organization, OrganizationService} from '../../services/organization.ser
 import {Project, ProjectService, ProjectType} from '../../services/project.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
-import {ProfileService, UserProfile} from '../../services/profile.service';
+import {AtlasUser, ProfileService} from '../../services/profile.service';
 
 @Component({
   selector: 'app-project-modal',
@@ -30,7 +30,7 @@ export class ProjectModalComponent implements OnInit {
 
 
   projectType: ProjectType;
-  userProfile: UserProfile;
+  userProfile: AtlasUser;
 
   constructor(private orgService: OrganizationService,
               private  dialog: MatDialogRef<ProjectModalComponent>,

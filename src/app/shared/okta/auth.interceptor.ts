@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Observable, from } from 'rxjs';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Injectable } from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

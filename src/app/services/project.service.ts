@@ -28,7 +28,6 @@ export class ProjectService implements CrudService<Project, string> {
 
   private projectsSubject$ = new BehaviorSubject<Project[]>([]);
   projects$ = this.projectsSubject$.asObservable();
-
   private projectSubject$ = new BehaviorSubject<Project>(null);
   project$ = this.projectsSubject$.asObservable();
 

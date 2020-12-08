@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ProfileService, UserProfile} from '../../../services/profile.service';
+import {Component} from '@angular/core';
+import {AtlasUser, ProfileService} from '../../../services/profile.service';
 import {Observable} from 'rxjs';
 import {OktaAuthService} from '@okta/okta-angular';
 
@@ -10,10 +10,12 @@ import {OktaAuthService} from '@okta/okta-angular';
 })
 export class UserMenuComponent{
 
-  public profile: Observable<UserProfile>;
+  public profile: Observable<AtlasUser>;
+  origin: string;
 
   constructor(public auth: OktaAuthService,
               private userService: ProfileService) {
     this.profile = userService.profile$;
+    this.origin = window.location.origin;
   }
 }

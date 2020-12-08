@@ -1,8 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Project, ProjectService} from '../../../services/project.service';
 import {Organization, OrganizationService} from '../../../services/organization.service';
-import {ProfileService, UserProfile} from '../../../services/profile.service';
-import {map, mergeMap, startWith} from 'rxjs/operators';
+import {AtlasUser, ProfileService} from '../../../services/profile.service';
+import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class ProjectCardComponent implements OnInit {
   @Input()
   project: Project;
   organization: Observable<Organization>;
-  lead: Observable<UserProfile>;
+  lead: Observable<AtlasUser>;
 
   constructor( private orgService: OrganizationService,
                private projectService: ProjectService,
@@ -27,12 +27,20 @@ export class ProjectCardComponent implements OnInit {
           return orgs.filter((org) => org.id === this.project.organizationId)[0];
         })
       );
-
-    this.lead = this.userService.findById(this.project.leadId)
+    const start: AtlasUser = {
+      email: '',
+      emailVerified: false,
+      familyName: '',
+      givenName: '',
+      lastModify: undefined,
+      local: '',
+      name: '',
+      sub: '',
+      userPicture: ''
+    };
+    this.lead = this.userService.findAtlasUserById(this.project.leadId)
       .pipe(
-        startWith({
-          email: '', emailVerified: false, name: '', nickname: '', picture: '', sub: '', updatedAt: ''
-        })
+        startWith(start)
       );
   }
 }

@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Organization, OrganizationService} from '../../services/organization.service';
-import {ProfileService, UserProfile} from '../../services/profile.service';
+import {AtlasUser, ProfileService} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
@@ -14,7 +14,7 @@ export class OrganizationModalComponent implements OnInit {
   organizationForm: FormGroup;
   organization: Organization;
   organizations: Organization[];
-  userProfile: UserProfile;
+  userProfile: AtlasUser;
 
   nameControl = new FormControl('',
     [

@@ -1,7 +1,7 @@
 <button mat-mini-fab
         [matMenuTriggerFor]="beforeMenu"
         class="user-picture"
-        [style.backgroundImage]="'url('+ (profile | async).picture + ')'">
+        [style.backgroundImage]="'url('+ origin + '/' + (profile | async).userPicture + ')'">
 </button>
 <mat-menu  #beforeMenu="matMenu" xPosition="before" class="menu">
   <div class="menu__item menu__title">{{(profile | async).name}}</div>
