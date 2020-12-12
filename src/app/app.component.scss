@@ -23,7 +23,7 @@ app-toolbar {
 }
 
 app-root > app-about,
-app-root > app-atlas,
+app-root > app-home,
 app-root > app-profile {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -35,6 +35,7 @@ app-root > app-profile {
   //}
 
   app-root > app-about,
+  app-root > app-home,
   app-root > app-profile {
     overflow-y: visible;
   }

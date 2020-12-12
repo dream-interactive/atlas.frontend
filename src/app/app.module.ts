@@ -14,6 +14,10 @@ import {AboutModule} from './pages/about/about.module';
 import {StartModule} from './pages/start/start.module';
 import {OrganizationModule} from './pages/organization/organization.module';
 import {AuthRoutingModule} from './auth-routing.module';
+import {HomeComponent} from './pages/home/home.component';
+import {HomeModule} from './pages/home/home.module';
+import {DocRoutingModule} from './pages/documentation/doc-routing.module';
+import {DocumentationModule} from './pages/documentation/documentation.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -36,6 +40,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     AppRoutingModule,
     AuthRoutingModule,
+    DocRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
@@ -44,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ProfileModule,
     FooterModule,
     StartModule,
-    OrganizationModule
+    OrganizationModule,
+    HomeModule,
+    DocumentationModule
   ],
   bootstrap: [AppComponent]
 })
