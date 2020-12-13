@@ -1,6 +1,15 @@
+@import "../../../themes/const";
+
 .documentation {
   height: 100%;
   &__content {
     padding: 1rem;
+    height: 100%;
+  }
+  .sidenav {
+    min-width: 150px;
+    position: sticky;
+    top: $toolbar-height;
   }
 }
+

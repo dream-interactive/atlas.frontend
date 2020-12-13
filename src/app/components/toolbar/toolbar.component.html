@@ -5,13 +5,16 @@
     <ng-template #darkMode>
       <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     </ng-template>
+    <span *ngIf="docs" class="docs">docs</span>
   </a>
   <a routerLink="/" class="toolbar__logo" mat-button *ngIf="!isAuthenticated">
     <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     <ng-template #darkMode>
       <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     </ng-template>
+    <span *ngIf="docs" class="docs">docs</span>
   </a>
+
 
   <span class="spacer"></span>
   <nav class="toolbar__nav">

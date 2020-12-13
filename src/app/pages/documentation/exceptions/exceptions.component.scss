@@ -1,0 +1,21 @@
+
+.sidenav {
+  min-width: 150px;
+  &__right {
+    border-left: none;
+  }
+}
+
+.chapter {
+  padding: 1rem;
+}
+
+.exception {
+  margin: 0 2rem;
+  p {
+    font-size: .9rem;
+  }
+  &__title {
+    margin: 1rem 0;
+  }
+}

@@ -1,1 +1,26 @@
-<p>exceptions works!</p>
+<section>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempus lorem pulvinar tortor mattis sagittis. Integer maximus ultrices nisi eu finibus. Etiam ut efficitur ex, eu dapibus arcu. Sed gravida turpis nec nulla maximus sodales. Nam in odio nisl. Nulla ut nunc pulvinar, gravida ante vitae, porta orci. Cras iaculis, eros eu lobortis dictum, urna metus volutpat dolor, mollis pharetra mauris lorem et nisl. Proin tincidunt orci purus. Integer laoreet dolor at neque lobortis aliquam. Curabitur nec lorem at urna pharetra cursus vitae non nunc. Nulla condimentum enim eget pellentesque maximus. Fusce at felis nulla. Sed leo tellus, porttitor a arcu at, ornare tempor risus. Aenean imperdiet placerat arcu, et rhoncus augue. Etiam elementum magna sem, nec facilisis magna vulputate ac.
+</section>
+
+<div *ngFor="let chapter of chapters;">
+  <h3 class="chapter">
+    {{chapter | titlecase}}
+  </h3>
+  <div *ngFor="let exception of exceptions;" class="exception">
+    <section *ngIf="exception.section.match(chapter)" id="exception-{{exception.aeid}}">
+      <div fxLayout="raw" fxLayoutAlign="start center" fxLayoutGap="1rem" class="exception__title">
+        <mat-chip-list>
+          <mat-chip color="primary" selected>{{exception.aeid}}</mat-chip>
+        </mat-chip-list>
+        <h3>{{exception.title}}</h3>
+      </div>
+      <h3>Description</h3>
+      <p>{{exception.description}}</p>
+      <h3>Message in log</h3>
+      <p>{{exception.messageInLog}}</p>
+      <h3>Message in throw</h3>
+      <p>{{exception.messageInThrow}}</p>
+
+    </section>
+  </div>
+</div>

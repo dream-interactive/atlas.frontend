@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {OktaAuthService} from '@okta/okta-angular';
 
 @Component({
   selector: 'app-documentation',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentationComponent implements OnInit {
 
-  constructor() { }
+  haveAccess = false;
 
-  ngOnInit(): void {
+  constructor(private oktaAuth: OktaAuthService) { }
+
+  // tslint:disable-next-line:typedef
+  async ngOnInit() {
+    const authenticated = await this.oktaAuth.isAuthenticated();
+    if (authenticated) {
+      const userClaims = await this.oktaAuth.getUser();
+      this.haveAccess = userClaims.groups.includes('Admins');
+    }
   }
 
 }

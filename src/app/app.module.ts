@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AppRoutingModule} from './app-routing.module';
+import {AppRoutingModule} from './routes/app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
@@ -13,10 +13,10 @@ import {FooterModule} from './components/footer/footer.module';
 import {AboutModule} from './pages/about/about.module';
 import {StartModule} from './pages/start/start.module';
 import {OrganizationModule} from './pages/organization/organization.module';
-import {AuthRoutingModule} from './auth-routing.module';
+import {AuthRoutingModule} from './routes/auth-routing.module';
 import {HomeComponent} from './pages/home/home.component';
 import {HomeModule} from './pages/home/home.module';
-import {DocRoutingModule} from './pages/documentation/doc-routing.module';
+import {DocRoutingModule} from './routes/doc-routing.module';
 import {DocumentationModule} from './pages/documentation/documentation.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

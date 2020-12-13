@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {SiteTheme, ThemeService} from '../../services/theme.service';
 import {TranslateService} from '@ngx-translate/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {OktaAuthService} from '@okta/okta-angular';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,11 +13,11 @@ import {OktaAuthService} from '@okta/okta-angular';
 export class ToolbarComponent implements OnInit{
   theme: SiteTheme = ThemeService.defaultTheme;
   isAuthenticated: boolean;
+  docs = false;
 
   constructor(public auth: OktaAuthService,
               public translate: TranslateService,
               private themeService: ThemeService,
-              private route: ActivatedRoute,
               public router: Router) {
 
     themeService.theme$.subscribe(theme => this.theme = theme);
@@ -29,6 +30,13 @@ export class ToolbarComponent implements OnInit{
     this.auth.$authenticationState.subscribe(
       (isAuthenticated)  => this.isAuthenticated = isAuthenticated
     );
+
+    this.router.events
+      .pipe(
+        filter((e) => e instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.docs = !!event.url.match('docs');
+      });
   }
 
   login(): void {

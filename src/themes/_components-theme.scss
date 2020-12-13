@@ -1,6 +1,7 @@
 @import '../../node_modules/@angular/material/theming';
 
 @import '../app/components/footer/footer-theme';
+@import '../app/components/toolbar/toolbar-theme';
 @import '../app/components/toolbar/user-menu/user-menu-theme';
 @import '../app/pages/start/start-theme';
 @import '../app/pages/home/home-theme';
@@ -8,6 +9,7 @@
 @import '../app/pages/about/about-theme';
 @import '../app/pages/special/special-theme';
 @import '../app/pages/documentation/documentation-theme';
+@import '../app/pages/documentation/exceptions/exceptions-theme';
 @import '../app/components/project-modal/project-modal-theme';
 
 // Styles for the components that are based on the current theme.
@@ -21,6 +23,8 @@
   @include project-card-theme($theme);
   @include home-theme($theme);
   @include documentation-theme($theme);
+  @include toolbar-theme($theme);
+  @include exceptions-theme($theme);
 }
 
 // Define the light theme.

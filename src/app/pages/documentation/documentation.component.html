@@ -1,10 +1,36 @@
-<mat-drawer-container class="documentation">
-  <mat-drawer mode="side" opened>
+<!--<mat-sidenav-container class="documentation">
+  <mat-sidenav mode="side" opened  fixedInViewport fixedTopGap="56" fixedBottomGap="56" class="sidenav  sidenav__left">
     <mat-nav-list>
-      <mat-list-item>
-        <a matLine routerLink="/documentation/exceptions">Exceptions</a>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine routerLink="/docs/api">API</a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine routerLink="/docs/exceptions" *ngIf="haveAccess">Exceptions</a>
       </mat-list-item>
     </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content class="documentation__content"><router-outlet></router-outlet></mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="documentation__content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>-->
+
+<div class="documentation" fxLayout="raw" fxLayoutAlign="start start">
+  <mat-nav-list class="sidenav">
+    <mat-list-item routerLinkActive="active-link">
+      <a matLine routerLink="/docs/api">API</a>
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active-link">
+      <a matLine routerLink="/docs/exceptions" *ngIf="haveAccess">Exceptions</a>
+    </mat-list-item>
+  </mat-nav-list>
+
+  <mat-divider vertical="true" style="height: 100%"></mat-divider>
+
+  <div class="documentation__content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+

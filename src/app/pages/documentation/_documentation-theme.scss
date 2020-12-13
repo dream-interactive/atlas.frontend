@@ -10,5 +10,8 @@
     .documentation {
       background-color: map-get($background, background);
     }
+    .active-link {
+      background-color: map-get($background, hover);
+    }
   }
 }

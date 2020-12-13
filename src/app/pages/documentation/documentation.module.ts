@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DocumentationComponent } from './documentation.component';
-import {DocRoutingModule} from './doc-routing.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DocumentationComponent} from './documentation.component';
+import {DocRoutingModule} from '../../routes/doc-routing.module';
 import {MaterialModule} from '../../material.module';
-
+import {FlexModule} from '@angular/flex-layout';
+import {BrowserModule} from '@angular/platform-browser';
+import {ExceptionsModule} from './exceptions/exceptions.module';
 
 
 @NgModule({
@@ -11,10 +13,14 @@ import {MaterialModule} from '../../material.module';
   imports: [
     CommonModule,
     DocRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FlexModule,
+    BrowserModule,
+    ExceptionsModule
   ],
   exports: [
     DocumentationComponent
   ]
 })
-export class DocumentationModule { }
+export class DocumentationModule {
+}

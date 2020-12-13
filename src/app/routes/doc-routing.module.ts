@@ -1,20 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '../../guards/auth.guard';
-import {ExceptionsComponent} from './exceptions/exceptions.component';
-import {DocumentationComponent} from './documentation.component';
+import {AuthGuard} from '../guards/auth.guard';
+import {ExceptionsComponent} from '../pages/documentation/exceptions/exceptions.component';
+import {DocumentationComponent} from '../pages/documentation/documentation.component';
+import {AdminGuard} from '../guards/admin.guard';
 
 const routes: Routes = [
 
   {
-    path: 'documentation',
+    path: 'docs',
     component: DocumentationComponent,
     canActivate: [AuthGuard],
     children: [
       {
         path: 'exceptions',
         component: ExceptionsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AdminGuard]
       }
     ]
   }
