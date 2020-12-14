@@ -8,3 +8,10 @@
 @include angular-material-theme($theme);
 @include components-theme($theme);
 
+.code {
+  border-radius: 4px;
+  &-in-text {
+    display: inline !important;
+    padding: 2px 4px !important;
+  }
+}

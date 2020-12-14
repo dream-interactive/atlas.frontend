@@ -5,6 +5,7 @@ import {MaterialModule} from '../../../material.module';
 import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {FlexModule} from '@angular/flex-layout';
+import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 
 
 @NgModule({
@@ -14,11 +15,20 @@ import {FlexModule} from '@angular/flex-layout';
     MaterialModule,
     RouterModule,
     BrowserModule,
-    FlexModule
+    FlexModule,
+    HighlightModule
   ],
   exports: [
     ExceptionsComponent
-  ]
+  ],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js'),
+      }
+    }
+  ],
 })
 export class ExceptionsModule {
 }

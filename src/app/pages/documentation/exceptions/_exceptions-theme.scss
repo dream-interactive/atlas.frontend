@@ -9,5 +9,11 @@
     .chapter {
       border-left: 4px solid mat-color($accent);
     }
+    .log {
+      color: #61aeee;
+    }
+    .optional {
+      color: mat-color( $accent);
+    }
   }
 }

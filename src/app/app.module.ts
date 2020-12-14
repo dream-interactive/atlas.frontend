@@ -18,6 +18,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {HomeModule} from './pages/home/home.module';
 import {DocRoutingModule} from './routes/doc-routing.module';
 import {DocumentationModule} from './pages/documentation/documentation.module';
+import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -51,7 +52,16 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     StartModule,
     OrganizationModule,
     HomeModule,
-    DocumentationModule
+    DocumentationModule,
+    HighlightModule
+  ],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js'),
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })

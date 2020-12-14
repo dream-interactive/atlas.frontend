@@ -1,4 +1,6 @@
 @import 'components-theme';
+@import '~highlight.js/styles/atom-one-dark';
+
 
 // Define the dark theme.
 $primary:  mat-palette($mat-teal, 700);
@@ -56,3 +58,7 @@ $theme: create-dark-theme($primary, $accent);
 
 @include angular-material-theme($theme);
 @include components-theme($theme);
+
+.hljs { // highlight.js
+  background-color: map-get($mat-dark-theme-background, card);
+}

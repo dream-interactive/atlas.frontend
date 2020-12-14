@@ -11,6 +11,15 @@ export class ExceptionsComponent implements OnInit {
 
   exceptions: AtlasException[] = [];
   chapters: string[] = [];
+  logCode = `log.error(String.format(
+        " @method [ Mono<AtlasUserAuthDTO> updateEmailVerification(Mono<AtlasUserAuthDTO> dto ] -> " +
+        " ATLAS-102: user ids does not match. "                                                      +
+        " [ Principal: %1$s ], "                                                                     +
+        " [ atlasUserAuthDTO.getSub(): %2$s ] "                                                      ,
+        uid,
+        atlasUserAuthDTO.getSub()
+));`;
+  messageCode = `return Mono.error(new CustomRequestException("ATLAS-102", HttpStatus.NOT_MODIFIED));`;
 
   constructor(private ds: DocumentationService) { }
 
