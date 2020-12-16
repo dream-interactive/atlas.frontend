@@ -1,0 +1,8 @@
+@mixin atlas-doc-chapter-theme($theme) {
+  $accent: map-get($theme, accent);
+
+  .atlas-doc-chapter {
+    border-left: 4px solid mat-color($accent);
+  }
+
+}

@@ -1,0 +1,11 @@
+@mixin exc-theme($theme) {
+
+  $accent: map-get($theme, accent);
+
+  .log {
+    color: #61aeee;
+  }
+  .optional {
+    color: mat-color( $accent);
+  }
+}

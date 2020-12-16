@@ -2,8 +2,11 @@
 @import "themes/reset";
 @import "themes/components-theme";
 @import 'themes/const';
+@import "themes/atlas-typography";
+@import "themes/mat-reset";
 @import "app/app.component";
 
+@include atlas-typography();
 @include mat-core();
 @include angular-material-theme($theme);
 @include components-theme($theme);

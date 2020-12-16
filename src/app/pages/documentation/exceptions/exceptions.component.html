@@ -31,32 +31,6 @@
     </p>
     <pre class="example"><code [highlight]="messageCode" [languages]="['java']" class="code"></code></pre>
   </section>
-  <div *ngFor="let chapter of chapters;">
-    <h3 class="chapter">
-      {{chapter | titlecase}}
-    </h3>
-    <div *ngFor="let exception of exceptions;" class="exception">
-      <section *ngIf="exception.section.match(chapter)" id="exception-{{exception.aeid}}" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-        <div fxLayout="raw" fxLayoutAlign="start center" fxLayoutGap="1rem" class="exception__title">
-          <mat-chip-list>
-            <mat-chip color="primary" selected>{{exception.aeid}}</mat-chip>
-            <mat-chip>{{exception.key}}</mat-chip>
-          </mat-chip-list>
-          <h3>{{exception.title}}</h3>
-        </div>
-        <div class="exception__body" fxLayout="column" fxLayoutAlign="start start">
 
-          <pre><code [highlight]="'description'" [languages]="['java']" class="code"></code></pre>
-          <p>{{exception.description}}</p>
-
-          <pre *ngIf="exception.messageInLog"><code [highlight]="'log'" [languages]="['java']" class="code log"></code></pre>
-          <p *ngIf="exception.messageInLog">{{exception.messageInLog}}</p>
-
-          <pre><code [highlight]="'throw'" [languages]="['java']" class="code"></code></pre>
-          <p>{{exception.messageInThrow}}</p>
-        </div>
-      </section>
-    </div>
-  </div>
 </div>
 

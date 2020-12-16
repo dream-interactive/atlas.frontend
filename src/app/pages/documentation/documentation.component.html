@@ -1,27 +1,14 @@
-<!--<mat-sidenav-container class="documentation">
-  <mat-sidenav mode="side" opened  fixedInViewport fixedTopGap="56" fixedBottomGap="56" class="sidenav  sidenav__left">
-    <mat-nav-list>
-      <mat-list-item routerLinkActive="active-link">
-        <a matLine routerLink="/docs/api">API</a>
-      </mat-list-item>
-      <mat-list-item routerLinkActive="active-link">
-        <a matLine routerLink="/docs/exceptions" *ngIf="haveAccess">Exceptions</a>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content class="documentation__content">
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>-->
 
 <div class="documentation" fxLayout="raw" fxLayoutAlign="start start">
   <mat-nav-list class="sidenav">
     <mat-list-item routerLinkActive="active-link">
       <a matLine routerLink="/docs/api">API</a>
     </mat-list-item>
-    <mat-list-item routerLinkActive="active-link">
-      <a matLine routerLink="/docs/exceptions" *ngIf="haveAccess">Exceptions</a>
+    <mat-list-item routerLinkActive="active-link" routerLink="/docs/exceptions" *ngIf="haveAccess">
+      Exceptions
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active-link" routerLink="/docs/exc">
+      Exceptions Old
     </mat-list-item>
   </mat-nav-list>
 
