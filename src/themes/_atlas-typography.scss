@@ -22,6 +22,31 @@
   letter-spacing: $letter-spacing;
 
 }
+@mixin chapter(
+  $font-size: 20px,
+  $font-weight: normal,
+  $line-height: 1.5,
+  $letter-spacing: normal) {
+
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+
+}
+
+@mixin subchapter(
+  $font-size: 18px,
+  $font-weight: normal,
+  $line-height: 1.5,
+  $letter-spacing: normal) {
+
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+
+}
 
 @mixin body(
   $font-size: 16px,

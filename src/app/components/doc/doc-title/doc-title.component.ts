@@ -4,7 +4,7 @@ import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
   selector: 'atlas-doc-title',
   templateUrl: './doc-title.component.html',
   styleUrls: ['./doc-title.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class DocTitleComponent implements OnInit {
   @HostBinding('class') class = 'atlas-doc-title';

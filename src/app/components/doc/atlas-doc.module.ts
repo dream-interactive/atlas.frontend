@@ -6,6 +6,7 @@ import {DocSmallDescriptionModule} from './doc-small-description/doc-small-descr
 import { AtlasDocComponent } from './atlas-doc.component';
 import {DocBodyModule} from './doc-body/doc-body.module';
 import {DocChapterModule} from './doc-chapter/doc-chapter.module';
+import {DocSubchapterModule} from './doc-subchapter/doc-subchapter.module';
 
 
 
@@ -18,6 +19,7 @@ import {DocChapterModule} from './doc-chapter/doc-chapter.module';
     DocSmallDescriptionModule,
     DocBodyModule,
     DocChapterModule,
+    DocSubchapterModule
   ],
   exports: [
     AtlasDocComponent,
@@ -26,7 +28,8 @@ import {DocChapterModule} from './doc-chapter/doc-chapter.module';
     DocHeaderModule,
     DocSmallDescriptionModule,
     DocBodyModule,
-    DocChapterModule
+    DocChapterModule,
+    DocSubchapterModule
   ]
 })
 export class AtlasDocModule { }

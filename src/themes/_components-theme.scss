@@ -11,7 +11,6 @@
 @import '../app/pages/about/about-theme';
 @import '../app/pages/special/special-theme';
 @import '../app/pages/documentation/documentation-theme';
-@import '../app/pages/documentation/exceptions/exceptions-theme';
 @import '../app/pages/documentation/exc/exc-theme';
 @import '../app/components/project-modal/project-modal-theme';
 
@@ -29,7 +28,6 @@
   @include home-theme($theme);
   @include documentation-theme($theme);
   @include toolbar-theme($theme);
-  @include exceptions-theme($theme);
   @include exc-theme($theme);
 }
 

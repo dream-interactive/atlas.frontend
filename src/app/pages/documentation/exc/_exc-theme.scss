@@ -1,11 +1,19 @@
 @mixin exc-theme($theme) {
-
+  $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
 
-  .log {
-    color: #61aeee;
-  }
-  .optional {
-    color: mat-color( $accent);
+  app-exc{
+    .chapter {
+      border-left: 4px solid mat-color($accent);
+    }
+    .log {
+      color: #61aeee;
+    }
+    .optional {
+      color: mat-color( $accent);
+    }
   }
 }

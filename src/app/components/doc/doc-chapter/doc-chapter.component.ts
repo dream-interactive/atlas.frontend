@@ -4,7 +4,7 @@ import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
   selector: 'atlas-doc-chapter',
   templateUrl: './doc-chapter.component.html',
   styleUrls: ['./doc-chapter.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class DocChapterComponent implements OnInit {
 

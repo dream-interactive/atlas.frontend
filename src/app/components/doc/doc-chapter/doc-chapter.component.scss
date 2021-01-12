@@ -1,4 +1,14 @@
+@import "~src/themes/atlas-typography";
+
 .atlas-doc-chapter {
+  @include chapter();
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+
+  margin: 48px 0;
   padding: 16px;
-  font-size: 16px;
 }

@@ -4,7 +4,7 @@ import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
   selector: 'atlas-doc-small-description',
   templateUrl: './doc-small-description.component.html',
   styleUrls: ['./doc-small-description.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 
 })
 export class DocSmallDescriptionComponent implements OnInit {

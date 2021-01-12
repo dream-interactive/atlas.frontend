@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExceptionsComponent } from './exceptions.component';
+import { TocComponent } from './toc.component';
 
-describe('ExceptionsComponent', () => {
-  let component: ExceptionsComponent;
-  let fixture: ComponentFixture<ExceptionsComponent>;
+describe('TocComponent', () => {
+  let component: TocComponent;
+  let fixture: ComponentFixture<TocComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExceptionsComponent ]
+      declarations: [ TocComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExceptionsComponent);
+    fixture = TestBed.createComponent(TocComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

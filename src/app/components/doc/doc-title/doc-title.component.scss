@@ -4,6 +4,10 @@
 .atlas-doc-title {
   @include title();
 
-  display: block;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
   margin-bottom: 16px;
 }

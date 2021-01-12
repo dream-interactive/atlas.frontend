@@ -24,7 +24,9 @@ app-toolbar {
 
 app-root > app-about,
 app-root > app-home,
-app-root > app-profile {
+app-root > app-profile,
+app-root > app-exc,
+{
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -36,8 +38,14 @@ app-root > app-profile {
 
   app-root > app-about,
   app-root > app-home,
-  app-root > app-profile {
+  app-root > app-profile,
+  app-root > app-exc,
+  {
     overflow-y: visible;
   }
+}
+
+.divider {
+  z-index: 100;
 }
 

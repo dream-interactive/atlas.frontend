@@ -5,7 +5,6 @@ import {DocRoutingModule} from '../../routes/doc-routing.module';
 import {MaterialModule} from '../../material.module';
 import {FlexModule} from '@angular/flex-layout';
 import {BrowserModule} from '@angular/platform-browser';
-import {ExceptionsModule} from './exceptions/exceptions.module';
 import {ExcModule} from './exc/exc.module';
 
 
@@ -17,7 +16,6 @@ import {ExcModule} from './exc/exc.module';
     MaterialModule,
     FlexModule,
     BrowserModule,
-    ExceptionsModule,
     ExcModule
   ],
   exports: [

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AtlasException} from '../../../shared/atlas/entity.service';
 import {DocumentationService} from '../../../services/documentation.service';
+import {ChapterNodes} from '../../../../../../atlas-docs-lib/dist/atlas-docs';
 
 @Component({
   selector: 'app-exc',
@@ -21,6 +22,18 @@ export class ExcComponent implements OnInit {
         atlasUserAuthDTO.getSub()
 ));`;
   messageCode = `return Mono.error(new CustomRequestException("ATLAS-102", HttpStatus.NOT_MODIFIED));`;
+
+  chapter1: ChapterNodes = {
+    children: [], componentID: 'chapter-1', name: 'Chapter 1'
+  };
+  subChapter: ChapterNodes = {
+    children: [], componentID: 'SubChapter-2', name: 'SubChapter 2'
+  };
+  chapter3: ChapterNodes = {
+    children: [this.subChapter], componentID: 'chapter-3', name: 'Chapter 3'
+  };
+  nodes: ChapterNodes[] = [this.chapter1, this.chapter3];
+
 
   constructor(private ds: DocumentationService) { }
 

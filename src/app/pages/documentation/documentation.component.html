@@ -1,23 +1,20 @@
+<mat-sidenav-container class="documentation__container">
+  <mat-sidenav #sidenav mode="side" class="sidenav">
+    <mat-nav-list>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine routerLink="/docs/api">API</a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link" routerLink="/docs/exceptions" *ngIf="haveAccess">
+        Exceptions
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
 
-<div class="documentation" fxLayout="raw" fxLayoutAlign="start start">
-  <mat-nav-list class="sidenav">
-    <mat-list-item routerLinkActive="active-link">
-      <a matLine routerLink="/docs/api">API</a>
-    </mat-list-item>
-    <mat-list-item routerLinkActive="active-link" routerLink="/docs/exceptions" *ngIf="haveAccess">
-      Exceptions
-    </mat-list-item>
-    <mat-list-item routerLinkActive="active-link" routerLink="/docs/exc">
-      Exceptions Old
-    </mat-list-item>
-  </mat-nav-list>
-
-  <mat-divider vertical="true" style="height: 100%"></mat-divider>
-
-  <div class="documentation__content">
+  <mat-sidenav-content class="documentation__content">
+    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
     <router-outlet></router-outlet>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 
 
