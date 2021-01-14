@@ -4,7 +4,6 @@ import {ExcComponent} from './exc.component';
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 import {FlexModule} from '@angular/flex-layout';
 import {MaterialModule} from '../../../material.module';
-import {AtlasDocModule} from '../../../components/doc/atlas-doc.module';
 
 @NgModule({
   declarations: [ExcComponent],
@@ -12,8 +11,7 @@ import {AtlasDocModule} from '../../../components/doc/atlas-doc.module';
     CommonModule,
     HighlightModule,
     FlexModule,
-    MaterialModule,
-    AtlasDocModule,
+    MaterialModule
   ],
   exports: [
     ExcComponent

@@ -9,6 +9,7 @@ import {OktaAuthService} from '@okta/okta-angular';
 export class DocumentationComponent implements OnInit {
 
   haveAccess = false;
+  opened = true;
 
   constructor(private oktaAuth: OktaAuthService) { }
 

@@ -1,9 +1,13 @@
+@import 'src/app/pages/documentation/exc/exc-theme';
+
 @mixin documentation-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
+
+  @include exc-theme($theme);
 
   app-documentation{
     color: map-get($foreground, text);

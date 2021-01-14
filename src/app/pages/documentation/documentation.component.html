@@ -1,5 +1,5 @@
 <mat-sidenav-container class="documentation__container">
-  <mat-sidenav #sidenav mode="side" class="sidenav">
+  <mat-sidenav #sidenav mode="side" class="sidenav" [(opened)]="opened">
     <mat-nav-list>
       <mat-list-item routerLinkActive="active-link">
         <a matLine routerLink="/docs/api">API</a>
@@ -11,7 +11,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="documentation__content">
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+    <!--<button mat-button (click)="sidenav.toggle()">Menu</button>-->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
