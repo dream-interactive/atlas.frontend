@@ -1,5 +1,4 @@
 .dialog {
-
   &__project-img {
     height: 100px;
     width: 100px;
@@ -27,5 +26,14 @@
   }
   &__img {
     height: 100px;
+  }
+}
+
+@media (max-width: 720px) {
+  // project-dialog
+  .dialog {
+    &__content {
+      width: unset  !important;
+    }
   }
 }

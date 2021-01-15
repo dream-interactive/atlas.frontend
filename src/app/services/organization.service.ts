@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {BehaviorSubject, EMPTY, Observable, throwError} from 'rxjs';
 import {CrudService} from './crud.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ProfileService} from './profile.service';
@@ -27,7 +27,11 @@ export class OrganizationService implements CrudService<Organization, string> {
   constructor(private http: HttpClient, profileService: ProfileService) {
     profileService.profile$.pipe(
       mergeMap((profile) => {
-        return this.findAllByUserId(profile.sub);
+        if (profile.sub) {
+          return this.findAllByUserId(profile.sub);
+        } else {
+          return EMPTY;
+        }
       })
     ).subscribe(organizations => this.updateOrganizationsSubject(organizations));
   }
@@ -64,10 +68,10 @@ export class OrganizationService implements CrudService<Organization, string> {
     return null;
   }
 
-  existByValidName(validName: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.URL}/organizations?validName=${validName}`);
+  findByOrganizationValidName(validName: string): Observable<Organization> {
+    const params = {validName};
+    return this.http.get<Organization>(`${this.URL}/organizations`, { params });
   }
-
 }
 
 

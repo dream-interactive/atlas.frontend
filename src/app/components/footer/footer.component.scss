@@ -6,17 +6,8 @@
   height: $footer-height;
   font-size: .9rem;
   font-weight: lighter;
+  z-index: 100;
 
-  // .drm-logo {
-  //   width: 350px;
-  //   &__img {
-  //     height: 46px;
-  //     margin: 0 16px;
-  //   }
-  //   &__text {
-  //    // @include gradient-text
-  //   }
-  // }
   &__logo {
     height: 40px;
   }

@@ -1,19 +1,24 @@
-.card__wrapper {
+.project-card {
   width: 100%;
-}
+  height: auto;
 
-.project {
+
+  &__desc {
+    width: 400px;
+  }
   &__info {
     width: 400px;
   }
-  &__card {
-    width: 100%;
-  }
-  &__header {
+  &__buttons {
     width: 400px;
   }
+
+  &__header {
+    max-width: 400px;
+    min-width: 150px;
+  }
   &__title {
-    max-width: 350px;
+    max-width: 310px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -30,8 +35,23 @@
   }
   &__subtitle {
     font-size: 14px;
-    max-width: 400px;
+    max-width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  .project-card{
+    &__title, &__subtitle {
+      max-width: 200px;
+    }
+  }
+
+}
+@media screen and (max-width: 959px) {
+  .project-card{
+    &__title, &__subtitle {
+      max-width: 100px;
+    }
   }
 }

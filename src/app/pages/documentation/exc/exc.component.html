@@ -1,0 +1,64 @@
+<div class="doc">
+  <header>
+    <h1 class="doc__title">Atlas Exceptions</h1>
+    <div class="doc__small-description">
+      <p>
+        This document contain description of exceptions witch can be used in Atlas services.
+        All data comes from the table <code [highlight]="'atlas_exceptions'" [languages]="['java']" class="code code-in-text"></code>.
+      </p>
+
+      <p>
+        The <code [highlight]="'throw'" [languages]="['java']" class="code code-in-text"></code> section contains an exception
+        message that should be throwing to the user.
+      </p>
+
+      <p>
+        <span class="optional">(Optional)</span> The <code [highlight]="'log'" [languages]="['java']" class="code code-in-text log"></code> section contains an exception
+        message that should be written to the log file.
+      </p>
+
+      <p class="doc__example">
+        Example <code [highlight]="'log'" [languages]="['java']" class="code code-in-text log"></code>:
+      </p>
+      <pre class="example"><code [highlight]="logCode" [languages]="['java']" class="code"></code></pre>
+
+      <p class="doc__example">
+        Example <code [highlight]="'throw'" [languages]="['java']" class="code code-in-text"></code>:
+      </p>
+      <pre class="example"><code [highlight]="messageCode" [languages]="['java']" class="code"></code></pre>
+
+    </div>
+  </header>
+  <div class="body">
+    <ng-container *ngFor="let chapter of chapters;">
+
+      <div class="chapter">
+        <h2>{{chapter | titlecase}}</h2>
+      </div>
+      <div *ngFor="let exception of exceptions; index as i" class="exception">
+        <section *ngIf="exception.section.match(chapter)" id="exception-{{exception.aeid}}" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+
+          <div fxLayout="raw" fxLayoutAlign="start center" fxLayoutGap="1rem" class="exception__title">
+            <mat-chip-list>
+              <mat-chip color="primary" selected>{{exception.aeid}}</mat-chip>
+              <mat-chip>{{exception.key}}</mat-chip>
+            </mat-chip-list>
+            <h3>{{exception.title}}</h3>
+          </div>
+          <div class="exception__body" fxLayout="column" fxLayoutAlign="start start">
+<!--            <pre><code [highlight]="'description'" [languages]="['java']" class="code"></code></pre>-->
+            <p>{{exception.description}}</p>
+
+            <pre *ngIf="exception.messageInLog"><code [highlight]="'log:'" [languages]="['java']" class="code code-in-text log"></code></pre>
+            <p *ngIf="exception.messageInLog">{{exception.messageInLog}}</p>
+
+            <pre><code [highlight]="'throw:'" [languages]="['java']" class="code code-in-text"></code></pre>
+            <p>{{exception.messageInThrow}}</p>
+          </div>
+          <mat-divider *ngIf="i < exceptions.length - 1" style="width: 100%;"></mat-divider>
+
+        </section>
+      </div>
+    </ng-container>
+  </div>
+</div>

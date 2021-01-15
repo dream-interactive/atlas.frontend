@@ -1,6 +1,6 @@
 <div class="footer">
   <div class="footer__container" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
-    <div class="group" fxLayoutGap="16px" fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutAlign.lt-md="center center">
+    <div class="group" fxLayoutGap="16px" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="center center">
       <span>&#169; 2020 Atlas</span>
       <div class="link-wrapper">
         <a routerLink="/about"
@@ -10,19 +10,15 @@
         <a routerLink="/privacy"
            class="footer footer__link footer__link-privacy">{{"footer.link.privacy" | translate}}</a>
       </div>
-      <div class="link-wrapper">
-        <a routerLink="/api"
-           class="footer footer__link footer__link-api">{{"footer.link.api" | translate}}</a>
-      </div>
     </div>
 
     <img src="../../../assets/images/logo/Atlas-logo_339_5grad_Deep.svg" alt="logo" class="footer__logo" [fxShow.lt-md]="false">
- <!--   <div fxLayout="column" fxLayoutAlign="center center" class="drm-logo" [fxShow.lt-md]="false">
 
-      <img src="../../../assets/images/partly-cloudy-night.png" alt="logo" class="drm-logo__img" >
-      <a class="drm-logo__text" href="">by Dream Interactive</a>
-    </div>-->
     <div class="group" fxLayoutGap="16px" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.lt-md="center center">
+      <div class="link-wrapper">
+        <a routerLink="/docs"
+           class="footer footer__link footer__link-documentation">{{"footer.link.documentation" | translate}}</a>
+      </div>
       <div class="link-wrapper">
         <a routerLink="/price"
            class="footer footer__link footer__link-price">{{"footer.link.price" | translate}}</a>

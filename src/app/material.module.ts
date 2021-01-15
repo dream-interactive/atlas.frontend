@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -32,8 +34,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    MatListModule,
+    MatSidenavModule
   ],
   exports: [
     MatFormFieldModule,
@@ -48,8 +51,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDialogModule,
     MatInputModule,
     MatCardModule,
-    MatChipsModule
-
+    MatChipsModule,
+    MatListModule,
+    MatSidenavModule
   ]
 })
 export class MaterialModule {

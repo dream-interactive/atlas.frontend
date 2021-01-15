@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {SiteTheme, ThemeService} from '../../services/theme.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-import {delay, timeout} from 'rxjs/operators';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-about',
@@ -20,7 +20,7 @@ export class AboutComponent {
     themeService.theme$.pipe(delay(1)).subscribe(theme => this.theme = theme);
   }
 
-  goToOrganization(): void{
+  goToStart(): void{
     this.route.navigate(['start']);
   }
 

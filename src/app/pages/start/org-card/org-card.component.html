@@ -1,4 +1,4 @@
-<mat-card class="org-card" *ngFor="let organization of organizations">
+<mat-card class="org-card">
   <mat-card-header>
     <img mat-card-avatar  src="{{organization.img}}" alt="Company avatar">
     <mat-card-title class="org-card__title">{{organization.name}}</mat-card-title>
@@ -13,7 +13,7 @@
     </button>
     <button mat-button title="Projects" class="button">
       <mat-icon class="button__icon">library_books</mat-icon>
-      <span>{{getProjectsLength(organization)}}</span>
+      <span>{{projects.length}}</span>
     </button>
   </mat-card-actions>
 </mat-card>

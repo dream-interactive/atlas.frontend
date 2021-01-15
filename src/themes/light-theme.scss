@@ -1,4 +1,5 @@
 @import 'components-theme';
+@import '~highlight.js/styles/atom-one-light';
 
 // Define the light theme.
 $primary:  mat-palette($mat-teal, 700);
@@ -55,4 +56,8 @@ $theme: create-light-theme($primary, $accent);
 
 @include angular-material-theme($theme);
 @include components-theme($theme);
+
+.hljs { // highlight.js
+  background-color: map-get($mat-light-theme-background, card);
+}
 

@@ -13,10 +13,25 @@
   },
   "footer": {
     "link": {
-      "api": "API",
+      "documentation": "Documentation",
       "about": "About",
       "privacy": "Privacy",
       "price": "Pricing"
+    }
+  },
+  "home": {
+    "header": {
+      "button": {
+        "trynow": "Use it free"
+      },
+      "text": {
+        "title": "Project management tool for agile teams",
+        "body": ""
+      }
+    },
+    "scrum": {
+      "title": "Scrum boards",
+      "body": "Agile teams can stay focused on delivering iterative and incremental value, as fast as possible, with customizable scrum boards."
     }
   },
   "about": {

@@ -1,24 +1,43 @@
+.menu {
+  &__button {
+    max-width: 200px;
+  }
 
-.orgs {
-  &__selector--header {
+  &__title {
+    max-width: 176px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.selector {
+  &__header {
     width: 100%;
   }
+
   &__image {
     height: 100px;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-}
-
-.org {
-  width: 100%;
-  display: flex;
-  font-weight: normal;
-  gap: 20px;
-  justify-content: space-between;
-  align-items: center;
-  &__img {
-    height: 32px;
+  &__button {
+    width: 100%;
+    display: flex;
+    font-weight: normal;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
+.organization {
+  &__img {
+    height: 32px;
+  }
+  &__name {
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
