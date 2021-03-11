@@ -20,7 +20,9 @@ $mat-light-theme-background: (
   disabled-button-toggle: map_get($mat-blue-gray, 200),
   unselected-chip: map_get($mat-blue-gray, 300),
   disabled-list-option: map_get($mat-blue-gray, 200),
-  tooltip: map_get($mat-blue-gray, 700),
+  tooltip: map_get($mat-blue-gray, 300),
+  skeleton: white,
+
 );
 // Foreground palette for light themes.
 $mat-light-theme-foreground: (
@@ -39,6 +41,7 @@ $mat-light-theme-foreground: (
   slider-min:        rgba(black, 0.87),
   slider-off:        rgba(black, 0.26),
   slider-off-active: rgba(black, 0.38),
+
 );
 
 @function create-light-theme($primary, $accent, $warn: mat-palette($mat-red)) {
@@ -61,3 +64,6 @@ $theme: create-light-theme($primary, $accent);
   background-color: map-get($mat-light-theme-background, card);
 }
 
+body {
+  background-color: map-get($mat-light-theme-background, background);
+}

@@ -88,7 +88,7 @@ export class ProjectsMenuComponent implements OnInit {
 
   goTo(id: string): void {
 
-    const projects = this.projects.filter(p => p.id === id);
+    const projects = this.projects.filter(p => p.idp === id);
     const projectName = projects[0].name.toLowerCase();
     const projectKey = projects[0].key;
 

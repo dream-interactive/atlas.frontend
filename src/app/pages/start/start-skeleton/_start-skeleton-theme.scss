@@ -1,0 +1,20 @@
+@mixin start-skeleton-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $skeleton: map-get($background, skeleton);
+
+
+  app-start-skeleton{
+    color: map-get($foreground, text);
+  }
+  .skeleton-animation {
+    background-color: map-get($background, background);
+    &::before {
+      background: linear-gradient(to right, transparent 0%, $skeleton 40%, $skeleton 60%, transparent 100%);
+    }
+  }
+
+}

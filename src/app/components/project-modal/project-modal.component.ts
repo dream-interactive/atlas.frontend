@@ -65,10 +65,10 @@ export class ProjectModalComponent implements OnInit {
         leadId: this.userProfile.sub
       };
 
-      this.ps.save(project).subscribe(
+      this.ps.create(project).subscribe(
         proj => {
           this.projects.push(proj);
-          this.ps.updateProjects(this.projects);
+          this.ps.updateProjectsSubject(this.projects);
           this.dialog.close();
         }, error => {
           if (error.status === 409) {

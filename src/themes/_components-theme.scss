@@ -3,6 +3,7 @@
 @import '../app/components/toolbar/toolbar-theme';
 @import '../app/components/toolbar/user-menu/user-menu-theme';
 @import '../app/pages/start/start-theme';
+@import '../app/pages/start/start-skeleton/start-skeleton-theme';
 @import '../app/pages/home/home-theme';
 @import '../app/pages/start/project-card/project-card-theme';
 @import '../app/pages/about/about-theme';
@@ -22,6 +23,7 @@
   @include home-theme($theme);
   @include documentation-theme($theme);
   @include toolbar-theme($theme);
+  @include start-skeleton-theme($theme)
 }
 
 // Define the light theme.

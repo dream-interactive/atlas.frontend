@@ -8,21 +8,25 @@ import {TranslateModule} from '@ngx-translate/core';
 import {OrgCardModule} from './org-card/org-card.module';
 import {ProjectModule} from '../project/project.module';
 import {ProjectCardModule} from './project-card/project-card.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {StartSkeletonModule} from './start-skeleton/start-skeleton.module';
 
 
 
 @NgModule({
   declarations: [StartComponent],
-  imports: [
-    CommonModule,
-    FlexModule,
-    MaterialModule,
-    OrganizationModalModule,
-    TranslateModule,
-    OrgCardModule,
-    ProjectModule,
-    ProjectCardModule,
-  ],
+    imports: [
+        CommonModule,
+        FlexModule,
+        MaterialModule,
+        OrganizationModalModule,
+        TranslateModule,
+        OrgCardModule,
+        ProjectModule,
+        ProjectCardModule,
+        MatProgressSpinnerModule,
+        StartSkeletonModule
+    ],
   exports: [
     StartComponent
   ]

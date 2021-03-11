@@ -3,8 +3,8 @@
     <img mat-card-avatar src="{{project.img}}" alt="Project avatar">
     <div class="project-card__header" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap=".2rem">
       <a class="project-card__title"
-         routerLink="/o/{{(organization | async).validName.toLowerCase()}}/{{project.name.toLowerCase()}}/{{project.key}}">{{project.name}}</a>
-      <span class="project-card__subtitle">/o/{{(organization | async).validName}}/{{project.name}}</span>
+         routerLink="/o/{{organization.validName.toLowerCase()}}/{{project.name.toLowerCase()}}/{{project.key}}">{{project.name}}</a>
+      <span class="project-card__subtitle">/o/{{organization.validName}}/{{project.name}}</span>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
     </div>
     <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap=".2rem" fxHide.lt-md>
       <span class="project-card__lead">Lead</span>
-      <a class="project-card__subtitle" routerLink="/user/{{(lead | async).nickname}}">{{(lead | async).name}}</a>
+      <a class="project-card__subtitle" routerLink="/user/{{($lead | async).sub}}">{{($lead | async).name}}</a>
     </div>
   </div>
 

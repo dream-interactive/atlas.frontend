@@ -6,6 +6,8 @@ import {AboutComponent} from '../pages/about/about.component';
 import {OrganizationComponent} from '../pages/organization/organization.component';
 import {ProjectComponent} from '../pages/project/project.component';
 import {SpecialComponent} from '../pages/special/special.component';
+import {ProjectSkeletonComponent} from '../pages/project/project-skeleton/project-skeleton.component';
+import {StartSkeletonComponent} from '../pages/start/start-skeleton/start-skeleton.component';
 
 const routes: Routes = [
 

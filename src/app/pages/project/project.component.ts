@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, GuardsCheckStart, NavigationCancel, NavigationEnd, NavigationError, Router} from '@angular/router';
 import {Project, ProjectService} from '../../services/project.service';
-import {mergeMap, startWith} from 'rxjs/operators';
+import {filter, mergeMap, startWith} from 'rxjs/operators';
 import {Organization, OrganizationService} from '../../services/organization.service';
 import {Observable} from 'rxjs';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-project',
@@ -22,8 +23,35 @@ export class ProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private organizationService: OrganizationService,
-    private activateRoute: ActivatedRoute) {
+    private activateRoute: ActivatedRoute,
+    private router: Router) {
+
+    const start = router.events.pipe(
+      filter(event => event instanceof GuardsCheckStart)
+    );
+    const end = router.events.pipe(
+      filter( event => event instanceof NavigationEnd
+                            || event instanceof NavigationCancel
+                            || event instanceof NavigationError
+      )
+    );
+
   }
+
+
+
+  drop(event: CdkDragDrop<string[]>): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
+  }
+
+
 
   ngOnInit(): void {
 
@@ -40,5 +68,9 @@ export class ProjectComponent implements OnInit {
             );
         })
       );
+  }
+
+  saveContainerName(): void {
+
   }
 }

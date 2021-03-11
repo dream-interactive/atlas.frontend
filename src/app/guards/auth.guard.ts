@@ -11,7 +11,6 @@ export class AuthGuard implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const authenticated = await this.auth.isAuthenticated();
     if (authenticated) { return true; }
-
     // Redirect to login flow.
     await this.auth.signInWithRedirect();
     return false;
