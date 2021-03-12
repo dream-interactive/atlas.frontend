@@ -1,0 +1,14 @@
+<div cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="board__issues-containers"
+     (cdkDropListDropped)="dropContainer($event)">
+  <div class="board__issues-container" *ngFor="let container of containers" cdkDrag>
+    <h2 cdkDragHandle>{{container.name}}</h2>
+    <div
+      cdkDropList
+      [cdkDropListData]="container.issues"
+      class="board__issues"
+      (cdkDropListDropped)="dropIssue($event)">
+      <div class="board__issue" *ngFor="let issue of container.issues" cdkDrag>{{issue}}</div>
+    </div>
+  </div>
+</div>
+

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CrudService} from './crud.service';
-import {BehaviorSubject, EMPTY, Observable, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, EMPTY, Observable, ReplaySubject, Subject, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, concatMap, mergeMap, switchMap} from 'rxjs/operators';
 import {ProfileService} from './profile.service';
@@ -28,7 +28,7 @@ export class ProjectService implements CrudService<Project, string> {
 
   private projectsSubject$ = new BehaviorSubject<Project[]>([]);
   projects$ = this.projectsSubject$.asObservable();
-  private projectSubject$ = new Subject<Project>();
+  private projectSubject$ = new ReplaySubject<Project>(1);
   project$ = this.projectSubject$.asObservable();
 
   private uri = environment.uri;
@@ -89,9 +89,9 @@ export class ProjectService implements CrudService<Project, string> {
    * @param ovn - organization valid name
    * @param pk - project key
    */
-  findByOrganizationValidNameAndProjectKey(ovn: string, pk: string): Observable<Project> {
+  findByOrganizationValidNameAndProjectKey(ovn: string, pk: string): Observable<Project[]> {
     const params = {ovn, pk};
-    return this.http.get<Project>(`${this.uri}/projects`, {params});
+    return this.http.get<Project[]>(`${this.uri}/projects`, {params});
   }
 
   findAll(): Observable<Project[]> {

@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Organization, OrganizationService} from '../../../services/organization.service';
-import {Project, ProjectService} from '../../../services/project.service';
+import {Organization, OrganizationService} from '../../../../services/organization.service';
+import {Project, ProjectService} from '../../../../services/project.service';
 import {map} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 

@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Project, ProjectService} from '../../../services/project.service';
-import {Organization, OrganizationService} from '../../../services/organization.service';
-import {AtlasUser, ProfileService} from '../../../services/profile.service';
+import {Project, ProjectService} from '../../../../services/project.service';
+import {Organization, OrganizationService} from '../../../../services/organization.service';
+import {AtlasUser, ProfileService} from '../../../../services/profile.service';
 import {filter, map, startWith} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
 

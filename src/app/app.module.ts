@@ -18,6 +18,9 @@ import {HomeModule} from './pages/home/home.module';
 import {DocRoutingModule} from './routes/doc-routing.module';
 import {DocumentationModule} from './pages/documentation/documentation.module';
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
+import {PageNotFoundModule} from './pages/page-not-found/page-not-found.module';
+import {PageNotFoundRoutingModule} from './routes/pnf-routing.module';
+import {ProjectRoutingModule} from './routes/project-routing.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -38,9 +41,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
       defaultLanguage: 'en'
     }),
-    AppRoutingModule,
-    AuthRoutingModule,
-    DocRoutingModule,
+
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
@@ -52,7 +53,15 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     OrganizationModule,
     HomeModule,
     DocumentationModule,
-    HighlightModule
+    HighlightModule,
+    PageNotFoundModule,
+
+
+    AuthRoutingModule,
+    AppRoutingModule,
+    ProjectRoutingModule,
+    DocRoutingModule,
+    PageNotFoundRoutingModule // PageNotFoundRoutingModule should be last of RoutingModules
   ],
   providers: [
     {

@@ -1,0 +1,24 @@
+@mixin board-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+
+  .board {
+    &__issues-containers {
+      color: map-get($foreground, text);
+      background-color: map-get($background, background);
+    }
+    &__issues-container {
+      border: solid 1px map-get($foreground, divider);
+    }
+    &__issues {
+
+    }
+    &__issue {
+      color: map-get($foreground, text);
+      background-color: map-get($background, card);
+      border: solid 1px map-get($foreground, divider);
+    }
+  }
+
+}

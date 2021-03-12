@@ -8,6 +8,7 @@ import {StartComponent} from '../pages/start/start.component';
 import {AboutComponent} from '../pages/about/about.component';
 import {AuthGuard} from '../guards/auth.guard';
 import {HomeComponent} from '../pages/home/home.component';
+import {PageNotFoundComponent} from '../pages/page-not-found/page-not-found.component';
 
 const oktaConfig = {
   issuer: 'https://dev-786355.okta.com/oauth2/default',

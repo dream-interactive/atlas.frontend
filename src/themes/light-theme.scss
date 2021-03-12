@@ -21,6 +21,8 @@ $mat-light-theme-background: (
   unselected-chip: map_get($mat-blue-gray, 300),
   disabled-list-option: map_get($mat-blue-gray, 200),
   tooltip: map_get($mat-blue-gray, 300),
+  sidenav: map_get($mat-blue-grey, 50),
+  nav-list-item: map_get($mat-blue-gray, 100),
   skeleton: white,
 
 );

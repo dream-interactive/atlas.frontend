@@ -24,6 +24,8 @@ $mat-dark-theme-background: (
   disabled-list-option: black,
   tooltip: map_get($mat-blue-grey, 700),
   skeleton: map_get($mat-blue-grey, 700),
+  sidenav: map_get($mat-blue-grey, 800),
+  nav-list-item: map_get($mat-blue-grey, 700),
 );
 // Foreground palette for dark themes.
 $mat-dark-theme-foreground: (

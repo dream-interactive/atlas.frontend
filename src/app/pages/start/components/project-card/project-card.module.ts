@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from './project-card.component';
-import {MaterialModule} from '../../../material.module';
+import {MaterialModule} from '../../../../material.module';
 import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 

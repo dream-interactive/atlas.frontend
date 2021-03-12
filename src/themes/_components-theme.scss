@@ -4,8 +4,10 @@
 @import '../app/components/toolbar/user-menu/user-menu-theme';
 @import '../app/pages/start/start-theme';
 @import '../app/pages/start/start-skeleton/start-skeleton-theme';
+@import '../app/pages/project/project-theme';
+@import '../app/pages/project/components/board/board-theme';
 @import '../app/pages/home/home-theme';
-@import '../app/pages/start/project-card/project-card-theme';
+@import '../app/pages/start/components/project-card/project-card-theme';
 @import '../app/pages/about/about-theme';
 @import '../app/pages/special/special-theme';
 @import '../app/pages/documentation/documentation-theme';
@@ -23,7 +25,10 @@
   @include home-theme($theme);
   @include documentation-theme($theme);
   @include toolbar-theme($theme);
-  @include start-skeleton-theme($theme)
+  @include start-skeleton-theme($theme);
+  @include project-theme($theme);
+  @include board-theme($theme);
+
 }
 
 // Define the light theme.

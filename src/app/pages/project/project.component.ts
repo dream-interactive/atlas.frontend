@@ -1,67 +1,46 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, GuardsCheckStart, NavigationCancel, NavigationEnd, NavigationError, Router} from '@angular/router';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Project, ProjectService} from '../../services/project.service';
-import {filter, mergeMap, startWith} from 'rxjs/operators';
-import {Organization, OrganizationService} from '../../services/organization.service';
-import {Observable} from 'rxjs';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {map, mergeMap, startWith} from 'rxjs/operators';
+import {OrganizationService} from '../../services/organization.service';
+import {EMPTY, from, Observable} from 'rxjs';
+
+import { onSideNavChange, animateText } from '../../animations/animations';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  styleUrls: ['./project.component.scss'],
+  animations: [onSideNavChange, animateText]
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit, AfterViewInit {
 
-  projects: Project[] = [];
-  organizatios: Organization[] = [];
-  organizationName = '';
-  projectName = '';
-  key = '';
-  currentProject: Observable<Project>;
+  currentProject: Observable<Project> = EMPTY;
+
+  isShowing = false;
+  linkText = false;
+
+  @ViewChild('matSidenav', { read: ElementRef }) matSidenav: ElementRef;
 
   constructor(
     private projectService: ProjectService,
     private organizationService: OrganizationService,
     private activateRoute: ActivatedRoute,
-    private router: Router) {
-
-    const start = router.events.pipe(
-      filter(event => event instanceof GuardsCheckStart)
-    );
-    const end = router.events.pipe(
-      filter( event => event instanceof NavigationEnd
-                            || event instanceof NavigationCancel
-                            || event instanceof NavigationError
-      )
-    );
-
-  }
-
-
-
-  drop(event: CdkDragDrop<string[]>): void {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-  }
-
-
-
-  ngOnInit(): void {
+    private elementRef: ElementRef) {
 
     this.currentProject = this.activateRoute.params
       .pipe(
         mergeMap((params) => {
           const organizationValidName = params[`organization`];
           const key = params[`key`];
+
+          // response is a Flux<Project> with one element
           return this.projectService.findByOrganizationValidNameAndProjectKey(organizationValidName, key)
             .pipe(
+              map((project) => {
+                this.projectService.updateProjectSubject(project[0]);
+                return project[0];
+              }),
               startWith({
                 id: '', img: '', isPrivate: false, key: '', leadId: '', name: '', organizationId: '', type: undefined
               })
@@ -70,7 +49,21 @@ export class ProjectComponent implements OnInit {
       );
   }
 
-  saveContainerName(): void {
+  ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit(): void {
+
+    this.matSidenav.nativeElement.addEventListener('mouseenter', () => {
+      setTimeout(() => this.isShowing = !this.isShowing , 1000);
+      setTimeout(() => this.linkText = this.isShowing, 1200);
+    });
+
+    this.matSidenav.nativeElement.addEventListener('mouseleave', () => {
+      this.isShowing = !this.isShowing;
+      setTimeout(() => this.linkText = this.isShowing, 200);
+    });
 
   }
 }
