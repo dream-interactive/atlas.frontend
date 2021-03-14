@@ -1,6 +1,8 @@
 @import "const";
 
-// The rem unit specifies the size relative to the font size of the <html> element.
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   height: 100%;

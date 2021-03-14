@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Container} from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-board',
@@ -7,6 +8,10 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
+
+
+
+
   containers = [
     {
       name: 'TODO',
@@ -24,17 +29,17 @@ export class BoardComponent implements OnInit {
       name: 'Done',
       issues: []
     },
+    {
+      name: 'Done',
+      issues: []
+    }
   ];
-  constructor() { }
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
   }
   dropContainer(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.containers, event.previousIndex, event.currentIndex);
-  }
-
-  saveContainerName(): void {
-
   }
 
   dropIssue(event: CdkDragDrop<string[]>): void {
@@ -46,5 +51,26 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+  saveContainerName(value: string, container: Container, inputId: string): void {
+    this.renderer.selectRootElement('#' + inputId).disabled = true;
+    // TODO
+  }
+
+
+  editName(inputId: string): void {
+    const input = this.renderer.selectRootElement('#' + inputId);
+
+    input.disabled = false;
+
+    setTimeout(() => {
+      input.focus();
+    }, 0);
+
+  }
+
+  disableInput(inputId: string): void{
+    this.renderer.selectRootElement('#' + inputId).disabled = true;
   }
 }

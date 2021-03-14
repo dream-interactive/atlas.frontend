@@ -2,24 +2,22 @@
 @import "../../../themes/const";
 
 .footer {
-  box-sizing: border-box;
   width: 100%;
   height: $footer-height;
   font-size: .9rem;
   font-weight: lighter;
-  z-index: 100;
+  padding: 0 1rem;
 
   &__logo {
-    height: 40px;
+    height: 36px;
   }
 
   &__container {
     margin: 0 auto;
-    max-width: 95%;
+    max-width: 1920px;
     height: inherit;
   }
   .group {
-    width: 100%;
     height: $footer-height / 2;
   }
 

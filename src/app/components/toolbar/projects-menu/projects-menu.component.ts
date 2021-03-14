@@ -1,86 +1,86 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Project, ProjectService} from '../../../services/project.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {filter, mergeMap} from 'rxjs/operators';
+import {defaultIfEmpty, filter, mergeMap, startWith, switchMap, tap} from 'rxjs/operators';
 import {SiteTheme, ThemeService} from '../../../services/theme.service';
 import {Organization, OrganizationService} from '../../../services/organization.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ProjectModalComponent} from '../../project-modal/project-modal.component';
+import {EMPTY, from, of, Subscription} from 'rxjs';
+import {OktaAuthService} from '@okta/okta-angular';
 
 @Component({
   selector: 'app-projects-menu',
   templateUrl: './projects-menu.component.html',
   styleUrls: ['./projects-menu.component.scss']
 })
-export class ProjectsMenuComponent implements OnInit {
+export class ProjectsMenuComponent implements OnInit, OnDestroy {
 
   theme: SiteTheme;
 
+
   projects: Project[] = [];
 
-  currentProject: string;
+  currentProject: Project = this.setDefaultProjectData();
 
   orgs: Organization[] = [];
-
+  private $projects = Subscription.EMPTY;
+  private $orgs = Subscription.EMPTY;
+  private $translator = Subscription.EMPTY;
 
   constructor(private projectService: ProjectService,
               private organizationService: OrganizationService,
+              public auth: OktaAuthService,
               private dialog: MatDialog,
               private router: Router,
               private route: ActivatedRoute,
               private translator: TranslateService,
               private themeService: ThemeService) {
+
     this.theme = ThemeService.defaultTheme;
     this.themeService.theme$.subscribe(theme => this.theme = theme);
+
+    this.$projects = from(auth.getUser()).pipe(
+      switchMap((user) => {
+        return projectService.findAllByUserId(user.sub).pipe(
+          switchMap((projects) => {
+            projectService.updateProjectsSubject(projects);
+            return projectService.projects$.pipe(
+              mergeMap((ps) => {
+                this.projects = ps;
+                return router.events
+                  .pipe(
+                    filter((e) => e instanceof NavigationEnd),
+                    startWith(router)
+                  );
+              })
+            );
+          })
+        );
+      })
+    ).subscribe((event: NavigationEnd) => {
+      if (event.url.match(new RegExp('/o/([a-z0-9-])+/'))) {
+        const projectKey = route.children[0].snapshot.url[3].path; // project's key is a 4 part in url
+        this.currentProject = this.setProjectData(projectKey);
+      } else {
+        this.currentProject = this.setDefaultProjectData();
+      }
+    });
+
   }
 
   ngOnInit(): void {
 
-    this.organizationService.userOrganizations$
-      .subscribe( (orgs) => this.orgs = orgs);
-
-    this.projectService.projects$
-      .subscribe( prjcts => {
-        this.projects = prjcts;
-
-        const currentUrl = this.router.url;
-
-        if (currentUrl.match(new RegExp('/o/([a-z0-9-])+/'))) {
-
-          const projectKey = this.route.children[0].snapshot.url[3].path; // project's key is a 4 part in url
-
-          if (projectKey) {
-            this.setNameOfCurrentProject(projectKey);
-          } else {
-            this.getDefaultProjectNameFromTranslator();
-          }
-
-        } else {
-          this.getDefaultProjectNameFromTranslator(); // Get default value on first loa
-        }
-
-        this.router.events
-          .pipe(
-            filter((e) => e instanceof NavigationEnd))
-          .subscribe((event: NavigationEnd) => {
-            const eventUrl = event.url;
-            if (eventUrl.match(new RegExp('/o/([a-z0-9-])+/'))) {
-              const projectKey = this.route.children[0].snapshot.url[3].path; // project's key is a 4 part in url
-              this.setNameOfCurrentProject(projectKey);
-            } else {
-              this.getDefaultProjectNameFromTranslator();
-            }
-          });
-      });
+    this.$orgs = this.organizationService.userOrganizations$
+      .subscribe((orgs) => this.orgs = orgs);
 
     // Subscribe on lang change
-    this.translator.onLangChange.pipe(
-      mergeMap(() => this.translator.get(['navbar.dropdown.projects']))
-    ).subscribe(res => {
-      this.currentProject = res['navbar.dropdown.projects'];
-    }); // Get default value on lang change
-
+    this.$translator = this.translator.onLangChange.subscribe(() => {
+      if (!this.router.url.match(new RegExp('/o/([a-z0-9-])+/'))){
+        this.currentProject = this.setDefaultProjectData();
+      }
+    }); // Set default value on lang change
 
 
   }
@@ -107,22 +107,32 @@ export class ProjectsMenuComponent implements OnInit {
     });
   }
 
-  private setNameOfCurrentProject(routeProjectKey: string): void {
-    const projects = this.projects
-      .filter((project) => project.key === routeProjectKey);
+  private setProjectData(routeProjectKey: string): Project {
+
+    const projects = this.projects.filter((project) => project.key === routeProjectKey);
 
     if (projects.length > 0) {
-      this.currentProject = projects[0].name;
-    }
-    else {
-      // todo 404
-      this.getDefaultProjectNameFromTranslator();
+      return projects[0];
+    } else {
+      return this.setDefaultProjectData();
     }
   }
 
-  private getDefaultProjectNameFromTranslator(): void {
-    this.translator.get(['navbar.dropdown.projects']).subscribe((res) => {
-      this.currentProject = res['navbar.dropdown.projects'];
-    });
+  private setDefaultProjectData(): Project {
+
+    const project: Project = {
+      img: '', key: '', leadId: '', name: '', organizationId: '', type: undefined
+    };
+    project.name = this.translator.instant('navbar.dropdown.projects');
+
+    project.img = 'assets/images/icon-business-pack/svg/101-organization-1.svg';
+
+    return project;
+  }
+
+  ngOnDestroy(): void {
+    this.$projects.unsubscribe();
+    this.$orgs.unsubscribe();
+    this.$translator.unsubscribe();
   }
 }

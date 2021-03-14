@@ -3,9 +3,9 @@ import {ActivatedRoute} from '@angular/router';
 import {Project, ProjectService} from '../../services/project.service';
 import {map, mergeMap, startWith} from 'rxjs/operators';
 import {OrganizationService} from '../../services/organization.service';
-import {EMPTY, from, Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 
-import { onSideNavChange, animateText } from '../../animations/animations';
+import {animateText, onSideNavChange} from '../../animations/animations';
 
 @Component({
   selector: 'app-project',
@@ -25,8 +25,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
   constructor(
     private projectService: ProjectService,
     private organizationService: OrganizationService,
-    private activateRoute: ActivatedRoute,
-    private elementRef: ElementRef) {
+    private activateRoute: ActivatedRoute) {
 
     this.currentProject = this.activateRoute.params
       .pipe(

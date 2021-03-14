@@ -7,7 +7,7 @@
 
   app-home {
     color: map-get($foreground, text);
-    .about {
+    .home {
       background: map-get($background, background);
     }
     h1, h2 {

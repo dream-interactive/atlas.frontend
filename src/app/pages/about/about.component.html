@@ -1,9 +1,9 @@
 <div class="about" fxLayout="column" fxLayoutGap="100px">
   <div class="about__header" fxLayout="column" fxFlexAlign="center" fxLayoutGap="20px">
 
-    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="about__logo-image">
     <ng-template #darkMode>
-      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="about__logo-image">
     </ng-template>
 
 

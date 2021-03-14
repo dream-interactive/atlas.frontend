@@ -3,7 +3,7 @@
 $sidenav-min-w: 60px;
 
 .project {
-  height: calc( 100vh - #{$footer-height} - #{$toolbar-height} - 1px);
+  height: calc( 100vh - #{$toolbar-height} - 1px);
   width: 100%;
 
   &__sidenav {
@@ -15,17 +15,18 @@ $sidenav-min-w: 60px;
     z-index: 3;
     position: absolute;
     top: 0;
-    height: calc( 100vh - #{$footer-height} - #{$toolbar-height});
+    height: calc( 100vh - #{$toolbar-height});
   }
 
   &__content {
+
     position: relative;
     left: $sidenav-min-w;
     z-index: 1;
     height: 100%;
-    width: calc( 100vw - #{$sidenav-min-w} - 40px);
+    width: calc( 100vw - #{$sidenav-min-w});
     overflow: auto;
-
+    box-sizing: border-box;
   }
 }
 
