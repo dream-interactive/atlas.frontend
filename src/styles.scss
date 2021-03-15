@@ -11,10 +11,29 @@
 @include angular-material-theme($theme);
 @include components-theme($theme);
 
+$foreground: map-get($theme, foreground);
+
 .code {
   border-radius: 4px;
   &-in-text {
     display: inline !important;
     padding: 2px 4px !important;
+  }
+}
+* {
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: mat-color($primary, default, .2);
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: mat-color($primary, default, .5);
   }
 }

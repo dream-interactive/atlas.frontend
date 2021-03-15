@@ -1,38 +1,43 @@
-<div class="start">
-  <div *ngIf="organizations.length, else IfOrganizationsArrayIsEmpty" class="start__container" fxLayout="column" fxLayoutGap="20px">
-    <div fxLayout="raw" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <h3>{{"start.organizations.title" | translate}}</h3>
-      <button mat-stroked-button color="primary" (click)="openCreateOrganizationPopup()"><mat-icon>add</mat-icon></button>
+<ng-container  *ngIf="loading; else content">
+  <ng-container
+    *ngComponentOutlet="skeleton"
+  ></ng-container>
+</ng-container>
+
+<ng-template #content>
+  <div class="start">
+    <div *ngIf="organizations.length; else IfOrganizationsArrayIsEmpty" class="start__container" fxLayout="column" fxLayoutGap="1rem">
+      <div fxLayout="raw" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <h3>{{"start.organizations.title" | translate}}</h3>
+        <button mat-stroked-button color="primary" (click)="openCreateOrganizationPopup()"><mat-icon>add</mat-icon></button>
+      </div>
+      <div class="start__orgs" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <app-org-card *ngFor="let organization of organizations" [organization]="organization"></app-org-card>
+      </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="raw" fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <h3>{{"start.projects.title" | translate}}</h3>
+        <button mat-stroked-button color="primary" (click)="openCreateProjectPopup()" [disabled]="organizations.length < 1"><mat-icon>add</mat-icon></button>
+      </div>
+      <div class="start__projects"  fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="1rem">
+        <app-project-card
+          *ngFor="let project of projects"
+          [project]="project"
+          [organization]="getOrganizationByProject(project)"></app-project-card>
+      </div>
+      <mat-divider></mat-divider>
+      <h3>{{"start.activity.title" | translate}}</h3>
+      <div class="start__changes">
+      </div>
     </div>
-    <div class="start__orgs" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <app-org-card *ngFor="let organization of organizations" [organization]="organization"></app-org-card>
-    </div>
-
-    <mat-divider></mat-divider>
-    <div fxLayout="raw" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <h3>{{"start.projects.title" | translate}}</h3>
-      <button mat-stroked-button color="primary" (click)="openCreateProjectPopup()" [disabled]="organizations.length < 1"><mat-icon>add</mat-icon></button>
-    </div>
-
-    <div class="start__projects"  fxLayout="column" fxLayoutAlign="center start">
-      <app-project-card  *ngFor="let project of projects" [project]="project"></app-project-card>
-    </div>
-
-    <mat-divider></mat-divider>
-
-    <h3>{{"start.activity.title" | translate}}</h3>
-    <div class="start__changes">
-
-    </div>
-
-  </div>
-<ng-template #IfOrganizationsArrayIsEmpty>
-  <div fxLayout="column" fxLayoutGap="20px" class="start__container" fxLayoutAlign="center center">
-    <img src="assets/images/organization.png" alt="org-img" class="start__image">
-    <h3>{{'start.noOrg.title'|translate}}</h3>
-    <p>{{'start.noOrg.text'|translate}} </p>
-    <button mat-flat-button color="primary"
-            (click) = "openCreateOrganizationPopup()">{{'start.noOrg.buttons.create'|translate}}</button>
+    <ng-template #IfOrganizationsArrayIsEmpty>
+      <div fxLayout="column" fxLayoutGap="1rem" class="start__container" fxLayoutAlign="center center">
+        <img src="assets/images/organization.png" alt="org-img" class="start__image">
+        <h3>{{'start.noOrg.title'|translate}}</h3>
+        <p>{{'start.noOrg.text'|translate}} </p>
+        <button mat-flat-button color="primary"
+                (click) = "openCreateOrganizationPopup()">{{'start.noOrg.buttons.create'|translate}}</button>
+      </div>
+    </ng-template>
   </div>
 </ng-template>
-</div>

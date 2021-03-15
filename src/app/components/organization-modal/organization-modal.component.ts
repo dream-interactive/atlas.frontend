@@ -48,7 +48,7 @@ export class OrganizationModalComponent implements OnInit {
         validName: this.createOrgValidName(this.nameControl.value)
       };
 
-      this.organizationService.save(organization).subscribe(
+      this.organizationService.create(organization).subscribe(
         (org) => {
           this.organizations.push(org);
           this.organizationService.updateOrganizationsSubject(this.organizations);

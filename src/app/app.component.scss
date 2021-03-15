@@ -6,26 +6,40 @@ app-root{
   bottom: 0;
   left: 0;
   right: 0;
-
-  display: flex;
-  flex-direction: column;
-  .content {
-    flex: 1 0 auto;
-  }
 }
-
 app-toolbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 5;
 }
+
+.flex-container {
+  height: calc(100% - 1px);
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    flex: 1 0 auto;
+  }
+}
+
+app-footer{
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+
+
+
 
 app-root > app-about,
 app-root > app-home,
 app-root > app-profile,
 app-root > app-exc,
+app-root > app-project,
+app-root > app-start,
 {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -44,8 +58,3 @@ app-root > app-exc,
     overflow-y: visible;
   }
 }
-
-.divider {
-  z-index: 100;
-}
-

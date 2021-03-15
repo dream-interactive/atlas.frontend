@@ -4,7 +4,7 @@ import {CrudService} from './crud.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ProfileService} from './profile.service';
 import {environment} from '../../environments/environment';
-import {catchError, mergeMap} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 
 export interface Organization {
   id?: string;
@@ -24,24 +24,10 @@ export class OrganizationService implements CrudService<Organization, string> {
 
   private URL = environment.uri;
 
-  constructor(private http: HttpClient, profileService: ProfileService) {
-    profileService.profile$.pipe(
-      mergeMap((profile) => {
-        if (profile.sub) {
-          return this.findAllByUserId(profile.sub);
-        } else {
-          return EMPTY;
-        }
-      })
-    ).subscribe(organizations => this.updateOrganizationsSubject(organizations));
-  }
+  constructor(private http: HttpClient) {}
 
   updateOrganizationsSubject(organizations: Organization[]): void {
     this.organizationsSubject$.next(organizations);
-  }
-
-  save(organization: Organization): Observable<Organization> {
-    return this.http.post<Organization>(`${this.URL}/organizations`, organization);
   }
 
   delete(id: string): void {
@@ -59,6 +45,21 @@ export class OrganizationService implements CrudService<Organization, string> {
     );
   }
 
+
+
+  findByOrganizationValidName(validName: string): Observable<Organization> {
+    const params = {validName};
+    return this.http.get<Organization>(`${this.URL}/organizations`, { params });
+  }
+
+  create(organization: Organization): Observable<Organization> {
+    return this.http.post<Organization>(`${this.URL}/organizations`, organization);
+  }
+
+  update(organization: Organization): Observable<Organization> {
+    return this.http.put<Organization>(`${this.URL}/organizations`, organization);
+  }
+
   findAll(): Observable<Organization[]> {
     return null;
   }
@@ -66,11 +67,6 @@ export class OrganizationService implements CrudService<Organization, string> {
   findById(id: string): Observable<Organization> {
     //  return  this.http.get<Organization>(`${URL}/api/organization/${id}`)
     return null;
-  }
-
-  findByOrganizationValidName(validName: string): Observable<Organization> {
-    const params = {validName};
-    return this.http.get<Organization>(`${this.URL}/organizations`, { params });
   }
 }
 

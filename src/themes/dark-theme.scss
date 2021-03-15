@@ -23,6 +23,9 @@ $mat-dark-theme-background: (
   unselected-chip: map_get($mat-blue-grey, 700),
   disabled-list-option: black,
   tooltip: map_get($mat-blue-grey, 700),
+  skeleton: map_get($mat-blue-grey, 700),
+  sidenav: map_get($mat-blue-grey, 800),
+  nav-list-item: map_get($mat-blue-grey, 700),
 );
 // Foreground palette for dark themes.
 $mat-dark-theme-foreground: (
@@ -61,4 +64,7 @@ $theme: create-dark-theme($primary, $accent);
 
 .hljs { // highlight.js
   background-color: map-get($mat-dark-theme-background, card);
+}
+body {
+  background-color: map-get($mat-dark-theme-background, background);
 }

@@ -1,9 +1,25 @@
-$accent-light: #80cbc4;
-$accent-lighter: #e0f2f1;
-$accent: #00796b;
+/****** colors *******/
+  $accent-light: #80cbc4;
+  $accent-lighter: #e0f2f1;
+  $accent: #00796b;
 
-$toolbar-height: 56px;
-$footer-height: 72px;
-$about-header-height: 224px;
-$about-row-height: $about-header-height * 2;
+/***** Dimensions ******/
 
+  $divider-height: 1px;
+
+  /* toolbar */
+  $toolbar-height: 56px;
+  $toolbar-icons-height: 26px;
+
+  /* footer */
+  $footer-height: 56px;
+
+  /* about */
+  $about-header-height: 224px;
+  $about-row-height: $about-header-height * 2;
+
+  /* project board*/
+  $board-issues-container-header-height: 50px;
+  $board-issues-container-width: 300px;
+  $board-toolbar: 56px;
+  $board-issue-height: 100px;

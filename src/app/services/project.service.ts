@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CrudService} from './crud.service';
-import {BehaviorSubject, EMPTY, Observable, of, throwError} from 'rxjs';
+import {BehaviorSubject, EMPTY, Observable, ReplaySubject, Subject, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {catchError, mergeMap} from 'rxjs/operators';
+import {catchError, concatMap, mergeMap, switchMap} from 'rxjs/operators';
 import {ProfileService} from './profile.service';
 
 export interface Project {
-  id?: string;
+  idp?: string;
   name: string;
   key: string;
   organizationId: string;
@@ -28,44 +28,21 @@ export class ProjectService implements CrudService<Project, string> {
 
   private projectsSubject$ = new BehaviorSubject<Project[]>([]);
   projects$ = this.projectsSubject$.asObservable();
-  private projectSubject$ = new BehaviorSubject<Project>(null);
-  project$ = this.projectsSubject$.asObservable();
+  private projectSubject$ = new ReplaySubject<Project>(1);
+  project$ = this.projectSubject$.asObservable();
 
   private uri = environment.uri;
 
-  constructor(private http: HttpClient, profileService: ProfileService) {
-    profileService.profile$.pipe(
-      mergeMap((profile) => {
-        if (profile.sub) {
-          return this.findAllByUserId(profile.sub);
-        } else {
-          return EMPTY;
-        }
-      })
-    ).subscribe((projects) => this.updateProjects(projects));
-  }
+  constructor(private http: HttpClient) {}
 
-  updateProjects(projects: Project[]): void {
+  updateProjectsSubject(projects: Project[]): void {
     this.projectsSubject$.next(projects);
   }
 
-  updateProject(project: Project): void {
+  updateProjectSubject(project: Project): void {
     this.projectSubject$.next(project);
   }
 
-
-  save(project: Project): Observable<Project> {
-
-
-    if (project.id) {
-
-      return this.http.put<Project>(`${this.uri}/projects`, project);
-    }
-
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-    return this.http.post<Project>(`${this.uri}/projects`, project, {headers});
-  }
 
   findAllByUserId(id: string): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.uri}/projects/users/${id}`).pipe(
@@ -112,13 +89,31 @@ export class ProjectService implements CrudService<Project, string> {
    * @param ovn - organization valid name
    * @param pk - project key
    */
-  findByOrganizationValidNameAndProjectKey(ovn: string, pk: string): Observable<Project> {
+  findByOrganizationValidNameAndProjectKey(ovn: string, pk: string): Observable<Project[]> {
     const params = {ovn, pk};
-    return this.http.get<Project>(`${this.uri}/projects`, {params});
+    return this.http.get<Project[]>(`${this.uri}/projects`, {params});
   }
 
   findAll(): Observable<Project[]> {
     return undefined;
+  }
+
+  create(project: Project): Observable<Project> {
+    return this.http.post<Project>(`${this.uri}/projects`, project).pipe(
+      catchError(err => {
+        console.log('Error:', err.error.message);
+        return throwError(err);
+      })
+    );
+  }
+
+  update(project: Project): Observable<Project> {
+    return this.http.put<Project>(`${this.uri}/projects`, project).pipe(
+      catchError(err => {
+        console.log('Error:', err.error.message);
+        return throwError(err);
+      })
+    );
   }
 
 }

@@ -1,6 +1,6 @@
-
 <button mat-button [matMenuTriggerFor]="projectsMenu" class="menu__button">
-  <span class="menu__title">{{currentProject}}</span>
+  <img matPrefix class="menu__icon" src="{{currentProject.img}}" alt="project-img">
+  <span class="menu__title">{{currentProject.name}}</span>
   <mat-icon>arrow_drop_down</mat-icon>
 </button>
 <mat-menu #projectsMenu yPosition="below"  class="selector">
@@ -12,7 +12,7 @@
     </ng-template>
   </div>
 
-  <button mat-menu-item class="selector__button project" *ngFor="let project of projects" (click)="goTo(project.id)">
+  <button mat-menu-item class="selector__button project" *ngFor="let project of projects" (click)="goTo(project.idp)">
     <img class="project__img" src="{{project.img}}" alt="org">
     <span class="project__name">{{project.name}}</span>
   </button>

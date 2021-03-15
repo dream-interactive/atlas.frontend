@@ -1,0 +1,51 @@
+@mixin project-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+
+  .project {
+
+    &__sidenav {
+      color: map-get($foreground, text);
+      background-color: map-get($background, sidenav);
+      border-right: solid 1px map-get($foreground, divider);
+    }
+
+    &__content {
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: mat-color($primary, default, .2);
+      }
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: mat-color($primary, default, .5);
+      }
+    }
+  }
+  .nav-list {
+    &__header {
+      > img {
+        box-sizing: border-box;
+        border: solid 1px map-get($foreground, divider);
+      }
+    }
+  }
+  .nav-list-item {
+    &:hover {
+      background-color: map-get($background, nav-list-item);
+    }
+    &-active {
+      background-color: map-get($background, nav-list-item);
+      box-shadow:
+        0 3px 5px -1px rgba(0,0,0,.2),
+        0 6px 10px 0 rgba(0,0,0,.14),
+        0 1px 18px 0 rgba(0,0,0,.12);
+    }
+  }
+}
