@@ -17,11 +17,11 @@
 
 
   <span class="spacer"></span>
-  <nav class="toolbar__nav">
+  <nav class="toolbar__nav" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
 
     <app-organizations-menu  *ngIf="isAuthenticated"></app-organizations-menu>
 
-    <app-projects-menu [currentProject]="" *ngIf="isAuthenticated"></app-projects-menu>
+    <app-projects-menu *ngIf="isAuthenticated"></app-projects-menu>
 
 
     <button *ngIf="!isAuthenticated"  mat-flat-button color="primary"

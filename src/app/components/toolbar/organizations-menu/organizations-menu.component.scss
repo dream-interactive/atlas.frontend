@@ -1,3 +1,5 @@
+@import "../../../../themes/const";
+
 .menu {
   &__button {
     max-width: 200px;
@@ -8,6 +10,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  &__icon {
+    height: $toolbar-icons-height;
+    margin-right: 10px;
   }
 }
 .selector {

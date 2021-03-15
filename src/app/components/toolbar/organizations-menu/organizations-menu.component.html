@@ -1,9 +1,10 @@
 <button mat-button [matMenuTriggerFor]="orgsMenu"  class="menu__button">
-  <span class="menu__title">{{currentOrg}}</span>
+  <img matPrefix class="menu__icon" src="{{currentOrg.img}}" alt="org-img">
+  <span class="menu__title">{{currentOrg.name}}</span>
   <mat-icon>arrow_drop_down</mat-icon>
 </button>
 <mat-menu #orgsMenu yPosition="below"  class="selector">
-  <div class="selector--header" fxLayout="column" fxLayoutAlign="center center">
+  <div class="selector__header" fxLayout="column" fxLayoutAlign="center center">
     <img src="assets/images/organization.png" alt="orgs" class="selector__image">
   </div>
 
