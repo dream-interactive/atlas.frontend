@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {StyleService} from '../../../services/style.service';
-import {SiteTheme, ThemeService} from '../../../services/theme.service';
-import {LocalStorageService} from '../../../services/local-storage.service';
+import {StyleService} from '../../../shared/style.service';
+import {SiteTheme, ThemeService} from '../../../shared/theme.service';
+import {LocalStorageService} from '../../../shared/local-storage.service';
 
 @Component({
   selector: 'app-theme-picker',

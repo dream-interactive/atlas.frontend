@@ -1,4 +1,4 @@
-import {Injectable, Type} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 export interface AtlasException {
   aeid: number; // atlas exception id

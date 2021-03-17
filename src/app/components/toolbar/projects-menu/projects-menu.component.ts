@@ -3,7 +3,7 @@ import {Project, ProjectService} from '../../../services/project.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {defaultIfEmpty, filter, mergeMap, startWith, switchMap, tap} from 'rxjs/operators';
-import {SiteTheme, ThemeService} from '../../../services/theme.service';
+import {SiteTheme, ThemeService} from '../../../shared/theme.service';
 import {Organization, OrganizationService} from '../../../services/organization.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ProjectModalComponent} from '../../project-modal/project-modal.component';
