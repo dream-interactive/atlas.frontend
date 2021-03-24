@@ -1,14 +1,15 @@
 import {Component} from '@angular/core';
-import {AtlasUser, ProfileService} from '../../../services/profile.service';
+import {ProfileService} from '../../../services/profile.service';
 import {Observable} from 'rxjs';
 import {OktaAuthService} from '@okta/okta-angular';
+import {AtlasUser} from '../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-user-menu',
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss']
 })
-export class UserMenuComponent{
+export class UserMenuComponent {
 
   public profile: Observable<AtlasUser>;
   origin: string;

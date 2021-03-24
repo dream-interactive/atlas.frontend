@@ -2,32 +2,36 @@
 @import '../app/components/footer/footer-theme';
 @import '../app/components/toolbar/toolbar-theme';
 @import '../app/components/toolbar/user-menu/user-menu-theme';
-@import '../app/pages/start/start-theme';
-@import '../app/pages/start/start-skeleton/start-skeleton-theme';
-@import '../app/pages/project/project-theme';
-@import '../app/pages/project/components/board/board-theme';
-@import '../app/pages/home/home-theme';
-@import '../app/pages/start/components/project-card/project-card-theme';
-@import '../app/pages/about/about-theme';
-@import '../app/pages/special/special-theme';
-@import '../app/pages/documentation/documentation-theme';
 @import '../app/components/project-modal/project-modal-theme';
+@import '../app/web/start/pages/start-page/start-page-theme';
+@import '../app/components/page-not-found/page-not-found-theme';
+@import '../app/web/start/components/start-skeleton/start-skeleton-theme';
+@import '../app/web/project/pages/project-page/project-page-theme';
+@import '../app/web/project/components/board/board-theme';
+@import '../app/web/home/home-theme';
+@import '../app/web/start/components/project-card/project-card-theme';
+@import '../app/web/about/pages/about/about-page-theme';
+@import '../app/web/special/special-theme';
+@import '../app/web/documentation/pages/documentaion-page/documentation-page-theme';
+@import '../app/web/documentation/pages/exceptions-page/exceptions-page-theme';
 
 // Styles for the components that are based on the current theme.
 @mixin components-theme($theme) {
   @include user-menu-theme($theme);
   @include footer-theme($theme);
-  @include about-theme($theme);
-  @include start-theme($theme);
+  @include about-page-theme($theme);
+  @include start-page-theme($theme);
   @include special-theme($theme);
   @include project-modal-theme($theme);
   @include project-card-theme($theme);
   @include home-theme($theme);
-  @include documentation-theme($theme);
+  @include documentation-page-theme($theme);
+  @include exceptions-page-theme($theme);
   @include toolbar-theme($theme);
   @include start-skeleton-theme($theme);
-  @include project-theme($theme);
+  @include project-page-theme($theme);
   @include board-theme($theme);
+  @include page-not-found($theme);
 
 }
 

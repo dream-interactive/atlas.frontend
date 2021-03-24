@@ -1,4 +1,5 @@
-import {Injectable, Type} from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Data} from '@angular/router';
 
 export interface AtlasException {
   aeid: number; // atlas exception id
@@ -40,6 +41,43 @@ export const IssuePriority: Map<number, string> = new Map()
   .set(2, 'Medium')
   .set(1, 'High');
 
+
+export interface Organization {
+  id?: string;
+  name: string;
+  validName: string;
+  img?: string;
+  ownerUserId: string; // ID user which create organization
+}
+export interface AtlasUserAuth { // Okta User Profile
+  email: string;
+  emailVerified: boolean;
+  familyName: string;
+  givenName: string;
+  name: string;
+  sub: string;
+  local: string;
+}
+
+export interface AtlasUser extends AtlasUserAuth {
+  lastModify: Data;
+  userPicture: string;
+}
+
+export interface Project {
+  idp?: string;
+  name: string;
+  key: string;
+  organizationId: string;
+  type: ProjectType;
+  leadId: string;
+  img?: string;
+  isPrivate?: boolean;
+}
+
+export enum ProjectType {
+  SCRUM, KANBAN
+}
 @Injectable({
   providedIn: 'root'
 })

@@ -1,14 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Project, ProjectService} from '../../../services/project.service';
+import {ProjectService} from '../../../web/project/services/project.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {defaultIfEmpty, filter, mergeMap, startWith, switchMap, tap} from 'rxjs/operators';
-import {SiteTheme, ThemeService} from '../../../services/theme.service';
-import {Organization, OrganizationService} from '../../../services/organization.service';
+import {filter, mergeMap, startWith, switchMap} from 'rxjs/operators';
+import {SiteTheme, ThemeService} from '../../../shared/theme.service';
+import {OrganizationService} from '../../../services/organization.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ProjectModalComponent} from '../../project-modal/project-modal.component';
-import {EMPTY, from, of, Subscription} from 'rxjs';
+import {from, Subscription} from 'rxjs';
 import {OktaAuthService} from '@okta/okta-angular';
+import {Organization, Project} from '../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-projects-menu',

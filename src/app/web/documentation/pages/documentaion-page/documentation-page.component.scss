@@ -1,0 +1,22 @@
+@import "../../../../../themes/const";
+
+.documentation {
+  height: 100%;
+
+  &__content {
+    box-sizing: border-box;
+    padding: 1rem;
+    height: 100%;
+  }
+
+  &__container {
+    position: absolute;
+    top: 0;
+    bottom: $footer-height;
+    left: 0;
+    right: 0;
+  }
+}
+.sidenav {
+  min-width: 200px;
+}

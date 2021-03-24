@@ -1,0 +1,9 @@
+<div class="pnf" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1rem">
+
+  <img *ngIf="theme.isDark, else darkMode" class="pnf__img" src="../../../assets/images/404-dark.png" alt="404">
+  <ng-template #darkMode>
+    <img class="pnf__img" src="../../../assets/images/404-light.png" alt="404">
+  </ng-template>
+  <h2 class="pnf__text">Oops... Page not found!</h2>
+  <a routerLink="/start" mat-button>Back to Start</a>
+</div>

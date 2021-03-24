@@ -1,0 +1,18 @@
+
+@mixin documentation-page-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-documentation-page{
+    color: map-get($foreground, text);
+    .documentation {
+      background-color: map-get($background, background);
+    }
+    .active-link {
+      background-color: map-get($background, hover);
+    }
+  }
+}

@@ -1,18 +1,13 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, EMPTY, Observable, throwError} from 'rxjs';
-import {CrudService} from './crud.service';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {CrudService} from '../shared/crud.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {ProfileService} from './profile.service';
 import {environment} from '../../environments/environment';
 import {catchError} from 'rxjs/operators';
+import {Organization} from '../shared/atlas/entity.service';
 
-export interface Organization {
-  id?: string;
-  name: string;
-  validName: string;
-  img?: string;
-  ownerUserId: string; // ID user which create organization
-}
+
+// TODO Перенести
 
 @Injectable({
   providedIn: 'root'

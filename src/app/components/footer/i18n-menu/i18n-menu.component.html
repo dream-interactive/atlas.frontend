@@ -1,14 +1,18 @@
-<mat-select [(value)]="language" class="i18n" (selectionChange)="changeLanguage($event)">
+<mat-select [(value)]="language"
+            class="i18n"
+            disableOptionCentering
+            panelClass="i18n__options"
+            (selectionChange)="changeLanguage($event)">
   <mat-option value="ua">
-    <img src="../../../assets/images/flags/ukraine.png" alt="ua-flag" class="i18n__flag">
+    <img src="assets/images/flags/ukraine.png" alt="ua-flag" class="i18n__flag">
     UA
   </mat-option>
   <mat-option value="en">
-    <img src="../../../assets/images/flags/gb.png" alt="gb-flag" class="i18n__flag">
+    <img src="assets/images/flags/gb.png" alt="gb-flag" class="i18n__flag">
     EN
   </mat-option>
   <mat-option value="ru">
-    <img src="../../../assets/images/flags/rf.png" alt="rf-flag" class="i18n__flag">
+    <img src="assets/images/flags/rf.png" alt="rf-flag" class="i18n__flag">
     RU
   </mat-option>
 </mat-select>
