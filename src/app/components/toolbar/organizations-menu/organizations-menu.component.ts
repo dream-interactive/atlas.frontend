@@ -2,11 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, mergeMap, startWith, switchMap} from 'rxjs/operators';
-import {Organization, OrganizationService} from '../../../services/organization.service';
+import {OrganizationService} from '../../../services/organization.service';
 import {OrganizationModalComponent} from '../../organization-modal/organization-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 import {OktaAuthService} from '@okta/okta-angular';
 import {from, Subscription} from 'rxjs';
+import {Organization} from '../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-organizations-menu',

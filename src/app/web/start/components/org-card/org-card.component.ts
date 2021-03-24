@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Organization, OrganizationService} from '../../../../services/organization.service';
-import {Project, ProjectService} from '../../../../services/project.service';
-import {map} from 'rxjs/operators';
+import {OrganizationService} from '../../../../services/organization.service';
+import {ProjectService} from '../../../project/services/project.service';
 import {Subscription} from 'rxjs';
+import {Organization, Project} from '../../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-org-card',

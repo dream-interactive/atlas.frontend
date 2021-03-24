@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {LocalStorageService} from '../../../shared/local-storage.service';
-import {AtlasUser, ProfileService} from '../../../services/profile.service';
+import {ProfileService} from '../../../services/profile.service';
+import {AtlasUser} from '../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-i18n-menu',

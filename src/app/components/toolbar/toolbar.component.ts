@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SiteTheme, ThemeService} from '../../shared/theme.service';
 import {TranslateService} from '@ngx-translate/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {OktaAuthService} from '@okta/okta-angular';
 import {filter} from 'rxjs/operators';
 

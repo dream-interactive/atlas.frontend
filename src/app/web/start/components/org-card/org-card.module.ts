@@ -7,12 +7,12 @@ import {MaterialModule} from '../../../../material.module';
 
 @NgModule({
   declarations: [OrgCardComponent],
-  exports: [
-    OrgCardComponent
-  ],
   imports: [
     CommonModule,
     MaterialModule
+  ],
+  exports: [
+    OrgCardComponent
   ]
 })
 export class OrgCardModule { }

@@ -1,0 +1,15 @@
+@mixin page-not-found($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-page-not-found {
+    color: map-get($foreground, text);
+
+    h1, h2 {
+      color: mat-color($primary);
+    }
+  }
+}

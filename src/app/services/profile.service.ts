@@ -1,27 +1,12 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, EMPTY, from, Observable, of, throwError} from 'rxjs';
+import {BehaviorSubject, EMPTY, from, Observable, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {OktaAuthService} from '@okta/okta-angular';
-import {catchError, mergeMap, startWith, switchMap} from 'rxjs/operators';
-import {Data} from '@angular/router';
+import {catchError, mergeMap, switchMap} from 'rxjs/operators';
+import {AtlasUser, AtlasUserAuth} from '../shared/atlas/entity.service';
 
-
-// tslint:disable-next-line:no-empty-interface
-export interface AtlasUserAuth { // Okta User Profile
-  email: string;
-  emailVerified: boolean;
-  familyName: string;
-  givenName: string;
-  name: string;
-  sub: string;
-  local: string;
-}
-
-export interface AtlasUser extends AtlasUserAuth {
-  lastModify: Data;
-  userPicture: string;
-}
+// TODO Перенести
 
 @Injectable({
   providedIn: 'root'

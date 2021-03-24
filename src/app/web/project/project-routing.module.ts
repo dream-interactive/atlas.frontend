@@ -6,7 +6,7 @@ import {ProjectPageComponent} from './pages/project-page/project-page.component'
 const routes: Routes = [
 
   {
-    path: 'o/:organization/:project/:key',
+    path: '',
     component: ProjectPageComponent,
     children: [
       {
@@ -29,7 +29,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule] // exporting for inner router-outlet
 })
 export class ProjectRoutingModule {
 }

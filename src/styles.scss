@@ -37,3 +37,7 @@ $foreground: map-get($theme, foreground);
     background-color: mat-color($primary, default, .5);
   }
 }
+
+.i18n__options {
+  margin-bottom: 30px !important;
+}

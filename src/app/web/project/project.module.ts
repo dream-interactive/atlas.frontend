@@ -18,8 +18,6 @@ import {ProjectBoardPageModule} from './pages/project-board-page/project-board-p
     MaterialModule,
     FlexLayoutModule,
 
-    ProjectBoardPageModule,
-
     ProjectRoutingModule
 
   ]

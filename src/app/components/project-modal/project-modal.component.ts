@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Organization, OrganizationService} from '../../services/organization.service';
-import {Project, ProjectService, ProjectType} from '../../services/project.service';
+import {OrganizationService} from '../../services/organization.service';
+import {ProjectService} from '../../web/project/services/project.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
-import {AtlasUser, ProfileService} from '../../services/profile.service';
+import {ProfileService} from '../../services/profile.service';
+import {AtlasUser, Organization, Project, ProjectType} from '../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-project-modal',

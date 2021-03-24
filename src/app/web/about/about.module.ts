@@ -24,7 +24,7 @@ import {HttpClient} from '@angular/common/http';
     }),
     RouterModule.forChild([
       {
-        path: 'about',
+        path: '',
         component: AboutPageComponent
       }
     ])

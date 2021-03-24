@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Organization, OrganizationService} from '../../services/organization.service';
-import {AtlasUser, ProfileService} from '../../services/profile.service';
+import {OrganizationService} from '../../services/organization.service';
+import {ProfileService} from '../../services/profile.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
+import {AtlasUser, Organization} from '../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-organization-modal',

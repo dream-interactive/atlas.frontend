@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Project} from '../../../../services/project.service';
-import {Organization} from '../../../../services/organization.service';
-import {AtlasUser, ProfileService} from '../../../../services/profile.service';
+import {ProfileService} from '../../../../services/profile.service';
 import {startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {AtlasUser, Organization, Project} from '../../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-project-card',
