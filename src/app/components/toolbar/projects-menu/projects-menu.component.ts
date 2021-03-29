@@ -102,10 +102,8 @@ export class ProjectsMenuComponent implements OnInit, OnDestroy {
     this.router.navigate([`/start`]);
   }
 
-  goToCreate(): void {
-    this.dialog.open(ProjectModalComponent, {
-      panelClass: ['full-screen-modal']
-    });
+  create(): void {
+    this.dialog.open(ProjectModalComponent);
   }
 
   private setProjectData(routeProjectKey: string): Project {

@@ -1,0 +1,10 @@
+@mixin issues-container-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+
+
+  header:hover {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2)
+  }
+}

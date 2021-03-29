@@ -10,11 +10,6 @@
     }
     &__issues-container {
       border: solid 1px map-get($foreground, divider);
-      > header {
-        &:hover {
-          box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2)
-        }
-      }
     }
     &__issues {
 

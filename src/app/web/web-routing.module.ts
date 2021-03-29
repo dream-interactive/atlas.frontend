@@ -25,18 +25,13 @@ const routes = [
     loadChildren: () => import('./documentation/documentation.module').then(module => module.DocumentationModule),
   },
   {
+    path: 'special',
+    loadChildren: () => import('./special/special.module').then(module => module.SpecialModule),
+  },
+  {
     path: 'o/:organization/:project/:key',
     loadChildren: () => import('./project/project.module').then(module => module.ProjectModule),
     canActivate: [AuthGuard],
-  },
-/*  {
-    path: 'o/:organization',
-    component: OrganizationComponent, // TODO
-    canActivate: [AuthGuard]
-  },*/
-  {
-    path: 'special',
-    loadChildren: () => import('./special/special.module').then(module => module.SpecialModule),
   },
 
 ];

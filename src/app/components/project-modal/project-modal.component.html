@@ -6,7 +6,7 @@
   <form [formGroup]="projectForm" (ngSubmit)="create()" fxLayout="column" fxFlexAlign="center center"
         fxLayoutGap=".8rem">
 
-    <mat-button-toggle-group name="projectType" aria-label="Project Type" [(value)]="projectType" class="dialog__toggle-group">
+  <!--  <mat-button-toggle-group name="projectType" aria-label="Project Type" [(value)]="projectType" class="dialog__toggle-group">
       <mat-button-toggle value="SCRUM" class="toggle__button">
         <img src="../../../assets/images/tipa-scrum.png" alt="SCRUM" class="toggle__img">
         <div>SCRUM</div>
@@ -15,7 +15,7 @@
         <img src="../../../assets/images/kanban-board-page.png" alt="KANBAN" class="toggle__img">
         <div>KANBAN</div>
       </mat-button-toggle>
-    </mat-button-toggle-group>
+    </mat-button-toggle-group>-->
 
     <mat-form-field appearance="outline">
       <mat-label>{{'project.dialog.organization' | translate}}</mat-label>
@@ -34,7 +34,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>{{'project.dialog.key' | translate}}</mat-label>
-      <input matInput [formControl]="projectKeyControl" (keyup)="keyToUpperCase()" maxlength="5">
+      <input matInput [formControl]="projectKeyControl" (keyup)="projectKeyControl.value.toUpperCase()" maxlength="5">
       <mat-error *ngIf="projectKeyControl.invalid">{{getProjectKeyErrorMessage()}}</mat-error>
     </mat-form-field>
 

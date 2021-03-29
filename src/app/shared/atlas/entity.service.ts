@@ -10,18 +10,25 @@ export interface AtlasException {
   title: string;
   description: string; // description for programmer
 }
+
 export interface Issue {
   idi?: number;
   idic: number; // IssuesContainer Id
   indexNumber: number; // used for saving order place
   name: string;
+  idp: string;
+  keyNumber: number;
+
   assignToId?: number; // assign to user
   creatorId: string;
   checkerId?: string;
-  priorityId: number;
-  closeBeforeIssues: Issue[];
-  closeAfterIssues: Issue[];
-  closeWithIssues: Issue[];
+  priority: number;
+  status: number;
+  description: {};
+  points: number;
+  closeBeforeIssues: number[]; // ids
+  closeAfterIssues: number[]; // ids
+  closeWithIssues: number[]; // ids
   labels: string[];
   dateTimeS: Date;
   dateTimeE: Date;
@@ -32,14 +39,17 @@ export interface IssuesContainer {
   idic?: number;
   name: string;
   idp: string;
+  canBeDeleted: boolean;
+  issues: Issue[];
   // used for saving order place
   indexNumber: number;
 }
 
-export const IssuePriority: Map<number, string> = new Map()
-  .set(1, 'Low')
-  .set(2, 'Medium')
-  .set(1, 'High');
+export const IssuePriorities: string [] = [
+  'Low',
+  'Medium',
+  'High'
+];
 
 
 export interface Organization {
@@ -49,6 +59,7 @@ export interface Organization {
   img?: string;
   ownerUserId: string; // ID user which create organization
 }
+
 export interface AtlasUserAuth { // Okta User Profile
   email: string;
   emailVerified: boolean;
@@ -78,7 +89,9 @@ export interface Project {
 export enum ProjectType {
   SCRUM, KANBAN
 }
+
 @Injectable({
   providedIn: 'root'
 })
-export class EntityService {}
+export class EntityService {
+}
