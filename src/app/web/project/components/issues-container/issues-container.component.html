@@ -4,7 +4,7 @@
          disabled
          (focusout)="disableInput('input' + i)"
          (change)="saveContainerName($event.target.value, 'input' + i)"
-         [value]="container.name">
+         [value]="container.summary">
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="issues-length">
       <h3>{{container.issues.length}}</h3>

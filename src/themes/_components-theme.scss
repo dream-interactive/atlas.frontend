@@ -3,6 +3,7 @@
 @import '../app/components/toolbar/toolbar-theme';
 @import '../app/components/toolbar/user-menu/user-menu-theme';
 @import '../app/components/project-modal/project-modal-theme';
+@import '../app/components/issue-create-modal/issue-create-modal-theme';
 @import '../app/web/start/pages/start-page/start-page-theme';
 @import '../app/components/page-not-found/page-not-found-theme';
 @import '../app/web/start/components/start-skeleton/start-skeleton-theme';
@@ -34,6 +35,7 @@
   @include board-theme($theme);
   @include page-not-found($theme);
   @include issues-container-theme($theme);
+  @include issue-create-modal-theme($theme);
 
 }
 

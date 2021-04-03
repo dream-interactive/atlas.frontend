@@ -4,7 +4,7 @@ import {IssueCreateModalComponent} from './issue-create-modal.component';
 import {MaterialModule} from '../../material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {TranslateModule} from '@ngx-translate/core';
+import {NgxEditorModule} from 'ngx-editor';
 
 
 @NgModule({
@@ -13,7 +13,9 @@ import {TranslateModule} from '@ngx-translate/core';
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxEditorModule,
+    FormsModule
   ],
   exports: [IssueCreateModalComponent]
 })

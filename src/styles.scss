@@ -41,3 +41,30 @@ $foreground: map-get($theme, foreground);
 .i18n__options {
   margin-bottom: 30px !important;
 }
+
+.NgxEditor {
+  min-height: 300px;
+  border: none !important;
+}
+.ngx-editor {
+  max-height: 310px;
+  overflow: auto;
+  &__menu {
+    .NgxEditor{
+      &__MenuItem {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &__Dropdown {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &__MenuBar {
+        border-radius: 5px !important;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

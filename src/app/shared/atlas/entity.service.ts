@@ -37,7 +37,7 @@ export interface Issue {
 
 export interface IssuesContainer {
   idic?: number;
-  name: string;
+  summary: string;
   idp: string;
   canBeDeleted: boolean;
   issues: Issue[];
