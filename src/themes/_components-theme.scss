@@ -9,6 +9,7 @@
 @import '../app/web/start/components/start-skeleton/start-skeleton-theme';
 @import '../app/web/project/pages/project-page/project-page-theme';
 @import '../app/web/project/components/board/board-theme';
+@import '../app/web/project/components/board-toolbar/board-toolbar-theme';
 @import '../app/web/project/components/issues-container/issues-container';
 @import '../app/web/home/home-theme';
 @import '../app/web/start/components/project-card/project-card-theme';
@@ -36,11 +37,11 @@
   @include page-not-found($theme);
   @include issues-container-theme($theme);
   @include issue-create-modal-theme($theme);
-
+  @include board-toolbar-theme($theme);
 }
 
 // Define the light theme.
-$primary:  mat-palette($mat-teal, 700);
+$primary: mat-palette($mat-teal, 700);
 $accent: mat-palette($mat-deep-orange, 700);
 $theme: mat-light-theme($primary, $accent);
 

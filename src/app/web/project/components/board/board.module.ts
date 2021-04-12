@@ -4,7 +4,7 @@ import {BoardComponent} from './board.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '../../../../material.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IssuesContainerModule} from '../issues-container/issues-container.module';
 
 
@@ -17,6 +17,7 @@ import {IssuesContainerModule} from '../issues-container/issues-container.module
         MaterialModule,
         FormsModule,
         IssuesContainerModule,
+        ReactiveFormsModule,
     ],
   exports: [
     BoardComponent

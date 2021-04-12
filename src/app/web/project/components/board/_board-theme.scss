@@ -10,6 +10,11 @@
     }
     &__issues-container {
       border: solid 1px map-get($foreground, divider);
+
+      &--new {
+        color: map-get($foreground, text);
+        background-color: map-get($background, card);
+      }
     }
     &__issues {
 

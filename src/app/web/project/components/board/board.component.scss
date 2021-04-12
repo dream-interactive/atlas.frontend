@@ -1,9 +1,7 @@
 @import "../../../../../themes/const";
 
 /******** containers ********/
-.board {
 
-}
 .board__issues-containers {
   width: 100%;
   height: calc(100% - #{$board-toolbar});
@@ -24,11 +22,14 @@
   min-height: 160px;
   height: 100%;
 
-  &:first-child {
-    //margin-left: 20px;
+  &--add {
+    border: none;
   }
 }
 
+#new-container {
+  display: none;
+}
 /************ issues *********/
 
 .board__issues {
@@ -86,6 +87,7 @@
 }
 
 .board__issues-container-custom-placeholder {
+  margin-right: 25px;
   width: $board-issues-container-width;
   height: 100%;
   display: inline-block;

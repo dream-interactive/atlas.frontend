@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {IssuesContainerService} from '../../services/issues-container.service';
 import {IssuesContainer} from '../../../../shared/atlas/entity.service';
 import {ProjectService} from '../../services/project.service';
 import {mergeMap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -15,11 +16,20 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   containers: IssuesContainer[] = [];
 
+  form: FormGroup;
+  summaryControl = new FormControl('', Validators.required);
+
+  @ViewChild('newContainer') newContainer: ElementRef;
+
   $project = Subscription.EMPTY;
 
   constructor(private renderer: Renderer2,
               private projectService: ProjectService,
-              private issuesContainerService: IssuesContainerService) { }
+              private issuesContainerService: IssuesContainerService) {
+    this.form = new FormGroup({
+      summary: this.summaryControl
+    });
+  }
 
   ngOnInit(): void {
     this.$project = this.projectService.project$.pipe(
@@ -39,6 +49,9 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
   createContainer(): IssuesContainer {
+
+    this.newContainer.nativeElement.style.display = 'inline-block';
+
     return undefined;
   }
 
