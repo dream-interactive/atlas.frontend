@@ -4,11 +4,11 @@
   $primary: map-get($theme, primary);
 
   .board {
-    &__issues-containers {
+    &__tasks-containers {
       color: map-get($foreground, text);
       background-color: map-get($background, background);
     }
-    &__issues-container {
+    &__tasks-container {
       border: solid 1px map-get($foreground, divider);
 
       &--new {
@@ -16,19 +16,19 @@
         background-color: map-get($background, card);
       }
     }
-    &__issues {
+    &__tasks {
 
     }
-    &__issue {
+    &__task {
       color: map-get($foreground, text);
       background-color: map-get($background, card);
       border: solid 1px map-get($foreground, divider);
     }
 
-    &__issue-custom-placeholder{
+    &__task-custom-placeholder{
       background-color: map-get($background, tooltip);
     }
-    &__issues-container-custom-placeholder {
+    &__tasks-container-custom-placeholder {
       background-color: map-get($background, tooltip);
     }
   }
@@ -36,7 +36,7 @@
     color: map-get($foreground, text);
   }
 
-  .issues-container{
+  .tasks-container{
     &__header {
 
     }

@@ -1,15 +1,15 @@
-<div cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="board__issues-containers"
+<div cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="board__tasks-containers"
      (cdkDropListDropped)="dropContainer($event)">
 
-  <div class="board__issues-container issues-container" *ngFor="let container of containers; let i = index" cdkDrag>
-    <div class="board__issues-container-custom-placeholder" *cdkDragPlaceholder></div>
-    <app-issues-container [container]="container" [i]="i"></app-issues-container>
+  <div class="board__tasks-container tasks-container" *ngFor="let container of containers; let i = index" cdkDrag>
+    <div class="board__tasks-container-custom-placeholder" *cdkDragPlaceholder></div>
+    <app-task-container [container]="container" [i]="i"></app-task-container>
   </div>
 
-  <div #newContainer id="new-container" class="board__issues-container board__issues-container--new">
-    <form formGroup="form" (ngSubmit)="createContainer()" fxLayout="raw"fxLayoutAlign="space-around center">
+  <div #newContainer id="new-container" class="board__tasks-container board__tasks-container--new">
+    <form [formGroup]="newContainerForm" (ngSubmit)="createContainer()" fxLayout="raw" fxLayoutAlign="space-around center">
       <mat-form-field>
-        <input matInput [formControl]="summaryControl">
+        <input matInput formControlName="newContainerSummaryControl">
       </mat-form-field>
       <button mat-icon-button color="primary">
         <mat-icon>done</mat-icon>
@@ -20,7 +20,7 @@
     </form>
   </div>
 
-  <div class="board__issues-container board__issues-container--add">
+  <div class="board__tasks-container board__tasks-container--add">
     <button mat-stroked-button color="accent" class="board__add-container" (click)="createContainer()">
       <mat-icon>add</mat-icon>
     </button>

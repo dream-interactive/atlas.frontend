@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Data} from '@angular/router';
 
-export interface AtlasException {
+export type AtlasException = {
   aeid: number; // atlas exception id
   key: string; // ATLAS, JDK, SQL
   section: string; // project, organization, ticket etc
@@ -9,13 +9,13 @@ export interface AtlasException {
   messageInThrow: string;
   title: string;
   description: string; // description for programmer
-}
+};
 
-export interface Issue {
+export type Task = {
   idi?: number;
   idic: number; // IssuesContainer Id
   indexNumber: number; // used for saving order place
-  name: string;
+  summary: string;
   idp: string;
   keyNumber: number;
 
@@ -33,34 +33,34 @@ export interface Issue {
   dateTimeS: Date;
   dateTimeE: Date;
   dateTimeU: Date;
-}
+};
 
-export interface IssuesContainer {
+export type TasksContainer = {
   idic?: number;
   summary: string;
   idp: string;
   canBeDeleted: boolean;
-  issues: Issue[];
+  issues: Task[];
   // used for saving order place
   indexNumber: number;
-}
+};
 
-export const IssuePriorities: string [] = [
+export const TaskPriorities: string [] = [
   'Low',
   'Medium',
   'High'
 ];
 
 
-export interface Organization {
+export type Organization = {
   id?: string;
   name: string;
   validName: string;
   img?: string;
   ownerUserId: string; // ID user which create organization
-}
+};
 
-export interface AtlasUserAuth { // Okta User Profile
+export type AtlasUserAuth = { // Okta User Profile
   email: string;
   emailVerified: boolean;
   familyName: string;
@@ -68,14 +68,14 @@ export interface AtlasUserAuth { // Okta User Profile
   name: string;
   sub: string;
   local: string;
-}
+};
 
-export interface AtlasUser extends AtlasUserAuth {
+export type AtlasUser = AtlasUserAuth & {
   lastModify: Data;
   userPicture: string;
-}
+};
 
-export interface Project {
+export type Project = {
   idp?: string;
   name: string;
   key: string;
@@ -84,7 +84,14 @@ export interface Project {
   leadId: string;
   img?: string;
   isPrivate?: boolean;
-}
+  labels?: string [];
+};
+
+export type ProjectMember = {
+  idp: string;
+  role: string;
+  user: AtlasUser;
+};
 
 export enum ProjectType {
   SCRUM, KANBAN

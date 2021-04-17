@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {IssueCreateModalComponent} from './issue-create-modal.component';
+import {TaskCreateModalComponent} from './task-create-modal.component';
 import {MaterialModule} from '../../material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -8,7 +8,7 @@ import {NgxEditorModule} from 'ngx-editor';
 
 
 @NgModule({
-  declarations: [IssueCreateModalComponent],
+  declarations: [TaskCreateModalComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -17,7 +17,7 @@ import {NgxEditorModule} from 'ngx-editor';
     NgxEditorModule,
     FormsModule
   ],
-  exports: [IssueCreateModalComponent]
+  exports: [TaskCreateModalComponent]
 })
-export class IssueCreateModalModule {
+export class TaskCreateModalModule {
 }

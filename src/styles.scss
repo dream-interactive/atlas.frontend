@@ -83,3 +83,7 @@ $foreground: map-get($theme, foreground);
     }
   }
 }
+
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: mat-color($accent);
+}

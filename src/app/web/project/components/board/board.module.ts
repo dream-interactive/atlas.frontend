@@ -5,7 +5,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '../../../../material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {IssuesContainerModule} from '../issues-container/issues-container.module';
+import {TaskContainerModule} from '../task-container/task-container.module';
 
 
 @NgModule({
@@ -16,8 +16,8 @@ import {IssuesContainerModule} from '../issues-container/issues-container.module
         FlexLayoutModule,
         MaterialModule,
         FormsModule,
-        IssuesContainerModule,
         ReactiveFormsModule,
+        TaskContainerModule,
     ],
   exports: [
     BoardComponent

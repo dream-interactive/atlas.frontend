@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {IssuesContainerService} from '../../services/issues-container.service';
-import {IssuesContainer} from '../../../../shared/atlas/entity.service';
+import {TaskContainerService} from '../../services/task-container.service';
+import {TasksContainer} from '../../../../shared/atlas/entity.service';
 import {ProjectService} from '../../services/project.service';
 import {mergeMap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
@@ -14,10 +14,10 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class BoardComponent implements OnInit, OnDestroy {
 
-  containers: IssuesContainer[] = [];
+  containers: TasksContainer[] = [];
 
-  form: FormGroup;
-  summaryControl = new FormControl('', Validators.required);
+  newContainerForm: FormGroup;
+  newContainerSummaryControl = new FormControl('', Validators.required);
 
   @ViewChild('newContainer') newContainer: ElementRef;
 
@@ -25,20 +25,20 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   constructor(private renderer: Renderer2,
               private projectService: ProjectService,
-              private issuesContainerService: IssuesContainerService) {
-    this.form = new FormGroup({
-      summary: this.summaryControl
+              private taskContainerService: TaskContainerService) {
+    this.newContainerForm = new FormGroup({
+      newContainerSummaryControl: this.newContainerSummaryControl
     });
   }
 
   ngOnInit(): void {
     this.$project = this.projectService.project$.pipe(
       mergeMap((project) => {
-        return this.issuesContainerService.findAllByProjectId(project.idp);
+        return this.taskContainerService.findAllByProjectId(project.idp);
       })
     ).subscribe((cs) => {
       this.containers = cs;
-      this.issuesContainerService.updateContainers(cs);
+      this.taskContainerService.updateContainers(cs);
     });
   }
 
@@ -48,7 +48,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
 
-  createContainer(): IssuesContainer {
+  createContainer(): TasksContainer {
 
     this.newContainer.nativeElement.style.display = 'inline-block';
 

@@ -1,13 +1,14 @@
-<form class="issue-form" [formGroup]="issueForm" (submit)="create()">
-  <mat-form-field id="summary">
+<form class="task-form" [formGroup]="taskForm" (submit)="create()">
+  <mat-form-field class="task-form__summary">
     <mat-label>Summary</mat-label>
-    <input  [formControl]="summaryControl"  matInput type="text">
+    <input formControlName="summaryControl" matInput type="text">
   </mat-form-field>
-  <mat-dialog-content fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+
+  <div class="task-form__main" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="20px">
     <section class="section-left" fxLayout="column" fxLayoutAlign="space-around start">
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
-        <mat-select [formControl]="containerControl">
+        <mat-select formControlName="containerControl">
           <mat-option *ngFor="let cont of (containers | async)" [value]="cont.idic">
             {{cont.summary}}
           </mat-option>
@@ -16,36 +17,62 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Assign to</mat-label>
-        <mat-select [formControl]="containerControl">
+        <mat-select formControlName="assignToControl">
           <mat-option *ngFor="let cont of (containers | async)" [value]="cont.idic">
-            {{cont.name}}
+            {{cont.summary}}
           </mat-option>
         </mat-select>
         <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Priority</mat-label>
-        <mat-select [formControl]="priorityControl">
+        <mat-select formControlName="priorityControl">
           <mat-option *ngFor="let priority of priorities, let i = index" [value]="i">
             {{priority}}
           </mat-option>
         </mat-select>
         <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
       </mat-form-field>
-      <mat-form-field  appearance="fill">
+      <mat-form-field appearance="fill">
         <mat-label>Points</mat-label>
-        <input  [formControl]="pointsControl"  matInput type="number">
+        <input formControlName="pointsControl" matInput type="number">
+      </mat-form-field>
+      <mat-form-field class="chip-list">
+        <mat-label>Labels</mat-label>
+        <mat-chip-list #chipList aria-label="Labels">
+          <mat-chip
+            *ngFor="let label of labels"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(label)">
+            {{label}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="New label..."
+            #labelInput
+            [formControl]="labelsControl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let label of filteredLabels | async" [value]="label">
+            {{label}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </section>
 
     <section class="section-right">
       <p>Description</p>
-      <div class="issue-form__editor">
+      <div class="task-form__editor">
         <ngx-editor-menu class="ngx-editor__menu" [editor]="editor"></ngx-editor-menu>
         <div class="ngx-editor">
           <ngx-editor
             [editor]="editor"
-            [ngModel]="json"
+            formControlName="descriptionControl"
             [placeholder]=""
           ></ngx-editor>
         </div>
@@ -53,10 +80,11 @@
       </div>
     </section>
 
-  </mat-dialog-content>
+  </div>
 
-  <mat-dialog-actions align="end">
+  <div align="end">
     <button mat-flat-button mat-dialog-close type="button">Cancel</button>
     <button mat-flat-button color="accent" type="submit">Create</button>
-  </mat-dialog-actions>
+  </div>
 </form>
+

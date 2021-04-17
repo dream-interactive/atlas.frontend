@@ -1,4 +1,4 @@
-@mixin issues-container-theme($theme) {
+@mixin task-container-theme($theme) {
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
   $primary: map-get($theme, primary);
