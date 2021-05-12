@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CrudService} from '../../../shared/crud.service';
 import {TasksContainer} from '../../../shared/atlas/entity.service';
-import {Observable, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 
@@ -10,11 +10,11 @@ import {environment} from '../../../../environments/environment';
 })
 export class TaskContainerService implements CrudService<TasksContainer, number>{
 
-  readonly uri = environment.uri;
-  readonly apiRoute = 'issues-containers';
+  private readonly uri = environment.uri;
+  private readonly apiRoute = 'tasks-containers';
 
-  private issuesContainers = new ReplaySubject<TasksContainer[]>(1);
-  public taskContainers$ = this.issuesContainers.asObservable();
+  private tasksContainersSubject = new BehaviorSubject<TasksContainer[]>([]);
+  public tasksContainers$ = this.tasksContainersSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +26,8 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
     return undefined;
   }
 
-  delete(idc: number): void {
+  delete(idc: number): Observable<void> {
+    return this.http.delete<void>(`${this.uri}/${this.apiRoute}/${idc}`);
   }
 
   findAll(): Observable<TasksContainer[]> {
@@ -41,6 +42,6 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
   }
 
   updateContainers(containers: TasksContainer[]): void {
-    this.issuesContainers.next(containers);
+    this.tasksContainersSubject.next(containers);
   }
 }

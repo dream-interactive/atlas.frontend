@@ -13,7 +13,7 @@ export type AtlasException = {
 
 export type Task = {
   idi?: number;
-  idic: number; // IssuesContainer Id
+  idtc: number; // TasksContainer Id
   indexNumber: number; // used for saving order place
   summary: string;
   idp: string;
@@ -22,25 +22,24 @@ export type Task = {
   assignToId?: number; // assign to user
   creatorId: string;
   checkerId?: string;
-  priority: number;
-  status: number;
-  description: {};
+  priority: string;
+  description: string;
   points: number;
   closeBeforeIssues: number[]; // ids
   closeAfterIssues: number[]; // ids
   closeWithIssues: number[]; // ids
   labels: string[];
   dateTimeS: Date;
-  dateTimeE: Date;
-  dateTimeU: Date;
+  dateTimeE?: Date;
+  dateTimeU?: Date;
 };
 
 export type TasksContainer = {
-  idic?: number;
+  idtc?: number;
   summary: string;
   idp: string;
   canBeDeleted: boolean;
-  issues: Task[];
+  tasks: Task[];
   // used for saving order place
   indexNumber: number;
 };

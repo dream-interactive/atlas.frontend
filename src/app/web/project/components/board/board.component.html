@@ -7,21 +7,22 @@
   </div>
 
   <div #newContainer id="new-container" class="board__tasks-container board__tasks-container--new">
-    <form [formGroup]="newContainerForm" (ngSubmit)="createContainer()" fxLayout="raw" fxLayoutAlign="space-around center">
+    <div fxLayout="raw" fxLayoutAlign="space-around center">
       <mat-form-field>
-        <input matInput formControlName="newContainerSummaryControl">
+        <input [(ngModel)]="summary" matInput>
       </mat-form-field>
-      <button mat-icon-button color="primary">
+      <button mat-icon-button color="primary" *ngIf="!loading" type="button" (click)="create()">
         <mat-icon>done</mat-icon>
       </button>
-      <button mat-icon-button color="accent">
+      <button mat-icon-button color="accent" type="button" *ngIf="!loading" (click)="newContainer.style.display = 'none'">
         <mat-icon>close</mat-icon>
       </button>
-    </form>
+      <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
+    </div>
   </div>
 
   <div class="board__tasks-container board__tasks-container--add">
-    <button mat-stroked-button color="accent" class="board__add-container" (click)="createContainer()">
+    <button mat-stroked-button color="accent" class="board__add-container" (click)="add()">
       <mat-icon>add</mat-icon>
     </button>
   </div>

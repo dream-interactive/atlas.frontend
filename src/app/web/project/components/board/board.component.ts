@@ -1,11 +1,10 @@
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {TaskContainerService} from '../../services/task-container.service';
-import {TasksContainer} from '../../../../shared/atlas/entity.service';
+import {Project, TasksContainer} from '../../../../shared/atlas/entity.service';
 import {ProjectService} from '../../services/project.service';
 import {mergeMap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -15,31 +14,41 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class BoardComponent implements OnInit, OnDestroy {
 
   containers: TasksContainer[] = [];
+  project: Project;
 
-  newContainerForm: FormGroup;
-  newContainerSummaryControl = new FormControl('', Validators.required);
+  summary = '';
 
   @ViewChild('newContainer') newContainer: ElementRef;
 
   $project = Subscription.EMPTY;
+  $create = Subscription.EMPTY;
+  $containers = Subscription.EMPTY;
+
+  loading = false;
 
   constructor(private renderer: Renderer2,
               private projectService: ProjectService,
               private taskContainerService: TaskContainerService) {
-    this.newContainerForm = new FormGroup({
-      newContainerSummaryControl: this.newContainerSummaryControl
-    });
   }
 
   ngOnInit(): void {
     this.$project = this.projectService.project$.pipe(
       mergeMap((project) => {
+        this.project = project;
         return this.taskContainerService.findAllByProjectId(project.idp);
       })
     ).subscribe((cs) => {
       this.containers = cs;
       this.taskContainerService.updateContainers(cs);
     });
+
+    this.$containers = this.taskContainerService.tasksContainers$.subscribe(tc => this.containers = tc);
+  }
+
+  ngOnDestroy(): void {
+    this.$project.unsubscribe();
+    this.$create.unsubscribe();
+    this.$containers.unsubscribe();
   }
 
   dropContainer(event: CdkDragDrop<string[]>): void {
@@ -47,16 +56,41 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
 
+  create(): void {
 
-  createContainer(): TasksContainer {
+    if (this.summary.trim()) {
 
+
+      this.loading = true;
+
+      const container: TasksContainer = {
+        canBeDeleted: true,
+        idp: this.project.idp,
+        indexNumber: this.containers.length,
+        tasks: [],
+        summary: this.summary
+
+      };
+
+      this.taskContainerService.create(container).subscribe(
+        (c) => {
+          this.containers.push(c);
+          this.loading = false;
+          this.newContainer.nativeElement.style.display = 'none';
+          this.taskContainerService.updateContainers(this.containers);
+        }, error => {
+          this.newContainer.nativeElement.style.display = 'none';
+          this.loading = false;
+        });
+    }
+
+
+
+  }
+
+
+
+  add(): void {
     this.newContainer.nativeElement.style.display = 'inline-block';
-
-    return undefined;
   }
-
-  ngOnDestroy(): void {
-    this.$project.unsubscribe();
-  }
-
 }

@@ -1,15 +1,19 @@
 <form class="task-form" [formGroup]="taskForm" (submit)="create()">
   <mat-form-field class="task-form__summary">
     <mat-label>Summary</mat-label>
-    <input formControlName="summaryControl" matInput type="text">
+    <input required formControlName="summaryControl" matInput type="text">
   </mat-form-field>
 
-  <div class="task-form__main" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="20px">
+  <div class="task-form__main" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center start" fxLayoutGap="20px">
     <section class="section-left" fxLayout="column" fxLayoutAlign="space-around start">
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
-        <mat-select formControlName="containerControl">
-          <mat-option *ngFor="let cont of (containers | async)" [value]="cont.idic">
+
+        <mat-select [(value)]="container" formControlName="containerControl" required>
+          <mat-select-trigger>
+            {{container.summary}}
+          </mat-select-trigger>
+          <mat-option *ngFor="let cont of (containers$ | async)" [value]="cont">
             {{cont.summary}}
           </mat-option>
         </mat-select>
@@ -17,9 +21,16 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Assign to</mat-label>
-        <mat-select formControlName="assignToControl">
-          <mat-option *ngFor="let cont of (containers | async)" [value]="cont.idic">
-            {{cont.summary}}
+
+        <mat-select [(value)]="member">
+          <mat-select-trigger>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <img class="task-form__user-picture" src="{{member ? member.user.userPicture : ''}}" alt="">
+              <span> {{member ? member.user.name : ''}} </span>
+            </div>
+          </mat-select-trigger>
+          <mat-option *ngFor="let m of $members | async" [value]="m">
+            <img class="task-form__user-picture" src="{{m.user.userPicture}}" alt=""> {{m.user.name}}
           </mat-option>
         </mat-select>
         <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
@@ -27,7 +38,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Priority</mat-label>
         <mat-select formControlName="priorityControl">
-          <mat-option *ngFor="let priority of priorities, let i = index" [value]="i">
+          <mat-option *ngFor="let priority of priorities" [value]="priority">
             {{priority}}
           </mat-option>
         </mat-select>

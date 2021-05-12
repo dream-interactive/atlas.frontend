@@ -1,15 +1,19 @@
 import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjectService} from '../../web/project/services/project.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {TaskPriorities, TasksContainer} from '../../shared/atlas/entity.service';
+import {AtlasUser, Project, ProjectMember, Task, TaskPriorities, TasksContainer} from '../../shared/atlas/entity.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {TaskContainerService} from '../../web/project/services/task-container.service';
 import {EMPTY, Observable, Subscription} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {Editor} from 'ngx-editor';
+import {map, startWith, switchMap, tap} from 'rxjs/operators';
+import {Editor, toHTML} from 'ngx-editor';
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import {ProjectMembersService} from '../../web/project/services/project-members.service';
+import {OktaAuthService} from '@okta/okta-angular';
+import {UserClaims} from '@okta/okta-auth-js/lib/types';
+import {TaskService} from '../../web/project/services/task.service';
 
 export interface TaskCreateDialogData {
   container: TasksContainer;
@@ -23,7 +27,8 @@ export interface TaskCreateDialogData {
 export class TaskCreateModalComponent implements OnInit, OnDestroy {
 
   container: TasksContainer;
-  containers: Observable<TasksContainer[]> = EMPTY;
+  containers: TasksContainer[] = [];
+  containers$: Observable<TasksContainer[]> = EMPTY;
   filteredLabels: Observable<string[]> = EMPTY;
 
   taskForm: FormGroup;
@@ -37,22 +42,29 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
   priorities = TaskPriorities;
 
   editor: Editor;
-  json: '';
 
   selectable = true;
   removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
 
   labels: string [] = [];
   allLabels: string [] = [];
 
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  $project = Subscription.EMPTY;
+  project: Project;
+  member: ProjectMember;
+
+  $members: Observable<ProjectMember[]> = EMPTY;
 
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
+  user: UserClaims;
+
   constructor(private projectService: ProjectService,
               private taskContainerService: TaskContainerService,
+              private taskService: TaskService,
+              private membersService: ProjectMembersService,
+              private auth: OktaAuthService,
               @Inject(MAT_DIALOG_DATA) public data: TaskCreateDialogData) {
     this.taskForm = new FormGroup({
       summaryControl: this.summaryControl,
@@ -68,7 +80,7 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
 
     if (containerFromData) {
       this.container = containerFromData;
-      this.containerControl.patchValue(containerFromData.idic);
+      this.containerControl.patchValue(containerFromData.idtc);
     }
 
     this.filteredLabels = this.labelsControl.valueChanges.pipe(
@@ -76,23 +88,53 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.containers = this.taskContainerService.taskContainers$.pipe(
+
+    this.auth.getUser().then((user) => {
+      this.user = user;
+    });
+
+    this.containers$ = this.taskContainerService.tasksContainers$.pipe(
       startWith([]),
+      tap(containers => this.containers = containers),
       map(containers => containers.sort((a: TasksContainer, b: TasksContainer) => a.indexNumber - b.indexNumber))
     );
 
-    this.$project = this.projectService.project$.subscribe(project => {
-      this.allLabels = project.labels;
-    });
-
-
+    this.$members = this.projectService.project$.pipe(
+        switchMap((project) => {
+          this.project = project;
+          this.allLabels = project.labels;
+          return this.membersService.findAllMembersByProjectId(project.idp);
+        })
+    );
 
     this.editor = new Editor();
 
   }
 
   create(): void {
-    console.log(this.descriptionControl.value);
+    if (this.taskForm.valid) {
+      const task: Task = {
+        closeAfterIssues: [],
+        closeBeforeIssues: [],
+        closeWithIssues: [],
+        creatorId: this.user.sub,
+        dateTimeS: new Date(Date.now()),
+        description: toHTML(this.descriptionControl.value),
+        idp: this.project.idp,
+        idtc: this.container.idtc,
+        indexNumber: this.container.tasks.length,
+        keyNumber: 0,
+        labels: this.labels,
+        points: this.pointsControl.value,
+        priority: this.priorityControl.value,
+        summary: this.summaryControl.value
+      };
+      console.log(task);
+      this.taskService.create(task).subscribe(t => {
+        console.log('created', t);
+      });
+    }
+
   }
 
   remove(label: string): void {
@@ -104,7 +146,6 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.$project.unsubscribe();
     this.editor.destroy();
   }
 
