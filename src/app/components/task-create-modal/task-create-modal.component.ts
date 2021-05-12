@@ -1,10 +1,10 @@
 import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjectService} from '../../web/project/services/project.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {AtlasUser, Project, ProjectMember, Task, TaskPriorities, TasksContainer} from '../../shared/atlas/entity.service';
+import {Project, ProjectMember, Task, TaskPriorities, TasksContainer} from '../../shared/atlas/entity.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {TaskContainerService} from '../../web/project/services/task-container.service';
-import {EMPTY, Observable, Subscription} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {map, startWith, switchMap, tap} from 'rxjs/operators';
 import {Editor, toHTML} from 'ngx-editor';
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';

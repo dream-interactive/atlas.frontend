@@ -1,0 +1,20 @@
+.tasks-container {
+  &__name {
+    height: 75%;
+    border-radius: 4px;
+    border: none;
+    &:read-only {
+      cursor: move;
+    }
+  }
+  &__header {
+    border-radius: 4px;
+    height: 40px;
+    padding: 5px;
+    cursor: move;
+  }
+
+  &__length {
+    margin-right: 10px;
+  }
+}

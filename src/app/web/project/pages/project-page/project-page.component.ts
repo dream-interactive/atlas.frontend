@@ -41,7 +41,7 @@ export class ProjectPageComponent implements OnInit, AfterViewInit {
                 return project[0];
               }),
               startWith({
-                id: '', img: '', isPrivate: false, key: '', leadId: '', name: '', organizationId: '', type: undefined
+                id: '', img: '', isPrivate: false, key: '', leadId: '', name: '', organizationId: '', type: 1
               })
             );
         })

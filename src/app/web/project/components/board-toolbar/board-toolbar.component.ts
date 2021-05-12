@@ -5,6 +5,8 @@ import {EMPTY, Observable} from 'rxjs';
 import {ProjectMember} from '../../../../shared/atlas/entity.service';
 import {ProjectService} from '../../services/project.service';
 import {switchMap} from 'rxjs/operators';
+import {TaskCreateModalComponent} from '../../../../components/task-create-modal/task-create-modal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-board-toolbar',
@@ -18,7 +20,8 @@ export class BoardToolbarComponent implements OnInit {
 
   constructor(private taskService: TaskService,
               private projectService: ProjectService,
-              private membersService: ProjectMembersService) { }
+              private membersService: ProjectMembersService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.members$ = this.projectService.project$.pipe(
@@ -29,7 +32,7 @@ export class BoardToolbarComponent implements OnInit {
   }
 
   createTask(): void {
-    const modal = this.taskService.creatTaskModal(null);
+    const modal = this.dialog.open(TaskCreateModalComponent, { data: { container: null }});
 
     modal.afterClosed().subscribe((value => {
 

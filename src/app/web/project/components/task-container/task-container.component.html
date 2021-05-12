@@ -1,0 +1,10 @@
+<div class="task-container">
+  <header class="tasks-container__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <input #tcname readonly type="text" class="tasks-container__name" (dblclick)="tcname.readOnly = false" (focusout)="tcname.readOnly = true; saveName(tcname.value)">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="tasks-container__length">{{container.tasks.length}}</span>
+      <button mat-icon-button><mat-icon>add</mat-icon></button>
+      <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+    </div>
+  </header>
+</div>

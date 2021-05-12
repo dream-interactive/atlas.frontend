@@ -23,7 +23,7 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
   }
 
   update(container: TasksContainer): Observable<TasksContainer> {
-    return undefined;
+      return this.http.put<TasksContainer>(`${this.uri}/${this.apiRoute}`, container);
   }
 
   delete(idc: number): Observable<void> {

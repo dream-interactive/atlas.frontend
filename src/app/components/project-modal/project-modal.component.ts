@@ -30,7 +30,7 @@ export class ProjectModalComponent implements OnInit {
   selectedOrganization: any;
 
 
-  projectType: ProjectType = ProjectType.KANBAN;
+  projectType = 1;
   userProfile: AtlasUser;
 
   constructor(private orgService: OrganizationService,

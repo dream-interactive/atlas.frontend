@@ -120,7 +120,7 @@ export class ProjectsMenuComponent implements OnInit, OnDestroy {
   private setDefaultProjectData(): Project {
 
     const project: Project = {
-      img: '', key: '', leadId: '', name: '', organizationId: '', type: undefined
+      img: '', key: '', leadId: '', name: '', organizationId: '', type: 1
     };
     project.name = this.translator.instant('navbar.dropdown.projects');
 

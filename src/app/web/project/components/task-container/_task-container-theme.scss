@@ -2,9 +2,20 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
   $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
 
-
+  .tasks-container {
+    &__name {
+      color: map-get($foreground, text);
+      background-color: inherit;
+      &:read-write {
+        background-color: map-get($background, background);
+      }
+    }
+  }
   header:hover {
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2)
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+    background-color: map-get($background, sidenav);
+  ;
   }
 }

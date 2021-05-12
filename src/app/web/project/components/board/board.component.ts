@@ -53,13 +53,19 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   dropContainer(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.containers, event.previousIndex, event.currentIndex);
+    this.containers.forEach((container, i) => {
+      if (container.indexNumber !== i) {
+        container.indexNumber = i;
+        this.taskContainerService.update(container).subscribe();
+      }
+    });
+
   }
 
 
   create(): void {
 
     if (this.summary.trim()) {
-
 
       this.loading = true;
 

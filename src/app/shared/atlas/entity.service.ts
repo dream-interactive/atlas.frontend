@@ -79,7 +79,7 @@ export type Project = {
   name: string;
   key: string;
   organizationId: string;
-  type: ProjectType;
+  type: number;
   leadId: string;
   img?: string;
   isPrivate?: boolean;
