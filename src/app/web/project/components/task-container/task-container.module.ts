@@ -4,6 +4,8 @@ import { TaskContainerComponent } from './task-container.component';
 import {TaskCreateModalModule} from '../../../../components/task-create-modal/task-create-modal.module';
 import {MaterialModule} from '../../../../material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {TaskBoxModule} from '../task-box/task-box.module';
 
 
 
@@ -13,7 +15,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     CommonModule,
     TaskCreateModalModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    DragDropModule,
+    TaskBoxModule
   ],
   exports: [TaskContainerComponent]
 })

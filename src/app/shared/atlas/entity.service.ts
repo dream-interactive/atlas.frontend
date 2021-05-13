@@ -19,7 +19,7 @@ export type Task = {
   idp: string;
   keyNumber: number;
 
-  assignToId?: number; // assign to user
+  assignToId?: string; // assign to user
   creatorId: string;
   checkerId?: string;
   priority: string;
@@ -36,7 +36,7 @@ export type Task = {
 
 export type TasksContainer = {
   idtc?: number;
-  summary: string;
+  name: string;
   idp: string;
   canBeDeleted: boolean;
   tasks: Task[];

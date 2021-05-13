@@ -1,0 +1,8 @@
+<div class="task-box" cdkDrag>
+  <div class="custom-placeholder" *cdkDragPlaceholder></div>
+
+  <span>
+    {{task.summary}}
+  </span>
+  <img class="avatar" src="{{(assignToMember$ | async).user.userPicture}}" alt="avatar">
+</div>

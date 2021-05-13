@@ -1,7 +1,9 @@
 <div cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="board__tasks-containers"
      (cdkDropListDropped)="dropContainer($event)">
 
-  <div class="board__tasks-container tasks-container" *ngFor="let container of containers; let i = index" cdkDrag>
+  <div class="board__tasks-container tasks-container"
+       *ngFor="let container of containers; let i = index"
+       cdkDrag>
     <div class="board__tasks-container-custom-placeholder" *cdkDragPlaceholder></div>
     <app-task-container [container]="container" [i]="i"></app-task-container>
   </div>

@@ -9,6 +9,7 @@
 @import '../app/web/start/components/start-skeleton/start-skeleton-theme';
 @import '../app/web/project/pages/project-page/project-page-theme';
 @import '../app/web/project/components/board/board-theme';
+@import '../app/web/project/components/task-box/task-box-theme';
 @import '../app/web/project/components/board-toolbar/board-toolbar-theme';
 @import '../app/web/project/components/task-container/task-container-theme';
 @import '../app/web/home/home-theme';
@@ -38,6 +39,7 @@
   @include task-container-theme($theme);
   @include task-create-modal-theme($theme);
   @include board-toolbar-theme($theme);
+  @include task-box-theme($theme);
 }
 
 // Define the light theme.

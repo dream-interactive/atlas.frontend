@@ -80,11 +80,11 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
 
     if (containerFromData) {
       this.container = containerFromData;
-      this.containerControl.patchValue(containerFromData.idtc);
+      this.containerControl.patchValue(containerFromData);
     }
 
     this.filteredLabels = this.labelsControl.valueChanges.pipe(
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allLabels.slice()));
+      map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
   }
 
   ngOnInit(): void {
@@ -119,7 +119,7 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
         closeWithIssues: [],
         creatorId: this.user.sub,
         dateTimeS: new Date(Date.now()),
-        description: toHTML(this.descriptionControl.value),
+        description: toHTML(this.descriptionControl.value ? this.descriptionControl.value : {content: [], type: 'doc'}),
         idp: this.project.idp,
         idtc: this.container.idtc,
         indexNumber: this.container.tasks.length,
@@ -129,10 +129,17 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
         priority: this.priorityControl.value,
         summary: this.summaryControl.value
       };
-      console.log(task);
+
       this.taskService.create(task).subscribe(t => {
-        console.log('created', t);
+        this.containers.forEach(container => {
+          if (container.idtc === t.idtc) {
+            container.tasks.push(t);
+          }
+        });
+        this.taskService.taskCreatingUpdate(false);
       });
+
+
     }
 
   }

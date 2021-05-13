@@ -74,7 +74,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         idp: this.project.idp,
         indexNumber: this.containers.length,
         tasks: [],
-        summary: this.summary
+        name: this.summary
 
       };
 

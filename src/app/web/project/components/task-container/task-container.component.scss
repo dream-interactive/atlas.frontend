@@ -1,4 +1,7 @@
+@import "../../../../../themes/const";
+
 .tasks-container {
+  height: 100%;
   &__name {
     height: 75%;
     border-radius: 4px;
@@ -12,9 +15,26 @@
     height: 40px;
     padding: 5px;
     cursor: move;
+    margin-bottom: 5px;
   }
 
   &__length {
     margin-right: 10px;
   }
+}
+
+.task-list {
+  padding: 5px;
+  min-height: $task-box-height;
+  overflow: auto;
+  display: block;
+  height: calc(100% - 45px);
+}
+
+.task-list.cdk-drop-list-dragging .task-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
