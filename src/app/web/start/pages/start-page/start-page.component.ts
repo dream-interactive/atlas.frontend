@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrganizationService} from '../../../../services/organization.service';
 import {ProjectService} from '../../../project/services/project.service';
 import {StartSkeletonComponent} from '../../components/start-skeleton/start-skeleton.component';
@@ -16,7 +16,7 @@ import {Organization, Project} from '../../../../shared/atlas/entity.service';
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.scss']
 })
-export class StartPageComponent implements OnInit {
+export class StartPageComponent implements OnInit, OnDestroy {
 
   organizations: Organization[] = [];
   projects: Project[] = [];
@@ -33,15 +33,20 @@ export class StartPageComponent implements OnInit {
     this.loading = true;
 
     this.$projectsAndOrganizations = this.findProjectsAndOrganizationsByUser(this.auth.getUser())
+      .pipe(
+        switchMap(([organizations, projects]) => {
+            this.organizationService.updateOrganizationsSubject(organizations);
+            this.projectService.updateProjectsSubject(projects);
+            return zip(this.organizationService.userOrganizations$, this.projectService.projects$);
+          },
+        )
+      )
       .subscribe(([organizations, projects]) => {
-          this.organizations = organizations;
-          this.organizationService.updateOrganizationsSubject(organizations);
-          this.projects = projects;
-          this.projectService.updateProjectsSubject(projects);
-          this.loading = false;
-        },
-        error => this.loading = false
-      );
+        this.organizations = organizations;
+        this.projects = projects;
+        this.loading = false;
+
+      }, error => this.loading = false);
   }
 
   ngOnInit(): void {

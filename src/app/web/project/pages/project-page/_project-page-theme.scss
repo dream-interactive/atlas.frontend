@@ -12,20 +12,7 @@
     }
 
     &__content {
-      &::-webkit-scrollbar-track {
-        border-radius: 10px;
-        background-color: mat-color($primary, default, .2);
-      }
 
-      &::-webkit-scrollbar {
-        width: 10px;
-        border-radius: 10px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: mat-color($primary, default, .5);
-      }
     }
   }
   .nav-list {

@@ -1,0 +1,19 @@
+@import "../../../../../themes/const";
+
+.toolbar {
+  height: $board-toolbar;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 5px;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+.members {
+  &__userPicture {
+    height: 20px;
+    width: 20px;
+  }
+}

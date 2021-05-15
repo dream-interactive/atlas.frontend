@@ -9,5 +9,15 @@
     .docs {
       color: map-get($foreground, hint-text);
     }
+    .toolbar {
+      &__button {
+        &--colorless {
+          &:hover {
+            background-color: mat-color($primary, default, .2);
+            color: mat-color($primary);
+          }
+        }
+      }
+    }
   }
 }

@@ -1,73 +1,102 @@
-import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Container} from '@angular/compiler/src/i18n/i18n_ast';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {TaskContainerService} from '../../services/task-container.service';
+import {Project, TasksContainer} from '../../../../shared/atlas/entity.service';
+import {ProjectService} from '../../services/project.service';
+import {mergeMap} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
-  containers = [
-    {
-      name: 'TODO',
-      issues: ['sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf']
-    },
-    {
-      name: 'In work',
-      issues: ['dfew', 'fweas']
-    },
-    {
-      name: 'In check',
-      issues: []
-    },
-    {
-      name: 'Done',
-      issues: []
-    },
-    {
-      name: 'Done',
-      issues: []
-    }
-  ];
-  constructor(private renderer: Renderer2) { }
+  containers: TasksContainer[] = [];
+  project: Project;
+
+  summary = '';
+
+  @ViewChild('newContainer') newContainer: ElementRef;
+
+  $project = Subscription.EMPTY;
+  $create = Subscription.EMPTY;
+  $containers = Subscription.EMPTY;
+
+  loading = false;
+
+  constructor(private renderer: Renderer2,
+              private projectService: ProjectService,
+              private taskContainerService: TaskContainerService) {
+  }
 
   ngOnInit(): void {
+    this.$project = this.projectService.project$.pipe(
+      mergeMap((project) => {
+        this.project = project;
+        return this.taskContainerService.findAllByProjectId(project.idp);
+      })
+    ).subscribe((cs) => {
+      this.containers = cs;
+      this.taskContainerService.updateContainers(cs);
+    });
+
+    this.$containers = this.taskContainerService.tasksContainers$.subscribe(tc => this.containers = tc);
   }
+
+  ngOnDestroy(): void {
+    this.$project.unsubscribe();
+    this.$create.unsubscribe();
+    this.$containers.unsubscribe();
+  }
+
   dropContainer(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.containers, event.previousIndex, event.currentIndex);
+    this.containers.forEach((container, i) => {
+      if (container.indexNumber !== i) {
+        container.indexNumber = i;
+        this.taskContainerService.update(container).subscribe();
+      }
+    });
+
   }
 
-  dropIssue(event: CdkDragDrop<string[]>): void {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+
+  create(): void {
+
+    if (this.summary.trim()) {
+
+      this.loading = true;
+
+      const container: TasksContainer = {
+        canBeDeleted: true,
+        idp: this.project.idp,
+        indexNumber: this.containers.length,
+        tasks: [],
+        name: this.summary
+
+      };
+
+      this.taskContainerService.create(container).subscribe(
+        (c) => {
+          this.containers.push(c);
+          this.loading = false;
+          this.newContainer.nativeElement.style.display = 'none';
+          this.taskContainerService.updateContainers(this.containers);
+        }, error => {
+          this.newContainer.nativeElement.style.display = 'none';
+          this.loading = false;
+        });
     }
-  }
-
-  saveContainerName(value: string, container: Container, inputId: string): void {
-    this.renderer.selectRootElement('#' + inputId).disabled = true;
-    // TODO
-  }
 
 
-  editName(inputId: string): void {
-    const input = this.renderer.selectRootElement('#' + inputId);
-
-    input.disabled = false;
-
-    setTimeout(() => {
-      input.focus();
-    }, 0);
 
   }
 
-  disableInput(inputId: string): void{
-    this.renderer.selectRootElement('#' + inputId).disabled = true;
+
+
+  add(): void {
+    this.newContainer.nativeElement.style.display = 'inline-block';
   }
 }
