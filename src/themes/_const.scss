@@ -21,4 +21,6 @@ $board-toolbar: 68px;
 /* task container */
 
 /* task box */
-$task-box-height: 100px;
+$task-box-height: 80px;
+$task-box-header-height: 24px;
+$task-box-body-height: calc(100% - #{$task-box-header-height})

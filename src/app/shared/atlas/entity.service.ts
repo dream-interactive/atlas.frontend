@@ -12,22 +12,22 @@ export type AtlasException = {
 };
 
 export type Task = {
-  idi?: number;
+  idt?: number;
   idtc: number; // TasksContainer Id
   indexNumber: number; // used for saving order place
   summary: string;
   idp: string;
   keyNumber: number;
 
-  assignToId?: string; // assign to user
+  assignToId?: string | null; // assign to user
   creatorId: string;
   checkerId?: string;
   priority: string;
   description: string;
   points: number;
-  closeBeforeIssues: number[]; // ids
-  closeAfterIssues: number[]; // ids
-  closeWithIssues: number[]; // ids
+  closeBeforeTasks: number[]; // ids
+  closeAfterTasks: number[]; // ids
+  closeWithTasks: number[]; // ids
   labels: string[];
   dateTimeS: Date;
   dateTimeE?: Date;
@@ -91,10 +91,6 @@ export type ProjectMember = {
   role: string;
   user: AtlasUser;
 };
-
-export enum ProjectType {
-  SCRUM, KANBAN
-}
 
 @Injectable({
   providedIn: 'root'

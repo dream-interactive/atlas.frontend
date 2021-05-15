@@ -5,7 +5,7 @@ import {ProjectService} from '../../web/project/services/project.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
 import {ProfileService} from '../../services/profile.service';
-import {AtlasUser, Organization, Project, ProjectType} from '../../shared/atlas/entity.service';
+import {AtlasUser, Organization, Project} from '../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-project-modal',

@@ -22,7 +22,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Assign to</mat-label>
 
-        <mat-select [(value)]="member">
+        <mat-select [(value)]="member" formControlName="assignToControl">
           <mat-select-trigger>
             <div fxLayout="row" fxLayoutAlign="space-between center">
               <img class="task-form__user-picture" src="{{member ? member.user.userPicture : ''}}" alt="">

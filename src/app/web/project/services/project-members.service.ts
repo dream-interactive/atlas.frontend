@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {AtlasUser, ProjectMember, TasksContainer} from '../../../shared/atlas/entity.service';
+import {ProjectMember} from '../../../shared/atlas/entity.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
@@ -19,7 +19,9 @@ export class ProjectMembersService {
   findAllMembersByProjectId(idp: string): Observable<ProjectMember[]> {
     return this.http.get<ProjectMember[]>(`${this.uri}/projects/${idp}/members`)
       .pipe(
-        tap((ms) => this.membersSub.next(ms))
+        tap((ms) => {
+          this.membersSub.next(ms);
+        })
       );
   }
 

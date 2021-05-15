@@ -35,7 +35,7 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
   summaryControl = new FormControl('');
   containerControl = new FormControl('');
   assignToControl  = new FormControl('');
-  priorityControl = new FormControl(1);
+  priorityControl = new FormControl('Medium');
   descriptionControl = new FormControl(null);
   pointsControl = new FormControl('');
   labelsControl = new FormControl('');
@@ -114,9 +114,10 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
   create(): void {
     if (this.taskForm.valid) {
       const task: Task = {
-        closeAfterIssues: [],
-        closeBeforeIssues: [],
-        closeWithIssues: [],
+        assignToId: this.assignToControl.value ? this.assignToControl.value.user.sub : null,
+        closeAfterTasks: [],
+        closeBeforeTasks: [],
+        closeWithTasks: [],
         creatorId: this.user.sub,
         dateTimeS: new Date(Date.now()),
         description: toHTML(this.descriptionControl.value ? this.descriptionControl.value : {content: [], type: 'doc'}),

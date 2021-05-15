@@ -10,6 +10,34 @@
   cursor: move;
   border-radius: 4px;
   margin-bottom: 5px;
+
+  font-size: 14px;
+  padding: 5px;
+
+  &__header {
+    width: 100%;
+    height: $task-box-header-height;
+  }
+  &__body {
+    display: inline-block;
+    width: 100%;
+    height: $task-box-body-height;
+  }
+  &__container {
+    height: 100%;
+  }
+  &__summary {
+    width: 275px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__label {
+    width: 100%;
+  }
+  &__info {
+    width: calc(100% - 30px);
+  }
 }
 
 .custom-placeholder {
@@ -28,7 +56,21 @@
 }
 
 .avatar {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
+}
+
+.low {
+  color: green;
+}
+.medium {
+  color: orange;
+}
+
+.high {
+  color: orangered;
+}
+.button {
+  height: 48px;
 }
