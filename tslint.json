@@ -1,5 +1,8 @@
 {
-  "extends": "tslint:recommended",
+  "extends": [
+    "tslint:recommended",
+    "@nativescript/tslint-rules"
+  ],
   "rules": {
     "align": {
       "options": [
@@ -25,7 +28,10 @@
     "component-selector": [
       true,
       "element",
-      ["app", "atlas"],
+      [
+        "app",
+        "atlas"
+      ],
       "kebab-case"
     ],
     "eofline": true,
@@ -145,7 +151,15 @@
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
-    "no-trailing-whitespace": false
+    "no-trailing-whitespace": false,
+    "prefer-mapped-imports": [
+      true,
+      {
+        "prefix": "@src/",
+        "prefix-mapped-to": "src/",
+        "base-url": "./"
+      }
+    ]
   },
   "rulesDirectory": [
     "codelyzer"
