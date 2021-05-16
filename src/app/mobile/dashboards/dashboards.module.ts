@@ -3,9 +3,10 @@ import { NativeScriptCommonModule } from '@nativescript/angular';
 
 import { DashboardsRoutingModule } from './dashboards-routing.module';
 import { DashboardsComponent } from './dashboards.component';
+import {ActionBarModule} from '@src/app/mobile/action-bar/action-bar.module';
 
 @NgModule({
-  imports: [NativeScriptCommonModule, DashboardsRoutingModule],
+    imports: [NativeScriptCommonModule, DashboardsRoutingModule, ActionBarModule],
   declarations: [DashboardsComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })

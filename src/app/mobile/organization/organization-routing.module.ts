@@ -10,4 +10,9 @@ const routes: Routes = [{ path: '', component: OrganizationComponent }];
   imports: [NativeScriptRouterModule.forChild(routes)],
   exports: [NativeScriptRouterModule],
 })
-export class OrganizationRoutingModule {}
+export class OrganizationRoutingModule {
+
+
+
+
+}

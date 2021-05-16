@@ -1,13 +1,24 @@
-<ActionBar class="action-bar">
-    <NavigationButton visibility="hidden"></NavigationButton>
-    <GridLayout columns="50, *">
-        <Label class="action-bar-title" text="Ogranization" colSpan="2"></Label>
+<app-action-bar title="Organization">
 
-        <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
-    </GridLayout>
-</ActionBar>
+</app-action-bar>
 
 <GridLayout class="page__content">
+  <ListView [items]="countries" (itemTap)="onItemTap($event)"
+            style="height:1250px">
+    <ng-template let-country="item">
+      <FlexboxLayout flexDirection="row">
+        <Image [src]="country.imageSrc" class="thumb img-circle"></Image>
+        <Label [text]="country.name" class="t-12"
+               verticalAlignment="center" style="width: 60%"></Label>
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
+
   <Label class="page__content-icon fas" text="&#xf015;"></Label>
   <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+
+  <FlexboxLayout justifyContent="flex-end" width="100%" id="addButtonContainer"
+                 left="0">
+    <Button class="add-button" row="0" col="1" text="+" (tap)="navigateAdd()"></Button>
+  </FlexboxLayout>
 </GridLayout>
