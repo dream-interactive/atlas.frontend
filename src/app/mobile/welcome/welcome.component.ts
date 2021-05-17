@@ -1,20 +1,21 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RouterExtensions } from '@nativescript/angular';
 
-import { Page,
+import {
+  Page,
   ContentView,
   SwipeGestureEventData,
   GridLayout,
   GridUnitType,
   ItemSpec,
   AnimationDefinition,
-  Animation
+  Animation,  Builder
 
 } from '@nativescript/core';
-import { screen } from 'platform';
+import {Screen} from '@nativescript/core/platform/index.android';
 
 import * as fs from 'file-system';
-import * as builder from 'ui/';
+
 
 @Component({
   selector: 'welcome',
@@ -22,7 +23,7 @@ import * as builder from 'ui/';
   templateUrl: './welcome.component.html'
 })
 export class WelcomeComponent implements OnInit {
-  private slidesPath = 'pages/welcome/slides';
+  private slidesPath = '/slides';
   private slideFiles = ['slide1.xml', 'slide2.xml', 'slide3.xml'];
 
   private currentSlideNum = 0;
@@ -39,7 +40,7 @@ export class WelcomeComponent implements OnInit {
     private page: Page,
     private nav: RouterExtensions,
   ) {
-    this.screenWidth = screen.mainScreen.widthDIPs;
+    this.screenWidth = Screen.mainScreen.widthDIPs;
   }
 
   ngOnInit() {
@@ -66,13 +67,13 @@ export class WelcomeComponent implements OnInit {
   }
 
   private loadSlides(slideFiles, slidesPath) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       const slides = [];
       const currentAppFolder = fs.knownFolders.currentApp();
       const path = fs.path.normalize(currentAppFolder.path + '/' + slidesPath);
       slideFiles.forEach((dataFile, i) => {
         const slidePath = path + '/' + dataFile;
-        slides.push(builder.load(slidePath));
+        slides.push(Builder.load(slidePath));
       });
 
       resolve(slides);
@@ -131,7 +132,7 @@ export class WelcomeComponent implements OnInit {
 
   skipIntro() {
     // this.nav.navigate(["/home"], { clearHistory: true });
-    this.nav.navigate(['/home']);
+    this.nav.navigate(['/organization']);
   }
 
   getSliderItemClass(item: number) {

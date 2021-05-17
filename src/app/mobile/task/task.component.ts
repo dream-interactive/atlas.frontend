@@ -16,8 +16,5 @@ export class TaskComponent implements OnInit {
     // Init your component properties here.
   }
 
-  onDrawerButtonTap(): void {
-    const sideDrawer = <RadSideDrawer> Application.getRootView();
-    sideDrawer.showDrawer();
-  }
+
 }

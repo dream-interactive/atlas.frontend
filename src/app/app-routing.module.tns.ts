@@ -4,9 +4,9 @@ import {Routes} from '@angular/router';
 
 const routes: Routes = [
   {path: '', redirectTo: '/organization', pathMatch: 'full'},
-  /*{path: 'welcome',
+  {path: 'welcome',
   loadChildren: () => import('./mobile/welcome/welcome.module').then((m) => m.WelcomeModule)
-  },*/
+  },
   {
     path: 'organization',
     loadChildren: () => import('./mobile/organization/organization.module').then((m) => m.OrganizationModule),

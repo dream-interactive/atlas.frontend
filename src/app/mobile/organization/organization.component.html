@@ -2,23 +2,36 @@
 
 </app-action-bar>
 
-<GridLayout class="page__content">
+
+
+<FlexboxLayout flexDirection="column" class="page__content" justifyContent = 'space-between'>
+
+
   <ListView [items]="countries" (itemTap)="onItemTap($event)"
             style="height:1250px">
     <ng-template let-country="item">
-      <FlexboxLayout flexDirection="row">
+      <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
         <Image [src]="country.imageSrc" class="thumb img-circle"></Image>
         <Label [text]="country.name" class="t-12"
-               verticalAlignment="center" style="width: 60%"></Label>
+               verticalAlignment="center" ></Label>
+        <FlexBoxLayout class = 'icon'flexDirection="row" >
+      <Label  text="&#xf013;" class="nt-icon fas"> </Label>
+        </FlexBoxLayout>
+
       </FlexboxLayout>
     </ng-template>
   </ListView>
+  <Button
+    class = 'btn-primary'
+    text ='Add'
+  ></Button>
 
-  <Label class="page__content-icon fas" text="&#xf015;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
 
-  <FlexboxLayout justifyContent="flex-end" width="100%" id="addButtonContainer"
+ <!-- <Label class="page__content-icon fas" text="&#xf015;"></Label>
+  <Label class="page__content-placeholder" text="&lt;!&ndash; Page content goes here &ndash;&gt;"></Label>-->
+
+  <!--<FlexboxLayout justifyContent="flex-end" width="100%" id="addButtonContainer"
                  left="0">
-    <Button class="add-button" row="0" col="1" text="+" (tap)="navigateAdd()"></Button>
-  </FlexboxLayout>
-</GridLayout>
+    <Button class="btn" row="0" col="1" text="+" (tap)="navigateAdd()"></Button>
+  </FlexboxLayout>-->
+</FlexboxLayout>

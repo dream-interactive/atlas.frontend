@@ -6,6 +6,7 @@ import {Application, ItemEventData} from '@nativescript/core';
   moduleId: module.id,
   selector: 'Organization',
   templateUrl: './organization.component.html',
+  styleUrls: ['./organization.component.scss']
 })
 export class OrganizationComponent implements OnInit {
   countries: { name: string, imageSrc: string }[] = [
@@ -14,19 +15,19 @@ export class OrganizationComponent implements OnInit {
 
     { name: 'New Org', imageSrc: 'res://donut' },
     { name: 'New Org', imageSrc: 'res://donut' },
+    { name: 'New Org', imageSrc: 'res://donut' },
+    { name: 'New Org', imageSrc: 'res://donut' },
+    { name: 'New Org', imageSrc: 'res://donut' },
   ];
   constructor() {
     // Use the component constructor to inject providers.
   }
 
+
   ngOnInit(): void {
     // Init your component properties here.
   }
 
-  onDrawerButtonTap(): void {
-    const sideDrawer = Application.getRootView() as RadSideDrawer;
-    sideDrawer.showDrawer();
-  }
 
   onItemTap(args: ItemEventData): void {
     console.log('Item with index: ' + args.index + ' tapped');
@@ -41,4 +42,7 @@ export class OrganizationComponent implements OnInit {
 
   }
 
+  addOrg(): void {
+
+  }
 }

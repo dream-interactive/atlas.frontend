@@ -15,6 +15,7 @@ export class ActionBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   onDrawerButtonTap(): void {
