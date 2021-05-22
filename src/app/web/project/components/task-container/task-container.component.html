@@ -12,7 +12,7 @@
   <div class="task-list"
        cdkDropList
        [cdkDropListData]="container.tasks"
-       (cdkDropListDropped)="drop($event)">
+       (cdkDropListDropped)="drop($event, container)">
 
     <app-task-box *ngFor="let task of container.tasks" [task]="task"></app-task-box>
 

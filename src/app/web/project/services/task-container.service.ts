@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {CrudService} from '../../../shared/crud.service';
-import {TasksContainer} from '../../../shared/atlas/entity.service';
+import {Task, TasksContainer} from '../../../shared/atlas/entity.service';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
+import {transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +45,40 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
   updateContainers(containers: TasksContainer[]): void {
     this.tasksContainersSubject.next(containers);
   }
+
+
+  moveTask(tasks: Task[], idtc: number): Observable<TasksContainer> {
+    for (const [index, task] of tasks.entries()) {
+      task.idtc = idtc;
+      if (task.indexNumber !== index) {
+        task.indexNumber = index;
+      }
+    }
+    return this.http.put<TasksContainer>(`${this.uri}/${this.apiRoute}/${idtc}/move`, tasks);
+  }
+
+  transferTask(currentTasks: Task[], currentIdtc: number, previousIdtc: number, previousTasks: Task[]): Observable<TasksContainer[]> {
+
+    for (const [index, task] of currentTasks.entries()) {
+      task.idtc = currentIdtc;
+      if (task.indexNumber !== index) {
+        task.indexNumber = index;
+      }
+    }
+    for (const [index, task] of previousTasks.entries()) {
+      task.idtc = previousIdtc;
+      if (task.indexNumber !== index) {
+        task.indexNumber = index;
+      }
+    }
+
+    return this.http.put<TasksContainer[]>(`${this.uri}/${this.apiRoute}/transfer`, {
+      currentIdtc,
+      previousIdtc,
+      currentTasks,
+      previousTasks
+    });
+  }
+
+
 }

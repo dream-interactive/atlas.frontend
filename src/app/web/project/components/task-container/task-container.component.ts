@@ -51,14 +51,30 @@ export class TaskContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnDestroy(): void {
   }
 
-  drop(event: CdkDragDrop<Task[]>): void {
+  drop(event: CdkDragDrop<Task[]>, container: TasksContainer): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+
+      this.tcs.moveTask(event.container.data, container.idtc).subscribe(tc => {
+        console.log('tc', tc);
+      });
     } else {
-      transferArrayItem(event.previousContainer.data,
+      transferArrayItem(
+        event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
+        event.currentIndex
+      );
+      const task = event.item.data as Task;
+      this.tcs.transferTask(
+        event.container.data,
+        container.idtc,
+        task.idtc,
+        event.previousContainer.data
+      ).subscribe(result => {
+        console.log(result);
+      });
     }
+
   }
 }

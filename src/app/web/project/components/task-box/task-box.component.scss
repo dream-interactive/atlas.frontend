@@ -32,8 +32,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  &__label {
+  &__close-after {
     width: 100%;
+    height: 20px !important;
   }
   &__info {
     width: calc(100% - 30px);

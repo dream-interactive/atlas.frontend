@@ -17,13 +17,13 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
+  taskCreatingUpdate(value: boolean): void {
+    this.taskCreatingSubject.next(value);
+  }
+
 
   create(task: Task): Observable<Task> {
     return this.http.post<Task>(`${this.uri}/${this.apiRoute}`, task);
-  }
-
-  taskCreatingUpdate(value: boolean): void {
-    this.taskCreatingSubject.next(value);
   }
 }
 
