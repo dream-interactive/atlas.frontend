@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
-import {Application, ItemEventData} from '@nativescript/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {ItemEventData} from '@nativescript/core';
+import {ModalDialogService} from '@nativescript/angular';
+import {OrganizationModalComponent} from '@src/app/components/organization-modal/organization-modal.component';
 
 @Component({
   moduleId: module.id,
-  selector: 'Organization',
+  selector: 'app-organization',
   templateUrl: './organization.component.html',
   styleUrls: ['./organization.component.scss']
 })
@@ -19,7 +20,7 @@ export class OrganizationComponent implements OnInit {
     { name: 'New Org', imageSrc: 'res://donut' },
     { name: 'New Org', imageSrc: 'res://donut' },
   ];
-  constructor() {
+  constructor(private modalDialog: ModalDialogService, private  vcRef: ViewContainerRef) {
     // Use the component constructor to inject providers.
   }
 
@@ -32,7 +33,6 @@ export class OrganizationComponent implements OnInit {
   onItemTap(args: ItemEventData): void {
     console.log('Item with index: ' + args.index + ' tapped');
   }
-
   navigateAdd(): void  {
     // TODO Create org
   }
@@ -43,6 +43,9 @@ export class OrganizationComponent implements OnInit {
   }
 
   addOrg(): void {
+    this.modalDialog.showModal(OrganizationModalComponent,
+      {
 
+        viewContainerRef: this.vcRef});
   }
 }

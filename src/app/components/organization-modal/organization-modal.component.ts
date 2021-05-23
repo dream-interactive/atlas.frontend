@@ -57,7 +57,7 @@ export class OrganizationModalComponent implements OnInit {
         },
         error => {
           if (error.status === 409) {
-            console.log('errotr', error);
+            console.log('error', error);
             this.nameControl.setErrors({ notUnique: true });
           }
         }

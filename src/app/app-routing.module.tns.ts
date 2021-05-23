@@ -1,6 +1,20 @@
-import {NativeScriptRouterModule} from '@nativescript/angular';
+import {NativeScriptHttpClientModule, NativeScriptRouterModule} from '@nativescript/angular';
 import {NgModule} from '@angular/core';
 import {Routes} from '@angular/router';
+import {OKTA_CONFIG, OktaAuthModule} from '@okta/okta-angular';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '@src/app/shared/okta/auth.interceptor';
+
+/*
+
+const oktaConfig = {
+  issuer: 'https://dev-786355.okta.com/oauth2/default',
+  redirectUri: window.location.origin + '/callback',
+  clientId: '0oa1ium5l7RlObiG74x7',
+  pkce: true,
+  scope: ['openid', 'email', 'profile', 'groups']
+};
+*/
 
 const routes: Routes = [
   {path: '', redirectTo: '/organization', pathMatch: 'full'},
@@ -34,7 +48,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [NativeScriptRouterModule.forRoot(routes)],
+  imports: [
+    NativeScriptHttpClientModule,
+ //   OktaAuthModule,
+    NativeScriptRouterModule.forRoot(routes)],
   exports: [NativeScriptRouterModule],
+ /* providers: [
+    { provide: OKTA_CONFIG, useValue: oktaConfig },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ]*/
 })
 export class AppRoutingModule {}

@@ -5,7 +5,7 @@ import {RadSideDrawer} from 'nativescript-ui-sidedrawer';
 @Component({
   selector: 'app-action-bar',
   templateUrl: './action-bar.component.tns.html',
-  styleUrls: ['./action-bar.component.scss'],
+ // styleUrls: ['./action-bar.component.scss'],
   moduleId: module.id
 })
 export class ActionBarComponent implements OnInit {

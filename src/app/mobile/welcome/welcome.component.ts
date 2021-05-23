@@ -9,12 +9,14 @@ import {
   GridUnitType,
   ItemSpec,
   AnimationDefinition,
-  Animation,  Builder
+  Animation, Builder, isAndroid, Application
 
 } from '@nativescript/core';
+declare var android: any;
 import {Screen} from '@nativescript/core/platform/index.android';
 
 import * as fs from 'file-system';
+import {WelcomeSlidesService} from '@src/app/mobile/welcome/welcome-slides.service';
 
 
 @Component({
@@ -23,14 +25,13 @@ import * as fs from 'file-system';
   templateUrl: './welcome.component.html'
 })
 export class WelcomeComponent implements OnInit {
-  private slidesPath = '/slides';
+  private slidesPath = 'pages/welcome/slides';
   private slideFiles = ['slide1.xml', 'slide2.xml', 'slide3.xml'];
 
   private currentSlideNum = 0;
   private slideCount = 3;
 
   private screenWidth;
-
   private slidesView: GridLayout;
 
   @ViewChild('slideContent') slideElement: ElementRef;
@@ -39,8 +40,23 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private page: Page,
     private nav: RouterExtensions,
+    private slidesService: WelcomeSlidesService
   ) {
     this.screenWidth = Screen.mainScreen.widthDIPs;
+
+    // Span the background under status bar on Android
+    if (isAndroid /*&& device.sdkVersion >= '21'*/) {
+      const View = android.view.View;
+      const window = Application.android.startActivity.getWindow();
+      window.setStatusBarColor(0x000000);
+
+      const decorView = window.getDecorView();
+      decorView.setSystemUiVisibility(
+        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
   }
 
   ngOnInit() {
@@ -50,7 +66,7 @@ export class WelcomeComponent implements OnInit {
 
     this.slideView = this.slideElement.nativeElement;
 
-    this.loadSlides(this.slideFiles, this.slidesPath).then((slides: any) => {
+    this.loadSlides(this.slidesService.getSlides()).then((slides: any) => {
       const row = new ItemSpec(1, GridUnitType.STAR);
       const gridLayout = new GridLayout();
       slides.forEach((element, i) => {
@@ -61,23 +77,24 @@ export class WelcomeComponent implements OnInit {
         gridLayout.addChild(element);
       });
       gridLayout.addRow(row);
-
       this.slideView.content = (this.slidesView = gridLayout);
     });
   }
 
-  private loadSlides(slideFiles, slidesPath) {
+  private loadSlides(slides) {
     return new Promise((resolve, reject) => {
-      const slides = [];
-      const currentAppFolder = fs.knownFolders.currentApp();
-      const path = fs.path.normalize(currentAppFolder.path + '/' + slidesPath);
-      slideFiles.forEach((dataFile, i) => {
-        const slidePath = path + '/' + dataFile;
-        slides.push(Builder.load(slidePath));
+      const slideViews = [];
+      slides.forEach((slide, i) => {
+        slideViews.push(Builder.parse(slide));
       });
 
-      resolve(slides);
+      resolve(slideViews);
     });
+  }
+
+  skipIntro() {
+    // this.nav.navigate(["/home"], { clearHistory: true });
+    this.nav.navigate(['/organization']);
   }
 
   onSwipe(args: SwipeGestureEventData) {
@@ -102,24 +119,25 @@ export class WelcomeComponent implements OnInit {
     nextSlide.translateX = (direction === 2 ? this.screenWidth : -this.screenWidth);
     nextSlide.opacity = 1;
     const definitions = new Array<AnimationDefinition>();
-
-    definitions.push({
+    const defn1: AnimationDefinition = {
       target: currSlide,
       translate: { x: (direction === 2 ? -this.screenWidth : this.screenWidth), y: 0 },
       duration: 500
-    });
+    };
+    definitions.push(defn1);
 
-    definitions.push({
+    const defn2: AnimationDefinition = {
       target: nextSlide,
       translate: { x: 0, y: 0 },
       duration: 500
-    });
+    };
+    definitions.push(defn2);
 
     const animationSet = new Animation(definitions);
-
-    animationSet.play().then(() => {
-      // console.log("Animation finished");
-    })
+    animationSet.play()
+      .then(() => {
+        // console.log("Animation finished");
+      })
       .catch((e) => {
         console.log(e.message);
       });
@@ -128,11 +146,6 @@ export class WelcomeComponent implements OnInit {
   itemSelected(item: number) {
 
     console.log(item);
-  }
-
-  skipIntro() {
-    // this.nav.navigate(["/home"], { clearHistory: true });
-    this.nav.navigate(['/organization']);
   }
 
   getSliderItemClass(item: number) {

@@ -4,6 +4,7 @@ import {NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModul
 import { AppRoutingModule } from '@src/app/app-routing.module.tns';
 import { AppComponent } from '@src/app/app.component.tns';
 import {NativeScriptUISideDrawerModule} from 'nativescript-ui-sidedrawer/angular';
+import {AuthRoutingModule} from '@src/app/auth-routing.module';
 
 
 
@@ -21,6 +22,7 @@ import {NativeScriptUISideDrawerModule} from 'nativescript-ui-sidedrawer/angular
     NativeScriptModule,
     AppRoutingModule,
     NativeScriptUISideDrawerModule,
+    // AuthRoutingModule
 
   ],
   providers: [],
