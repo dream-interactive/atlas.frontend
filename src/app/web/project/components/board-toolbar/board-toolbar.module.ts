@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import { BoardToolbarComponent } from './board-toolbar.component';
 import {MaterialModule} from '../../../../material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   imports: [
     CommonModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule
   ],
   exports: [
     BoardToolbarComponent

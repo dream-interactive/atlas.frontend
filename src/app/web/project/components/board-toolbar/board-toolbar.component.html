@@ -1,21 +1,24 @@
-<div class="toolbar" fxLayoutGap="20px">
+<div class="toolbar" fxLayoutGap="20px" [formGroup]="form">
 
-  <mat-form-field class="toolbar__search" appearance="outline" [style.fontSize.px]="14">
-    <input matInput placeholder="Search...">
+  <mat-form-field
+    class="toolbar__search"
+    appearance="outline"
+    [style.fontSize.px]="14">
+    <input matInput placeholder="Search..." formControlName="searchControl">
     <mat-icon matPrefix>search</mat-icon>
   </mat-form-field>
 
   <mat-form-field class="toolbar__filter members" appearance="standard" [style.fontSize.px]="14">
     <mat-label>Members</mat-label>
 
-    <mat-select [(value)]="member">
+    <mat-select [(value)]="member"  formControlName="memberControl" (selectionChange)="taskFilter()">
       <mat-select-trigger>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <img class="members__userPicture" src="{{member ? member.user.userPicture : ''}}" alt="">
           <span> {{member ? member.user.name : ''}} </span>
         </div>
-
       </mat-select-trigger>
+      <mat-option [value]="undefined"></mat-option>
       <mat-option *ngFor="let m of members$ | async" [value]="m">
         <img class="members__userPicture" src="{{m.user.userPicture}}" alt=""> {{m.user.name}}
       </mat-option>

@@ -26,8 +26,6 @@ export class TaskBoxComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    console.log(this.task);
-
     this.project$ = this.projectService.project$;
 
     this.$assignTo = this.pms.members$.pipe(
