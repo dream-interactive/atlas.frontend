@@ -139,8 +139,6 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
         });
         this.taskService.taskCreatingUpdate(false);
       });
-
-
     }
 
   }

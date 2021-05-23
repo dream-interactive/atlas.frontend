@@ -3,7 +3,7 @@ import {EMPTY, Observable} from 'rxjs';
 import {ProjectService} from '../../services/project.service';
 import {OrganizationService} from '../../../../services/organization.service';
 import {ActivatedRoute} from '@angular/router';
-import {map, mergeMap, startWith} from 'rxjs/operators';
+import {map, mergeMap, startWith, switchMap} from 'rxjs/operators';
 import {animateText, onSideNavChange} from '../../../../animations/sidenav-animations';
 import {Project} from '../../../../shared/atlas/entity.service';
 
@@ -29,19 +29,21 @@ export class ProjectPageComponent implements OnInit, AfterViewInit {
 
     this.currentProject = this.activateRoute.params
       .pipe(
-        mergeMap((params) => {
+        switchMap((params) => {
           const organizationValidName = params[`organization`];
           const key = params[`key`];
+
+          const project: Project = {
+            key: '', leadId: '', name: '', organizationId: '', type: 0
+          };
 
           // response is a Flux<Project> with one element
           return this.projectService.findByOrganizationValidNameAndProjectKey(organizationValidName, key)
             .pipe(
-              map((project) => {
-                this.projectService.updateProjectSubject(project[0]);
-                return project[0];
-              }),
-              startWith({
-                id: '', img: '', isPrivate: false, key: '', leadId: '', name: '', organizationId: '', type: 1
+              startWith([project]),
+              map((projects) => {
+                this.projectService.updateProjectSubject(projects[0]);
+                return projects[0];
               })
             );
         })

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CrudService} from '../../../shared/crud.service';
 import {Project, ProjectMember, Task, TasksContainer} from '../../../shared/atlas/entity.service';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {tap} from 'rxjs/operators';
@@ -9,7 +9,7 @@ import {tap} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class TaskContainerService implements CrudService<TasksContainer, number>{
+export class TaskContainerService implements CrudService<TasksContainer, number> {
 
   private readonly uri = environment.uri;
   private readonly apiRoute = 'tasks-containers';
@@ -19,7 +19,8 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
 
   private containers: TasksContainer[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   create(container: TasksContainer): Observable<TasksContainer> {
     return this.http.post<TasksContainer>(`${this.uri}/${this.apiRoute}`, container)
@@ -27,14 +28,14 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
   }
 
   update(container: TasksContainer): Observable<TasksContainer> {
-      return this.http.put<TasksContainer>(`${this.uri}/${this.apiRoute}`, container)
-        .pipe(tap(cr => {
-          for (const [index, c] of this.containers.entries()) {
-            if (c.idtc === cr.idtc) {
-              this.containers[index] = cr;
-            }
+    return this.http.put<TasksContainer>(`${this.uri}/${this.apiRoute}`, container)
+      .pipe(tap(cr => {
+        for (const [index, c] of this.containers.entries()) {
+          if (c.idtc === cr.idtc) {
+            this.containers[index] = cr;
           }
-        }));
+        }
+      }));
   }
 
   delete(idtc: number): Observable<void> {
@@ -81,6 +82,11 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
     return this.http.put<TasksContainer>(`${this.uri}/${this.apiRoute}/${idtc}/move`, tasks);
   }
 
+  /**
+   * Move task form previous container to current container.
+   *
+   * @return Observable<TasksContainer[]> with two TaskContainer (current and previous)
+   */
   transferTask(currentTasks: Task[], currentIdtc: number, previousIdtc: number, previousTasks: Task[]): Observable<TasksContainer[]> {
 
     for (const [index, task] of currentTasks.entries()) {
@@ -123,7 +129,7 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
   }
 
 
-  private filterBySearch(search: string, project: Project, task: Task): boolean{
+  private filterBySearch(search: string, project: Project, task: Task): boolean {
     if (search.trim() && search.length > 2) {
 
       search = search.toLowerCase();
@@ -148,7 +154,12 @@ export class TaskContainerService implements CrudService<TasksContainer, number>
     }
     return true;
   }
+
   private filterByLabel(label: string, task: Task): boolean {
+
+    if (label) {
+      return task.labels.includes(label);
+    }
 
     return true;
   }

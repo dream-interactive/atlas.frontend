@@ -3,8 +3,8 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {TaskContainerService} from '../../services/task-container.service';
 import {Project, TasksContainer} from '../../../../shared/atlas/entity.service';
 import {ProjectService} from '../../services/project.service';
-import {mergeMap} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
+import {mergeMap, switchMap} from 'rxjs/operators';
+import {EMPTY, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -33,9 +33,13 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.$project = this.projectService.project$.pipe(
-      mergeMap((project) => {
+      switchMap((project) => {
         this.project = project;
-        return this.taskContainerService.findAllByProjectId(project.idp);
+        if (project.idp) {
+          return this.taskContainerService.findAllByProjectId(project.idp);
+        } else {
+          return EMPTY;
+        }
       })
     ).subscribe((cs) => {
       this.containers = cs;
