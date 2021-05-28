@@ -4,7 +4,7 @@ import {TaskContainerService} from '../../services/task-container.service';
 import {MatDialog} from '@angular/material/dialog';
 import {TaskCreateModalComponent} from '../../../../components/task-create-modal/task-create-modal.component';
 import {EMPTY, Observable, Subscription} from 'rxjs';
-import {TaskService} from '../../services/task.service';
+import {TaskService} from '../../../../shared/task.service';
 import {startWith} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 

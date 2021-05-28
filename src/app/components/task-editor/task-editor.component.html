@@ -1,0 +1,113 @@
+<div [formGroup]="form" class="task-editor">
+  <div  fxLayout="row" fxLayoutAlign="space-between center">
+    <span class="task-editor__key">{{project.key}}-{{task.keyNumber}}</span>
+    <button mat-icon-button><mat-icon>edit</mat-icon></button>
+  </div>
+  <div class="task-editor__header">
+    <mat-form-field class="task-editor__summary">
+      <mat-label>Summary</mat-label>
+      <input formControlName="summaryControl" matInput type="text" readonly required/>
+    </mat-form-field>
+  </div>
+
+  <div class="task-editor__body" fxLayout="row">
+
+    <section class="task-editor__info" fxLayout="column" fxLayoutAlign="space-around start">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+
+        <mat-select [(value)]="container" [formControl]="containerControl" required>
+          <mat-select-trigger>
+            {{container ? container.name : ''}}
+          </mat-select-trigger>
+          <mat-option *ngFor="let cont of (containers$ | async)" [value]="cont">
+            {{cont.name}}
+          </mat-option>
+        </mat-select>
+        <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Assign to</mat-label>
+
+        <mat-select [(value)]="assignTo" [formControl]="assignToControl">
+          <mat-select-trigger>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <img class="task-editor__user-picture" src="{{assignTo ? assignTo.user.userPicture : ''}}" alt="">
+              <span> {{assignTo ? assignTo.user.name : ''}} </span>
+            </div>
+          </mat-select-trigger>
+          <mat-option *ngFor="let m of (members$ | async)" [value]="m">
+            <img class="task-editor__user-picture" src="{{m.user.userPicture}}" alt="">
+            {{m.user.name}}
+          </mat-option>
+        </mat-select>
+        <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Priority</mat-label>
+        <mat-select formControlName="priorityControl">
+          <mat-option *ngFor="let priority of priorities" [value]="priority">
+            {{priority}}
+          </mat-option>
+        </mat-select>
+        <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Points</mat-label>
+        <input formControlName="pointsControl" matInput type="number">
+      </mat-form-field>
+
+      <mat-form-field class="chip-list" [fxShow]="editable">
+        <mat-label>Labels</mat-label>
+        <mat-chip-list #chipList aria-label="Labels">
+          <mat-chip
+            *ngFor="let label of labels"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(label)">
+            {{label}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="New label..."
+            #labelInput
+            [formControl]="labelsControl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let label of filteredLabels | async" [value]="label">
+            {{label}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+      <mat-chip-list aria-label="Labels" [fxHide]="editable">
+        <mat-chip *ngFor="let label of labels" class="task-editor__chip">
+          {{label}}
+        </mat-chip>
+      </mat-chip-list>
+
+
+    </section>
+
+    <div class="task-editor__description">
+      <ngx-editor-menu class="ngx-editor__menu" [editor]="editor" [fxShow]="editable"></ngx-editor-menu>
+      <div class="ngx-editor">
+        <ngx-editor
+          [editor]="editor"
+          formControlName="descriptionControl"
+          [placeholder]=""
+        ></ngx-editor>
+      </div>
+    </div>
+  </div>
+
+</div>

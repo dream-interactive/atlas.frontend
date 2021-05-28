@@ -29,7 +29,7 @@
     <mat-label>Labels</mat-label>
     <mat-select formControlName="labelControl">
       <mat-option [value]=""></mat-option>
-      <mat-option *ngFor="let label of (project$ | async).labels" [value]="label">
+      <mat-option *ngFor="let label of (project$ | async).labels.filter(onlyUnique)" [value]="label">
         {{label}}
       </mat-option>
     </mat-select>

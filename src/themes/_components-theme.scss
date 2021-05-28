@@ -4,6 +4,7 @@
 @import '../app/components/toolbar/user-menu/user-menu-theme';
 @import '../app/components/project-modal/project-modal-theme';
 @import '../app/components/task-create-modal/task-create-modal-theme';
+@import '../app/components/task-editor/task-editor-theme';
 @import '../app/web/start/pages/start-page/start-page-theme';
 @import '../app/components/page-not-found/page-not-found-theme';
 @import '../app/web/start/components/start-skeleton/start-skeleton-theme';
@@ -40,6 +41,7 @@
   @include task-create-modal-theme($theme);
   @include board-toolbar-theme($theme);
   @include task-box-theme($theme);
+  @include task-editor-theme($theme);
 }
 
 // Define the light theme.

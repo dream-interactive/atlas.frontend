@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Task, TasksContainer} from '../../../shared/atlas/entity.service';
+import {Task, TasksContainer} from './atlas/entity.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,10 @@ export class TaskService {
 
   create(task: Task): Observable<Task> {
     return this.http.post<Task>(`${this.uri}/${this.apiRoute}`, task);
+  }
+
+  findOneById(idt: number): Observable<Task> {
+    return this.http.get<Task>(`${this.uri}/${this.apiRoute}/${idt}`);
   }
 }
 

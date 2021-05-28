@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {TaskService} from '../../services/task.service';
+import {TaskService} from '../../../../shared/task.service';
 import {ProjectMembersService} from '../../services/project-members.service';
 import {EMPTY, Observable, of, Subscription} from 'rxjs';
 import {Project, ProjectMember, Task, TasksContainer} from '../../../../shared/atlas/entity.service';
@@ -103,4 +103,9 @@ export class BoardToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
       project
     );
   }
+
+  onlyUnique(value: any, index: number, self: any): boolean {
+    return self.indexOf(value) === index;
+  }
+
 }

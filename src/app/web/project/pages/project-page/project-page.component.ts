@@ -34,7 +34,7 @@ export class ProjectPageComponent implements OnInit, AfterViewInit {
           const key = params[`key`];
 
           const project: Project = {
-            key: '', leadId: '', name: '', organizationId: '', type: 0
+            key: '', leadId: '', name: '', organizationId: '', type: 0, labels: []
           };
 
           // response is a Flux<Project> with one element

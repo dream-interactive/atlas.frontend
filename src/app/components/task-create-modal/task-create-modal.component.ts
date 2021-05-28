@@ -13,7 +13,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {ProjectMembersService} from '../../web/project/services/project-members.service';
 import {OktaAuthService} from '@okta/okta-angular';
 import {UserClaims} from '@okta/okta-auth-js/lib/types';
-import {TaskService} from '../../web/project/services/task.service';
+import {TaskService} from '../../shared/task.service';
 
 export interface TaskCreateDialogData {
   container: TasksContainer;
@@ -140,7 +140,6 @@ export class TaskCreateModalComponent implements OnInit, OnDestroy {
         this.taskService.taskCreatingUpdate(false);
       });
     }
-
   }
 
   remove(label: string): void {

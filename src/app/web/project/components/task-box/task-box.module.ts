@@ -4,6 +4,8 @@ import { TaskBoxComponent } from './task-box.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MaterialModule} from '../../../../material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {RouterModule} from '@angular/router';
+import {TaskEditorPopupModule} from '../task-editor-popup/task-editor-popup.module';
 
 
 
@@ -16,7 +18,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     DragDropModule,
     CommonModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    RouterModule,
+    TaskEditorPopupModule
   ]
 })
 export class TaskBoxModule { }
