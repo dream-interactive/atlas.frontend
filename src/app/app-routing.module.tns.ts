@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {Routes} from '@angular/router';
 import {OKTA_CONFIG, OktaAuthModule} from '@okta/okta-angular';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AuthInterceptor} from '@src/app/shared/okta/auth.interceptor';
+import {AuthInterceptor} from '@src/app/shared/okta/auth.interceptor.tns';
 
 /*
 
@@ -53,9 +53,8 @@ const routes: Routes = [
  //   OktaAuthModule,
     NativeScriptRouterModule.forRoot(routes)],
   exports: [NativeScriptRouterModule],
- /* providers: [
-    { provide: OKTA_CONFIG, useValue: oktaConfig },
+  providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ]*/
+  ]
 })
 export class AppRoutingModule {}
