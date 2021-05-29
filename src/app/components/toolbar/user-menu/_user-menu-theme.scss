@@ -9,5 +9,8 @@
     &__title {
       color: map-get($foreground, text);
     }
+    &__userPicture {
+      border: 2px solid mat-color($primary);
+    }
   }
 }

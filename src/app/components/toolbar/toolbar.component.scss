@@ -18,12 +18,6 @@
   }
   &__button {
     margin-left: 16px;
-    &--colorless {
-      &:hover {
-        background-color: $accent-lighter !important;
-        color: $accent !important;
-      }
-    }
   }
 }
 

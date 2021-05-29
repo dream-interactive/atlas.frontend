@@ -1,0 +1,76 @@
+@import "../../../../../themes/const";
+
+.task-box {
+  height: $task-box-height;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: move;
+  border-radius: 4px;
+  margin-bottom: 5px;
+
+  font-size: 14px;
+  padding: 5px;
+
+  &__header {
+    width: 100%;
+    height: $task-box-header-height;
+  }
+  &__body {
+    display: inline-block;
+    width: 100%;
+    height: $task-box-body-height;
+  }
+  &__container {
+    height: 100%;
+  }
+  &__summary {
+    width: 275px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__label {
+    width: 100%;
+  }
+  &__info {
+    width: calc(100% - 30px);
+  }
+}
+
+.custom-placeholder {
+  width: 100%;
+  height: $task-box-height;
+  display: inline-block;
+  border-radius: 4px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.avatar {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.low {
+  color: green;
+}
+.medium {
+  color: orange;
+}
+
+.high {
+  color: orangered;
+}
+.button {
+  height: 48px;
+}

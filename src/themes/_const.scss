@@ -1,25 +1,26 @@
-/****** colors *******/
-  $accent-light: #80cbc4;
-  $accent-lighter: #e0f2f1;
-  $accent: #00796b;
-
 /***** Dimensions ******/
+$divider-height: 1px;
 
-  $divider-height: 1px;
+/* toolbar */
+$toolbar-height: 56px;
+$toolbar-icons-height: 26px;
 
-  /* toolbar */
-  $toolbar-height: 56px;
-  $toolbar-icons-height: 26px;
+/* footer */
+$footer-height: 56px;
 
-  /* footer */
-  $footer-height: 56px;
+/* about */
+$about-header-height: 224px;
+$about-row-height: $about-header-height * 2;
 
-  /* about */
-  $about-header-height: 224px;
-  $about-row-height: $about-header-height * 2;
+/* project board*/
+$board-task-container-header-height: 50px;
+$board-task-container-width: 300px;
+$board-task-height: 100px;
+$board-toolbar: 68px;
 
-  /* project board*/
-  $board-issues-container-header-height: 50px;
-  $board-issues-container-width: 300px;
-  $board-toolbar: 56px;
-  $board-issue-height: 100px;
+/* task container */
+
+/* task box */
+$task-box-height: 80px;
+$task-box-header-height: 24px;
+$task-box-body-height: calc(100% - #{$task-box-header-height})

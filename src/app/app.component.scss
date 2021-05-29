@@ -30,31 +30,3 @@ app-footer{
   flex-shrink: 0;
 }
 
-
-
-
-
-app-root > app-about,
-app-root > app-home,
-app-root > app-profile,
-app-root > app-exc,
-app-root > app-project,
-app-root > app-start,
-{
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (max-width: 720px) {
-  //app-root {
-  //  top: 92px;
-  //}
-
-  app-root > app-about,
-  app-root > app-home,
-  app-root > app-profile,
-  app-root > app-exc,
-  {
-    overflow-y: visible;
-  }
-}

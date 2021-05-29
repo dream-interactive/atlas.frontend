@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Data} from '@angular/router';
 
-export interface AtlasException {
+export type AtlasException = {
   aeid: number; // atlas exception id
   key: string; // ATLAS, JDK, SQL
   section: string; // project, organization, ticket etc
@@ -9,47 +9,57 @@ export interface AtlasException {
   messageInThrow: string;
   title: string;
   description: string; // description for programmer
-}
-export interface Issue {
-  idi?: number;
-  idic: number; // IssuesContainer Id
+};
+
+export type Task = {
+  idt?: number;
+  idtc: number; // TasksContainer Id
   indexNumber: number; // used for saving order place
-  name: string;
-  assignToId?: number; // assign to user
+  summary: string;
+  idp: string;
+  keyNumber: number;
+
+  assignToId?: string | null; // assign to user
   creatorId: string;
   checkerId?: string;
-  priorityId: number;
-  closeBeforeIssues: Issue[];
-  closeAfterIssues: Issue[];
-  closeWithIssues: Issue[];
+  priority: string;
+  description: string;
+  points: number;
+  closeBeforeTasks: number[]; // ids
+  closeAfterTasks: number[]; // ids
+  closeWithTasks: number[]; // ids
   labels: string[];
   dateTimeS: Date;
-  dateTimeE: Date;
-  dateTimeU: Date;
-}
+  dateTimeE?: Date;
+  dateTimeU?: Date;
+};
 
-export interface IssuesContainer {
-  idic?: number;
+export type TasksContainer = {
+  idtc?: number;
   name: string;
   idp: string;
+  canBeDeleted: boolean;
+  tasks: Task[];
   // used for saving order place
   indexNumber: number;
-}
+};
 
-export const IssuePriority: Map<number, string> = new Map()
-  .set(1, 'Low')
-  .set(2, 'Medium')
-  .set(1, 'High');
+export const TaskPriorities: string [] = [
+  'Low',
+  'Medium',
+  'High'
+];
 
 
-export interface Organization {
+export type Organization = {
   id?: string;
   name: string;
   validName: string;
   img?: string;
   ownerUserId: string; // ID user which create organization
-}
-export interface AtlasUserAuth { // Okta User Profile
+};
+
+export type AtlasUserAuth = { // Okta User Profile
   email: string;
   emailVerified: boolean;
   familyName: string;
@@ -57,28 +67,33 @@ export interface AtlasUserAuth { // Okta User Profile
   name: string;
   sub: string;
   local: string;
-}
+};
 
-export interface AtlasUser extends AtlasUserAuth {
+export type AtlasUser = AtlasUserAuth & {
   lastModify: Data;
   userPicture: string;
-}
+};
 
-export interface Project {
+export type Project = {
   idp?: string;
   name: string;
   key: string;
   organizationId: string;
-  type: ProjectType;
+  type: number;
   leadId: string;
   img?: string;
   isPrivate?: boolean;
-}
+  labels?: string [];
+};
 
-export enum ProjectType {
-  SCRUM, KANBAN
-}
+export type ProjectMember = {
+  idp: string;
+  role: string;
+  user: AtlasUser;
+};
+
 @Injectable({
   providedIn: 'root'
 })
-export class EntityService {}
+export class EntityService {
+}
