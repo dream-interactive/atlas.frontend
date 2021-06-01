@@ -1,0 +1,21 @@
+<app-action-bar title="Project">
+
+</app-action-bar>
+
+<GridLayout class="page__content">
+  <ListView [items]="projects" (itemTap)="onItemTap($event)"
+            style="height:1250px">
+    <ng-template let-project="item">
+      <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
+        <Image [src]="project.imageSrc" class="thumb img-circle"></Image>
+        <Label [text]="project.name" class="t-12"
+               verticalAlignment="center" ></Label>
+        <FlexBoxLayout class = 'icon'flexDirection="row" >
+          <Label  text="&#xf013;" class="nt-icon fas"> </Label>
+        </FlexBoxLayout>
+
+
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
+</GridLayout>

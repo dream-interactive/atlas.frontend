@@ -157,6 +157,6 @@
   },
   "defaultProject": "atlas-frontend",
   "cli": {
-    "analytics": false
+    "defaultCollection": "@nativescript/schematics"
   }
 }
