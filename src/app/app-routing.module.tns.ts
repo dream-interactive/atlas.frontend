@@ -1,6 +1,8 @@
 import {NativeScriptHttpClientModule, NativeScriptRouterModule} from '@nativescript/angular';
 import {NgModule} from '@angular/core';
 import {Routes} from '@angular/router';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '@src/app/shared/okta/auth.interceptor.tns';
 
 
 
@@ -35,6 +37,7 @@ const routes: Routes = [
     NativeScriptRouterModule.forRoot(routes)],
   exports: [NativeScriptRouterModule],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
 export class AppRoutingModule {}
