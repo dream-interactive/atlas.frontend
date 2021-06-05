@@ -1,7 +1,7 @@
 <div [formGroup]="form" class="task-editor">
   <div  fxLayout="row" fxLayoutAlign="space-between center">
     <span class="task-editor__key">{{project.key}}-{{task.keyNumber}}</span>
-    <button mat-icon-button><mat-icon>edit</mat-icon></button>
+    <button mat-icon-button (click)="edit()"><mat-icon>edit</mat-icon></button>
   </div>
   <div class="task-editor__header">
     <mat-form-field class="task-editor__summary">
@@ -10,9 +10,9 @@
     </mat-form-field>
   </div>
 
-  <div class="task-editor__body" fxLayout="row">
+  <div class="task-editor__body" fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="10px">
 
-    <section class="task-editor__info" fxLayout="column" fxLayoutAlign="space-around start">
+    <section class="task-editor__info" fxLayout="column" fxLayoutAlign="start start">
 
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
@@ -100,7 +100,7 @@
 
     <div class="task-editor__description">
       <ngx-editor-menu class="ngx-editor__menu" [editor]="editor" [fxShow]="editable"></ngx-editor-menu>
-      <div class="ngx-editor">
+      <div class="task-editor__ngx-editor">
         <ngx-editor
           [editor]="editor"
           formControlName="descriptionControl"

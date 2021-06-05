@@ -140,4 +140,9 @@ export class TaskEditorComponent implements OnInit, OnDestroy {
 
     this.labelsControl.setValue(null);
   }
+
+  edit(): void {
+    this.editable = true;
+    this.form.enable();
+  }
 }

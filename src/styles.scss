@@ -62,8 +62,10 @@ $foreground: map-get($theme, foreground);
 }
 
 .ngx-editor {
-  max-height: 310px;
-  overflow: auto;
+  //max-height: 310px;
+
+  //overflow: auto;
+  height: 100%;
   &__menu {
     .NgxEditor{
       &__MenuItem {
