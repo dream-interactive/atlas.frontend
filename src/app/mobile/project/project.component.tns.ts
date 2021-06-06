@@ -59,7 +59,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   getOrganizationByProject(project: Project): Organization {
-    console.log(this.organizations);
+   // console.log(this.organizations);
     return this.organizations.filter(org => org.id === project.organizationId)[0];
   }
 

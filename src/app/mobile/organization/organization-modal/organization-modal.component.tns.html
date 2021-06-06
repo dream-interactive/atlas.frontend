@@ -2,16 +2,14 @@
 
 
   <TextField
-  hint ='New Organization'
-  secure="false"
-  keyboardType="datetime"
-  returnKeyType="done"
-  autocorrect="false"
-  maxLength="10"
+    hint = "New Organization"
+
+  [(ngModel)]="nameControl"
+  #nameCtr="ngModel"
 
   ></TextField>
- <!-- <Lable placeholder = 'Add Organization'></Lable>-->
-    /Form>
-  <Button  class="btn-primary" text = 'Add '></Button>
+ <Lable [text] = nameControl ></Lable>
+
+  <Button  class="btn-primary" text = 'Add ' (tap) ="create(nameCtr.value)" ></Button>
 
 </Flexboxlayout>
