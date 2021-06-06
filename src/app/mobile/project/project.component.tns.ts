@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import {Application, ItemEventData} from '@nativescript/core';
 import {Organization, Project} from '@src/app/shared/atlas/entity.service';
@@ -7,6 +7,9 @@ import {ProjectService} from '@src/app/web/project/services/project.service';
 import {OrganizationService} from '@src/app/services/organization.service';
 import {switchMap} from 'rxjs/operators';
 import {UserClaims} from '@okta/okta-auth-js/lib/types';
+import {OrganizationModalComponent} from '@src/app/mobile/organization/organization-modal/organization-modal.component';
+import {ProjectModalComponent} from '@src/app/mobile/project/project-modal/project-modal.component';
+import {ModalDialogService} from '@nativescript/angular';
 
 @Component({
   moduleId: module.id,
@@ -26,8 +29,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
   loading = true;
 
   constructor(
+    private modalDialog: ModalDialogService,
+    private  vcRef: ViewContainerRef,
     private organizationService: OrganizationService,
     private projectService: ProjectService,
+
+
+
   ) {
     this.$usersOrganizations = this.organizationService.findAllByUserId('00u2v5jxvoGXWqQTw4x7')
       .subscribe((organizations) => {
@@ -67,4 +75,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
       const sideDrawer = <RadSideDrawer>Application.getRootView()
       sideDrawer.showDrawer()
     }*/
+  addProject(): void {
+    this.modalDialog.showModal(ProjectModalComponent,
+      {
+
+        viewContainerRef: this.vcRef});
+
+
+  }
 }
