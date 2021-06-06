@@ -17,7 +17,9 @@ export class OrganizationService implements CrudService<Organization, string> {
   private organizationsSubject$ = new BehaviorSubject<Organization[]>([]);
   userOrganizations$ = this.organizationsSubject$.asObservable();
 
+
   private URL = environment.uri;
+
 
   constructor(private http: HttpClient) {}
 
@@ -34,7 +36,7 @@ export class OrganizationService implements CrudService<Organization, string> {
 
     return  this.http.get<Organization[]>(`${this.URL}/organizations`, { params }).pipe(
       catchError(err => {
-        console.log('Error:', err.error.message);
+        console.log('Error org : ', err.error.message);
         return throwError(err);
       })
     );

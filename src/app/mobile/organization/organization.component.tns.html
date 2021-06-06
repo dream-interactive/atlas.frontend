@@ -7,12 +7,12 @@
 <FlexboxLayout flexDirection="column" class="page__content" justifyContent = 'space-between'>
 
 
-  <ListView [items]="countries" (itemTap)="onItemTap($event)"
+  <ListView [items]="organizations" (itemTap)="onItemTap($event)"
             style="height:1250px">
-    <ng-template let-country="item">
+    <ng-template let-orga="item">
       <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
-        <Image [src]="country.imageSrc" class="thumb img-circle"></Image>
-        <Label [text]="country.name" class="t-12"
+        <Image [src]="orga.img" class="thumb img-circle"></Image>
+        <Label [text]="orga.name" class="t-12"
                verticalAlignment="center" ></Label>
         <FlexBoxLayout class = 'icon'flexDirection="row" >
       <Label  text="&#xf013;" class="nt-icon fas"> </Label>

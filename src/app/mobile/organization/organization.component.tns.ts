@@ -25,16 +25,7 @@ export class OrganizationComponent implements OnInit, OnDestroy {
 
   loading = true;
 
-  countries: { name: string, imageSrc: string }[] = [
-    { name: 'New Org', imageSrc: 'res://donut' },
 
-
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-  ];
   constructor(private modalDialog: ModalDialogService,
               private  vcRef: ViewContainerRef,
               private organizationService: OrganizationService
@@ -72,7 +63,6 @@ export class OrganizationComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    console.log(this.organizations);
 
   }
   ngOnDestroy(): void {

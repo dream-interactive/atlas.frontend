@@ -44,7 +44,7 @@
 }
 
 .action-bar {
-  color: #3ba1b0;
+  color: #00796b;
   background-color: #ffffff;
   padding-right: 10;
 }
@@ -63,28 +63,28 @@
 }
 
 .segmented-bar {
-  selected-background-color: #3ba1b0;
-  color: #3ba1b0;
+  selected-background-color: #00796b;
+  color: #00796b;
   background-color: #ffffff;
 }
 
 
 .switch[checked=true] {
   color: #ffffff;
-  background-color: #3ba1b0;
+  background-color: #00796b;
 }
 
 .activity-indicator {
-  color: #3ba1b0;
+  color: #00796b;
 }
 
 .slider {
   color: #ffffff;
-  background-color: #3ba1b0;
+  background-color: #00796b;
 }
 
 .progress {
-  color: #3ba1b0;
+  color: #00796b;
 }
 
 .img-circle {
@@ -132,11 +132,11 @@
 }
 
 .page label.text-primary, .tab-view label.text-primary {
-  color: #3ba1b0;
+  color: #00796b;
 }
 
 .page label.bg-primary, .tab-view label.bg-primary {
-  background-color: #3ba1b0;
+  background-color: #00796b;
 }
 
 .page label.text-danger, .tab-view label.text-danger {
@@ -152,30 +152,30 @@
 }
 
 .btn {
-  color: #3ba1b0;
+  color: #00796b;
 }
 
 
 .btn-primary {
-  border-color: #3ba1b0;
+  border-color: #00796b;
   color: #ffffff;
-  background-color: #3ba1b0;
+  background-color: #00796b;
 }
 
 .btn-outline {
-  border-color: #3ba1b0;
+  border-color: #00796b;
 }
 
 .btn-outline {
   background-color: transparent;
   border-width: 1;
-  color: #3ba1b0;
+  color: #00796b;
 }
 
 
 .btn[isEnabled=false] {
-  background-color: #3ba1b0;
-  border-color: #3ba1b0;
+  background-color: #00796b;
+  border-color: #00796b;
   color: #ffffff;
 }
 
@@ -203,13 +203,13 @@
   tab-text-color: #ffffff;
 }
 .tab-view {
-  tab-background-color: #3ba1b0;
+  tab-background-color: #00796b;
 }
 .tab-view {
-  android-selected-tab-highlight-color: #3ba1b0;
+  android-selected-tab-highlight-color: #00796b;
 }
 .sidedrawer-header {
-  background-color: #3ba1b0;
+  background-color: #00796b;
 }
 
 .sidedrawer-header-brand {
@@ -230,5 +230,5 @@
 }
 .input{
   color: #ffffff;
-  border:2 solid #00796b;
+  border: 2 solid #00796b;
 }
