@@ -9,10 +9,10 @@
 
   <ListView [items]="organizations" (itemTap)="onItemTap($event)"
             style="height:1250px">
-    <ng-template let-orga="item">
+    <ng-template let-org="item">
       <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
-        <Image [src]="orga.img" class="thumb img-circle"></Image>
-        <Label [text]="orga.name" class="t-12"
+        <Image src="res://donut" class="thumb img-circle"></Image>
+        <Label [text]="org.name" class="t-12"
                verticalAlignment="center" ></Label>
         <FlexBoxLayout class = 'icon'flexDirection="row" >
       <Label  text="&#xf013;" class="nt-icon fas"> </Label>
