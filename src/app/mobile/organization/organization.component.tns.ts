@@ -6,6 +6,7 @@ import {OrganizationModalComponent} from '@src/app/mobile/organization/organizat
 import {OrganizationService} from '@src/app/services/organization.service';
 import {Subscription, zip} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   moduleId: module.id,
@@ -25,19 +26,11 @@ export class OrganizationComponent implements OnInit, OnDestroy {
 
   loading = true;
 
-  countries: { name: string, imageSrc: string }[] = [
-    { name: 'New Org', imageSrc: 'res://donut' },
 
-
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-    { name: 'New Org', imageSrc: 'res://donut' },
-  ];
   constructor(private modalDialog: ModalDialogService,
               private  vcRef: ViewContainerRef,
-              private organizationService: OrganizationService
+              private organizationService: OrganizationService,
+              private translateService: TranslateService
               ) {
     // Use the component constructor to inject providers.
 

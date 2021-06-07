@@ -42,6 +42,7 @@
     "@oktadev/schematics": "^3.1.0",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
+    "nativescript-localstorage": "^2.0.2",
     "nativescript-ui-sidedrawer": "^9.0.3",
     "ngx-editor": "^8.1.1",
     "ngx-highlightjs": "^4.1.3",

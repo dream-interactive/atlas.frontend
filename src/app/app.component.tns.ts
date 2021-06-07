@@ -4,7 +4,9 @@ import {NavigationEnd, Router} from '@angular/router';
 import {RouterExtensions} from '@nativescript/angular';
 import {filter} from 'rxjs/operators';
 import {Application} from '@nativescript/core';
-
+import {TranslateService} from '@ngx-translate/core';
+import {LocalStorageService} from '@src/app/shared/local-storage.service';
+require ('nativescript-localstorage');
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,17 @@ export class AppComponent {
   private _activatedUrl: string;
   private _sideDrawerTransition: DrawerTransitionBase;
 
-  constructor(private router: Router, private routerExtensions: RouterExtensions) {
+  constructor(private router: Router,
+              private routerExtensions: RouterExtensions,
+              private local: LocalStorageService,
+              private translate: TranslateService
+
+
+  ) {
+    const lang = local.getValue(LocalStorageService.langKey);
+    if (lang) {
+      translate.use(lang);
+    }
     // Use the component constructor to inject services.
   }
 
@@ -38,7 +50,7 @@ export class AppComponent {
   onNavItemTap(navItemRoute: string): void {
     this.routerExtensions.navigate([navItemRoute], {
       transition: {
-        name: 'fade',
+        name:  'fade',
       },
     });
 

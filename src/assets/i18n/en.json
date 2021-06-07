@@ -110,5 +110,11 @@
     "activity":  {
       "title": "Activity"
     }
+  },
+  "actionbar": {
+    "organization": "Organization",
+    "project": "Project",
+    "dashboard": "Dashboard"
   }
+
 }

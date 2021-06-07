@@ -109,6 +109,11 @@
     "activity":  {
       "title": "Активність"
     }
+  },
+  "actionbar": {
+    "organization": "Організація",
+    "project": "Проект",
+    "dashboard": "Дошка"
   }
 
 }
