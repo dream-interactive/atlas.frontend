@@ -2,30 +2,50 @@
 
 </app-action-bar>
 
-<GridLayout class="page__content">
-  <ListView [items]="projects" (itemTap)="onItemTap($event)"
+<ng-container  *ngIf="loading; else content">
+
+</ng-container>
+<ng-template #content>
+
+<FlexboxLayout flexDirection="column" class="page__content" justifyContent = "space-between">
+
+  <FlexboxLayout flexDirection="column" >
+    <Label text = "Selected Organization"  class="h3"></Label>
+    <DropDown class="h4"
+              itemsTextAlignment="center"
+              [items]="organizationName"
+              [(ngModel)]="selectedIndex"
+              (selectedIndexChanged)="onchange($event)"
+              (opened)="onopen()"
+              (closed)="onclose()"
+              row="0"
+              colSpan="2"></DropDown>
+
+
+  </FlexboxLayout>
+  <ListView [items]="projectsFilter" (itemTap)="onItemTap($event)"
             style="height:1250px">
     <ng-template let-project="item">
       <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
         <Image src="res://donut" class="thumb img-circle"></Image>
         <Label [text]="project.name" class="t-12"
                verticalAlignment="center" ></Label>
-        <Label [text]="getOrganizationByProject(project).name" class="t-12"
+        <Label  [text]="getOrganizationByProject(project).name"  class="t-12"
                verticalAlignment="center" ></Label>
         <FlexBoxLayout class = 'icon'flexDirection="row" >
           <Label  text="&#xf013;" class="nt-icon fas"> </Label>
         </FlexBoxLayout>
-
-
       </FlexboxLayout>
     </ng-template>
   </ListView>
-
-
   <Button
     class = 'btn-primary'
     text ='Add'
     (tap) = addProject()
   ></Button>
 
-</GridLayout>
+</FlexboxLayout>
+
+
+
+</ng-template>

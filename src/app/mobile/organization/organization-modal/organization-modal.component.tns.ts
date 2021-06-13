@@ -31,8 +31,6 @@ export class OrganizationModalComponent{
   create(name: string): void {
 
     if (name) {
-
-      console.log(name);
       const organization: Organization = {
         name: this.nameControl,
         ownerUserId: '00u2v5jxvoGXWqQTw4x7',

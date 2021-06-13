@@ -5,8 +5,6 @@
 
 
 <FlexboxLayout flexDirection="column" class="page__content" justifyContent = 'space-between'>
-
-
   <ListView [items]="organizations" (itemTap)="onItemTap($event)"
             style="height:1250px">
     <ng-template let-org="item">
@@ -26,6 +24,8 @@
     text ='Add'
     (tap) = addOrg()
   ></Button>
+
+
 
 
  <!-- <Label class="page__content-icon fas" text="&#xf015;"></Label>
