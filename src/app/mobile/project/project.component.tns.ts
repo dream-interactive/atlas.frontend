@@ -7,6 +7,8 @@ import {OrganizationService} from '@src/app/services/organization.service';
 import {ProjectModalComponent} from '@src/app/mobile/project/project-modal/project-modal.component';
 import {ModalDialogService} from '@nativescript/angular';
 import {DropDown, SelectedIndexChangedEventData, ValueList} from 'nativescript-drop-down';
+import {switchMap} from 'rxjs/operators';
+import {UserClaims} from '@okta/okta-auth-js/lib/types';
 
 @Component({
   moduleId: module.id,
@@ -17,12 +19,13 @@ import {DropDown, SelectedIndexChangedEventData, ValueList} from 'nativescript-d
 export class ProjectComponent implements OnInit, OnDestroy {
 
   organizations: Organization[] = [];
+
   projectsFilter: Project[] = [];
   organizationName: string[];
   projects: Project[] = [];
   private $usersProjects: Subscription = Subscription.EMPTY;
   private $usersOrganizations: Subscription = Subscription.EMPTY;
-  private selectedIndex: '';
+  private $projectsAndOrganizations: Subscription = Subscription.EMPTY;
 
 
   user: {
@@ -36,14 +39,31 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private organizationService: OrganizationService,
     private projectService: ProjectService,
   ) {
-    this.$usersOrganizations = this.organizationService.findAllByUserId('00u2v5jxvoGXWqQTw4x7')
-      .subscribe((organizations) => {
 
+    this.$projectsAndOrganizations = this.findProjectsAndOrganizationsByUser('00u2v5jxvoGXWqQTw4x7')
+      .pipe(
+        switchMap(([organizations, projects]) => {
+            this.organizationService.updateOrganizationsSubject(organizations);
+            this.projectService.updateProjectsSubject(projects);
+            return zip(this.organizationService.userOrganizations$, this.projectService.projects$);
+          },
+        )
+      )
+      .subscribe(([organizations, projects]) => {
         this.organizations = organizations;
-
+        this.projects = projects;
+        this.projectsFilter = projects;
         this.organizationName = Array.from(organizations, org => org.name);
+
         this.loading = false;
 
+      }, error => this.loading = false);
+
+    /*this.$usersOrganizations = this.organizationService.findAllByUserId('00u2v5jxvoGXWqQTw4x7').pipe()
+      .subscribe((organizations) => {
+        this.organizations = organizations;
+        this.organizationName = Array.from(organizations, org => org.name);
+        this.loading = false;
 
       }, error => this.loading = false);
     this.$usersProjects = this.projectService.findAllByUserId('00u2v5jxvoGXWqQTw4x7')
@@ -51,13 +71,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
         this.projects = projects;
         this.projectsFilter = projects;
         this.loading = false;
-      }, error => this.loading = false);
+      }, error => this.loading = false);*/
 
   }
 
   ngOnInit(): void {
 
-    // Init your component properties here.
+
   }
 
   onItemTap(args: ItemEventData): void {
@@ -67,10 +87,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.$usersOrganizations.unsubscribe();
     this.$usersProjects.unsubscribe();
+    this.$projectsAndOrganizations.unsubscribe();
   }
 
   getOrganizationByProject(project: Project): Organization {
-    // console.log(this.organizations);
     const orga = this.organizations.filter(org => org.id === project.organizationId)[0];
     if (orga) {
       return orga;
@@ -78,6 +98,16 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   }
 
+
+  private findProjectsAndOrganizationsByUser(userId: string): Observable<[Organization[], Project[]]> {
+    return from(userId).pipe(
+      switchMap((user) => {
+        const organizations$ = this.organizationService.findAllByUserId('00u2v5jxvoGXWqQTw4x7');
+        const projects$ = this.projectService.findAllByUserId('00u2v5jxvoGXWqQTw4x7');
+        return zip(organizations$, projects$);
+      })
+    );
+  }
   /*  onDrawerButtonTap(): void {
       const sideDrawer = <RadSideDrawer>Application.getRootView()
       sideDrawer.showDrawer()
@@ -89,15 +119,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
       });
   }
 
+
   public onchange(args: SelectedIndexChangedEventData): void {
-
-    console.log('selectedIndex', this.selectedIndex);
-
-    const orgId = this.organizations.find(org => org.name === this.organizationName[this.selectedIndex]);
+    const orgId = this.organizations.find(org => org.name === this.organizationName[args.newIndex]);
     this.projectsFilter = this.projects.filter(project => project.organizationId === orgId.id);
-
-
-    console.log(`Drop Down selected index changed from ${args.oldIndex} to ${args.newIndex}`);
   }
 
   public onopen(): void {

@@ -1,0 +1,52 @@
+<Flexboxlayout flexDirection ="column" >
+
+ <Flexboxlayout flexDirection ="row">
+
+<Flexboxlayout flexDirection ="column">
+  <TextField
+    hint = "Summary"
+    [(ngModel)]="summaryControl"
+    #nameCtr="ngModel"
+  ></TextField>
+  <Lable [text] = summaryControl ></Lable>
+
+
+  <TextField
+    hint = "priorityControl"
+    [(ngModel)]="priorityControl"
+    #nameCtr="ngModel"
+  ></TextField>
+  <Lable [text] = priorityControl ></Lable>
+
+
+  <TextField
+    hint = "assignToControl"
+    [(ngModel)]="assignToControl"
+    #nameCtr="ngModel"
+  ></TextField>
+  <Lable [text] = assignToControl ></Lable>
+
+
+  <TextField
+    hint = "labelsControl"
+    [(ngModel)]="labelsControl"
+    #nameCtr="ngModel"
+  ></TextField>
+  <Lable [text] = labelsControl ></Lable>
+
+</Flexboxlayout>
+
+   <TextField
+
+     hint = "Desription"
+     [(ngModel)]="descriptionControl"
+     #nameCtr="ngModel"
+   ></TextField>
+   <Lable [text] = descriptionControl ></Lable>
+
+
+ </Flexboxlayout>
+
+  <Button  class="btn-primary" text = 'Add ' (tap) ="create()" ></Button>
+
+</Flexboxlayout>

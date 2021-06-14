@@ -4,3 +4,32 @@
   <Label class="page__content-icon fas" text="&#xf002;"></Label>
   <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
 </GridLayout>
+<FlexboxLayout flexDirection="column" class="page__content" justifyContent = 'space-between'>
+
+
+  <ListView [items]="tasks" (itemTap)="onItemTap($event)"
+            style="height:1250px">
+    <ng-template let-task="item">
+      <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
+        <Image src="res://donut" class="thumb img-circle"></Image>
+        <Label [text]="task.summary" class="t-12"
+               verticalAlignment="center" ></Label>
+        <Label [text]="task.priority" class="t-12"
+               verticalAlignment="center" ></Label>
+        <FlexBoxLayout class = 'icon'flexDirection="row" >
+          <Label  text="&#xf013;" class="nt-icon fas"> </Label>
+        </FlexBoxLayout>
+
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
+
+  <Button
+    class = 'btn-primary'
+    text ='Add'
+  (tap) = addTack()
+  >
+
+
+  </Button>
+</FlexboxLayout>

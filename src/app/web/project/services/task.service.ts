@@ -21,9 +21,14 @@ export class TaskService {
   create(task: Task): Observable<Task> {
     return this.http.post<Task>(`${this.uri}/${this.apiRoute}`, task);
   }
+  findAllByAssignToId(UserId: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.uri}/${this.apiRoute}/users/${UserId}`);
+  }
+
 
   taskCreatingUpdate(value: boolean): void {
     this.taskCreatingSubject.next(value);
   }
+
 }
 
