@@ -1,1 +1,24 @@
-<Button text="card-task works!" class="btn btn-primary"></Button>
+
+
+<FlexboxLayout flexDirection="column" class="page__content" justifyContent = "flex-start">
+
+  <ListView [items]="container.tasks ">
+    <ng-template let-task="item">
+      <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
+        <Image src="res://projects" class="thumb img-circle"></Image>
+        <Label [text]="task.summary" class="t-12"
+               verticalAlignment="center" ></Label>
+        <Label [text]="task.priority" class="t-12"
+               verticalAlignment="center" ></Label>
+        <Label [text]="task" class="t-12"
+               verticalAlignment="center" ></Label>
+       </FlexboxLayout>
+    </ng-template>
+  </ListView>
+
+
+
+</FlexboxLayout>
+
+
+

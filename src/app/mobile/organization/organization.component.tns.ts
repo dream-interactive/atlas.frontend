@@ -36,6 +36,8 @@ export class OrganizationComponent implements OnInit, OnDestroy {
 
       .subscribe((organizations) => {
         this.organizations = organizations;
+
+        this.organizationService.updateOrganizationsSubject(organizations);
         this.loading = false;
 
       }, error => this.loading = false);

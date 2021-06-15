@@ -3,23 +3,39 @@
 
 
 
-<FlexboxLayout flexDirection="column" class="page__content" justifyContent = "space-between">
+<FlexboxLayout flexDirection="column" class="page__content" justifyContent = "flex-start">
 
   <FlexboxLayout flexDirection  = "row" class = "drop__down" justifyContent = "space-between" >
     <Label text = "Project"  class="h4" ></Label>
     <DropDown class="h4"
               itemsTextAlignment="center"
               [items]="projectName"
-              [selectedIndex]="selectedIndex"
               (selectedIndexChanged)="onchange($event)"
               row="0"
               colSpan="2"></DropDown>
 
   </FlexboxLayout>
 
+  <ListView [items]="containers " (itemTap)="onItemTap($event)"
+            style="height:1250px">
+    <ng-template let-container="item" >
+      <FlexboxLayout flexDirection="column" class="list__item" justifyContent = "flex-start">
+      <FlexboxLayout flexDirection="row" justifyContent = "space-between"   class="list__item2" >
+        <Label  [text]="container.name"  class="t-12"
+                verticalAlignment="center" > </Label>
+        <FlexBoxLayout class = 'icon'flexDirection="row" >
+          <Label  text="&#xf013;" class="nt-icon fas"> </Label>
+        </FlexBoxLayout>
+
+      </FlexboxLayout>
+
+        <app-card-task [container]="container"></app-card-task>
+
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
 
 
-  <app-card-task ></app-card-task>
 
 
 </FlexboxLayout>
