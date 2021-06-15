@@ -9,8 +9,8 @@
 
 <FlexboxLayout flexDirection="column" class="page__content" justifyContent = "space-between">
 
-  <FlexboxLayout flexDirection="column" >
-    <Label text = "Selected Organization"  class="h3"></Label>
+  <FlexboxLayout flexDirection="row" >
+    <Label text = "Selected Organization"  class="h4" ></Label>
     <DropDown class="h4"
               itemsTextAlignment="center"
               [items]="organizationName"
@@ -19,7 +19,6 @@
               (closed)="onclose()"
               row="0"
               colSpan="2"></DropDown>
-
 
   </FlexboxLayout>
   <ListView [items]="projectsFilter " (itemTap)="onItemTap($event)"

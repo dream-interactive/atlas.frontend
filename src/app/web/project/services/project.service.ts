@@ -84,6 +84,8 @@ export class ProjectService implements CrudService<Project, string> {
   }
 
   create(project: Project): Observable<Project> {
+
+    console.log('in project service');
     return this.http.post<Project>(`${this.uri}/projects`, project).pipe(
       catchError(err => {
         console.log('Error:', err.error.message);

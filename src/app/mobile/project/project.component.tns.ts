@@ -59,20 +59,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
       }, error => this.loading = false);
 
-    /*this.$usersOrganizations = this.organizationService.findAllByUserId('00u2v5jxvoGXWqQTw4x7').pipe()
-      .subscribe((organizations) => {
-        this.organizations = organizations;
-        this.organizationName = Array.from(organizations, org => org.name);
-        this.loading = false;
-
-      }, error => this.loading = false);
-    this.$usersProjects = this.projectService.findAllByUserId('00u2v5jxvoGXWqQTw4x7')
-      .subscribe((projects) => {
-        this.projects = projects;
-        this.projectsFilter = projects;
-        this.loading = false;
-      }, error => this.loading = false);*/
-
   }
 
   ngOnInit(): void {

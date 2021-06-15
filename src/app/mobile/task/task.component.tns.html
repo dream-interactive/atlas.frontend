@@ -11,10 +11,12 @@
             style="height:1250px">
     <ng-template let-task="item">
       <FlexboxLayout flexDirection="row" justifyContent = 'space-between' >
-        <Image src="res://donut" class="thumb img-circle"></Image>
+        <Image src="res://projects" class="thumb img-circle"></Image>
         <Label [text]="task.summary" class="t-12"
                verticalAlignment="center" ></Label>
         <Label [text]="task.priority" class="t-12"
+               verticalAlignment="center" ></Label>
+        <Label [text]="task" class="t-12"
                verticalAlignment="center" ></Label>
         <FlexBoxLayout class = 'icon'flexDirection="row" >
           <Label  text="&#xf013;" class="nt-icon fas"> </Label>

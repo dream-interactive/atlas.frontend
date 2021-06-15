@@ -7,6 +7,7 @@ import { DashboardsComponent } from './dashboards.component.tns';
 const routes: Routes = [{ path: '', component: DashboardsComponent }];
 
 @NgModule({
+
   imports: [NativeScriptRouterModule.forChild(routes)],
   exports: [NativeScriptRouterModule],
 })

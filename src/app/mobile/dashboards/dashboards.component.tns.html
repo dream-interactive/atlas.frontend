@@ -1,6 +1,25 @@
 <app-action-bar title="DashBoard"></app-action-bar>
 
-<GridLayout class="page__content">
-  <Label class="page__content-icon far" text="&#xf1ea;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+
+
+
+<FlexboxLayout flexDirection="column" class="page__content" justifyContent = "space-between">
+
+  <FlexboxLayout flexDirection  = "row" class = "drop__down" justifyContent = "space-between" >
+    <Label text = "Project"  class="h4" ></Label>
+    <DropDown class="h4"
+              itemsTextAlignment="center"
+              [items]="projectName"
+              [selectedIndex]="selectedIndex"
+              (selectedIndexChanged)="onchange($event)"
+              row="0"
+              colSpan="2"></DropDown>
+
+  </FlexboxLayout>
+
+
+
+  <app-card-task ></app-card-task>
+
+
+</FlexboxLayout>

@@ -4,7 +4,7 @@
 
 
 
-<FlexboxLayout flexDirection="column" class="page__content" justifyContent = 'space-between'>
+<FlexboxLayout clas = 'fb-org' flexDirection="column" class="page__content" justifyContent = 'space-between'>
   <ListView [items]="organizations" (itemTap)="onItemTap($event)"
             style="height:1250px">
     <ng-template let-org="item">

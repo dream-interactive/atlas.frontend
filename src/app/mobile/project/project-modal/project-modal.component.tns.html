@@ -1,22 +1,27 @@
 <Flexboxlayout flexDirection = "column" >
+
+  <Flexboxlayout class = "list-org" flexDirection = 'row'  >
+    <Label text ="Select Organization"></Label>
     <DropDown
       itemsTextAlignment="center"
       [items]="orgName"
-      [(ngModel)]="selectedIndex"
       (selectedIndexChanged)="onchange($event)"
       (opened)="onopen()"
       (closed)="onclose()"
     ></DropDown>
-    <Label text="Selected Index:" row="1" col="0" fontSize="18" verticalAlignment="bottom"></Label>
-    <TextField text="{{ selectedIndex }}" row="1" col="1" ></TextField>
+
+  </Flexboxlayout>
   <TextField
     hint = "Name project"
 
     [(ngModel)]="namePrj"
     #nameCtr="ngModel"
-
   ></TextField>
-  <Lable [text] = "keyProject"></Lable>
+
+
+  <Label [text] = "namePrj"></Label>
+
+
 
   <Button  class="btn-primary" text = 'Add ' (tap) ="create()" ></Button>
 
