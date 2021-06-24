@@ -2,13 +2,14 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {TaskService} from '../../../../shared/task.service';
 import {ProjectMembersService} from '../../services/project-members.service';
 import {EMPTY, Observable, of, Subscription} from 'rxjs';
-import {Project, ProjectMember, Task, TasksContainer} from '../../../../shared/atlas/entity.service';
+import {Project, ProjectMember} from '../../../../shared/atlas/entity.service';
 import {ProjectService} from '../../services/project.service';
-import {startWith, switchMap, tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {TaskCreateModalComponent} from '../../../../components/task-create-modal/task-create-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TaskContainerService} from '../../services/task-container.service';
+import {AddMemberModalComponent} from '../../../../components/add-member-modal/add-member-modal.component';
 
 @Component({
   selector: 'app-board-toolbar',
@@ -108,4 +109,7 @@ export class BoardToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     return self.indexOf(value) === index;
   }
 
+  addMember(): void {
+    this.dialog.open(AddMemberModalComponent, {data: {project: this.project}});
+  }
 }

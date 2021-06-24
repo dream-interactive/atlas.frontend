@@ -1,9 +1,9 @@
-import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {TaskContainerService} from '../../services/task-container.service';
 import {Project, TasksContainer} from '../../../../shared/atlas/entity.service';
 import {ProjectService} from '../../services/project.service';
-import {mergeMap, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {EMPTY, Subscription} from 'rxjs';
 
 @Component({
@@ -26,8 +26,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   loading = false;
 
-  constructor(private renderer: Renderer2,
-              private projectService: ProjectService,
+  constructor(private projectService: ProjectService,
               private taskContainerService: TaskContainerService) {
   }
 

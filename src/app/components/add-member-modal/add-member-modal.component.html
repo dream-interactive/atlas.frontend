@@ -1,0 +1,21 @@
+<div mat-dialog-title>
+  <h2>Додати члена команди</h2>
+</div>
+
+
+<div mat-dialog-content class="dialog__content">
+<form [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Введіть email користувача</mat-label>
+    <input matInput placeholder="member@example.com" [formControl]="emailControl" required>
+    <mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+</form>
+
+
+  <div align="end">
+    <button mat-flat-button mat-dialog-close type="button" (click)="addMember()">Додати</button>
+  </div>
+
+</div>
+

@@ -28,4 +28,15 @@ export class ProjectMembersService {
   updateMembers(ms: ProjectMember[]): void {
     this.membersSub.next(ms);
   }
+
+  addMember(idp: string, email: string): Observable<ProjectMember> {
+    return this.http.post<ProjectMember>(`${this.uri}/projects/${idp}/members/${email}`, {})
+      .pipe(
+        tap(mem => {
+          const value = this.membersSub.value;
+          value.push(mem);
+          this.updateMembers(value);
+        })
+      );
+  }
 }

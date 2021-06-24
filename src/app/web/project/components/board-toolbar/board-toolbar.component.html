@@ -22,6 +22,8 @@
       <mat-option *ngFor="let m of members$ | async" [value]="m">
         <img class="members__userPicture" src="{{m.user.userPicture}}" alt=""> {{m.user.name}}
       </mat-option>
+      <mat-divider style="width: 100%"></mat-divider>
+      <mat-option [value]="undefined" (onSelectionChange)="addMember()"><mat-icon>add</mat-icon> member</mat-option>
     </mat-select>
   </mat-form-field>
 
