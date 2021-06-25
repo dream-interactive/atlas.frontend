@@ -1,4 +1,4 @@
-@import "src/styles/const";
+@import "../../../themes/const";
 .toolbar {
   height: $toolbar-height;
   padding: 0;
@@ -12,20 +12,34 @@
       height: $toolbar-height - 26px;
     }
   }
+
   &__nav {
     margin-right: 16px;
   }
   &__button {
     margin-left: 16px;
-    &--colorless {
-      &:hover {
-        background-color: $accent-lighter !important;
-        color: $accent !important;
-      }
-    }
   }
 }
 
 .spacer{
   flex: 1 1 auto;
+}
+
+.menu {
+  &__button {
+    width: 150px;
+  }
+
+  &__title {
+    width: 126px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.docs {
+  margin-left: 5px;
+  font-weight: lighter;
+  font-size: 1.6rem;
 }

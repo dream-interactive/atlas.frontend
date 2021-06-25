@@ -1,0 +1,32 @@
+<div class="task-box" cdkDrag [cdkDragData]="task">
+  <div class="custom-placeholder" *cdkDragPlaceholder></div>
+  <div fxLayout="column" class="task-box__container">
+    <div class="task-box__header">
+      <a class="task-box__summary" (click)="taskEditorPopup()">{{task.summary}}</a>
+    </div>
+    <div class="task-box__body" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+      <img class="avatar" src="{{assignTo ? assignTo.user.userPicture : 'assets/images/user/default.png'}}" alt="avatar">
+     <div class="task-box__info" fxLayout="column">
+       <button mat-button title="Close after" class="task-box__close-after button">{{task.closeAfterTasks[0]}}</button>
+
+       <div fxLayout="row" fxLayoutAlign="space-between center">
+         <div class="task-box__labels">
+           <div class="task-box__label"*ngFor="let l of task.labels">
+             {{l}}
+           </div>
+         </div>
+
+         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+           <span>{{(project$ | async).key}}-{{task.keyNumber}}</span>
+
+           <mat-icon class="low" *ngIf="task.priority.match('Low')">self_improvement</mat-icon>
+           <mat-icon class="medium" *ngIf="task.priority.match('Medium')">bolt</mat-icon>
+           <mat-icon class="high" *ngIf="task.priority.match('High')">local_fire_department</mat-icon>
+
+         </div>
+       </div>
+
+     </div>
+     </div>
+  </div>
+</div>

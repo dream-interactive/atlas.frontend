@@ -1,0 +1,14 @@
+@mixin project-card-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .project-card {
+    background-color: map-get($background, card);
+    &__title {
+      background: linear-gradient(map-get($foreground, text), map-get($foreground, text)) no-repeat center bottom;
+    }
+    &__subtitle {
+      color: map-get($foreground, secondary-text);
+    }
+  }
+}

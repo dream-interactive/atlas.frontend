@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Organization, OrganizationService} from '../../services/organization.service';
-import {ProjectType} from '../../services/project.service';
+import {OrganizationService} from '../../services/organization.service';
+import {ProjectService} from '../../web/project/services/project.service';
+import {MatDialogRef} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
+import {ProfileService} from '../../services/profile.service';
+import {AtlasUser, Organization, Project} from '../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-project-modal',
@@ -9,92 +13,107 @@ import {ProjectType} from '../../services/project.service';
   styleUrls: ['./project-modal.component.scss']
 })
 export class ProjectModalComponent implements OnInit {
-  removeOrg: Organization = {
-    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
-  };
-  organizations: Organization[] = [this.removeOrg];
 
+  organizations: Organization[] = [];
+
+  projects: Project[] = [];
   projectForm: FormGroup;
   projectNameControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z](?:-?[a-zA-Z0-9]+)*')]);
   projectKeyControl = new FormControl(
     '',
     [Validators.required,
-      Validators.pattern('^[A-Z]*'),
+      Validators.pattern('^[A-Z][A-Z0-9]*'),
       Validators.minLength(3),
       Validators.maxLength(5)]
   );
-  organizationControl = new FormControl(`${this.organizations[0].id}`, Validators.required);
+  organizationControl = new FormControl('', Validators.required);
   selectedOrganization: any;
 
 
-  projectType: ProjectType;
+  projectType = 1;
+  userProfile: AtlasUser;
 
-
-  constructor(private orgService: OrganizationService) {
+  constructor(private orgService: OrganizationService,
+              private  dialog: MatDialogRef<ProjectModalComponent>,
+              private ps: ProjectService,
+              private profileService: ProfileService,
+              private translateService: TranslateService) {
     this.projectForm = new FormGroup({
       projectName: this.projectNameControl,
       projectKey: this.projectKeyControl,
       organizationControl: this.organizationControl
     });
+
+    profileService.profile$.subscribe(profile => this.userProfile = {...profile});
   }
 
   ngOnInit(): void {
+    this.orgService.userOrganizations$.subscribe((orgs) => {
+      this.organizations = orgs;
+      this.organizationControl.setValue(orgs[0].id);
+    });
 
+    this.ps.projects$.subscribe(projects => this.projects = projects);
   }
 
-  create(): void{
-    console.log(this.projectType);
+  create(): void {
+    if (this.projectForm.valid) {
+      const project: Project = {
+        name: this.projectNameControl.value,
+        key: this.projectKeyControl.value,
+        organizationId: this.organizationControl.value,
+        type: this.projectType,
+        leadId: this.userProfile.sub
+      };
+
+      this.ps.create(project).subscribe(
+        proj => {
+          this.projects.push(proj);
+          this.ps.updateProjectsSubject(this.projects);
+          this.dialog.close();
+        }, error => {
+          if (error.status === 409) {
+            this.projectForm.get('projectKey').setErrors({notUnique: true});
+          }
+        }
+      );
+    }
   }
 
   getProjectNameErrorMessage(): string {
 
     if (this.projectNameControl.hasError('required')) {
-      return 'You must enter a value';
+      return this.translateService.instant('project.dialog.errors.nameField.empty');
+    } else if (this.projectNameControl.hasError('pattern')) {
+      return this.translateService.instant('project.dialog.errors.nameField.wrong');
     }
-    return (this.projectNameControl.hasError('pattern'))
-      ? 'Project name should start with latin alphabet letters(case insensitive), can contain numbers and dash(inside)'
-      : '';
+    return '';
   }
+
   getProjectKeyErrorMessage(): string {
     if (this.projectKeyControl.hasError('required')) {
-      return 'You must enter a value';
-    }
-    else if (this.projectKeyControl.hasError('minLength')) {
-      return 'Min length 3 characters';
-    }
-    else if (this.projectKeyControl.hasError('maxLength')) {
-      return 'Max length 5 characters';
-
+      return this.translateService.instant('project.dialog.errors.keyField.empty');
+    } else if (this.projectKeyControl.hasError('minLength')) {
+      return this.translateService.instant('project.dialog.errors.keyField.minLength');
+    } else if (this.projectKeyControl.hasError('maxLength')) {
+      return this.translateService.instant('project.dialog.errors.keyField.maxLength');
+    } else if (this.projectKeyControl.hasError('notUnique')) {
+      return this.translateService.instant('project.dialog.errors.keyField.notUnique');
     }
     return (this.projectKeyControl.hasError('pattern'))
-      ? 'Key name should contain only latin alphabet letters in upper case.'
+      ? this.translateService.instant('project.dialog.errors.keyField.empty')
       : '';
   }
-  keyToUpperCase(): void {
-    this.projectKeyControl.setValue(this.projectKeyControl.value.toUpperCase());
-  }
 
-  setAutoGeneratedKeyValue(): void {
-
-    const pName = this.projectNameControl.value.toString();
-    const chars = pName.replace(/[^a-zA-Z]+/g, '');
+  setAutoGeneratedKeyValue(pName: string): void {
+    const chars = pName.replace(/[^a-zA-Z0-9]+/g, '');
     if (chars.length > 2) {
       this.projectKeyControl.setValue(chars.toUpperCase().substring(0, 5));
     }
   }
 
- /* getRandomImageForProject(): string {
-
-    const imgURLs = [
-      '../../assets/images/icon-business-pack/svg/101-calendar.svg',
-      '../../assets/images/icon-business-pack/svg/101-card.svg',
-      '../../assets/images/icon-business-pack/svg/101-envelope.svg',
-      '../../assets/images/icon-business-pack/svg/101-flask.svg',
-      '../../assets/images/icon-business-pack/svg/101-gear.svg'
-    ];
-
-    const randomId = Math.floor(Math.random() * Math.floor(imgURLs.length));
-
-    return imgURLs[randomId];
-  }*/
+  onKeyUpProjectNameControl(): void {
+    const pName = this.projectNameControl.value.toString();
+    this.setAutoGeneratedKeyValue(pName);
+  }
 }

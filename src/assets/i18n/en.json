@@ -9,15 +9,33 @@
       "orgs": "Your organizations",
       "neworg": "Create organization",
       "newproject": "Create project"
-
     }
   },
   "footer": {
     "link": {
-      "api": "API",
+      "documentation": "Documentation",
       "about": "About",
       "privacy": "Privacy",
       "price": "Pricing"
+    }
+  },
+  "home": {
+    "header": {
+      "button": {
+        "trynow": "Use it free"
+      },
+      "text": {
+        "title": "Project management tool",
+        "body": ""
+      }
+    },
+    "scrum": {
+      "title": "Kanban boards",
+      "body": "Agile teams can stay focused on delivering iterative and incremental value, as fast as possible, with customizable kanban boards."
+    },
+    "stat": {
+      "title": "Statistics",
+      "body": "View task statistics."
     }
   },
   "about": {
@@ -41,11 +59,60 @@
       "organization": "Organization",
       "name": "Project name",
       "key": "Project key",
-
+      "buttons": {
+        "create": "Create",
+        "close": "Cancel"
+      },
+      "errors": {
+        "nameField": {
+          "empty": "Please, enter an project name.",
+          "wrong": "Project name should start with latin alphabet letters(case insensitive), can contain numbers and hyphen(inside)"
+        },
+        "keyField": {
+          "empty": "Please, enter a key.",
+          "minLength": "Key length must be between 3 and 5 characters.",
+          "maxLength": "Key length must be between 3 and 5 characters.",
+          "notUnique": "You already have an organization with this key.",
+          "pattern": "Key should contain only latin alphabet letters in upper case."
+        }
+      }
+    }
+  },
+  "organization": {
+    "dialog": {
+      "title": "Your new Organization",
+      "name": "Organization name",
+      "url": "Your URL will be:",
+      "errors": {
+        "notUnique": "An organization with this name already exists.",
+        "empty": "Please, enter an organization name.",
+        "wrong": "Organization name should start with alphabet letters(case insensitive), can contain numbers, whitespaces and hyphens(inside)",
+        "short": "Organization name should contain 3 or more characters.",
+        "exist": "An organization with this name already exists"
+      },
       "buttons": {
         "create": "Create",
         "close": "Cancel"
       }
+    }
+  },
+
+  "start": {
+    "noOrg": {
+      "title": "You are not currently a member of any organization.",
+      "text": "Organization allows you to manage projects and teams.",
+      "buttons": {
+        "create": "Create your first organization"
+      }
+    },
+    "organizations": {
+      "title": "Organizations"
+    },
+    "projects":  {
+      "title": "Projects"
+    },
+    "activity":  {
+      "title": "Activity"
     }
   }
 }

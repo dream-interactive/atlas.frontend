@@ -1,0 +1,99 @@
+@import "../../../../../themes/const";
+
+/******** containers ********/
+
+.board__tasks-containers {
+  width: 100%;
+  height: calc(100% - #{$board-toolbar});
+  display: block;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 5px;
+}
+
+.board__tasks-container {
+  box-sizing: border-box;
+  width: $board-task-container-width;
+  margin-right: 25px;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 4px;
+
+  min-height: 160px;
+  height: 100%;
+
+  &--add {
+    border: none;
+  }
+}
+
+#new-container {
+  display: none;
+}
+
+/************ tasks *********/
+
+.board__tasks {
+  box-sizing: border-box;
+  border-radius: 4px;
+  display: block;
+  height: calc(100% - #{$board-task-container-header-height});
+  overflow: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.board__task {
+  box-sizing: border-box;
+  padding: 20px 10px;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: move;
+  font-size: 14px;
+  border-radius: 4px;
+  height: $board-task-height;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/************ cdk **********/
+.board__tasks-containers.cdk-drop-list-dragging .board__tasks-container:not(.cdk-drag-placeholder),
+.board__tasks.cdk-drop-list-dragging .board__task:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+.board__task-custom-placeholder {
+  height: $board-task-height;
+  border-radius: 4px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.board__tasks-container-custom-placeholder {
+  margin-right: 25px;
+  width: $board-task-container-width;
+  height: 100%;
+  display: inline-block;
+  border-radius: 4px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+

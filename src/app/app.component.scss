@@ -1,4 +1,4 @@
-@import "../styles/const";
+@import "../themes/const";
 
 app-root{
   position: absolute;
@@ -6,37 +6,27 @@ app-root{
   bottom: 0;
   left: 0;
   right: 0;
-
-  display: flex;
-  flex-direction: column;
-  .content {
-    flex: 1 0 auto;
-  }
 }
-
 app-toolbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 5;
 }
 
-app-root > app-about,
-app-root > app-atlas,
-app-root > app-profile {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+.flex-container {
+  height: calc(100% - 1px);
+  display: flex;
+  flex-direction: column;
 
-@media (max-width: 720px) {
-  //app-root {
-  //  top: 92px;
-  //}
-
-  app-root > app-about,
-  app-root > app-profile {
-    overflow-y: visible;
+  .content {
+    flex: 1 0 auto;
   }
+}
+
+app-footer{
+  z-index: 5;
+  flex-shrink: 0;
 }
 

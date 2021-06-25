@@ -9,6 +9,7 @@ import {UserMenuModule} from './user-menu/user-menu.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ProjectsMenuModule} from './projects-menu/projects-menu.module';
 import {OrganizationsMenuModule} from './organizations-menu/organizations-menu.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -16,17 +17,18 @@ import {OrganizationsMenuModule} from './organizations-menu/organizations-menu.m
     ToolbarComponent,
 
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule,
-    DirectivesModule,
-    ThemePickerModule,
-    UserMenuModule,
-    TranslateModule,
-    ProjectsMenuModule,
-    OrganizationsMenuModule
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        RouterModule,
+        DirectivesModule,
+        ThemePickerModule,
+        UserMenuModule,
+        TranslateModule,
+        ProjectsMenuModule,
+        OrganizationsMenuModule,
+        FlexLayoutModule
+    ],
   exports: [
     ToolbarComponent
   ]

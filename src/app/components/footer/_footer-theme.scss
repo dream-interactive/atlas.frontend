@@ -6,18 +6,14 @@
   $foreground: map-get($theme, foreground);
 
   app-footer {
-    color: mat-color($primary, default-contrast);
+    color: map-get($foreground, text);
     .footer {
-      background: mat-color($primary);
+      border-top: solid 1px map-get($foreground, divider);
+      background: map-get($background, background);
     }
     a {
       &:hover {
         color: mat-color($primary);
-      }
-    }
-    a {
-      &:hover {
-        color: mat-color($accent);
       }
     }
   }

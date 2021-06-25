@@ -1,10 +1,87 @@
 @import '~@angular/material/theming';
-@import "styles/reset";
-@import "styles/app-theme";
-@import 'styles/const';
+@import "themes/reset";
+@import "themes/components-theme";
+@import 'themes/const';
+@import "themes/atlas-typography";
+@import "themes/mat-reset";
 @import "app/app.component";
 
+@include atlas-typography();
 @include mat-core();
 @include angular-material-theme($theme);
 @include components-theme($theme);
 
+$foreground: map-get($theme, foreground);
+
+.toolbar__search, .toolbar__filter {
+  .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .mat-form-field-underline {
+    display: none;
+  }
+}
+
+.code {
+  border-radius: 4px;
+  &-in-text {
+    display: inline !important;
+    padding: 2px 4px !important;
+  }
+}
+
+* {
+  &::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: mat-color($primary, default, .2);
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    &:hover {
+      background-color: mat-color($primary, default, .5);
+    }
+    border-radius: 8px;
+    background-color: mat-color($primary, default, .3);
+  }
+}
+
+.i18n__options {
+  margin-bottom: 30px !important;
+}
+
+.NgxEditor {
+  min-height: 300px;
+  border: none !important;
+}
+
+.ngx-editor {
+  //max-height: 310px;
+
+  //overflow: auto;
+  height: 100%;
+  &__menu {
+    .NgxEditor{
+      &__MenuItem {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &__Dropdown {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &__MenuBar {
+        border-radius: 5px !important;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

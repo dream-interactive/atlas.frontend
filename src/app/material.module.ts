@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
@@ -11,12 +10,18 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
@@ -27,8 +32,14 @@ import {MatInputModule} from '@angular/material/input';
     MatSelectModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
-
+    MatInputModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    MatTooltipModule
   ],
   exports: [
     MatFormFieldModule,
@@ -41,8 +52,14 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonToggleModule,
     MatSelectModule,
     MatDialogModule,
-    MatInputModule
-
+    MatInputModule,
+    MatCardModule,
+    MatChipsModule,
+    MatListModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule {

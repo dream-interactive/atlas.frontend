@@ -1,20 +1,17 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule} from './material.module';
-import {ToolbarModule} from './components/toolbar/toolbar.module';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {AtlasModule} from './pages/atlas/atlas.module';
-import {ProfileModule} from './pages/profile/profile.module';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {WebModule} from './web/web.module';
+import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {FooterModule} from './components/footer/footer.module';
-import {AboutModule} from './pages/about/about.module';
-import {StartModule} from './pages/start/start.module';
-import {AuthInterceptor} from './interceptors/auth-interceptor';
-import {OrganizationModule} from './pages/organization/organization.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule} from '@angular/router';
+import {AuthRoutingModule} from './auth-routing.module';
+import {PageNotFoundModule} from './components/page-not-found/page-not-found.module';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -26,6 +23,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -34,24 +32,18 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
       defaultLanguage: 'en'
     }),
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
     HttpClientModule,
     ToolbarModule,
-    AtlasModule,
-    AboutModule,
-    ProfileModule,
     FooterModule,
-    StartModule,
-    OrganizationModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+
+    RouterModule.forRoot([]), // First routing
+    AuthRoutingModule, // Second
+    WebModule, // Third
+
+
+
+    PageNotFoundModule // LAST !
+
   ],
   bootstrap: [AppComponent]
 })

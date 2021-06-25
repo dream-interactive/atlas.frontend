@@ -1,0 +1,32 @@
+<div class="project-card" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
+  <div class="project-card__desc" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+    <img mat-card-avatar src="{{project.img}}" alt="Project avatar">
+    <div class="project-card__header" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap=".2rem">
+      <a class="project-card__title"
+         routerLink="/o/{{organization.validName.toLowerCase()}}/{{project.name.toLowerCase()}}/{{project.key}}">{{project.name}}</a>
+      <span class="project-card__subtitle">/o/{{organization.validName}}/{{project.name}}</span>
+    </div>
+  </div>
+
+  <div class="project-card__info" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1rem" >
+    <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap=".2rem">
+      <span class="project-card__key">Key</span>
+      <a class="project-card__subtitle">{{project.key}}</a>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap=".2rem" fxHide.lt-md>
+      <span class="project-card__lead">Lead</span>
+      <a class="project-card__subtitle" routerLink="/user/{{($lead | async).sub}}">{{($lead | async).name}}</a>
+    </div>
+  </div>
+
+  <div class="project-card__buttons" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button title="Statistics" class="button">
+      <mat-icon>bar_chart</mat-icon>
+    </button>
+    <button mat-button title="Settings" class="button">
+      <mat-icon>tune</mat-icon>
+    </button>
+  </div>
+</div>
+
+

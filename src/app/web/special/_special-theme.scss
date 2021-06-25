@@ -1,0 +1,17 @@
+@mixin special-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-special {
+    color: map-get($foreground, text);
+    .special {
+      background: map-get($background, background);
+    }
+    a {
+      color: mat-color($primary);
+    }
+  }
+}

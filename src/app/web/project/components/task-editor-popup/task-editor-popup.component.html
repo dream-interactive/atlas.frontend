@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="space-between stretch" class="task-popup">
+  <app-task-editor class="task-popup__content"
+                   [task]="task"
+                   [project]="project"
+                   [container]="container"
+                   [assignTo]="assignTo"></app-task-editor>
+
+  <div align="end" class="task-popup__actions">
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+  </div>
+</div>
+

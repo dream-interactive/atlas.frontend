@@ -1,0 +1,48 @@
+<div class="toolbar" fxLayoutGap="20px" [formGroup]="form">
+
+  <mat-form-field
+    class="toolbar__search"
+    appearance="outline"
+    [style.fontSize.px]="14">
+    <input matInput placeholder="Search..." formControlName="searchControl">
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field class="toolbar__filter members" appearance="standard" [style.fontSize.px]="14">
+    <mat-label>Members</mat-label>
+
+    <mat-select [(value)]="member"  formControlName="memberControl">
+      <mat-select-trigger>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <img class="members__userPicture" src="{{member ? member.user.userPicture : ''}}" alt="">
+          <span> {{member ? member.user.name : ''}} </span>
+        </div>
+      </mat-select-trigger>
+      <mat-option [value]="undefined"></mat-option>
+      <mat-option *ngFor="let m of members$ | async" [value]="m">
+        <img class="members__userPicture" src="{{m.user.userPicture}}" alt=""> {{m.user.name}}
+      </mat-option>
+      <mat-divider style="width: 100%"></mat-divider>
+      <mat-option [value]="undefined" (onSelectionChange)="addMember()"><mat-icon>add</mat-icon> member</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="toolbar__filter" appearance="standard" [style.fontSize.px]="14">
+    <mat-label>Labels</mat-label>
+    <mat-select formControlName="labelControl">
+      <mat-option [value]=""></mat-option>
+      <mat-option *ngFor="let label of (project$ | async).labels.filter(onlyUnique)" [value]="label">
+        {{label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="spacer"></div>
+
+  <div class="toolbar__buttons" fxLayout="raw" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" (click)="createTask()">
+      <mat-icon>add</mat-icon>
+      Task
+    </button>
+  </div>
+</div>

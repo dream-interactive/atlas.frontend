@@ -1,30 +1,38 @@
 <mat-toolbar class="toolbar">
 
-  <a routerLink="/start" class="toolbar__logo" mat-button *ngIf="auth.loggedIn">
-    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+  <a routerLink="/start" class="toolbar__logo" mat-button *ngIf="isAuthenticated" fxHide.xs="true">
+    <img *ngIf="theme.isDark, else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     <ng-template #darkMode>
-      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     </ng-template>
+    <span *ngIf="docs" class="docs">docs</span>
   </a>
-  <a routerLink="/" class="toolbar__logo" mat-button *ngIf="!auth.loggedIn">
-    <img *ngIf="theme.name === 'light-theme', else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+  <a routerLink="/" class="toolbar__logo" mat-button *ngIf="!isAuthenticated">
+    <img *ngIf="theme.isDark, else darkMode" src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     <ng-template #darkMode>
-      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
+      <img src="assets/images/logo/Atlas-logo_339_5grad__with__text_light_Deep.svg" alt="atlas-logo" class="toolbar__logo-image">
     </ng-template>
+    <span *ngIf="docs" class="docs">docs</span>
   </a>
+
 
   <span class="spacer"></span>
-  <nav class="toolbar__nav">
+  <nav class="toolbar__nav" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
 
-    <app-organizations-menu  *ngIf="auth.loggedIn"></app-organizations-menu>
-    <app-projects-menu  *ngIf="auth.loggedIn"></app-projects-menu>
+    <app-organizations-menu  *ngIf="isAuthenticated"></app-organizations-menu>
 
-    <a href="#" mat-flat-button color="accent" class="toolbar__button">{{'navbar.button.trynow' | translate }}</a>
+    <app-projects-menu *ngIf="isAuthenticated"></app-projects-menu>
+
+
+    <button *ngIf="!isAuthenticated"  mat-flat-button color="primary"
+             class="toolbar__button"
+             (click)="login()"
+    >{{'navbar.button.trynow' | translate }}</button>
 
     <a href="#" mat-button
-       *ngIf="!auth.loggedIn; else userMenu"
+       *ngIf="!isAuthenticated; else userMenu"
        class="toolbar__button toolbar__button--colorless"
-       (click)="auth.login()">{{'navbar.button.signin' | translate }}</a>
+       (click)="auth.signInWithRedirect()">{{'navbar.button.signin' | translate }}</a>
     <ng-template #userMenu >
       <app-user-menu  class="toolbar__button"></app-user-menu>
     </ng-template>

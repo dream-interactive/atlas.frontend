@@ -1,0 +1,21 @@
+<div class="tasks-container">
+  <header class="tasks-container__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <input #tcname readonly type="text" class="tasks-container__name" (dblclick)="tcname.readOnly = false" (focusout)="tcname.readOnly = true; saveName(tcname.value)">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-spinner color="accent" diameter="30" *ngIf="taskCreating$ | async"></mat-spinner>
+      <span class="tasks-container__length">{{container.tasks.length}}</span>
+      <button mat-icon-button (click)="openTaskModalCreate()"><mat-icon>add</mat-icon></button>
+      <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+    </div>
+  </header>
+
+  <div class="task-list"
+       cdkDropList
+       [cdkDropListData]="container.tasks"
+       (cdkDropListDropped)="drop($event, container)">
+
+    <app-task-box *ngFor="let task of container.tasks" [task]="task" [container]="container"></app-task-box>
+
+  </div>
+
+</div>

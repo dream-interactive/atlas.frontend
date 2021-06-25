@@ -1,22 +1,24 @@
-<button mat-button [matMenuTriggerFor]="orgsMenu" >
-  {{currentOrg}}<mat-icon>arrow_drop_down</mat-icon>
+<button mat-button [matMenuTriggerFor]="orgsMenu"  class="menu__button">
+  <img matPrefix class="menu__icon" src="{{currentOrg.img}}" alt="org-img">
+  <span class="menu__title">{{currentOrg.name}}</span>
+  <mat-icon>arrow_drop_down</mat-icon>
 </button>
-<mat-menu #orgsMenu yPosition="below"  class="orgs__selector">
-  <div class="orgs__selector--header" fxLayout="column" fxLayoutAlign="center center">
-    <img src="assets/images/organization.png" alt="orgs" class="orgs__image">
+<mat-menu #orgsMenu yPosition="below"  class="selector">
+  <div class="selector__header" fxLayout="column" fxLayoutAlign="center center">
+    <img src="assets/images/organization.png" alt="orgs" class="selector__image">
   </div>
 
-  <button mat-menu-item class="org" *ngFor="let org of orgs" (click)="goTo(org.name)">
-    <img class="org__img" src="{{org.image}}" alt="org">
-    <span class="org__name">{{org.name}}</span>
+  <button mat-menu-item class="selector__button organization" *ngFor="let org of organizations" (click)="goTo(org.name)">
+    <img class="organization__img" src="{{org.img}}" alt="org">
+    <span class="organization__name">{{org.name}}</span>
   </button>
 <mat-divider></mat-divider>
-  <button mat-menu-item class="org" (click)="goToOrgs()">
-    <img class="org__img" src="assets/images/icon-business-pack/svg/101-organization-4.svg" alt="org">
-    <span class="org__name">{{'navbar.dropdown.orgs' | translate}}</span>
+  <button mat-menu-item class="selector__button organization" (click)="goToOrgs()">
+    <img class="organization__img" src="assets/images/icon-business-pack/svg/101-organization-4.svg" alt="org">
+    <span class="organization__name">{{'navbar.dropdown.orgs' | translate}}</span>
   </button>
-  <button mat-menu-item class="org" (click)="goToCreate()">
-    <img class="org__img" src="assets/images/icon-business-pack/svg/101-check.svg" alt="org">
-    <span class="org__name">{{'navbar.dropdown.neworg' | translate}}</span>
+  <button mat-menu-item class="selector__button organization" (click)="goToCreate()">
+    <img class="organization__img" src="assets/images/icon-business-pack/svg/101-check.svg" alt="org">
+    <span class="organization__name">{{'navbar.dropdown.neworg' | translate}}</span>
   </button>
 </mat-menu>

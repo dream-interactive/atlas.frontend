@@ -1,0 +1,14 @@
+.start {
+  max-width: 1920px;
+  height: 100%;
+  padding: 1rem;
+  &__image {
+    height: 200px;
+  }
+  &__container {
+    height: inherit;
+  }
+}
+app-project-card {
+  width: 100%;
+}

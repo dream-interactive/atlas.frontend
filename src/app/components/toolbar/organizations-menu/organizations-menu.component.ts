@@ -1,59 +1,71 @@
-import {Component, OnInit} from '@angular/core';
-import {Organization} from '../../../services/organization.service';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {filter, mergeMap} from 'rxjs/operators';
+import {filter, mergeMap, startWith, switchMap} from 'rxjs/operators';
+import {OrganizationService} from '../../../services/organization.service';
+import {OrganizationModalComponent} from '../../organization-modal/organization-modal.component';
+import {MatDialog} from '@angular/material/dialog';
+import {OktaAuthService} from '@okta/okta-angular';
+import {from, Subscription} from 'rxjs';
+import {Organization} from '../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-organizations-menu',
   templateUrl: './organizations-menu.component.html',
   styleUrls: ['./organizations-menu.component.scss']
 })
-export class OrganizationsMenuComponent implements OnInit {
+export class OrganizationsMenuComponent implements OnInit, OnDestroy {
 
-  removeOrg: Organization = {
-    id: '1', image: '../../../assets/images/icon-business-pack/svg/101-laptop.svg', name: 'Remove'
-  };
-  orgs: Organization[] = [this.removeOrg];
+  organizations: Organization[] = [];
 
-  currentOrg: string;
+  currentOrg: Organization = this.setDefaultOrganizationData();
+
+  private $organizations = Subscription.EMPTY;
+  private $translator = Subscription.EMPTY;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private translator: TranslateService) {
+              private translator: TranslateService,
+              private dialog: MatDialog,
+              public auth: OktaAuthService,
+              private organizationService: OrganizationService) {
 
-    const currentUrl = this.router.url;
-
-    if (currentUrl.match(new RegExp('/o/'))) {
-      const orgName = route.children[0].snapshot.url[1].path; // organization is a second part in url
-      this.setNameOfCurrentOrganization(orgName);
-    } else {
-      this.getDefaultOrganizationNameFromTranslator(); // Get default value on first load
-    }
-
-
-    this.translator.onLangChange.pipe(
-      mergeMap(() => this.translator.get(['navbar.dropdown.orgs']))
-    ).subscribe(res => {
-      this.currentOrg = res['navbar.dropdown.orgs'];
-    }); // Get default value on lang change
-
-
-    router.events
-      .pipe(
-        filter((e) => e instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        const eventUrl = event.url;
-        if (eventUrl.match(new RegExp('/o/'))) {
-          const orgName = route.children[0].snapshot.url[1].path; // organization is a second part in url
-          this.setNameOfCurrentOrganization(orgName);
-        } else {
-          this.getDefaultOrganizationNameFromTranslator();
+    this.$organizations = from(auth.getUser()).pipe(
+      switchMap((user) => {
+          return this.organizationService.findAllByUserId(user.sub).pipe(
+            switchMap((organizations) => {
+              organizationService.updateOrganizationsSubject(organizations);
+              return organizationService.userOrganizations$.pipe(
+                mergeMap((orgs) => {
+                  this.organizations = orgs;
+                  return router.events.pipe(
+                    filter((e) => e instanceof NavigationEnd),
+                    startWith(router)
+                  );
+                })
+              );
+            })
+          );
         }
-      });
+      )
+    ).subscribe((event: NavigationEnd) => {
+      if (event.url.match(new RegExp('/o/'))) {
+        const orgValidName = this.route.children[0].snapshot.url[1].path; // organization is a second part in url
+        this.currentOrg = this.setOrganizationData(orgValidName);
+      } else {
+        this.currentOrg = this.setDefaultOrganizationData(); // set default value on first load
+      }
+    });
   }
 
   ngOnInit(): void {
+
+    // Subscribe on lang change
+    this.$translator = this.translator.onLangChange.subscribe(() => {
+      if (!this.router.url.match(new RegExp('/o/([a-z0-9-])+/'))){
+        this.currentOrg = this.setDefaultOrganizationData();
+      }
+    }); // Set default value on lang change
   }
 
 
@@ -66,24 +78,34 @@ export class OrganizationsMenuComponent implements OnInit {
   }
 
   goToCreate(): void {
-    this.router.navigate([`/new/organization`]);
+    this.dialog.open(OrganizationModalComponent, {
+     // panelClass: ['full-screen-modal']
+    });
   }
 
-  setNameOfCurrentOrganization(route: string): void {
-    const organizations = this.orgs
-      .filter((org) => org.name.toLowerCase() === route);
+  private setOrganizationData(orgValidName: string): Organization {
+    const organizations = this.organizations
+      .filter((org) => org.validName === orgValidName);
 
     if (organizations.length > 0) {
-      this.currentOrg = organizations[0].name;
+      return organizations[0];
     } else {
-      // todo 404
-      this.getDefaultOrganizationNameFromTranslator();
+      return this.setDefaultOrganizationData();
     }
   }
 
-  getDefaultOrganizationNameFromTranslator(): void {
-    this.translator.get(['navbar.dropdown.orgs']).subscribe((res) => {
-      this.currentOrg = res['navbar.dropdown.orgs'];
-    });
+  private setDefaultOrganizationData(): Organization {
+    const organization: Organization = {
+      img: '', name: '', ownerUserId: '', validName: ''
+    };
+
+    organization.name = this.translator.instant('navbar.dropdown.orgs');
+    organization.img = 'assets/images/icon-business-pack/svg/101-organization-4.svg';
+
+    return organization;
   }
+
+  ngOnDestroy(): void {
+  }
+
 }

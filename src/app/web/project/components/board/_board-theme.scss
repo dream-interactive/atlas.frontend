@@ -1,0 +1,54 @@
+@mixin board-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+
+  .board {
+    &__tasks-containers {
+      color: map-get($foreground, text);
+      background-color: map-get($background, background);
+    }
+    &__tasks-container {
+      border: solid 1px map-get($foreground, divider);
+
+      &--new {
+        color: map-get($foreground, text);
+        background-color: map-get($background, card);
+      }
+    }
+    &__tasks {
+
+    }
+    &__task {
+      color: map-get($foreground, text);
+      background-color: map-get($background, card);
+      border: solid 1px map-get($foreground, divider);
+    }
+
+    &__task-custom-placeholder{
+      background-color: map-get($background, tooltip);
+    }
+    &__tasks-container-custom-placeholder {
+      background-color: map-get($background, tooltip);
+    }
+  }
+  .cdk-drag-preview {
+    color: map-get($foreground, text);
+  }
+
+  .tasks-container{
+    &__header {
+
+    }
+    &__input {
+      background-color: map-get($background, background);
+      color: map-get($foreground, text);
+      border: none;
+      &:focus {
+        outline: none;
+        border: 1px solid mat-color($primary);
+        caret-color: mat-color($primary);
+      }
+    }
+  }
+}

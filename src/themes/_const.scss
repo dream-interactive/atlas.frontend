@@ -1,0 +1,26 @@
+/***** Dimensions ******/
+$divider-height: 1px;
+
+/* toolbar */
+$toolbar-height: 56px;
+$toolbar-icons-height: 26px;
+
+/* footer */
+$footer-height: 56px;
+
+/* about */
+$about-header-height: 224px;
+$about-row-height: $about-header-height * 2;
+
+/* project board*/
+$board-task-container-header-height: 50px;
+$board-task-container-width: 300px;
+$board-task-height: 100px;
+$board-toolbar: 68px;
+
+/* task container */
+
+/* task box */
+$task-box-height: 80px;
+$task-box-header-height: 24px;
+$task-box-body-height: calc(100% - #{$task-box-header-height})

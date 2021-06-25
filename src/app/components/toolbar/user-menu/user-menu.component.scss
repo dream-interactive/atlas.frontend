@@ -1,14 +1,12 @@
-@import "src/styles/const";
+@import "../../../../themes/const";
 
-.user-picture {
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  border: 2px solid $accent;
-
-}
 .menu {
+  &__userPicture {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
   &__item {
     min-width: 250px !important;
     padding-left: 24px;

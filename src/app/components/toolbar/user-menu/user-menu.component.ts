@@ -1,21 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../../services/auth.service';
-import {ProfileService, UserProfile} from '../../../services/profile.service';
+import {Component} from '@angular/core';
+import {ProfileService} from '../../../services/profile.service';
+import {Observable} from 'rxjs';
+import {OktaAuthService} from '@okta/okta-angular';
+import {AtlasUser} from '../../../shared/atlas/entity.service';
 
 @Component({
   selector: 'app-user-menu',
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss']
 })
-export class UserMenuComponent{
+export class UserMenuComponent {
 
-  public profile: UserProfile;
+  public profile: Observable<AtlasUser>;
+  origin: string;
 
-
-  constructor(public auth: AuthService,
+  constructor(public auth: OktaAuthService,
               private userService: ProfileService) {
-    if (this.userService.profile$) {
-      this.userService.profile$.subscribe(prof => this.profile = prof);
-    }
+    this.profile = userService.profile$;
+    this.origin = window.location.origin;
   }
 }

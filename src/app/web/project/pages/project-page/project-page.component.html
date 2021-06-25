@@ -1,0 +1,45 @@
+<div class="project" fxLayout="row">
+  <div class="project__sidenav" #matSidenav [@onSideNavChange]="isShowing ? 'open' : 'close'">
+    <mat-nav-list class="nav-list">
+      <div class="nav-list__header">
+        <img class="nav-list-item__img"
+             src="{{(currentProject | async).img}}"
+             alt="p-icon">
+        <span class="project__name nav-list-item__name item-name"
+              [@animateText]="linkText ? 'show' : 'hide'">{{(currentProject | async).name}}</span>
+      </div>
+
+      <mat-divider style="width: 100%"></mat-divider>
+
+      <div routerLink="board" routerLinkActive="nav-list-item-active" class="nav-list-item">
+        <mat-icon class="nav-list-item__img">view_week</mat-icon>
+        <span class="nav-list-item__name" [@animateText]="linkText ? 'show' : 'hide'">Board</span>
+      </div>
+     <!-- <div routerLink="table" routerLinkActive="nav-list-item-active" class="nav-list-item">
+        <mat-icon class="nav-list-item__img">table_chart</mat-icon>
+        <span class="nav-list-item__name" [@animateText]="linkText ? 'show' : 'hide'">Table</span>
+      </div>-->
+      <!--<div routerLink="roadmap" routerLinkActive="nav-list-item-active" class="nav-list-item">
+        <mat-icon class="nav-list-item__img">align_horizontal_left</mat-icon>
+        <span class="nav-list-item__name" [@animateText]="linkText ? 'show' : 'hide'">Roadmap</span>
+      </div>-->
+      <div routerLink="statistics" routerLinkActive="nav-list-item-active" class="nav-list-item">
+        <mat-icon class="nav-list-item__img">bar_chart</mat-icon>
+        <span class="nav-list-item__name" [@animateText]="linkText ? 'show' : 'hide'">Statistics</span>
+      </div>
+ <!--     <div routerLink="code" routerLinkActive="nav-list-item-active" class="nav-list-item">
+        <mat-icon class="nav-list-item__img">code</mat-icon>
+        <span class="nav-list-item__name" [@animateText]="linkText ? 'show' : 'hide'">Code</span>
+      </div>-->
+
+      <div routerLink="settings" routerLinkActive="nav-list-item-active" class="nav-list-item">
+        <mat-icon class="nav-list-item__img">settings</mat-icon>
+        <span class="nav-list-item__name" [@animateText]="linkText ? 'show' : 'hide'">Settings</span>
+      </div>
+
+    </mat-nav-list>
+  </div>
+  <div class="project__content">
+   <router-outlet></router-outlet>
+  </div>
+</div>

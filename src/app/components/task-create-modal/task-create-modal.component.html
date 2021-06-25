@@ -1,0 +1,101 @@
+<form class="task-form" [formGroup]="taskForm" (submit)="create()">
+  <mat-form-field class="task-form__summary">
+    <mat-label>Summary</mat-label>
+    <input required formControlName="summaryControl" matInput type="text">
+  </mat-form-field>
+
+  <div class="task-form__main" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center start" fxLayoutGap="20px">
+    <section class="section-left" fxLayout="column" fxLayoutAlign="space-around start">
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+
+        <mat-select [(value)]="container" formControlName="containerControl" required>
+          <mat-select-trigger>
+            {{container? container.name : ''}}
+          </mat-select-trigger>
+          <mat-option *ngFor="let cont of (containers$ | async)" [value]="cont">
+            {{cont.name}}
+          </mat-option>
+        </mat-select>
+        <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Assign to</mat-label>
+
+        <mat-select [(value)]="member" formControlName="assignToControl">
+          <mat-select-trigger>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <img class="task-form__user-picture" src="{{member ? member.user.userPicture : ''}}" alt="">
+              <span> {{member ? member.user.name : ''}} </span>
+            </div>
+          </mat-select-trigger>
+          <mat-option *ngFor="let m of $members | async" [value]="m">
+            <img class="task-form__user-picture" src="{{m.user.userPicture}}" alt=""> {{m.user.name}}
+          </mat-option>
+        </mat-select>
+        <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Priority</mat-label>
+        <mat-select formControlName="priorityControl">
+          <mat-option *ngFor="let priority of priorities" [value]="priority">
+            {{priority}}
+          </mat-option>
+        </mat-select>
+        <!--<mat-error *ngIf="organizationControl.hasError('required')">Please choose an organization</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Points</mat-label>
+        <input formControlName="pointsControl" matInput type="number">
+      </mat-form-field>
+      <mat-form-field class="chip-list">
+        <mat-label>Labels</mat-label>
+        <mat-chip-list #chipList aria-label="Labels">
+          <mat-chip
+            *ngFor="let label of labels"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(label)">
+            {{label}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="New label..."
+            #labelInput
+            [formControl]="labelsControl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let label of filteredLabels | async" [value]="label">
+            {{label}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </section>
+
+    <section class="section-right">
+      <p>Description</p>
+      <div class="task-form__editor">
+        <ngx-editor-menu class="ngx-editor__menu" [editor]="editor"></ngx-editor-menu>
+        <div class="ngx-editor">
+          <ngx-editor
+            [editor]="editor"
+            formControlName="descriptionControl"
+            [placeholder]=""
+          ></ngx-editor>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <div align="end">
+    <button mat-flat-button mat-dialog-close="false" type="button">Cancel</button>
+    <button mat-flat-button mat-dialog-close="true" color="accent" type="submit">Create</button>
+  </div>
+</form>
+

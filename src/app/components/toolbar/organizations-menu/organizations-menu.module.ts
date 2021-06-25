@@ -4,6 +4,7 @@ import { OrganizationsMenuComponent } from './organizations-menu.component';
 import {MaterialModule} from '../../../material.module';
 import {FlexModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
+import {OrganizationModalModule} from '../../organization-modal/organization-modal.module';
 
 
 
@@ -13,7 +14,9 @@ import {TranslateModule} from '@ngx-translate/core';
         CommonModule,
         MaterialModule,
         FlexModule,
-        TranslateModule
+        TranslateModule,
+        OrganizationModalModule
+
     ],
   exports: [
     OrganizationsMenuComponent
