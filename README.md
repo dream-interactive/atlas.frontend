@@ -1,4 +1,6 @@
-# ![Atlas](https://github.com/dream-interactive/atlas.frontend/raw/main/src/assets/images/board2.png) Atlas (frontend / pet)
+# ![Atlas](https://raw.githubusercontent.com/dream-interactive/atlas.frontend/main/src/assets/images/logo/Atlas-logo_339_5grad__with__text_dark_Deep.svg)  (frontend / pet)
+
+![Atlas](https://github.com/dream-interactive/atlas.frontend/raw/main/src/assets/images/board2.png) 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
 
