@@ -13,5 +13,12 @@
     color: map-get($foreground, text);
     background-color: map-get($background, task-box);
     border: solid 1px map-get($foreground, divider);
+
+    &__summary {
+      background: linear-gradient(map-get($foreground, text), map-get($foreground, text)) no-repeat center bottom;
+    }
+    &__label {
+      background-color: mat-color($primary, default, .3);
+    }
   }
 }

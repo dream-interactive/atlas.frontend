@@ -3,8 +3,8 @@ import {Task, TasksContainer} from '../../../../shared/atlas/entity.service';
 import {TaskContainerService} from '../../services/task-container.service';
 import {MatDialog} from '@angular/material/dialog';
 import {TaskCreateModalComponent} from '../../../../components/task-create-modal/task-create-modal.component';
-import {EMPTY, Observable} from 'rxjs';
-import {TaskService} from '../../services/task.service';
+import {EMPTY, Observable, Subscription} from 'rxjs';
+import {TaskService} from '../../../../shared/task.service';
 import {startWith} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
@@ -20,6 +20,8 @@ export class TaskContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   @ViewChild('tcname') tcname: ElementRef;
   taskCreating$: Observable<boolean> = EMPTY;
+  private $containers: Subscription;
+  private containers: TasksContainer[] = [];
 
   constructor(private tcs: TaskContainerService,
               private taskService: TaskService,
@@ -28,10 +30,16 @@ export class TaskContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnInit(): void {
     this.taskCreating$ = this.taskService.taskCreating$.pipe(startWith(false));
+
+    this.$containers = this.tcs.tasksContainers$.subscribe(cs => this.containers = cs);
   }
 
   ngAfterViewInit(): void {
     this.tcname.nativeElement.value = this.container.name;
+  }
+
+  ngOnDestroy(): void {
+    this.$containers.unsubscribe();
   }
 
   saveName(value: string): void {
@@ -48,17 +56,49 @@ export class TaskContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
 
-  ngOnDestroy(): void {
-  }
 
-  drop(event: CdkDragDrop<Task[]>): void {
+  drop(event: CdkDragDrop<Task[]>, container: TasksContainer): void {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+
+      if (event.currentIndex !== event.previousIndex) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+
+        this.tcs.moveTask(event.container.data, container.idtc).subscribe(c => {
+          const index = this.containers.findIndex(con => con.idtc === c.idtc);
+          if (index >= 0) {
+            this.containers[index] = c;
+          }
+          this.tcs.updateContainers(this.containers);
+        });
+      }
     } else {
-      transferArrayItem(event.previousContainer.data,
+
+      transferArrayItem(
+        event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
+        event.currentIndex
+      );
+
+      const task = event.item.data as Task;
+
+      this.tcs.transferTask(
+        event.container.data,
+        container.idtc,
+        task.idtc,
+        event.previousContainer.data
+      ).subscribe(cs => {
+
+        cs.forEach(c => {
+          const index = this.containers.findIndex(con => con.idtc === c.idtc);
+          if (index >= 0) {
+            this.containers[index] = c;
+          }
+        });
+
+        this.tcs.updateContainers(this.containers);
+      });
     }
+
   }
 }

@@ -1,0 +1,69 @@
+@mixin task-editor-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+
+  .task-editor {
+    &__chip {
+      background-color: mat-color($primary, default, .4);
+    }
+    &__key {
+      color: mat-color($primary);
+    }
+  }
+
+  .ngx-editor {
+    border: 1px solid map-get($foreground, divider);
+    border-radius: 4px;
+    &__menu {
+      svg {
+        fill: map-get($foreground, text) !important;
+      }
+      .NgxEditor {
+        &__Popup {
+          background-color: map-get($background, background) !important;
+        }
+        &__MenuBar {
+          background-color: map-get($background, background);
+        }
+        &__MenuItem {
+          &:hover {
+            background-color: map-get($background, hover);
+          }
+          &--Active {
+            background-color: mat-color($primary)  !important;
+          }
+        }
+        &__Dropdown {
+          &:hover {
+            background-color: map-get($background, hover) !important;
+          }
+          &--Selected {
+            background-color: map-get($background, background) !important;
+            color: mat-color($primary)  !important;
+          }
+          &--Open {
+
+          }
+          &--Text {
+            color: map-get($foreground, text) !important;
+          }
+          &--DropdownMenu {
+            background-color: map-get($background, background) !important;
+            color: map-get($foreground, text) !important;
+          }
+          &--Item {
+            &:hover {
+              background-color: map-get($background, hover) !important;
+            }
+          }
+          &--Active {
+            background-color: map-get($background, hover) !important;
+          }
+        }
+      }
+    }
+  }
+}

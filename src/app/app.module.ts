@@ -11,6 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {AuthRoutingModule} from './auth-routing.module';
 import {PageNotFoundModule} from './components/page-not-found/page-not-found.module';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);

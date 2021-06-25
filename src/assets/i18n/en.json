@@ -30,8 +30,12 @@
       }
     },
     "scrum": {
-      "title": "Scrum boards",
-      "body": "Agile teams can stay focused on delivering iterative and incremental value, as fast as possible, with customizable scrum boards."
+      "title": "Kanban boards",
+      "body": "Agile teams can stay focused on delivering iterative and incremental value, as fast as possible, with customizable kanban boards."
+    },
+    "stat": {
+      "title": "Statistics",
+      "body": "View task statistics."
     }
   },
   "about": {
