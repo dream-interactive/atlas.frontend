@@ -1,4 +1,4 @@
-# AtlasFrontend
+# ![Atlas](https://github.com/dream-interactive/atlas.frontend/raw/main/src/assets/images/board2.png) Atlas (frontend / pet)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
 
